@@ -46,7 +46,6 @@ The use of `SE` objects enables consistent handling of multi-omics data, facilit
 * `GRanges` makes it easy to manipulate and visualize genomic intervals across datasets.
 * Most analyses — from clustering to visualization — can be performed directly on these containers.
 
-
 ## Download and Extract Data
 
 ```{r, eval=FALSE}
@@ -59,7 +58,8 @@ options(timeout=1000)
 # Download file
 download.file(
   url = "https://biology-informed-multiomics.s3.eu-central-1.amazonaws.com/biology-informed-multiomics.tar",
-  destfile = "data/data.tar"
+  destfile = "data/data.tar",
+  mode = "wb"  # explicitly tell R to download the file in binary mode for Windows system
 )
 
 # Unzip file
@@ -71,7 +71,7 @@ file.remove("data/data.tar")
 
 ## Load Libraries
 ```{r setup, include=FALSE} 
-knitr::opts_chunk$set(warning = FALSE) 
+knitr::opts_chunk$set(warning = FALSE)
 ```
 
 ```{r}
@@ -95,6 +95,8 @@ h3k27me3 <- readRDS("data/h3k27me3_se.rds")
 h3k27ac <- readRDS("data/h3k27ac_se.rds")
 ```
 
+`readRDS()` is not part of the SummarizedExperiment package. It is a standard R function used to read a single R object that was previously saved using saveRDS(). Because SummarizedExperiment objects are just specialized R objects, they can be saved and loaded using these standard base R functions.
+
 ---
 
 ## 🧪 Exercise 1: Working with `SummarizedExperiment` (SE)
@@ -105,28 +107,93 @@ h3k27ac <- readRDS("data/h3k27ac_se.rds")
 rna
 ```
 
+When we use `readRDS("data/rna_se.rds")`, it doesn't just read raw text or numbers (like read.csv would), but it completely restores the R object from the file exactly as it was when it was saved. Since the original object saved into that file was a `RangedSummarizedExperiment` class, that is exactly what gets loaded back into the `rna` variable.
+
 ### 2. Access `rowRanges`, `colData`, and `assays`
 
+The `rowRanges()` accessor is used to view the range information for a RangedSummarizedExperiment. (Note if this were the parent SummarizedExperiment class we'd use `rowData()`). The data are stored in a GRangesList (*Genomic Ranges*) object, where each list element corresponds to one gene transcript (*feature*) and the ranges in each GRanges correspond to the exons in the transcript.
+
+Sample meta-data (*condition*) describing the samples can be accessed using `colData()`, and is a DataFrame that can store any number of descriptive columns for each sample row.
+
 ```{r}
-rowRanges(rna)[1:5]
+rowRanges(rna)
 colData(rna)
-assay(rna)[1:5,]
+```
+
+We can isolate the GRanges (or sometimes a GRangesList) object. This object will contain the seqnames (chromosome), ranges (start and end positions), and strand (+ or -) for every single gene in the RNA-seq dataset, perfectly matching the order of the rows in the count matrix.
+
+```{r]}
+gr <- rowRanges(rna)
+length(gr)
+seqnames(gr)
+```
+
+In a GRanges object, the core information is strictly the genomic coordinates: the chromosome (seqnames), the start and end positions (ranges), and the strand. However, we almost always have extra information associated with those genomic intervals. For example:
+
+- For RNA-seq, we might want to store the Gene Symbol, Ensembl ID, or Biotype for each gene
+- For ATAC-seq/ChIP-seq, we might want to store the peak score, fold-change, or p-value for each peak
+
+`mcols(gr)` (which stands for metadata cols) is how we access or modify this extra information. It returns a DataFrame where each row perfectly matches a genomic range in our GRanges object, and the columns contain whatever extra annotations we've attached to those ranges.
+
+```{r}
+mcols(gr)
+```
+
+In a RangedSummarizedExperiment, `rowData()` is just a shortcut. Under the hood, rowData(rna) is programmed to reach into the rowRanges and pull out its mcols(). They return the exact same DataFrame of gene annotations.
+
+```{r}
+rowData(rna)
+```
+
+Here we are seeing start, end, or seqnames as columns inside your rowData() DataFrame, it simply means the person who created the dataset left redundant data in there. By default, the core spatial coordinates are not part of the metadata table. Even though the rowData table has columns conveniently named start and end, Bioconductor tools do not know what they are.
+
+The sample metadata columns (which are stored in `colData()`) can be accessed directly on the object using the `$` accessor. This makes it easy to subset the entire object by a given phenotype or treatment group.
+
+```{r}
+rna[, rna$group == "11half"]
+```
+
+The `assay()` function (singular) extracts a single matrix from the object. Because we didn't specify a name, it defaults to returning the very first assay in the object. Depending on how rna was created, this might happen to be "counts", but it could be "logCPM".
+
+To retrieve the experiment data from a SummarizedExperiment object one can use the `assays()` (plural) accessor.
+
+```{r}
+assay(rna)[1:5,]  # same as assay(rna, 'counts')[1:5,] or assay(rna, 1)[1:5,]
 assays(rna)
 ```
+
+A SummarizedExperiment object can hold multiple assay datasets (e.g., raw counts and normalized values). We can view the list of available assays using `assays(rna)` and access a specific one using the `$` operator on that list (for example, `assays(rna)$counts`). In these assay matrices, each row represents a gene/transcript and each column represents a single sample.
+
+```{r}
+assays(rna)$counts[1:5,]
+```
+
+_Note: While `assays(rna)$counts` works perfectly, the common and preferred Bioconductor method we can use is the singular function: `assay(rna, "counts")`._
+
+Meta-data describing the experimental methods and publication references can be accessed using metadata().
+
+```{r}
+metadata(rna)
+```
+
+_Note that `metadata()` is just a simple list, so it is appropriate for any experiment wide metadata the user wishes to save, such as storing model formulas._
 
 ### 3. Boxplot of Expression for a Few Genes
 
 ```{r}
 df <- as.data.frame(t(assay(rna)[1:5, ]))
 df$sample <- rownames(df)
-df_long <- pivot_longer(df, -sample, names_to = "gene", values_to = "expression")
+df_long <- pivot_longer(
+  df, -sample, names_to = "gene", values_to = "expression")
+# -sample tells to pivot every column in the dataframe EXCEPT the sample column
 
 ggplot(df_long, aes(x = gene, y = expression)) +
   geom_boxplot(aes(fill = gene)) +
   theme_bw() +
   theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) +
-  labs(title = "Expression Distribution of Selected Genes",
-       y = "Expression", x = "Genes") +
+  labs(
+    title = "Expression Distribution of Selected Genes",
+    y = "Expression", x = "Genes") +
   scale_fill_brewer(palette = "Set2")
 ```
 
@@ -148,20 +215,24 @@ logcpm <- assay(rna, "logCPM")
 # Convert to long data frames for ggplot
 df_raw <- as.data.frame(raw_counts)
 df_raw$gene <- rownames(df_raw)
-df_raw_long <- pivot_longer(df_raw, -gene, names_to = "sample", values_to = "expression")
+df_raw_long <- pivot_longer(
+  df_raw, -gene, names_to = "sample", values_to = "expression")
 df_raw_long$assay <- "Raw Counts"
 df_raw_long$expression <- log2(df_raw_long$expression + 1)
 
 df_log <- as.data.frame(logcpm)
 df_log$gene <- rownames(df_log)
-df_log_long <- pivot_longer(df_log, -gene, names_to = "sample", values_to = "expression")
+df_log_long <- pivot_longer(
+  df_log, -gene, names_to = "sample", values_to = "expression")
 df_log_long$assay <- "logCPM"
 
 # Combine both
 df_combined <- rbind(df_raw_long, df_log_long)
 
 # Set factor for names to make Raw counts to be plotted first
-df_combined$assay <- factor(df_combined$assay, levels = unique(df_combined$assay))
+df_combined$assay <- factor(
+  df_combined$assay,
+  levels = unique(df_combined$assay))
 
 # Plot boxplot across samples
 ggplot(df_combined, aes(x = sample, y = expression, fill = assay)) +
@@ -169,10 +240,10 @@ ggplot(df_combined, aes(x = sample, y = expression, fill = assay)) +
   theme_bw() +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
   facet_wrap(~ assay, scales = "free_y") +
-  labs(title = "Sample-wise Expression: Raw vs Normalized",
-       x = "Samples", y = "Expression") +
+  labs(
+    title = "Sample-wise Expression: Raw vs Normalized",
+    x = "Samples", y = "Expression") +
   scale_fill_brewer(palette = "Set2")
-
 ```
 
 :::
@@ -189,21 +260,28 @@ rna_subset
 
 assays(rna_subset)
 assay(rna_subset, "counts")
-assay(rna_subset, "logCPM")
 
 colData(rna_subset)
-rowData(rna_subset)
 rowRanges(rna_subset)
+length(rowRanges(rna_subset))
 ```
 
 :::
-
 
 ## Question 3
 
 **Try to run all other commands from the following image on other `SE` objects as well**
 
 ![](../assets/images/se.svg)
+
+```{r}
+h3k27ac
+
+colData(h3k27ac)
+assays(h3k27ac)
+metadata(h3k27ac)
+head(assay(h3k27ac, "logCPM"))
+```
 
 ---
 
@@ -214,13 +292,24 @@ rowRanges(rna_subset)
 ```{r}
 gr <- rowRanges(atac)
 gr
+
+seqlevels(gr)
 ```
 
 ### 2. Subset Regions on chr1 with Width > 1000 bp
 
+`width` (along with seqnames, start, end, and strand) is not in the metadata columns (mcols). It is a core spatial property of the GRanges object itself. It calculates width simply as _end - start + 1_. For a gene, this represents the entire genomic locus on the chromosome, spanning from the start of the first exon all the way to the end of the last exon, including all the introns.
+
 ```{r}
 subset_gr <- gr[seqnames(gr) == "chr1" & width(gr) > 1000]
-subset_gr
+length(subset_gr)
+```
+
+Bioconductor has a specialized `subset` method for GRanges that allows us to drop the repetitive `gr` calls, making it look much cleaner:
+
+```{r}
+subset(gr, seqnames == "chr1" & width > 1000)
+length(subset_gr)
 ```
 
 ### 3. Plot Width Distribution of Genomic Ranges
@@ -231,9 +320,16 @@ df_gr <- as.data.frame(gr)
 ggplot(df_gr, aes(x = width)) +
   geom_histogram(bins = 50, fill = "#3366cc", color = "white") +
   theme_minimal() +
-  labs(title = "Width Distribution of Genomic Ranges",
-       x = "Width (bp)", y = "Count")
+  labs(
+    title = "Width Distribution of Genomic Ranges",
+    x = "Width (bp)", y = "Count")
 ```
+
+`mcols(gr)` (Metadata only) returns only the extra annotations (the "fact sheet"). It returns a DataFrame of things like Gene Name, P-value, or Score. It does not include the actual genomic coordinates (seqnames, start, end, width, strand). `as.data.frame(gr)` (Everything) flattens the entire GRanges object into a standard R dataframe. The resulting table will have seqnames, start, end, width, and strand as its first five columns, and then it will attach all of the mcols right next to them.
+
+We must use `as.data.frame(gr)` here. If we used mcols(gr), the resulting table wouldn't have the **width** column.
+
+The _geneLength_ column in the metadata is usually the effective length of the mature mRNA transcript. It is calculated by summing up only the lengths of the exons (ignoring the introns). This is the number used to normalize counts into TPM (Transcripts Per Million).
 
 ---
 
@@ -241,15 +337,17 @@ ggplot(df_gr, aes(x = width)) +
 
 ```{r}
 mat <- assay(h3k27ac)
+head(mat)
 
-Heatmap(mat[1:50, ],
-        name = "H3K27ac",
-        show_row_names = FALSE,
-        show_column_names = TRUE,
-        cluster_rows = TRUE,
-        cluster_columns = TRUE)
+Heatmap(
+  mat[1:50,],
+  name = "H3K27ac",
+  show_row_names = FALSE,
+  show_column_names = TRUE,
+  cluster_rows = TRUE,
+  show_row_dend = FALSE,  # hide row dendrogram
+  cluster_columns = TRUE)
 ```
-
 
 ## Question 4
 
@@ -257,6 +355,17 @@ Heatmap(mat[1:50, ],
 
 ![](../assets/images/gr.png)
 
+```{r}
+gr <- rowRanges(h3k4me1)
+head(gr)
+
+length(gr)
+
+head(width(gr))
+head(gr$geneLength)  # head(mcols(gr)$geneLength)
+
+seqlevels(gr)
+```
 
 ::: {.callout-important}
 Understanding how different omics layers are represented in `SE` and `GRanges` objects is essential for multi-omics integration, visualization, and downstream analysis.
