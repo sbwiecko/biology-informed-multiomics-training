@@ -24,3 +24,4 @@ _site/
 de_genes_FindAllMarkers.csv
 *.html
 data/
+**/*.quarto_ipynb
