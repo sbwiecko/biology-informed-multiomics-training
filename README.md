@@ -1,36 +1,72 @@
-![build workflow](https://github.com/sib-swiss/biology-informed-multiomics-training/actions/workflows/docker-image.yml/badge.svg)
-![GitHub Release Date](https://img.shields.io/github/release-date/sib-swiss/biology-informed-multiomics-training)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5703106.svg)](https://doi.org/10.5281/zenodo.5703106)
 [![License: CC BY-SA 4.0](https://img.shields.io/badge/License-CC_BY--SA_4.0-lightgrey.svg)](https://creativecommons.org/licenses/by-sa/4.0/)
+[![Forked from sib-swiss](https://img.shields.io/badge/Forked%20from-sib--swiss-blue)](https://github.com/sib-swiss/biology-informed-multiomics-training)
 
-This website is hosted at: https://sib-swiss.github.io/biology-informed-multiomics-training/
+# Biology-Informed Multi-Omics: A Wet-Lab Scientist's Study Fork
 
-Please refer to [issues](https://github.com/sib-swiss/biology-informed-multiomicstraining/issues) for improvements/bugs for course material or the website. 
+Welcome! This repository is an annotated study fork of the [SIB Swiss Institute of Bioinformatics Multi-Omics Training Course](https://github.com/sib-swiss/biology-informed-multiomics-training).
 
-Any contribution to this course material is highly appreciated :+1:. Please have a look at the [CONTRIBUTING.md](CONTRIBUTING.md) file to learn more on how to contribute. 
+I come from a **wet-lab background** and am investing significant effort into transitioning toward computational biology. When working with multi-layered genomics data, the learning curve can be steep. I created this fork to document my self-study process, deconstruct complex concepts, and answer technical bioinformatics questions from a bench scientist's perspective.
 
-# Course website biology-informed-multiomics
+---
 
-## Authors
+## What You Will Find in This Fork
 
-- Deepak Tanwar [ORCiD](https://orcid.org/0000-0001-8036-1989)
-- Geert van Geest [ORCiD](https://orcid.org/0000-0002-1561-078X)
-- Patricia Palagi [ORCiD](https://orcid.org/0000-0001-9062-6303)
+* **Wet-Lab Context & Concept Deconstruction:** Line-by-line notes translating abstract computational steps into biological meaning.
+* **Troubleshooting & Technical Deep Dives:** Detailed reflections and extra research on tricky parameters, Bioconductor quirks, and statistical assumptions.
+* **Refactored & Annotated Code:** Code blocks with additional comments explaining the *why* behind data transformations.
+* **Beginner-Friendly Focus:** Written specifically for researchers without formal bioinformatics degrees who want to understand multi-omics integration step by step.
 
-## Helper
+---
 
--  Joana Carlevaro-Fita [ORCiD](https://orcid.org/0000-0002-1674-2055)
+## Analytical Workflow Covered
 
-## How reuse this material
+1. **Multi-Layer Integration:** Importing and processing ATAC-seq, RNA-seq, ChIP-seq, and Bisulfite-seq datasets in R/Bioconductor.
+2. **Overlap Matrices:** Quantifying co-occurrence across layers to detect epigenetic and transcriptional co-regulation.
+3. **Downstream Analysis:** Functional annotation and pathway enrichment.
+4. **Data Visualization:** Creating interpretable plots for multi-layer data.
 
-This website is generated with [quarto](https://quarto.org/). To re-build the website, download and install [Rstudio](https://posit.co/download/rstudio-desktop/) and [Quarto CLI](https://quarto.org/docs/get-started/). Also make sure you have installed the [required packages](Docker/install_packages.R). After that, clone this repository:
+---
 
-```sh
-git clone https://github.com/sib-swiss/biology-informed-multiomics-training.git
+## Local Setup (VS Code + renv on Windows)
+
+Unlike the upstream repository which builds a Quarto website via Docker/RStudio, I run these notebooks locally inside **VS Code on Windows** using the authors' `renv` environment with minor local adjustments.
+
+### 1. Clone the repository
+
+```bash
+git clone [https://github.com/](https://github.com/)<your-username>/biology-informed-multiomics-training.git
+cd biology-informed-multiomics-training
 ```
 
-Open the project in Rstudio, and run in the terminal:
+### 2. Restore the R environment
+
+Open R in your terminal or VS Code console and restore the dependencies:
 
 ```R
-quarto preview
+install.packages("renv")
+renv::restore()
+```
+
+### 3. Running the notebooks
+
+Open the `.qmd` or `.Rmd` files directly in VS Code with the [R extension](https://marketplace.visualstudio.com/items?itemName=REditorSupport.r) and run the code chunks interactively.
+
+---
+
+## Connect & Discuss
+
+If you are also bridging the gap between wet-lab biology and bioinformatics, feel free to explore the code, open an issue, or ask a question. Feedback, corrections, and discussions are always welcome!
+
+---
+
+## Credits & Upstream Authors
+
+This repository is built upon the open course materials designed by the **SIB Swiss Institute of Bioinformatics**:
+
+* **Original Course Site:** [https://sib-swiss.github.io/biology-informed-multiomics-training/](https://sib-swiss.github.io/biology-informed-multiomics-training/)
+* **Original Repository:** [sib-swiss/biology-informed-multiomics-training](https://www.google.com/url?sa=E&source=gmail&q=https://github.com/sib-swiss/biology-informed-multiomics-training)
+* **Authors:** Deepak Tanwar, Geert van Geest, Patricia Palagi
+* **Helper:** Joana Carlevaro-Fita
+* **Original DOI:** [10.5281/zenodo.5703106](https://doi.org/10.5281/zenodo.5703106)
+
 ```
