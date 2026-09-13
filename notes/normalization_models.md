@@ -1,4 +1,4 @@
-# Notes on normalization models
+# Normalization models
 
 ## Averaging Models for Normalization
 
@@ -100,5 +100,3 @@ These predefined groupings are then fed into the `EnrichedHeatmap` package, whic
 * If we look at the bottom group, the center is bright red in `E11.5` but fades significantly in `E15.5`.
 
 * **The Summary Lines (Profile plot):** The line graphs at the very top summarize the heatmap data. The red line shows the average signal for all the "Increased accessibility" regions, and the blue line shows the average for the "Decreased accessibility" regions. They peak at the `mid` point, matching the visual concentration of red in the heatmaps below.
-
-**A quick note of caution:** A subsequent slide in that deck points out that the color scales for E11.5 (max 0.7) and E15.5 (max 2.3) are different. This means the visual redness isn't directly comparable between the two columns without adjusting for those distinct scales!

@@ -15,11 +15,12 @@ editor_options:
 - Add multiple categorical annotations with separate color legends
 - Avoid common data handling errors in `heatmap` plotting
 
-
 ## Load Libraries
 ```{r setup, include=FALSE} 
 knitr::opts_chunk$set(warning = FALSE) 
 ```
+
+[Follow the instructions](https://github.com/mskilab-org/gUtils) to install `gUtils`.
 
 ```{r}
 #| warning: false
@@ -32,41 +33,110 @@ library(circlize)
 library(GenomicRanges)
 ```
 
-
 ## ATAC SE object
 Here we load the `SummarizedExperiment` for the ATAC-seq data
 ```{r}
 atac <- readRDS("data/atac_se.rds")
 ```
 
-
 ## ATAC peaks info
+
 Each peak region represent the activity in a genomic region. These peaks are annotated for various features, including their genomic annotations and the results for differential accessibility analysis is also added there.
 ```{r overlap-matrix-2, message=FALSE, warning=FALSE}
-rowRanges(atac)
-
 rd_atac <- rowRanges(atac)
-rd_atac <- rd_atac[abs(rd_atac$logFC) >= 0.5 & rd_atac$qvalue <= 0.1]
-colnames(elementMetadata(rd_atac)) <- paste("ATAC", colnames(elementMetadata(rd_atac)), sep = "_")
+
+head(rd_atac)
 ```
 
+Once we have the short sequencing reads, bioinformatics takes over to recreate the biological landscape.
+
+* **Alignment:** We take every read and match it to a reference genome to find exactly where it originated.
+* **Generating Coverage:** When thousands of reads map to the exact same open genomic location, they form a "pile-up." This is the black, mountainous signal we see in the example snapshot of chromatin accessibility.
+* **Peak Calling:** We use statistical algorithms (like MACS2) to distinguish true biological pile-ups from random background noise, artifacts and duplicates. The algorithm defines the precise boundaries of these pile-ups, creating discrete peak regions (the shaded boxes on the example snapshot of chromatin accessibility) with specific coordinates (e.g., `chr1`, `start: 100`, `end: 400`).
+
+## Statistical results
+
+Now that we have genomic coordinates for our peaks, we can extract the specific information.
+
+* **Genomic Annotation:** We compare our peak coordinates against a known database of genes. This tells us which gene is nearby (e.g., `Gene1`) and how far the peak is from the Transcription Start Site (`distanceTSS`).
+* **Differential Accessibility:** To compare conditions, we count exactly how many sequencing reads fall within a specific peak region for each experimental group (e.g., `Group1` vs `Group2`). Statistical software (like DESeq2) then calculates the fold-change between these counts to determine if a region significantly opened or closed in response to a treatment. Here is the step-by-step bioinformatics pipeline used to generate those exact values from the raw data.
+
+### 1. Creating a Consensus Peak Set
+
+Before comparing samples, we need a unified map. The peak-calling algorithm (like MACS2) finds peaks for each sample individually. To compare them, bioinformatics tools merge all these individual peak files across all replicates and conditions into a single "master list" of non-overlapping genomic windows. This ensures we are comparing the exact same spatial coordinates across the board.
+
+### 2. Generating the Count Matrix
+
+Once the master list of regions is defined, we go back to the original aligned sequence alignments (the BAM files). Using tools like `featureCounts` or `bedtools`, we count exactly how many reads fall into each consensus region for every single sample. This generates a large matrix where the rows are the genomic regions and the columns are the individual samples.
+
+### 3. Statistical Modeling
+
+This raw count matrix is then fed into differential expression software, most commonly DESeq2 or edgeR.
+
+* **Normalization:** The software mathematically adjusts for differences in sequencing depth between the samples.
+* **Testing:** It fits a negative binomial model to test if the difference in read counts between groups (e.g., Group 1 vs. Group 2) is statistically significant.
+* **Output:** The algorithm outputs a results table containing the $\text{Log}_{2} \text{ fold-change}$ (`logFC`), p-values, and adjusted p-values for every single region.
+
+### 4. Constructing the `rowRanges`
+
+Finally, the data is assembled for visualization tools like `EnrichedHeatmap`, which relies on the Bioconductor ecosystem. The genomic coordinates (`chr`, `start`, `end`) form the core of the `rowRanges` object, and the statistical results (like the `logFC` and p-values) are tacked on as metadata columns. This creates a unified object where the visualization tool instantly knows both *where* the region is located and *how significantly* its accessibility changed.
+
+```{r}
+# qvalue is the FDR adjusted P value
+#rd_atac <- rd_atac[abs(rd_atac$logFC) >= 0.5 & rd_atac$qvalue <= 0.1]
+rd_atac_filtered = subset(rd_atac, logFC >= .5 & qvalue <= .1)
+
+# Add an "ATAC_" prefix to all the metadata columns in rd_atac_filtered
+colnames(elementMetadata(rd_atac_filtered)) <- paste(
+  "ATAC", colnames(elementMetadata(rd_atac_filtered )), sep = "_")
+```
 
 ## Taking 1000 bp around the mid of ATAC-peaks
+
 Most of the peaks are around 1000 bp wide. We can check that
 ```{r}
-median(lengths(rowRanges(atac)))
+# median(lengths(rd_atac_filtered))  # `lengths` (plural) is an alias for `width`
+median(width(rd_atac_filtered))
+
+hist(
+  width(rd_atac_filtered),
+    breaks = 50,
+    main = "Distribution of ATAC Peak Widths",
+    xlab = "Width (bp)",
+    col = "lightblue",
+    border = "black")
 ```
 
-For plotting the data, we can hence consider 1000 bp around the **peak-mid**
+For plotting the data, we can hence consider 1000 bp around the **peak-mid** that we find using `gr.mid()` (this returns the 1-bp center of each peak). It directly overwrites the data inside the `ranges` column.
 ```{r}
 # Finding mid of all peaks
-mid_peaks <- gr.mid(rd_atac)
+mid_peaks <- gr.mid(rd_atac_filtered)
 
 # adding names to peaks to give them identity
 names(mid_peaks) <- paste("peak", 1:length(mid_peaks), sep = "_")
 ```
 
+There actually is a native way to do this in standard GenomicRanges, but it doesn't have a dedicated "midpoint" name. Instead, Bioconductor relies on its highly versatile `resize()` function.
+
+```{r}
+# Finding mid of all peaks
+mid_peaks <- resize(rd_atac_filtered, width = 1, fix = "center")
+
+# adding names to peaks to give them identity
+names(mid_peaks) <- paste("peak", 1:length(mid_peaks), sep = "_")
+```
+
+A GRanges object is not a standard data frame. It strictly separates its data into two distinct parts: **Core Geometry** and **Metadata** . Because GRanges is an object-oriented structure (S4), you have to use specific "accessor" functions to extract the core geometry.
+
+```{r}
+# Returns an IRanges object with start, end, and width
+ranges(mid_peaks)
+```
+
+_Note: Because GRanges is an S4 object, its core architecture is rigidly locked. You physically cannot add a custom geometry column (like midpeak) next to start and end. The rules of the object state that a GRanges row can only represent exactly one genomic interval at a time._
+
 ## Normalizing data for plotting
+
 `bigWig` files are compressed, indexed, binary format used for efficiently displaying continuous data, like genomic signal data, in genome browsers. Here, we read in ATAC-seq `bigWig` files, filters the data to specific chromosomes, normalizes signal intensity around genomic regions of interest (peak centers), and saves the resulting matrices for downstream visualization.
 
 ```{r}
