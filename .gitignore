@@ -1,8 +1,6 @@
 # renv
-# DO NOT ignore .Rprofile or renv.lock; only ignore installed packages
-renv/library/
-renv/local/
-renv/staging/
+# Note: renv/ manages its own .gitignore for library/, local/, etc.
+# Keep .Rprofile, renv.lock, and renv/activate.R tracked!
 
 # Data and large binary artifacts
 data/

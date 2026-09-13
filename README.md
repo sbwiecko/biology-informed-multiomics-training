@@ -35,32 +35,34 @@ No Docker or Quarto setup required. You can run everything locally in **VS Code 
 ### 1. Clone the repository
 
 ```bash
-git clone [https://github.com/](https://github.com/sbwiecko/biology-informed-multiomics-training.git)
+git clone https://github.com/sbwiecko/biology-informed-multiomics-training.git
 cd biology-informed-multiomics-training
 ```
 
 ### 2. Restore the R environment
 
-Open R in your terminal or console to restore the dependencies via `renv`:
+Open R in your terminal or console to restore dependencies via `renv`:
 
 ```R
 install.packages("renv")
 renv::restore()
 ```
 
-### 3. Enable the R kernel for Jupyter
+### 3. Register the Project Kernel for Jupyter
 
-Ensure the `IRkernel` package is registered so Jupyter can run R:
+Ensure `IRkernel` is available inside this `renv` environment and register a distinct kernel:
 
 ```R
-install.packages("IRkernel")
-IRkernel::installspec(user = FALSE)
-
+renv::install("IRkernel")
+IRkernel::installspec(name = "ir_multiomics", displayname = "R (multiomics-renv)")
 ```
 
 ### 4. Running the Notebooks
 
-Open the project folder in VS Code, install the official **Jupyter extension**, open any `.ipynb` file, select the **R kernel** in the top-right corner, and run the cells.
+1. Open the project folder in VS Code with the official **Jupyter extension** installed.
+2. Open any `.ipynb` notebook.
+3. Click **Select Kernel** in the top-right corner -> **Jupyter Kernel...** -> **R (multiomics-renv)**.
+4. *(Optional check)* Run `.libPaths()` in the first cell to confirm packages load from the local `renv/library`.
 
 ---
 
