@@ -3,17 +3,18 @@
 
 # Biology-Informed Multi-Omics: A Wet-Lab Scientist's Study Fork
 
-Welcome! This repository is an annotated study fork of the [SIB Swiss Institute of Bioinformatics Multi-Omics Training Course](https://github.com/sib-swiss/biology-informed-multiomics-training).
+Welcome! This repository is an annotated, restructured study fork of the [SIB Swiss Institute of Bioinformatics Multi-Omics Training Course](https://github.com/sib-swiss/biology-informed-multiomics-training).
 
-I come from a **wet-lab background** and am investing significant effort into transitioning toward computational biology. When working with multi-layered genomics data, the learning curve can be steep. I created this fork to document my self-study process, deconstruct complex concepts, and answer technical bioinformatics questions from a bench scientist's perspective.
+I come from a **wet-lab background** and am investing significant effort into transitioning toward computational biology. To make the learning curve manageable and fully focus on the code and biology, **I simplified the project architecture**: I removed the Docker containers and Quarto website infrastructure in favor of standalone **Jupyter Notebooks (`.ipynb`) and clean Markdown files**.
 
 ---
 
 ## What You Will Find in This Fork
 
+* **Streamlined Interactive Format:** Converted from the original `.qmd` files into pure Jupyter Notebooks (`.ipynb`) (via `quarto convert`, configured to use the R kernel via `jupyter: ir` in the YAML front matter) for direct, interactive execution.
 * **Wet-Lab Context & Concept Deconstruction:** Line-by-line notes translating abstract computational steps into biological meaning.
 * **Troubleshooting & Technical Deep Dives:** Detailed reflections and extra research on tricky parameters, Bioconductor quirks, and statistical assumptions.
-* **Refactored & Annotated Code:** Code blocks with additional comments explaining the *why* behind data transformations.
+* **Refactored & Annotated Code:** Code cells with additional comments explaining the *why* behind data transformations.
 * **Beginner-Friendly Focus:** Written specifically for researchers without formal bioinformatics degrees who want to understand multi-omics integration step by step.
 
 ---
@@ -27,35 +28,45 @@ I come from a **wet-lab background** and am investing significant effort into tr
 
 ---
 
-## Local Setup (VS Code + renv on Windows)
+## Local Setup (VS Code + Jupyter + renv on Windows)
 
-Unlike the upstream repository which builds a Quarto website via Docker/RStudio, I run these notebooks locally inside **VS Code on Windows** using the authors' `renv` environment with minor local adjustments.
+No Docker or Quarto setup required. You can run everything locally in **VS Code on Windows** using an R kernel.
 
 ### 1. Clone the repository
 
 ```bash
-git clone [https://github.com/](https://github.com/)<your-username>/biology-informed-multiomics-training.git
+git clone [https://github.com/](https://github.com/sbwiecko/biology-informed-multiomics-training.git)
 cd biology-informed-multiomics-training
 ```
 
 ### 2. Restore the R environment
 
-Open R in your terminal or VS Code console and restore the dependencies:
+Open R in your terminal or console to restore the dependencies via `renv`:
 
 ```R
 install.packages("renv")
 renv::restore()
 ```
 
-### 3. Running the notebooks
+### 3. Enable the R kernel for Jupyter
 
-Open the `.qmd` or `.Rmd` files directly in VS Code with the [R extension](https://marketplace.visualstudio.com/items?itemName=REditorSupport.r) and run the code chunks interactively.
+Ensure the `IRkernel` package is registered so Jupyter can run R:
+
+```R
+install.packages("IRkernel")
+IRkernel::installspec(user = FALSE)
+
+```
+
+### 4. Running the Notebooks
+
+Open the project folder in VS Code, install the official **Jupyter extension**, open any `.ipynb` file, select the **R kernel** in the top-right corner, and run the cells.
 
 ---
 
 ## Connect & Discuss
 
-If you are also bridging the gap between wet-lab biology and bioinformatics, feel free to explore the code, open an issue, or ask a question. Feedback, corrections, and discussions are always welcome!
+If you are also bridging the gap between wet-lab biology and bioinformatics, feel free to explore the notebooks, open an issue, or ask a question. Feedback, corrections, and discussions are always welcome!
 
 ---
 
@@ -68,5 +79,3 @@ This repository is built upon the open course materials designed by the **SIB Sw
 * **Authors:** Deepak Tanwar, Geert van Geest, Patricia Palagi
 * **Helper:** Joana Carlevaro-Fita
 * **Original DOI:** [10.5281/zenodo.5703106](https://doi.org/10.5281/zenodo.5703106)
-
-```
