@@ -39,7 +39,17 @@ git clone https://github.com/sbwiecko/biology-informed-multiomics-training.git
 cd biology-informed-multiomics-training
 ```
 
-### 2. Restore the R environment
+### 2. Configure VS Code Working Directory (Crucial)
+
+To guarantee that Jupyter always activates `.Rprofile` and locates your `renv` library—even when notebooks are stored in subfolders—force VS Code to run kernels from the project root:
+
+1. Open Settings in VS Code (`Ctrl + ,` on Windows/Linux or `Cmd + ,` on macOS).
+2. Search for: `Jupyter Notebook File Root`.
+3. Set the value to: `${workspaceFolder}`.
+
+*(Alternatively, add `"jupyter.notebookFileRoot": "${workspaceFolder}"` inside your `.vscode/settings.json` file.)*
+
+### 3. Restore the R environment
 
 Open R in your terminal or console to restore dependencies via `renv`:
 
@@ -48,7 +58,7 @@ install.packages("renv")
 renv::restore()
 ```
 
-### 3. Register the Project Kernel for Jupyter
+### 4. Register the Project Kernel for Jupyter
 
 Ensure `IRkernel` is available inside this `renv` environment and register a distinct kernel:
 
@@ -57,12 +67,12 @@ renv::install("IRkernel")
 IRkernel::installspec(name = "ir_multiomics", displayname = "R (multiomics-renv)")
 ```
 
-### 4. Running the Notebooks
+### 5. Running the Notebooks
 
 1. Open the project folder in VS Code with the official **Jupyter extension** installed.
-2. Open any `.ipynb` notebook.
+2. Open any `.ipynb` notebook (e.g., `01_...ipynb`).
 3. Click **Select Kernel** in the top-right corner -> **Jupyter Kernel...** -> **R (multiomics-renv)**.
-4. *(Optional check)* Run `.libPaths()` in the first cell to confirm packages load from the local `renv/library`.
+4. *(Optional check)* Run `.libPaths()` in the first cell to verify packages are loading from `./renv/library`.
 
 ---
 
