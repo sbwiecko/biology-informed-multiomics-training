@@ -1,27 +1,41 @@
-.DS_Store
-site
+# renv
+# DO NOT ignore .Rprofile or renv.lock; only ignore installed packages
+renv/library/
+renv/local/
+renv/staging/
+
+# Data and large binary artifacts
+data/
+*.rds
+course_data*
+cellranger*
+single_cell_course
+de_genes_FindAllMarkers.csv
+
+# Jupyter / Checkpoints
+.ipynb_checkpoints/
+
+# R / System temp files
 .Rproj.user
+.Rhistory
+.DS_Store
+~$*
+
+# Shell / Cache
 .cache
 .local
 .config
 .bash_history
-.Rhistory
-.Rprofile
-single_cell_course
-cellranger*
-course_data*
-*.rds
-_site/
-# _freeze/
-.quarto/
-/.quarto/
-*cache*
-*_files*
-/.luarc.json
-~$*
 .sh_history
 .wget-hsts
-de_genes_FindAllMarkers.csv
+*cache*
+
+# Web / Render leftovers
+site
+_site/
+.quarto/
+/.quarto/
+*_files*
 *.html
-data/
 **/*.quarto_ipynb
+/.luarc.json
