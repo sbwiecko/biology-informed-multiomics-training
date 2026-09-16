@@ -28,9 +28,11 @@ I come from a **wet-lab background** and am investing significant effort into tr
 
 ---
 
-## Local Setup (VS Code + Jupyter + renv on Windows)
+## Setup & Running the Notebooks
 
-No Docker or Quarto setup required. You can run everything locally in **VS Code on Windows** using an R kernel.
+**Prerequisite:** You must have **R** installed on your system.
+
+No Docker or Quarto setup is required. The project relies on `renv` to manage dependencies. Since these are standard Jupyter Notebooks (`.ipynb`) with an R kernel, you can run them locally using **VS Code**.
 
 ### 1. Clone the repository
 
@@ -39,40 +41,30 @@ git clone https://github.com/sbwiecko/biology-informed-multiomics-training.git
 cd biology-informed-multiomics-training
 ```
 
-### 2. Configure VS Code Working Directory (Crucial)
+### 2. Restore the R environment
 
-To guarantee that Jupyter always activates `.Rprofile` and locates your `renv` library—even when notebooks are stored in subfolders—force VS Code to run kernels from the project root:
-
-1. Open Settings in VS Code (`Ctrl + ,` on Windows/Linux or `Cmd + ,` on macOS).
-2. Search for: `Jupyter Notebook File Root`.
-3. Set the value to: `${workspaceFolder}`.
-
-*(Alternatively, add `"jupyter.notebookFileRoot": "${workspaceFolder}"` inside your `.vscode/settings.json` file.)*
-
-### 3. Restore the R environment
-
-Open R in your terminal or console to restore dependencies via `renv`:
+Open R in your terminal, console, or IDE to restore dependencies via `renv`:
 
 ```R
 install.packages("renv")
 renv::restore()
 ```
 
-### 4. Register the Project Kernel for Jupyter
+### 3. Running in VS Code
 
-Ensure `IRkernel` is available inside this `renv` environment and register a distinct kernel:
+1. **Configure VS Code Working Directory (Crucial):** To guarantee that Jupyter always activates `.Rprofile` and locates your `renv` library, force VS Code to run kernels from the project root.
+   - Open Settings (`Ctrl + ,` or `Cmd + ,`).
+   - Search for: `Jupyter Notebook File Root`.
+   - Set the value to: `${workspaceFolder}`.
+2. **Register the Project Kernel:**
+   ```R
+   renv::install("IRkernel")
+   IRkernel::installspec(name = "ir_multiomics", displayname = "R (multiomics-renv)")
+   ```
+3. Open any `.ipynb` notebook.
+4. Click **Select Kernel** in the top-right -> **Jupyter Kernel...** -> **R (multiomics-renv)**.
 
-```R
-renv::install("IRkernel")
-IRkernel::installspec(name = "ir_multiomics", displayname = "R (multiomics-renv)")
-```
-
-### 5. Running the Notebooks
-
-1. Open the project folder in VS Code with the official **Jupyter extension** installed.
-2. Open any `.ipynb` notebook (e.g., `01_...ipynb`).
-3. Click **Select Kernel** in the top-right corner -> **Jupyter Kernel...** -> **R (multiomics-renv)**.
-4. *(Optional check)* Run `.libPaths()` in the first cell to verify packages are loading from `./renv/library`.
+> **Optional check:** You can always run `.libPaths()` in a notebook's first cell to verify that packages are loading from the project's local `./renv/library`.
 
 ---
 
