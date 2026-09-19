@@ -28,6 +28,27 @@ I come from a **wet-lab background** and am investing significant effort into tr
 
 ---
 
+## Prerequisites & Scope
+
+> **Important Scope Note:**  
+> This repository focuses specifically on **downstream multi-omics integration and cross-layer biological interpretation**. It does **not** cover raw single-omics preprocessing (e.g., FASTQ quality control, read alignment, transcript quantification) or general Exploratory Data Analysis (EDA) and feature engineering from scratch.
+
+To get the most out of these notebooks, familiarity with the following concepts is recommended:
+
+* **Basic R & Bioconductor:** Working with common data structures (`data.frame`, matrices) and core Bioconductor classes (`GRanges`, `SummarizedExperiment`).
+* **Single-Omics Foundations:** Understanding basic quantification and differential analysis concepts in RNA-seq, ChIP-seq, and ATAC-seq.
+* **Exploratory Data Analysis (EDA):** Experience diagnosing batch effects, sample clustering (PCA/UMAP), and data normalization before multi-layer joining.
+
+### Looking to build foundational skills or explore more topics?
+
+* **Statistical Foundations & Coding with Python:** For those wanting to master coding from the ground up using biostatistics as the vehicle, check out my book [*Intuitive Biostatistics with Python* (Oxford University Press)](https://global.oup.com/academic/product/intuitive-biostatistics-with-python-9780197845035?lang=en&cc=fr). It uses Python's simulation and visualization capabilities to demystify confusing core concepts (null hypotheses, bootstrapping, non-parametrics) through hands-on coding and publication-ready graphs.
+* **End-to-End RNA-seq & Preprocessing:** Check out my repository [sbwiecko/RNAseq_UPenn](https://github.com/sbwiecko/RNAseq_UPenn), rewritten alongside the excellent [UPenn DIY Transcriptomics course](https://diytranscriptomics.com/) for a ground-up journey through raw data, quality control, alignment, and differential expression.
+* **SIB Training Catalog:** Explore the full lineup of world-class courses designed by the exceptional SIB Training Team: [SIB Swiss Institute of Bioinformatics Courses & Training](https://www.sib.swiss/training/learning-paths)
+* **Bioconductor Workflows:** [RNA-seq analysis is easy as 1-2-3 with limma, Glimma and edgeR](https://bioconductor.org/packages/release/workflows/vignettes/RnaSeqGeneEdgeRQL/inst/doc/edgeRQL.html)
+* **EDA & Statistical Exploration:** [Modern Statistics for Modern Biology](https://www.huber.embl.de/msmb/) by Susan Holmes and Wolfgang Huber
+
+---
+
 ## Setup & Running the Notebooks
 
 **Prerequisite:** You must have **R** installed on your system.
