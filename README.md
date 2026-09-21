@@ -21,7 +21,7 @@ I come from a **wet-lab background** and am investing significant effort into tr
 
 ## Analytical Workflow Covered
 
-1. **Multi-Layer Integration:** Importing and processing ATAC-seq, RNA-seq, ChIP-seq, and Bisulfite-seq datasets in R/Bioconductor.
+1. **Multi-Layer Integration:** Importing and processing ATAC-seq, RNA-seq, ChIP-seq, and WGBS datasets in R/Bioconductor.
 2. **Overlap Matrices:** Quantifying co-occurrence across layers to detect epigenetic and transcriptional co-regulation.
 3. **Downstream Analysis:** Functional annotation and pathway enrichment.
 4. **Data Visualization:** Creating interpretable plots for multi-layer data.
@@ -46,6 +46,7 @@ To get the most out of these notebooks, familiarity with the following concepts 
 * **SIB Training Catalog:** Explore the full lineup of world-class courses designed by the exceptional SIB Training Team: [SIB Swiss Institute of Bioinformatics Courses & Training](https://www.sib.swiss/training/learning-paths)
 * **Bioconductor Workflows:** [RNA-seq analysis is easy as 1-2-3 with limma, Glimma and edgeR](https://bioconductor.org/packages/release/workflows/vignettes/RnaSeqGeneEdgeRQL/inst/doc/edgeRQL.html)
 * **EDA & Statistical Exploration:** [Modern Statistics for Modern Biology](https://www.huber.embl.de/msmb/) by Susan Holmes and Wolfgang Huber
+* **Free Bioinformatics Resources:** Discover a curated collection of free bioinformatics training materials and resources at [GLITTR](https://glittr.org/)
 
 ---
 
