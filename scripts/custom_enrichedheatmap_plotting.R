@@ -12,6 +12,9 @@
 #' @param hm_width The physical or relative width of the heatmap (defaults to grid::unit(1, "null") for proportional layout)
 #' @param hm_height The physical or relative height of the heatmap
 #' @param top_anno_height Height of the top profile annotation block
+#' @param title_fontsize Numeric, font size for the column title (default 10)
+#' @param axis_fontsize Numeric, font size for the y-axis labels on the top annotation (default 7)
+#' @param axis_lwd Numeric, line width for the y-axis line on the top annotation (default 1)
 custom_enrichedheatmap_plotting <- function(
   norm_mat, 
   hm_name, 
@@ -21,7 +24,10 @@ custom_enrichedheatmap_plotting <- function(
   line_colors = NULL,
   hm_width = grid::unit(1, "null"), 
   hm_height = NULL, 
-  top_anno_height = grid::unit(1.5, "cm")) {
+  top_anno_height = grid::unit(1.5, "cm"), 
+  title_fontsize = 10, 
+  axis_fontsize = 7, 
+  axis_lwd = 1) {
 
   # Calculate the heavy math exactly ONCE (1st and 99th percentiles)
   vmin <- as.numeric(stats::quantile(norm_mat, c(0.01), na.rm = TRUE))
@@ -47,7 +53,7 @@ custom_enrichedheatmap_plotting <- function(
     row_title = NULL, 
     col = col_fun, 
     column_title = hm_name, 
-    column_title_gp = grid::gpar(fontsize = 10, fill = col_fill), 
+    column_title_gp = grid::gpar(fontsize = title_fontsize, fill = col_fill), 
     axis_name = c("-1kb", "mid", "1kb"), 
     heatmap_legend_param = list(
       at = legend_ticks, 
@@ -58,7 +64,9 @@ custom_enrichedheatmap_plotting <- function(
     top_annotation = ComplexHeatmap::HeatmapAnnotation(
       lines = EnrichedHeatmap::anno_enriched(
         height = top_anno_height, 
-        axis_param = list(facing = "inside"), 
+        axis_param = list(
+          facing = "inside", 
+          gp = grid::gpar(fontsize = axis_fontsize, lwd = axis_lwd)), 
         gp = grid::gpar(col = line_colors)
       )
     )
