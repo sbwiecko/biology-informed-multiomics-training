@@ -17,6 +17,20 @@ I come from a **wet-lab background** and am investing significant effort into tr
 * **Refactored & Annotated Code:** Code cells with additional comments explaining the *why* behind data transformations.
 * **Beginner-Friendly Focus:** Written specifically for researchers without formal bioinformatics degrees who want to understand multi-omics integration step by step.
 
+### Key Code Optimizations in this Fork
+
+Over the course of the notebooks, I adapted the original base R code to implement modern data science and tidyverse workflows. If you are learning R, you will find highly optimized, real-world solutions for:
+
+* **Modern Biological Logic (`dplyr::case_when`):** Transitioned classic boolean matrix subsetting into elegant, readable `case_when()` pipelines. This includes safely coercing `NA` values in `logFC` columns to `0` to build robust logical filtering for genomic categories.
+* **Genomic Range Wrangling:** Seamlessly manipulating `GRanges` metadata columns directly with `dplyr` (`mcols(gr) <- as.data.frame(mcols(gr)) %>% mutate(...)`) to keep genomic data structures perfectly aligned.
+* **Efficient I/O & Memory Management:** Refactored how large multi-omics matrices are grouped into named lists and saved via `saveRDS`, significantly streamlining downstream loading and keeping the global environment clean.
+* **Parameterizing Shared Scripts:** Updated shared plotting functions (`custom_enrichedheatmap_plotting.R`) to accept flexible aesthetic defaults (fonts, line widths), ensuring backward compatibility across all notebooks while allowing for highly customized plots.
+* **Mastering `ComplexHeatmap`:** 
+  * Building **local function wrappers** (e.g., `make_EH()`) to abstract away dimensions when generating massive 14-column plots.
+  * Explicitly extracting continuous 9-tone diverging palettes from `RColorBrewer` to biologically map epigenetic states (e.g., mapping unmethylated Active Promoters to exactly 0).
+  * Using the `grid` package's `pushViewport(viewport(gp = gpar(lwd = 0.5)))` trick to force razor-thin borders on dense composite figures for publication-quality PDF exports.
+  * Controlling chaotic layouts by overriding `merge_legend = FALSE` to seamlessly wrap dozens of continuous color bars horizontally.
+  
 ---
 
 ## Analytical Workflow Covered
