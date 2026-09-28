@@ -1,1 +1,8 @@
+---
+title: "Biology-Informed Multi-Omics Integration"
+subtitle: "A working fork of the SIB Training by a wet-lab scientist"
+author: "Sébastien Wieckowski"
+date: today
+---
+
 {{< include README.md >}}

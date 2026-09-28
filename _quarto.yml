@@ -1,29 +1,26 @@
 project:
-  type: book
+  type: website
 
-book:
+website:
   title: "Biology-Informed Multi-Omics Integration"
-  subtitle: "A working fork of the SIB Training from a wet-lab scientist"
-  author: "Sébastien Wieckowski"
-  date: today
-  chapters:
-    - index.qmd
-    - part: "I. Theoretical Reference & Notes"
-      chapters:
-        - notes/epigenetic_analysis_reference_guide.md
-        - notes/normalization_models.md
-        - notes/enrichment_analysis.md
-    - part: "II. Data Structures & Visualization"
-      chapters:
-        - notebooks/01-omics_data_structures.ipynb
-        - notebooks/02-atac_heatmaps.ipynb
-        - notebooks/03-chip_rna_visualization.ipynb
-    - part: "III. Multi-Omics Integration"
-      chapters:
-        - notebooks/04-genomic_overlap_matrices.ipynb
-        - notebooks/05-atac_rna_integration.ipynb
-        - notebooks/06-multiomics_integration.ipynb
-        - notebooks/07-functional_enrichment.ipynb
+  # subtitle: "A working fork of the SIB Training from a wet-lab scientist"
+  # author: "Sébastien Wieckowski"
+  # date: today
+  sidebar:
+    style: "docked"
+    search: true
+    contents:
+      - index.qmd
+      - notes/epigenetic_analysis_reference_guide.md
+      - notes/normalization_models.md
+      - notes/enrichment_analysis.md
+      - notebooks/01-omics_data_structures.ipynb
+      - notebooks/02-atac_heatmaps.ipynb
+      - notebooks/03-chip_rna_visualization.ipynb
+      - notebooks/04-genomic_overlap_matrices.ipynb
+      - notebooks/05-atac_rna_integration.ipynb
+      - notebooks/06-multiomics_integration.ipynb
+      - notebooks/07-functional_enrichment.ipynb
 
 format:
   html:
@@ -32,11 +29,3 @@ format:
     toc-depth: 3
     code-fold: show
     code-copy: true
-  pdf:
-    documentclass: scrreprt
-    toc: true
-    toc-depth: 3
-    colorlinks: true
-    include-in-header:
-      text: |
-        \usepackage[inline]{enumitem}

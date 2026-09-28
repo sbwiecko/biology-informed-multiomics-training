@@ -1,7 +1,5 @@
-::: {.content-visible when-format="html"}
 [![License: CC BY-SA 4.0](https://img.shields.io/badge/License-CC_BY--SA_4.0-lightgrey.svg)](https://creativecommons.org/licenses/by-sa/4.0/)
 [![Forked from sib-swiss](https://img.shields.io/badge/Forked%20from-sib--swiss-blue)](https://github.com/sib-swiss/biology-informed-multiomics-training)
-:::
 
 # Biology-Informed Multi-Omics: A Wet-Lab Scientist's Study Fork
 
