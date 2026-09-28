@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Sébastien Wieckowski">
+<meta name="dcterms.date" content="2026-09-28">
+
+<title>Biology-Informed Multi-Omics Integration</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./notes/epigenetic_analysis_reference_guide.html" rel="next">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-5630e6732664d48c7cde3b526013eeb9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">index.html</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Biology-Informed Multi-Omics Integration</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">index.html</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">I. Theoretical Reference &amp; Notes</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./notes/epigenetic_analysis_reference_guide.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Epigenetic Analysis Reference Guide</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./notes/normalization_models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Normalization models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./notes/enrichment_analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Functional Enrichment Analysis: Multi-Omics Integration</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">II. Data Structures &amp; Visualization</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./notebooks/01-omics_data_structures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Datasets, <code>SummarizedExperiment</code>, and <code>GRanges</code></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./notebooks/02-atac_heatmaps.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Enriched Heatmaps and identification of regions with different activities</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./notebooks/03-chip_rna_visualization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">ChIP and RNA sequencing data plots</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">III. Multi-Omics Integration</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./notebooks/04-genomic_overlap_matrices.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Overlapping all the datasets</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./notebooks/05-atac_rna_integration.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Integrating ATAC and RNA sequencing data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./notebooks/06-multiomics_integration.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Integrating ATAC, ChIP, and RNA sequencing data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./notebooks/07-functional_enrichment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Functional enrichment of genomic regions</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#biology-informed-multi-omics-a-wet-lab-scientists-study-fork" id="toc-biology-informed-multi-omics-a-wet-lab-scientists-study-fork" class="nav-link active" data-scroll-target="#biology-informed-multi-omics-a-wet-lab-scientists-study-fork"><span class="header-section-number">1</span> Biology-Informed Multi-Omics: A Wet-Lab Scientist’s Study Fork</a>
+  <ul class="collapse">
+  <li><a href="#what-you-will-find-in-this-fork" id="toc-what-you-will-find-in-this-fork" class="nav-link" data-scroll-target="#what-you-will-find-in-this-fork"><span class="header-section-number">1.1</span> What You Will Find in This Fork</a>
+  <ul class="collapse">
+  <li><a href="#key-code-optimizations-in-this-fork" id="toc-key-code-optimizations-in-this-fork" class="nav-link" data-scroll-target="#key-code-optimizations-in-this-fork"><span class="header-section-number">1.1.1</span> Key Code Optimizations in this Fork</a></li>
+  </ul></li>
+  <li><a href="#analytical-workflow-covered" id="toc-analytical-workflow-covered" class="nav-link" data-scroll-target="#analytical-workflow-covered"><span class="header-section-number">1.2</span> Analytical Workflow Covered</a></li>
+  <li><a href="#prerequisites-scope" id="toc-prerequisites-scope" class="nav-link" data-scroll-target="#prerequisites-scope"><span class="header-section-number">1.3</span> Prerequisites &amp; Scope</a>
+  <ul class="collapse">
+  <li><a href="#looking-to-build-foundational-skills-or-explore-more-topics" id="toc-looking-to-build-foundational-skills-or-explore-more-topics" class="nav-link" data-scroll-target="#looking-to-build-foundational-skills-or-explore-more-topics"><span class="header-section-number">1.3.1</span> Looking to build foundational skills or explore more topics?</a></li>
+  </ul></li>
+  <li><a href="#setup-running-the-notebooks" id="toc-setup-running-the-notebooks" class="nav-link" data-scroll-target="#setup-running-the-notebooks"><span class="header-section-number">1.4</span> Setup &amp; Running the Notebooks</a>
+  <ul class="collapse">
+  <li><a href="#clone-the-repository" id="toc-clone-the-repository" class="nav-link" data-scroll-target="#clone-the-repository"><span class="header-section-number">1.4.1</span> 1. Clone the repository</a></li>
+  <li><a href="#restore-the-r-environment" id="toc-restore-the-r-environment" class="nav-link" data-scroll-target="#restore-the-r-environment"><span class="header-section-number">1.4.2</span> 2. Restore the R environment</a></li>
+  <li><a href="#running-in-vs-code" id="toc-running-in-vs-code" class="nav-link" data-scroll-target="#running-in-vs-code"><span class="header-section-number">1.4.3</span> 3. Running in VS Code</a></li>
+  </ul></li>
+  <li><a href="#connect-discuss" id="toc-connect-discuss" class="nav-link" data-scroll-target="#connect-discuss"><span class="header-section-number">1.5</span> Connect &amp; Discuss</a></li>
+  <li><a href="#credits-upstream-authors" id="toc-credits-upstream-authors" class="nav-link" data-scroll-target="#credits-upstream-authors"><span class="header-section-number">1.6</span> Credits &amp; Upstream Authors</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Biology-Informed Multi-Omics Integration</h1>
+<p class="subtitle lead">A working fork of the SIB Training from a wet-lab scientist</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Sébastien Wieckowski </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">September 28, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><a href="https://creativecommons.org/licenses/by-sa/4.0/"><img src="https://img.shields.io/badge/License-CC_BY--SA_4.0-lightgrey.svg" class="img-fluid" alt="License: CC BY-SA 4.0"></a> <a href="https://github.com/sib-swiss/biology-informed-multiomics-training"><img src="https://img.shields.io/badge/Forked%20from-sib--swiss-blue.png" class="img-fluid" alt="Forked from sib-swiss"></a></p>
+<section id="biology-informed-multi-omics-a-wet-lab-scientists-study-fork" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Biology-Informed Multi-Omics: A Wet-Lab Scientist’s Study Fork</h1>
+<p>Welcome! This repository is an annotated, restructured study fork of the <a href="https://github.com/sib-swiss/biology-informed-multiomics-training">SIB Swiss Institute of Bioinformatics Multi-Omics Training Course</a>.</p>
+<p>I come from a <strong>wet-lab background</strong> and am investing significant effort into transitioning toward computational biology. To make the learning curve manageable and fully focus on the code and biology, <strong>I simplified the project architecture</strong>: I removed the Docker containers and Quarto website infrastructure in favor of standalone <strong>Jupyter Notebooks (<code>.ipynb</code>) and clean Markdown files</strong>.</p>
+<hr>
+<section id="what-you-will-find-in-this-fork" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="what-you-will-find-in-this-fork"><span class="header-section-number">1.1</span> What You Will Find in This Fork</h2>
+<ul>
+<li><strong>Streamlined Interactive Format:</strong> Converted from the original <code>.qmd</code> files into pure Jupyter Notebooks (<code>.ipynb</code>) (via <code>quarto convert</code>, configured to use the R kernel via <code>jupyter: ir</code> in the YAML front matter) for direct, interactive execution.</li>
+<li><strong>Wet-Lab Context &amp; Concept Deconstruction:</strong> Line-by-line notes translating abstract computational steps into biological meaning.</li>
+<li><strong>Troubleshooting &amp; Technical Deep Dives:</strong> Detailed reflections and extra research on tricky parameters, Bioconductor quirks, and statistical assumptions.</li>
+<li><strong>Refactored &amp; Annotated Code:</strong> Code cells with additional comments explaining the <em>why</em> behind data transformations.</li>
+<li><strong>Beginner-Friendly Focus:</strong> Written specifically for researchers without formal bioinformatics degrees who want to understand multi-omics integration step by step.</li>
+</ul>
+<section id="key-code-optimizations-in-this-fork" class="level3" data-number="1.1.1">
+<h3 data-number="1.1.1" class="anchored" data-anchor-id="key-code-optimizations-in-this-fork"><span class="header-section-number">1.1.1</span> Key Code Optimizations in this Fork</h3>
+<p>Over the course of the notebooks, I adapted the original base R code to implement modern data science and tidyverse workflows. If you are learning R, you will find highly optimized, real-world solutions for:</p>
+<ul>
+<li><strong>Modern Biological Logic (<code>dplyr::case_when</code>):</strong> Transitioned classic boolean matrix subsetting into elegant, readable <code>case_when()</code> pipelines. This includes safely coercing <code>NA</code> values in <code>logFC</code> columns to <code>0</code> to build robust logical filtering for genomic categories.</li>
+<li><strong>Genomic Range Wrangling:</strong> Seamlessly manipulating <code>GRanges</code> metadata columns directly with <code>dplyr</code> (<code>mcols(gr) &lt;- as.data.frame(mcols(gr)) %&gt;% mutate(...)</code>) to keep genomic data structures perfectly aligned.</li>
+<li><strong>Efficient I/O &amp; Memory Management:</strong> Refactored how large multi-omics matrices are grouped into named lists and saved via <code>saveRDS</code>, significantly streamlining downstream loading and keeping the global environment clean.</li>
+<li><strong>Parameterizing Shared Scripts &amp; Local Wrappers:</strong> Updated shared plotting functions (<code>custom_enrichedheatmap_plotting.R</code>) to accept flexible aesthetic defaults (fonts, line widths), ensuring backward compatibility across all notebooks. Paired this with <strong>local function wrappers</strong> (e.g., <code>make_EH()</code>) in notebooks to abstract away dimensions when generating massive 14-column plots without repetitive copy-pasting.</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="analytical-workflow-covered" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="analytical-workflow-covered"><span class="header-section-number">1.2</span> Analytical Workflow Covered</h2>
+<ol type="1">
+<li><strong>Multi-Layer Integration:</strong> Importing and processing ATAC-seq, RNA-seq, ChIP-seq, and WGBS datasets in R/Bioconductor.</li>
+<li><strong>Overlap Matrices:</strong> Quantifying co-occurrence across layers to detect epigenetic and transcriptional co-regulation.</li>
+<li><strong>Downstream Analysis:</strong> Functional annotation and pathway enrichment.</li>
+<li><strong>Data Visualization:</strong> Creating interpretable plots for multi-layer data.</li>
+</ol>
+<hr>
+</section>
+<section id="prerequisites-scope" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="prerequisites-scope"><span class="header-section-number">1.3</span> Prerequisites &amp; Scope</h2>
+<blockquote class="blockquote">
+<p><strong>Important Scope Note:</strong><br>
+This repository focuses specifically on <strong>downstream multi-omics integration and cross-layer biological interpretation</strong>. It does <strong>not</strong> cover raw single-omics preprocessing (e.g., FASTQ quality control, read alignment, transcript quantification) or general Exploratory Data Analysis (EDA) and feature engineering from scratch.</p>
+</blockquote>
+<p>To get the most out of these notebooks, familiarity with the following concepts is recommended:</p>
+<ul>
+<li><strong>Basic R &amp; Bioconductor:</strong> Working with common data structures (<code>data.frame</code>, matrices) and core Bioconductor classes (<code>GRanges</code>, <code>SummarizedExperiment</code>).</li>
+<li><strong>Single-Omics Foundations:</strong> Understanding basic quantification and differential analysis concepts in RNA-seq, ChIP-seq, and ATAC-seq.</li>
+<li><strong>Exploratory Data Analysis (EDA):</strong> Experience diagnosing batch effects, sample clustering (PCA/UMAP), and data normalization before multi-layer joining.</li>
+</ul>
+<section id="looking-to-build-foundational-skills-or-explore-more-topics" class="level3" data-number="1.3.1">
+<h3 data-number="1.3.1" class="anchored" data-anchor-id="looking-to-build-foundational-skills-or-explore-more-topics"><span class="header-section-number">1.3.1</span> Looking to build foundational skills or explore more topics?</h3>
+<ul>
+<li><strong>Statistical Foundations &amp; Coding with Python:</strong> For those wanting to master coding from the ground up using biostatistics as the vehicle, check out my book <a href="https://global.oup.com/academic/product/intuitive-biostatistics-with-python-9780197845035?lang=en&amp;cc=fr"><em>Intuitive Biostatistics with Python</em> (Oxford University Press)</a>. It uses Python’s simulation and visualization capabilities to demystify confusing core concepts (null hypotheses, bootstrapping, non-parametrics) through hands-on coding and publication-ready graphs.</li>
+<li><strong>End-to-End RNA-seq &amp; Preprocessing:</strong> Check out my repository <a href="https://github.com/sbwiecko/RNAseq_UPenn">sbwiecko/RNAseq_UPenn</a>, rewritten alongside the excellent <a href="https://diytranscriptomics.com/">UPenn DIY Transcriptomics course</a> for a ground-up journey through raw data, quality control, alignment, and differential expression.</li>
+<li><strong>SIB Training Catalog:</strong> Explore the full lineup of world-class courses designed by the exceptional SIB Training Team: <a href="https://www.sib.swiss/training/learning-paths">SIB Swiss Institute of Bioinformatics Courses &amp; Training</a></li>
+<li><strong>Bioconductor Workflows:</strong> <a href="https://bioconductor.org/packages/release/workflows/vignettes/RnaSeqGeneEdgeRQL/inst/doc/edgeRQL.html">RNA-seq analysis is easy as 1-2-3 with limma, Glimma and edgeR</a></li>
+<li><strong>EDA &amp; Statistical Exploration:</strong> <a href="https://www.huber.embl.de/msmb/">Modern Statistics for Modern Biology</a> by Susan Holmes and Wolfgang Huber</li>
+<li><strong>Free Bioinformatics Resources:</strong> Discover a curated collection of free bioinformatics training materials and resources at <a href="https://glittr.org/">GLITTR</a></li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="setup-running-the-notebooks" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="setup-running-the-notebooks"><span class="header-section-number">1.4</span> Setup &amp; Running the Notebooks</h2>
+<p><strong>Prerequisite:</strong> You must have <strong>R</strong> installed on your system.</p>
+<p>No Docker or Quarto setup is required. The project relies on <code>renv</code> to manage dependencies. Since these are standard Jupyter Notebooks (<code>.ipynb</code>) with an R kernel, you can run them locally using <strong>VS Code</strong>.</p>
+<section id="clone-the-repository" class="level3" data-number="1.4.1">
+<h3 data-number="1.4.1" class="anchored" data-anchor-id="clone-the-repository"><span class="header-section-number">1.4.1</span> 1. Clone the repository</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/sbwiecko/biology-informed-multiomics-training.git</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> biology-informed-multiomics-training</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="restore-the-r-environment" class="level3" data-number="1.4.2">
+<h3 data-number="1.4.2" class="anchored" data-anchor-id="restore-the-r-environment"><span class="header-section-number">1.4.2</span> 2. Restore the R environment</h3>
+<p>Open R in your terminal, console, or IDE to restore dependencies via <code>renv</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"renv"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">restore</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="running-in-vs-code" class="level3" data-number="1.4.3">
+<h3 data-number="1.4.3" class="anchored" data-anchor-id="running-in-vs-code"><span class="header-section-number">1.4.3</span> 3. Running in VS Code</h3>
+<ol type="1">
+<li><p><strong>Configure VS Code Working Directory (Crucial):</strong> To guarantee that Jupyter always activates <code>.Rprofile</code> and locates your <code>renv</code> library, force VS Code to run kernels from the project root.</p>
+<ul>
+<li>Open Settings (<code>Ctrl + ,</code> or <code>Cmd + ,</code>).</li>
+<li>Search for: <code>Jupyter Notebook File Root</code>.</li>
+<li>Set the value to: <code>${workspaceFolder}</code>.</li>
+</ul></li>
+<li><p><strong>Register the Project Kernel:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">install</span>(<span class="st">"IRkernel"</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>IRkernel<span class="sc">::</span><span class="fu">installspec</span>(<span class="at">name =</span> <span class="st">"ir_multiomics"</span>, <span class="at">displayname =</span> <span class="st">"R (multiomics-renv)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p>Open any <code>.ipynb</code> notebook.</p></li>
+<li><p>Click <strong>Select Kernel</strong> in the top-right -&gt; <strong>Jupyter Kernel…</strong> -&gt; <strong>R (multiomics-renv)</strong>.</p></li>
+</ol>
+<blockquote class="blockquote">
+<p><strong>Optional check:</strong> You can always run <code>.libPaths()</code> in a notebook’s first cell to verify that packages are loading from the project’s local <code>./renv/library</code>.</p>
+</blockquote>
+<hr>
+</section>
+</section>
+<section id="connect-discuss" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="connect-discuss"><span class="header-section-number">1.5</span> Connect &amp; Discuss</h2>
+<p>If you are also bridging the gap between wet-lab biology and bioinformatics, feel free to explore the notebooks, open an issue, or ask a question. Feedback, corrections, and discussions are always welcome!</p>
+<hr>
+</section>
+<section id="credits-upstream-authors" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="credits-upstream-authors"><span class="header-section-number">1.6</span> Credits &amp; Upstream Authors</h2>
+<p>This repository is built upon the open course materials designed by the <strong>SIB Swiss Institute of Bioinformatics</strong>:</p>
+<ul>
+<li><strong>Original Course Site:</strong> <a href="https://sib-swiss.github.io/biology-informed-multiomics-training/">https://sib-swiss.github.io/biology-informed-multiomics-training/</a></li>
+<li><strong>Original Repository:</strong> <a href="https://www.google.com/url?sa=E&amp;source=gmail&amp;q=https://github.com/sib-swiss/biology-informed-multiomics-training">sib-swiss/biology-informed-multiomics-training</a></li>
+<li><strong>Authors:</strong> Deepak Tanwar, Geert van Geest, Patricia Palagi</li>
+<li><strong>Helper:</strong> Joana Carlevaro-Fita</li>
+<li><strong>Original DOI:</strong> <a href="https://doi.org/10.5281/zenodo.5703106">10.5281/zenodo.5703106</a></li>
+</ul>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./notes/epigenetic_analysis_reference_guide.html" class="pagination-link" aria-label="Epigenetic Analysis Reference Guide">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Epigenetic Analysis Reference Guide</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

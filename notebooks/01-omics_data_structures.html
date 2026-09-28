@@ -1,0 +1,2260 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>5&nbsp; Datasets, SummarizedExperiment, and GRanges – Biology-Informed Multi-Omics Integration</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../notebooks/02-atac_heatmaps.html" rel="next">
+<link href="../notes/enrichment_analysis.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-5630e6732664d48c7cde3b526013eeb9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../notebooks/01-omics_data_structures.html">II. Data Structures &amp; Visualization</a></li><li class="breadcrumb-item"><a href="../notebooks/01-omics_data_structures.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Datasets, <code>SummarizedExperiment</code>, and <code>GRanges</code></span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Biology-Informed Multi-Omics Integration</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">index.html</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">I. Theoretical Reference &amp; Notes</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/epigenetic_analysis_reference_guide.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Epigenetic Analysis Reference Guide</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/normalization_models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Normalization models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/enrichment_analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Functional Enrichment Analysis: Multi-Omics Integration</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">II. Data Structures &amp; Visualization</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/01-omics_data_structures.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Datasets, <code>SummarizedExperiment</code>, and <code>GRanges</code></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/02-atac_heatmaps.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Enriched Heatmaps and identification of regions with different activities</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/03-chip_rna_visualization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">ChIP and RNA sequencing data plots</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">III. Multi-Omics Integration</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/04-genomic_overlap_matrices.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Overlapping all the datasets</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/05-atac_rna_integration.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Integrating ATAC and RNA sequencing data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/06-multiomics_integration.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Integrating ATAC, ChIP, and RNA sequencing data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/07-functional_enrichment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Functional enrichment of genomic regions</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#learning-outcomes" id="toc-learning-outcomes" class="nav-link active" data-scroll-target="#learning-outcomes"><span class="header-section-number">5.1</span> Learning outcomes</a></li>
+  <li><a href="#environment-and-data-setup" id="toc-environment-and-data-setup" class="nav-link" data-scroll-target="#environment-and-data-setup"><span class="header-section-number">5.2</span> Environment and data setup</a>
+  <ul class="collapse">
+  <li><a href="#datasets-for-the-course" id="toc-datasets-for-the-course" class="nav-link" data-scroll-target="#datasets-for-the-course"><span class="header-section-number">5.2.1</span> Datasets for the course</a></li>
+  <li><a href="#downloading-and-extracting-data" id="toc-downloading-and-extracting-data" class="nav-link" data-scroll-target="#downloading-and-extracting-data"><span class="header-section-number">5.2.2</span> Downloading and extracting data</a></li>
+  <li><a href="#loading-libraries" id="toc-loading-libraries" class="nav-link" data-scroll-target="#loading-libraries"><span class="header-section-number">5.2.3</span> Loading libraries</a></li>
+  </ul></li>
+  <li><a href="#the-summarizedexperiment-se-object" id="toc-the-summarizedexperiment-se-object" class="nav-link" data-scroll-target="#the-summarizedexperiment-se-object"><span class="header-section-number">5.3</span> The <code>SummarizedExperiment</code> (SE) object</a>
+  <ul class="collapse">
+  <li><a href="#loading-se-objects" id="toc-loading-se-objects" class="nav-link" data-scroll-target="#loading-se-objects"><span class="header-section-number">5.3.1</span> Loading SE objects</a></li>
+  <li><a href="#inspecting-the-rna-se-object" id="toc-inspecting-the-rna-se-object" class="nav-link" data-scroll-target="#inspecting-the-rna-se-object"><span class="header-section-number">5.3.2</span> Inspecting the RNA SE object</a></li>
+  <li><a href="#accessing-coldata-rowranges-and-assays" id="toc-accessing-coldata-rowranges-and-assays" class="nav-link" data-scroll-target="#accessing-coldata-rowranges-and-assays"><span class="header-section-number">5.3.3</span> Accessing <code>colData</code>, <code>rowRanges</code> and <code>assays</code></a></li>
+  <li><a href="#subsetting-data" id="toc-subsetting-data" class="nav-link" data-scroll-target="#subsetting-data"><span class="header-section-number">5.3.4</span> Subsetting data</a></li>
+  <li><a href="#boxplot-of-expression-for-a-few-genes" id="toc-boxplot-of-expression-for-a-few-genes" class="nav-link" data-scroll-target="#boxplot-of-expression-for-a-few-genes"><span class="header-section-number">5.3.5</span> Boxplot of expression for a few genes</a></li>
+  </ul></li>
+  <li><a href="#practice-exercises" id="toc-practice-exercises" class="nav-link" data-scroll-target="#practice-exercises"><span class="header-section-number">5.4</span> PRACTICE &amp; EXERCISES</a>
+  <ul class="collapse">
+  <li><a href="#question-1" id="toc-question-1" class="nav-link" data-scroll-target="#question-1"><span class="header-section-number">5.4.1</span> Question 1</a></li>
+  <li><a href="#question-2" id="toc-question-2" class="nav-link" data-scroll-target="#question-2"><span class="header-section-number">5.4.2</span> Question 2</a></li>
+  <li><a href="#question-3" id="toc-question-3" class="nav-link" data-scroll-target="#question-3"><span class="header-section-number">5.4.3</span> Question 3</a></li>
+  </ul></li>
+  <li><a href="#the-granges-object" id="toc-the-granges-object" class="nav-link" data-scroll-target="#the-granges-object"><span class="header-section-number">5.5</span> The <code>GRanges</code> object</a>
+  <ul class="collapse">
+  <li><a href="#extracting-and-inspecting-granges-from-atac-seq" id="toc-extracting-and-inspecting-granges-from-atac-seq" class="nav-link" data-scroll-target="#extracting-and-inspecting-granges-from-atac-seq"><span class="header-section-number">5.5.1</span> Extracting and inspecting <code>GRanges</code> from ATAC-seq</a></li>
+  <li><a href="#subsetting-regions-on-chr1-with-width-1000-bp" id="toc-subsetting-regions-on-chr1-with-width-1000-bp" class="nav-link" data-scroll-target="#subsetting-regions-on-chr1-with-width-1000-bp"><span class="header-section-number">5.5.2</span> Subsetting regions on <em>chr1</em> with width &gt; 1000 bp</a></li>
+  <li><a href="#plotting-the-width-distribution-of-genomic-ranges" id="toc-plotting-the-width-distribution-of-genomic-ranges" class="nav-link" data-scroll-target="#plotting-the-width-distribution-of-genomic-ranges"><span class="header-section-number">5.5.3</span> Plotting the width distribution of genomic ranges</a></li>
+  </ul></li>
+  <li><a href="#visualizing-genomic-data" id="toc-visualizing-genomic-data" class="nav-link" data-scroll-target="#visualizing-genomic-data"><span class="header-section-number">5.6</span> Visualizing genomic data</a>
+  <ul class="collapse">
+  <li><a href="#heatmap-of-h3k27ac-signal" id="toc-heatmap-of-h3k27ac-signal" class="nav-link" data-scroll-target="#heatmap-of-h3k27ac-signal"><span class="header-section-number">5.6.1</span> Heatmap of H3K27ac signal</a></li>
+  <li><a href="#question-4" id="toc-question-4" class="nav-link" data-scroll-target="#question-4"><span class="header-section-number">5.6.2</span> Question 4</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../notebooks/01-omics_data_structures.html">II. Data Structures &amp; Visualization</a></li><li class="breadcrumb-item"><a href="../notebooks/01-omics_data_structures.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Datasets, <code>SummarizedExperiment</code>, and <code>GRanges</code></span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Datasets, <code>SummarizedExperiment</code>, and <code>GRanges</code></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="learning-outcomes" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="learning-outcomes"><span class="header-section-number">5.1</span> Learning outcomes</h2>
+<ul>
+<li>Understand the structure of <code>SummarizedExperiment</code> and <code>GRanges</code> objects in <code>R</code>.</li>
+<li>Access and manipulate metadata and assays within <code>SummarizedExperiment</code>.</li>
+<li>Visualize and subset genomic intervals using <code>GRanges</code>.</li>
+<li>Recognize how even RNA expression data can be stored as genomic ranges.</li>
+</ul>
+</section>
+<section id="environment-and-data-setup" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="environment-and-data-setup"><span class="header-section-number">5.2</span> Environment and data setup</h2>
+<section id="datasets-for-the-course" class="level3" data-number="5.2.1">
+<h3 data-number="5.2.1" class="anchored" data-anchor-id="datasets-for-the-course"><span class="header-section-number">5.2.1</span> Datasets for the course</h3>
+<p>In this course, we are working with <strong>multi-omics datasets</strong> derived from the developing <strong>mouse neural tube</strong> at two developmental stages: <strong>E11.5</strong> and <strong>E15.5</strong>. These stages represent key transitions in central nervous system development. These datasets are downloaded and processed from the ENCODE project: <a href="https://www.encodeproject.org/mouse-development-matrix/?type=Experiment&amp;status=released&amp;related_series.@type=OrganismDevelopmentSeries&amp;replicates.library.biosample.organism.scientific_name=Mus+musculus#neural_tube">Mouse Development Matrix</a>. For the sake of time and efficient computational usage, datasets are analyzed for only chromosomes 1 and 2.</p>
+<p>The following chromatin and transcriptional profiling datasets are included, each with <strong>two biological replicates per time point</strong>:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 72%">
+<col style="width: 6%">
+<col style="width: 6%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Assay</th>
+<th>Description</th>
+<th>E11.5</th>
+<th>E15.5</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>ATAC-seq</strong></td>
+<td>Chromatin accessibility profiling</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td><strong>H3K4me3</strong></td>
+<td>Histone mark at active promoters</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td><strong>H3K4me1</strong></td>
+<td>Histone mark at enhancers and poised regulatory elements</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td><strong>H3K27me3</strong></td>
+<td>Repressive histone modification (Polycomb repression)</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td><strong>H3K27ac</strong></td>
+<td>Active enhancer and promoter histone mark</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td><strong>RNA-seq</strong></td>
+<td>Gene expression quantification via transcriptome sequencing</td>
+<td>2</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<p>All datasets are preprocessed and stored in <strong><code>SummarizedExperiment</code> (SE)</strong> objects:</p>
+<ul>
+<li><strong>Assays</strong> contain count matrices (e.g., raw counts, logCPM).</li>
+<li><strong>RowRanges</strong> describe genomic coordinates (<code>GRanges</code>) for each feature (gene, peak, region).</li>
+<li><strong>ColData</strong> holds metadata for each sample (e.g., stage, replicate).</li>
+</ul>
+<p>The use of <code>SE</code> objects enables consistent handling of multi-omics data, facilitates downstream integration, and supports interoperability with Bioconductor tools.</p>
+<ul>
+<li><code>SummarizedExperiment</code> enables structured storage of high-dimensional omics data and metadata.</li>
+<li><code>GRanges</code> makes it easy to manipulate and visualize genomic intervals across datasets.</li>
+<li>Most analyses — from clustering to visualization — can be performed directly on these containers.</li>
+</ul>
+</section>
+<section id="downloading-and-extracting-data" class="level3" data-number="5.2.2">
+<h3 data-number="5.2.2" class="anchored" data-anchor-id="downloading-and-extracting-data"><span class="header-section-number">5.2.2</span> Downloading and extracting data</h3>
+<p><em>Note: run the following once for the entire course.</em></p>
+<div id="cell-3" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="1">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Download and unpack data only if not already present</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">dir.exists</span>(<span class="st">"data"</span>)) {</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dir.create</span>(<span class="st">"data"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Increase timeout for large file transfer</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">options</span>(<span class="at">timeout =</span> <span class="dv">1000</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">message</span>(<span class="st">"Downloading course datasets..."</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">download.file</span>(</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">url =</span> <span class="st">"https://biology-informed-multiomics.s3.eu-central-1.amazonaws.com/biology-informed-multiomics.tar"</span>,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">destfile =</span> <span class="st">"data/data.tar"</span>,</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">mode =</span> <span class="st">"wb"</span>  <span class="co"># Binary mode required for Windows</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">message</span>(<span class="st">"Extracting archive..."</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">untar</span>(<span class="at">tarfile =</span> <span class="st">"data/data.tar"</span>, <span class="at">exdir =</span> <span class="st">"data"</span>)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.remove</span>(<span class="st">"data/data.tar"</span>)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">message</span>(<span class="st">"Done! Data ready in ./data"</span>)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">message</span>(<span class="st">"Data directory already exists. Skipping download."</span>)</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Data directory already exists. Skipping download.
+</code></pre>
+</div>
+</div>
+</section>
+<section id="loading-libraries" class="level3" data-number="5.2.3">
+<h3 data-number="5.2.3" class="anchored" data-anchor-id="loading-libraries"><span class="header-section-number">5.2.3</span> Loading libraries</h3>
+<div id="cell-5" class="cell" data-message="false" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="2">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># suppress warnings and messages</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">suppressWarnings</span>({</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(SummarizedExperiment)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(GenomicRanges)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(ggplot2)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(tidyr)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(ComplexHeatmap)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>}))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section>
+</section>
+<section id="the-summarizedexperiment-se-object" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="the-summarizedexperiment-se-object"><span class="header-section-number">5.3</span> The <code>SummarizedExperiment</code> (SE) object</h2>
+<section id="loading-se-objects" class="level3" data-number="5.3.1">
+<h3 data-number="5.3.1" class="anchored" data-anchor-id="loading-se-objects"><span class="header-section-number">5.3.1</span> Loading SE objects</h3>
+<p>The function <code>readRDS()</code> is not part of the SummarizedExperiment package. It is a standard R function used to read a single R object that was previously saved using saveRDS(). Because SummarizedExperiment objects are just specialized R objects, they can be saved and loaded using these standard base R functions.</p>
+<div id="cell-7" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="3">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>rna <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/rna_se.rds"</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>atac <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/atac_se.rds"</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>h3k4me3 <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/h3k4me3_se.rds"</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>h3k4me1 <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/h3k4me1_se.rds"</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>h3k27me3 <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/h3k27me3_se.rds"</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>h3k27ac <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/h3k27ac_se.rds"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section>
+<section id="inspecting-the-rna-se-object" class="level3" data-number="5.3.2">
+<h3 data-number="5.3.2" class="anchored" data-anchor-id="inspecting-the-rna-se-object"><span class="header-section-number">5.3.2</span> Inspecting the RNA SE object</h3>
+<p>When we use <code>readRDS("data/rna_se.rds")</code>, it doesn’t just read raw text or numbers (like read.csv would), but it completely restores the R object from the file exactly as it was when it was saved.</p>
+<div id="cell-9" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="4">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>rna</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<pre><code>class: RangedSummarizedExperiment 
+dim: 2216 4 
+metadata(0):
+assays(2): counts logCPM
+rownames(2216): ENSMUSG00000000194 ENSMUSG00000000247 ...
+  ENSMUSG00000103948 ENSMUSG00000104257
+rowData names(18): Row.names gene_id ... PValue qvalue
+colnames(4): RNA_11half_1.tsv.gz RNA_11half_2.tsv.gz
+  RNA_15half_1.tsv.gz RNA_15half_2.tsv.gz
+colData names(2): sample group</code></pre>
+</div>
+</div>
+<p>The object is technically a <code>RangedSummarizedExperiment</code>, which is a specialized version of a <code>SummarizedExperiment</code> that explicitly links every row (gene/peak) to genomic coordinates (a <code>GRanges</code> object).</p>
+</section>
+<section id="accessing-coldata-rowranges-and-assays" class="level3" data-number="5.3.3">
+<h3 data-number="5.3.3" class="anchored" data-anchor-id="accessing-coldata-rowranges-and-assays"><span class="header-section-number">5.3.3</span> Accessing <code>colData</code>, <code>rowRanges</code> and <code>assays</code></h3>
+<p>There is a <a href="https://www.bioconductor.org/packages/release/bioc/vignettes/SummarizedExperiment/inst/doc/SummarizedExperiment.html">nice tutorial</a> from the authors of the SE library. Sample meta-data (<em>condition</em>) describing the samples can be accessed using <code>colData()</code>, and is a DataFrame that can store any number of descriptive columns for each sample row.</p>
+<div id="cell-12" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="5">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colData</span>(rna)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<pre><code>DataFrame with 4 rows and 2 columns
+                                 sample    group
+                            &lt;character&gt; &lt;factor&gt;
+RNA_11half_1.tsv.gz RNA_11half_1.tsv.gz   11half
+RNA_11half_2.tsv.gz RNA_11half_2.tsv.gz   11half
+RNA_15half_1.tsv.gz RNA_15half_1.tsv.gz   15half
+RNA_15half_2.tsv.gz RNA_15half_2.tsv.gz   15half</code></pre>
+</div>
+</div>
+<p><em>Notice that the group column uses <code>11half</code> and <code>15half</code>, which correspond to the E11.5 and E15.5 developmental stages.</em></p>
+<p>The <code>rowRanges()</code> accessor is used to view the range information for a RangedSummarizedExperiment. The data are stored in a GRangesList (<em>Genomic Ranges</em>) object, where each list element corresponds to one gene transcript (<em>feature</em>) and the ranges in each GRanges correspond to the exons in the transcript.</p>
+<div id="cell-14" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="6">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rowRanges</span>(rna)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<pre><code>GRanges object with 2216 ranges and 18 metadata columns:
+                     seqnames              ranges strand |          Row.names
+                        &lt;Rle&gt;           &lt;IRanges&gt;  &lt;Rle&gt; |        &lt;character&gt;
+  ENSMUSG00000000194     chr2   31152316-31218775      + | ENSMUSG00000000194
+  ENSMUSG00000000247     chr2   38339281-38369733      + | ENSMUSG00000000247
+  ENSMUSG00000000305     chr2 179442431-179899373      + | ENSMUSG00000000305
+  ENSMUSG00000000308     chr2 121357714-121363737      + | ENSMUSG00000000308
+  ENSMUSG00000000359     chr2 152626951-152635198      + | ENSMUSG00000000359
+                 ...      ...                 ...    ... .                ...
+  ENSMUSG00000102976     chr1 133619862-133661380      - | ENSMUSG00000102976
+  ENSMUSG00000103711     chr1 171418872-171420352      + | ENSMUSG00000103711
+  ENSMUSG00000103746     chr1   33669824-33670712      + | ENSMUSG00000103746
+  ENSMUSG00000103948     chr1   37485851-37488982      - | ENSMUSG00000103948
+  ENSMUSG00000104257     chr1   25276404-25277954      - | ENSMUSG00000104257
+                         gene_id        SYMBOL               GENENAME
+                     &lt;character&gt;   &lt;character&gt;            &lt;character&gt;
+  ENSMUSG00000000194      277463        Gpr107 G protein-coupled re..
+  ENSMUSG00000000247       16870          Lhx2 LIM homeobox protein 2
+  ENSMUSG00000000305       12561          Cdh4             cadherin 4
+  ENSMUSG00000000308       12716         Ckmt1 creatine kinase, mit..
+  ENSMUSG00000000359       19700          Rem1 rad and gem related ..
+                 ...         ...           ...                    ...
+  ENSMUSG00000102976       70579       Zc3h11a zinc finger CCCH typ..
+  ENSMUSG00000103711      226654         Tstd1 thiosulfate sulfurtr..
+  ENSMUSG00000103746       67503 1700001G17Rik RIKEN cDNA 1700001G1..
+  ENSMUSG00000103948       77633 4930594C11Rik G1 to S phase transi..
+  ENSMUSG00000104257   100504323       Gm20172  predicted gene, 20172
+                                ENSEMBL geneLength     geneChr geneStart
+                            &lt;character&gt;  &lt;integer&gt; &lt;character&gt; &lt;integer&gt;
+  ENSMUSG00000000194 ENSMUSG00000000194      66460        chr2  31152316
+  ENSMUSG00000000247 ENSMUSG00000000247      30453        chr2  38339281
+  ENSMUSG00000000305 ENSMUSG00000000305     456943        chr2 179442431
+  ENSMUSG00000000308 ENSMUSG00000000308       6024        chr2 121357714
+  ENSMUSG00000000359 ENSMUSG00000000359       8248        chr2 152626951
+                 ...                ...        ...         ...       ...
+  ENSMUSG00000102976 ENSMUSG00000102976      41519        chr1 133619862
+  ENSMUSG00000103711 ENSMUSG00000103711       1481        chr1 171418872
+  ENSMUSG00000103746 ENSMUSG00000103746        889        chr1  33669824
+  ENSMUSG00000103948 ENSMUSG00000103948       3132        chr1  37485851
+  ENSMUSG00000104257 ENSMUSG00000104257       1551        chr1  25276404
+                       geneEnd  geneStrand      geneId          transcriptId
+                     &lt;integer&gt; &lt;character&gt; &lt;character&gt;           &lt;character&gt;
+  ENSMUSG00000000194  31218775           +      277463  ENSMUST00000056433.6
+  ENSMUSG00000000247  38369733           +       16870  ENSMUST00000143783.8
+  ENSMUSG00000000305 179899373           +       12561 ENSMUST00000000314.12
+  ENSMUSG00000000308 121363737           +       12716  ENSMUST00000125812.7
+  ENSMUSG00000000359 152635198           +       19700  ENSMUST00000000369.3
+                 ...       ...         ...         ...                   ...
+  ENSMUSG00000102976 133661380           -       70579  ENSMUST00000191896.5
+  ENSMUSG00000103711 171420352           +      226654  ENSMUST00000193060.1
+  ENSMUSG00000103746  33670712           +       67503  ENSMUST00000191779.1
+  ENSMUSG00000103948  37488982           -       77633  ENSMUST00000192316.1
+  ENSMUSG00000104257  25277954           -   100504323  ENSMUST00000193138.1
+                            anno     logFC    logCPM         F      PValue
+                     &lt;character&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt;   &lt;numeric&gt;
+  ENSMUSG00000000194        Gene   1.12372   8.74812 137.26552 8.72516e-05
+  ENSMUSG00000000247        Gene  -1.60859   5.40640  11.86742 1.87646e-02
+  ENSMUSG00000000305        Gene   2.11822   9.25294 504.51658 3.72434e-06
+  ENSMUSG00000000308        Gene   3.79826   8.63364 420.96960 5.79582e-06
+  ENSMUSG00000000359        Gene   1.90855   3.12253   2.67341 1.64139e-01
+                 ...         ...       ...       ...       ...         ...
+  ENSMUSG00000102976        Gene -0.856315  10.09628  97.72448 0.000195722
+  ENSMUSG00000103711        Gene  0.499469   3.20636   2.31857 0.189210840
+  ENSMUSG00000103746        Gene  0.563047   2.57430   1.09798 0.343492016
+  ENSMUSG00000103948        Gene  2.760559   2.65971  12.70432 0.016224604
+  ENSMUSG00000104257        Gene  1.965857   2.42225   9.13281 0.030057179
+                          qvalue
+                       &lt;numeric&gt;
+  ENSMUSG00000000194 0.000834921
+  ENSMUSG00000000247 0.033322641
+  ENSMUSG00000000305 0.000490337
+  ENSMUSG00000000308 0.000490337
+  ENSMUSG00000000359 0.211786009
+                 ...         ...
+  ENSMUSG00000102976  0.00126563
+  ENSMUSG00000103711  0.23858422
+  ENSMUSG00000103746  0.39804874
+  ENSMUSG00000103948  0.02952106
+  ENSMUSG00000104257  0.04873306
+  -------
+  seqinfo: 66 sequences from an unspecified genome; no seqlengths</code></pre>
+</div>
+</div>
+<p>We can isolate the <code>GRanges</code> (or sometimes a GRangesList) object. This object will contain the seqnames (chromosome), ranges (start and end positions), and strand (+ or -) for every single gene in the RNA-seq dataset, perfectly matching the order of the rows in the count matrix.</p>
+<div id="cell-16" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="7">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>gr <span class="ot">&lt;-</span> <span class="fu">rowRanges</span>(rna)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(gr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+2216
+</div>
+</div>
+<div id="cell-17" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="8">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>gr[<span class="dv">1</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<pre><code>GRanges object with 1 range and 18 metadata columns:
+                     seqnames            ranges strand |          Row.names
+                        &lt;Rle&gt;         &lt;IRanges&gt;  &lt;Rle&gt; |        &lt;character&gt;
+  ENSMUSG00000000194     chr2 31152316-31218775      + | ENSMUSG00000000194
+                         gene_id      SYMBOL               GENENAME
+                     &lt;character&gt; &lt;character&gt;            &lt;character&gt;
+  ENSMUSG00000000194      277463      Gpr107 G protein-coupled re..
+                                ENSEMBL geneLength     geneChr geneStart
+                            &lt;character&gt;  &lt;integer&gt; &lt;character&gt; &lt;integer&gt;
+  ENSMUSG00000000194 ENSMUSG00000000194      66460        chr2  31152316
+                       geneEnd  geneStrand      geneId         transcriptId
+                     &lt;integer&gt; &lt;character&gt; &lt;character&gt;          &lt;character&gt;
+  ENSMUSG00000000194  31218775           +      277463 ENSMUST00000056433.6
+                            anno     logFC    logCPM         F      PValue
+                     &lt;character&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt;   &lt;numeric&gt;
+  ENSMUSG00000000194        Gene   1.12372   8.74812   137.266 8.72516e-05
+                          qvalue
+                       &lt;numeric&gt;
+  ENSMUSG00000000194 0.000834921
+  -------
+  seqinfo: 66 sequences from an unspecified genome; no seqlengths</code></pre>
+</div>
+</div>
+<div id="cell-18" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="9">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seqnames</span>(gr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<pre><code>factor-Rle of length 2216 with 528 runs
+  Lengths:   11    3    1    1   20    1    7 ...    3    7    1    5    1    5
+  Values : chr2 chr1 chr2 chr1 chr2 chr1 chr2 ... chr2 chr1 chr2 chr1 chr2 chr1
+Levels(66): chr1 chr2 chr3 ... chrUn_GL456394 chrUn_GL456396 chrUn_JH584304</code></pre>
+</div>
+</div>
+<div id="cell-19" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="10">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">strand</span>(gr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<pre><code>factor-Rle of length 2216 with 1124 runs
+  Lengths:  5  2  2  1  2  2  1  2  1  1 10 ...  1  1  2  2  1  2  3  6  2  2
+  Values :  +  -  +  -  +  -  +  -  +  -  + ...  +  -  +  -  +  -  +  -  +  -
+Levels(3): + - *</code></pre>
+</div>
+</div>
+<p>In a GRanges object, the core information is strictly the <strong>genomic coordinates</strong>. However, we almost always have extra information associated with those genomic intervals. For example:</p>
+<ul>
+<li>For RNA-seq, we might want to store the Gene Symbol, Ensembl ID, or Biotype for each gene</li>
+<li>For ATAC-seq/ChIP-seq, we might want to store the peak score, fold-change, or p-value for each peak</li>
+</ul>
+<p><code>mcols(gr)</code> (which stands for metadata cols) is how we access or modify this extra information. It returns a DataFrame where each row perfectly matches a genomic range in our GRanges object, and the columns contain whatever extra annotations we’ve attached to those ranges.</p>
+<div id="cell-21" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="11">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mcols</span>(gr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<pre><code>DataFrame with 2216 rows and 18 columns
+                            Row.names     gene_id        SYMBOL
+                          &lt;character&gt; &lt;character&gt;   &lt;character&gt;
+ENSMUSG00000000194 ENSMUSG00000000194      277463        Gpr107
+ENSMUSG00000000247 ENSMUSG00000000247       16870          Lhx2
+ENSMUSG00000000305 ENSMUSG00000000305       12561          Cdh4
+ENSMUSG00000000308 ENSMUSG00000000308       12716         Ckmt1
+ENSMUSG00000000359 ENSMUSG00000000359       19700          Rem1
+...                               ...         ...           ...
+ENSMUSG00000102976 ENSMUSG00000102976       70579       Zc3h11a
+ENSMUSG00000103711 ENSMUSG00000103711      226654         Tstd1
+ENSMUSG00000103746 ENSMUSG00000103746       67503 1700001G17Rik
+ENSMUSG00000103948 ENSMUSG00000103948       77633 4930594C11Rik
+ENSMUSG00000104257 ENSMUSG00000104257   100504323       Gm20172
+                                 GENENAME            ENSEMBL geneLength
+                              &lt;character&gt;        &lt;character&gt;  &lt;integer&gt;
+ENSMUSG00000000194 G protein-coupled re.. ENSMUSG00000000194      66460
+ENSMUSG00000000247 LIM homeobox protein 2 ENSMUSG00000000247      30453
+ENSMUSG00000000305             cadherin 4 ENSMUSG00000000305     456943
+ENSMUSG00000000308 creatine kinase, mit.. ENSMUSG00000000308       6024
+ENSMUSG00000000359 rad and gem related .. ENSMUSG00000000359       8248
+...                                   ...                ...        ...
+ENSMUSG00000102976 zinc finger CCCH typ.. ENSMUSG00000102976      41519
+ENSMUSG00000103711 thiosulfate sulfurtr.. ENSMUSG00000103711       1481
+ENSMUSG00000103746 RIKEN cDNA 1700001G1.. ENSMUSG00000103746        889
+ENSMUSG00000103948 G1 to S phase transi.. ENSMUSG00000103948       3132
+ENSMUSG00000104257  predicted gene, 20172 ENSMUSG00000104257       1551
+                       geneChr geneStart   geneEnd  geneStrand      geneId
+                   &lt;character&gt; &lt;integer&gt; &lt;integer&gt; &lt;character&gt; &lt;character&gt;
+ENSMUSG00000000194        chr2  31152316  31218775           +      277463
+ENSMUSG00000000247        chr2  38339281  38369733           +       16870
+ENSMUSG00000000305        chr2 179442431 179899373           +       12561
+ENSMUSG00000000308        chr2 121357714 121363737           +       12716
+ENSMUSG00000000359        chr2 152626951 152635198           +       19700
+...                        ...       ...       ...         ...         ...
+ENSMUSG00000102976        chr1 133619862 133661380           -       70579
+ENSMUSG00000103711        chr1 171418872 171420352           +      226654
+ENSMUSG00000103746        chr1  33669824  33670712           +       67503
+ENSMUSG00000103948        chr1  37485851  37488982           -       77633
+ENSMUSG00000104257        chr1  25276404  25277954           -   100504323
+                            transcriptId        anno     logFC    logCPM
+                             &lt;character&gt; &lt;character&gt; &lt;numeric&gt; &lt;numeric&gt;
+ENSMUSG00000000194  ENSMUST00000056433.6        Gene   1.12372   8.74812
+ENSMUSG00000000247  ENSMUST00000143783.8        Gene  -1.60859   5.40640
+ENSMUSG00000000305 ENSMUST00000000314.12        Gene   2.11822   9.25294
+ENSMUSG00000000308  ENSMUST00000125812.7        Gene   3.79826   8.63364
+ENSMUSG00000000359  ENSMUST00000000369.3        Gene   1.90855   3.12253
+...                                  ...         ...       ...       ...
+ENSMUSG00000102976  ENSMUST00000191896.5        Gene -0.856315  10.09628
+ENSMUSG00000103711  ENSMUST00000193060.1        Gene  0.499469   3.20636
+ENSMUSG00000103746  ENSMUST00000191779.1        Gene  0.563047   2.57430
+ENSMUSG00000103948  ENSMUST00000192316.1        Gene  2.760559   2.65971
+ENSMUSG00000104257  ENSMUST00000193138.1        Gene  1.965857   2.42225
+                           F      PValue      qvalue
+                   &lt;numeric&gt;   &lt;numeric&gt;   &lt;numeric&gt;
+ENSMUSG00000000194 137.26552 8.72516e-05 0.000834921
+ENSMUSG00000000247  11.86742 1.87646e-02 0.033322641
+ENSMUSG00000000305 504.51658 3.72434e-06 0.000490337
+ENSMUSG00000000308 420.96960 5.79582e-06 0.000490337
+ENSMUSG00000000359   2.67341 1.64139e-01 0.211786009
+...                      ...         ...         ...
+ENSMUSG00000102976  97.72448 0.000195722  0.00126563
+ENSMUSG00000103711   2.31857 0.189210840  0.23858422
+ENSMUSG00000103746   1.09798 0.343492016  0.39804874
+ENSMUSG00000103948  12.70432 0.016224604  0.02952106
+ENSMUSG00000104257   9.13281 0.030057179  0.04873306</code></pre>
+</div>
+</div>
+<p>In a RangedSummarizedExperiment, <code>rowData()</code> is just a shortcut. Under the hood, <code>rowData(rna)</code> is programmed to reach into the <code>rowRanges</code> and pull out its <code>mcols()</code>. They return the exact same DataFrame of gene annotations.</p>
+<p><em>Note: rowData() works on all SE objects. However, if this were a standard SummarizedExperiment without genomic coordinates, we would only be able to use rowData(), as rowRanges() would not exist.</em></p>
+<div id="cell-23" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="12">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">rowData</span>(rna), <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<pre><code>DataFrame with 3 rows and 18 columns
+                            Row.names     gene_id      SYMBOL
+                          &lt;character&gt; &lt;character&gt; &lt;character&gt;
+ENSMUSG00000000194 ENSMUSG00000000194      277463      Gpr107
+ENSMUSG00000000247 ENSMUSG00000000247       16870        Lhx2
+ENSMUSG00000000305 ENSMUSG00000000305       12561        Cdh4
+                                 GENENAME            ENSEMBL geneLength
+                              &lt;character&gt;        &lt;character&gt;  &lt;integer&gt;
+ENSMUSG00000000194 G protein-coupled re.. ENSMUSG00000000194      66460
+ENSMUSG00000000247 LIM homeobox protein 2 ENSMUSG00000000247      30453
+ENSMUSG00000000305             cadherin 4 ENSMUSG00000000305     456943
+                       geneChr geneStart   geneEnd  geneStrand      geneId
+                   &lt;character&gt; &lt;integer&gt; &lt;integer&gt; &lt;character&gt; &lt;character&gt;
+ENSMUSG00000000194        chr2  31152316  31218775           +      277463
+ENSMUSG00000000247        chr2  38339281  38369733           +       16870
+ENSMUSG00000000305        chr2 179442431 179899373           +       12561
+                            transcriptId        anno     logFC    logCPM
+                             &lt;character&gt; &lt;character&gt; &lt;numeric&gt; &lt;numeric&gt;
+ENSMUSG00000000194  ENSMUST00000056433.6        Gene   1.12372   8.74812
+ENSMUSG00000000247  ENSMUST00000143783.8        Gene  -1.60859   5.40640
+ENSMUSG00000000305 ENSMUST00000000314.12        Gene   2.11822   9.25294
+                           F      PValue      qvalue
+                   &lt;numeric&gt;   &lt;numeric&gt;   &lt;numeric&gt;
+ENSMUSG00000000194  137.2655 8.72516e-05 0.000834921
+ENSMUSG00000000247   11.8674 1.87646e-02 0.033322641
+ENSMUSG00000000305  504.5166 3.72434e-06 0.000490337</code></pre>
+</div>
+</div>
+<p>Here we are seeing start, end, or seqnames as columns inside our <code>rowData()</code> DataFrame, it simply means the person who created the dataset left redundant data in there.</p>
+<p>By default, the <em>core spatial coordinates</em> are not part of the metadata table. Even though the rowData table has columns conveniently named start and end, Bioconductor tools do not know what they are.</p>
+<p>A SummarizedExperiment object can hold multiple assay datasets (e.g., raw counts and normalized values). We can view the list of available assays using <code>assays(rna)</code> and access a specific one using the <code>$</code> operator on that list (for example, <code>assays(rna)$counts</code>). In these assay matrices, each row represents a gene/transcript and each column represents a single sample.</p>
+<div id="cell-26" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="13">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assays</span>(rna)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<pre><code>List of length 2
+names(2): counts logCPM</code></pre>
+</div>
+</div>
+<div id="cell-27" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="14">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assays</span>(rna)<span class="sc">$</span>counts[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<table class="dataframe caption-top table table-sm table-striped small">
+<caption>A data.frame: 5 × 4</caption>
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th" scope="col">RNA_11half_1.tsv.gz</th>
+<th data-quarto-table-cell-role="th" scope="col">RNA_11half_2.tsv.gz</th>
+<th data-quarto-table-cell-role="th" scope="col">RNA_15half_1.tsv.gz</th>
+<th data-quarto-table-cell-role="th" scope="col">RNA_15half_2.tsv.gz</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th" scope="row">ENSMUSG00000000194</th>
+<td>848</td>
+<td>893.35</td>
+<td>2619.55</td>
+<td>3046.41</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th" scope="row">ENSMUSG00000000247</th>
+<td>169</td>
+<td>246.00</td>
+<td>51.00</td>
+<td>153.00</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th" scope="row">ENSMUSG00000000305</th>
+<td>694</td>
+<td>778.00</td>
+<td>4431.00</td>
+<td>5102.00</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th" scope="row">ENSMUSG00000000308</th>
+<td>148</td>
+<td>195.00</td>
+<td>3011.00</td>
+<td>4131.00</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th" scope="row">ENSMUSG00000000359</th>
+<td>8</td>
+<td>13.00</td>
+<td>101.00</td>
+<td>16.00</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>The <code>assay()</code> function (singular) extracts a single matrix from the object. Because we didn’t specify a name, it defaults to returning the very first assay in the object. Depending on how rna was created, this might happen to be “counts”, but it could be “logCPM”.</p>
+<div id="cell-29" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="15">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assay</span>(rna)[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,]  <span class="co"># same as assay(rna, 'counts')[1:5,] or assay(rna, 1)[1:5,]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<table class="dataframe caption-top table table-sm table-striped small">
+<caption>A data.frame: 5 × 4</caption>
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th" scope="col">RNA_11half_1.tsv.gz</th>
+<th data-quarto-table-cell-role="th" scope="col">RNA_11half_2.tsv.gz</th>
+<th data-quarto-table-cell-role="th" scope="col">RNA_15half_1.tsv.gz</th>
+<th data-quarto-table-cell-role="th" scope="col">RNA_15half_2.tsv.gz</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th" scope="row">ENSMUSG00000000194</th>
+<td>848</td>
+<td>893.35</td>
+<td>2619.55</td>
+<td>3046.41</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th" scope="row">ENSMUSG00000000247</th>
+<td>169</td>
+<td>246.00</td>
+<td>51.00</td>
+<td>153.00</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th" scope="row">ENSMUSG00000000305</th>
+<td>694</td>
+<td>778.00</td>
+<td>4431.00</td>
+<td>5102.00</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th" scope="row">ENSMUSG00000000308</th>
+<td>148</td>
+<td>195.00</td>
+<td>3011.00</td>
+<td>4131.00</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th" scope="row">ENSMUSG00000000359</th>
+<td>8</td>
+<td>13.00</td>
+<td>101.00</td>
+<td>16.00</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><em>Note: While <code>assays(rna)$counts</code> works perfectly, the common and preferred Bioconductor method we can use is the singular function: <code>assay(rna, "counts")</code>.</em></p>
+<div id="cell-31" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="16">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assay</span>(rna, <span class="st">"counts"</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<table class="dataframe caption-top table table-sm table-striped small">
+<caption>A data.frame: 5 × 4</caption>
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th" scope="col">RNA_11half_1.tsv.gz</th>
+<th data-quarto-table-cell-role="th" scope="col">RNA_11half_2.tsv.gz</th>
+<th data-quarto-table-cell-role="th" scope="col">RNA_15half_1.tsv.gz</th>
+<th data-quarto-table-cell-role="th" scope="col">RNA_15half_2.tsv.gz</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th" scope="row">ENSMUSG00000000194</th>
+<td>848</td>
+<td>893.35</td>
+<td>2619.55</td>
+<td>3046.41</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th" scope="row">ENSMUSG00000000247</th>
+<td>169</td>
+<td>246.00</td>
+<td>51.00</td>
+<td>153.00</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th" scope="row">ENSMUSG00000000305</th>
+<td>694</td>
+<td>778.00</td>
+<td>4431.00</td>
+<td>5102.00</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th" scope="row">ENSMUSG00000000308</th>
+<td>148</td>
+<td>195.00</td>
+<td>3011.00</td>
+<td>4131.00</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th" scope="row">ENSMUSG00000000359</th>
+<td>8</td>
+<td>13.00</td>
+<td>101.00</td>
+<td>16.00</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>It is often helpful to revisit the core principles of RNA-seq analysis. A great starting point is the <a href="https://github.com/sbwiecko/RNAseq_UPenn">UPenn course material</a>.</p>
+<p>Meta-data describing the experimental methods and publication references can be accessed using metadata().</p>
+<div id="cell-33" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="17">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">metadata</span>(rna))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>list()</code></pre>
+</div>
+</div>
+<p><em>Note that <code>metadata()</code> is just a simple list, so it is appropriate for any experiment wide metadata the user wishes to save, such as storing model formulas.</em></p>
+</section>
+<section id="subsetting-data" class="level3" data-number="5.3.4">
+<h3 data-number="5.3.4" class="anchored" data-anchor-id="subsetting-data"><span class="header-section-number">5.3.4</span> Subsetting data</h3>
+<p>The sample metadata columns (which are stored in <code>colData()</code>) can be accessed directly on the object using the <code>$</code> accessor. This makes it easy to <strong>subset</strong> the entire object by a given phenotype or treatment group.</p>
+<div id="cell-36" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="18">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>rna[, rna<span class="sc">$</span>group <span class="sc">==</span> <span class="st">"11half"</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<pre><code>class: RangedSummarizedExperiment 
+dim: 2216 2 
+metadata(0):
+assays(2): counts logCPM
+rownames(2216): ENSMUSG00000000194 ENSMUSG00000000247 ...
+  ENSMUSG00000103948 ENSMUSG00000104257
+rowData names(18): Row.names gene_id ... PValue qvalue
+colnames(2): RNA_11half_1.tsv.gz RNA_11half_2.tsv.gz
+colData names(2): sample group</code></pre>
+</div>
+</div>
+</section>
+<section id="boxplot-of-expression-for-a-few-genes" class="level3" data-number="5.3.5">
+<h3 data-number="5.3.5" class="anchored" data-anchor-id="boxplot-of-expression-for-a-few-genes"><span class="header-section-number">5.3.5</span> Boxplot of expression for a few genes</h3>
+<p>Let’s pick-up the first 5 genes and plot their expression in the 4 samples tested.</p>
+<div id="cell-38" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="19">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">t</span>(<span class="fu">assay</span>(rna)[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, ]))</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>sample <span class="ot">&lt;-</span> <span class="fu">rownames</span>(df)</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>df_long <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  df, <span class="sc">-</span>sample, <span class="at">names_to =</span> <span class="st">"gene"</span>, <span class="at">values_to =</span> <span class="st">"expression"</span>)</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="co"># -sample tells to pivot every column in the dataframe EXCEPT the sample column</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df_long, <span class="fu">aes</span>(<span class="at">x =</span> gene, <span class="at">y =</span> expression)) <span class="sc">+</span></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">fill =</span> gene)) <span class="sc">+</span></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">hjust=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Expression Distribution of Selected Genes"</span>,</span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Expression"</span>, <span class="at">x =</span> <span class="st">"Genes"</span>) <span class="sc">+</span></span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Set2"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="01-omics_data_structures_files/figure-html/cell-20-output-1.png" width="420" height="420" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="practice-exercises" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="practice-exercises"><span class="header-section-number">5.4</span> PRACTICE &amp; EXERCISES</h2>
+<section id="question-1" class="level3" data-number="5.4.1">
+<h3 data-number="5.4.1" class="anchored" data-anchor-id="question-1"><span class="header-section-number">5.4.1</span> Question 1</h3>
+<p>Make a <code>boxplot</code> of samples, before and after normalization.</p>
+<p><em>Hint:</em> Check <code>assays</code> of <code>rna</code> object. Raw counts should be converted to <code>log2</code> to make a comparison.</p>
+<div id="cell-40" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="20">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract assays</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>raw_counts <span class="ot">&lt;-</span> <span class="fu">assay</span>(rna, <span class="st">"counts"</span>)</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>logcpm <span class="ot">&lt;-</span> <span class="fu">assay</span>(rna, <span class="st">"logCPM"</span>)</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert to long data frames for ggplot</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>df_raw <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(raw_counts)</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>df_raw<span class="sc">$</span>gene <span class="ot">&lt;-</span> <span class="fu">rownames</span>(df_raw)</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>df_raw_long <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>  df_raw, <span class="sc">-</span>gene, <span class="at">names_to =</span> <span class="st">"sample"</span>, <span class="at">values_to =</span> <span class="st">"expression"</span>)</span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>df_raw_long<span class="sc">$</span>assay <span class="ot">&lt;-</span> <span class="st">"Raw Counts"</span></span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>df_raw_long<span class="sc">$</span>expression <span class="ot">&lt;-</span> <span class="fu">log2</span>(df_raw_long<span class="sc">$</span>expression <span class="sc">+</span> <span class="dv">1</span>)</span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>df_log <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(logcpm)</span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>df_log<span class="sc">$</span>gene <span class="ot">&lt;-</span> <span class="fu">rownames</span>(df_log)</span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>df_log_long <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(</span>
+<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a>  df_log, <span class="sc">-</span>gene, <span class="at">names_to =</span> <span class="st">"sample"</span>, <span class="at">values_to =</span> <span class="st">"expression"</span>)</span>
+<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a>df_log_long<span class="sc">$</span>assay <span class="ot">&lt;-</span> <span class="st">"logCPM"</span></span>
+<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine both</span></span>
+<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a>df_combined <span class="ot">&lt;-</span> <span class="fu">rbind</span>(df_raw_long, df_log_long)</span>
+<span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-22"><a href="#cb32-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Set factor for names to make Raw counts to be plotted first</span></span>
+<span id="cb32-23"><a href="#cb32-23" aria-hidden="true" tabindex="-1"></a>df_combined<span class="sc">$</span>assay <span class="ot">&lt;-</span> <span class="fu">factor</span>(</span>
+<span id="cb32-24"><a href="#cb32-24" aria-hidden="true" tabindex="-1"></a>  df_combined<span class="sc">$</span>assay,</span>
+<span id="cb32-25"><a href="#cb32-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">levels =</span> <span class="fu">unique</span>(df_combined<span class="sc">$</span>assay))</span>
+<span id="cb32-26"><a href="#cb32-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-27"><a href="#cb32-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot boxplot across samples</span></span>
+<span id="cb32-28"><a href="#cb32-28" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df_combined, <span class="fu">aes</span>(<span class="at">x =</span> sample, <span class="at">y =</span> expression, <span class="at">fill =</span> assay)) <span class="sc">+</span></span>
+<span id="cb32-29"><a href="#cb32-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">outlier.size =</span> <span class="fl">0.5</span>, <span class="at">lwd =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb32-30"><a href="#cb32-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb32-31"><a href="#cb32-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb32-32"><a href="#cb32-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> assay, <span class="at">scales =</span> <span class="st">"free_y"</span>) <span class="sc">+</span></span>
+<span id="cb32-33"><a href="#cb32-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb32-34"><a href="#cb32-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Sample-wise Expression: Raw vs Normalized"</span>,</span>
+<span id="cb32-35"><a href="#cb32-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Samples"</span>, <span class="at">y =</span> <span class="st">"Expression"</span>) <span class="sc">+</span></span>
+<span id="cb32-36"><a href="#cb32-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Set2"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="01-omics_data_structures_files/figure-html/cell-21-output-1.png" width="420" height="420" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><em>Important Note: While doing log2(counts + 1) puts the raw counts on a similar visual scale as logCPM, it is not a true normalization! logCPM (Counts Per Million) explicitly scales the data by the total sequencing depth (library size) of each sample before taking the log. This is why normalization is essential before comparing samples.</em></p>
+</section>
+<section id="question-2" class="level3" data-number="5.4.2">
+<h3 data-number="5.4.2" class="anchored" data-anchor-id="question-2"><span class="header-section-number">5.4.2</span> Question 2</h3>
+<p>Make a new <code>SummarizedExperiment</code> object by sub-setting <code>rna</code>.</p>
+<p>Take only first 2 samples and first 10 genes. Check the <code>assays</code>, row and column metadata.</p>
+<div id="cell-43" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="21">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>rna_subset <span class="ot">&lt;-</span> rna[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>rna_subset</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="fu">assays</span>(rna_subset)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<pre><code>class: RangedSummarizedExperiment 
+dim: 10 2 
+metadata(0):
+assays(2): counts logCPM
+rownames(10): ENSMUSG00000000194 ENSMUSG00000000247 ...
+  ENSMUSG00000000827 ENSMUSG00000000876
+rowData names(18): Row.names gene_id ... PValue qvalue
+colnames(2): RNA_11half_1.tsv.gz RNA_11half_2.tsv.gz
+colData names(2): sample group</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<pre><code>List of length 2
+names(2): counts logCPM</code></pre>
+</div>
+</div>
+<div id="cell-44" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="22">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colData</span>(rna_subset)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<pre><code>DataFrame with 2 rows and 2 columns
+                                 sample    group
+                            &lt;character&gt; &lt;factor&gt;
+RNA_11half_1.tsv.gz RNA_11half_1.tsv.gz   11half
+RNA_11half_2.tsv.gz RNA_11half_2.tsv.gz   11half</code></pre>
+</div>
+</div>
+<div id="cell-45" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="23">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rowRanges</span>(rna_subset)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<pre><code>GRanges object with 10 ranges and 18 metadata columns:
+                     seqnames              ranges strand |          Row.names
+                        &lt;Rle&gt;           &lt;IRanges&gt;  &lt;Rle&gt; |        &lt;character&gt;
+  ENSMUSG00000000194     chr2   31152316-31218775      + | ENSMUSG00000000194
+  ENSMUSG00000000247     chr2   38339281-38369733      + | ENSMUSG00000000247
+  ENSMUSG00000000305     chr2 179442431-179899373      + | ENSMUSG00000000305
+  ENSMUSG00000000308     chr2 121357714-121363737      + | ENSMUSG00000000308
+  ENSMUSG00000000359     chr2 152626951-152635198      + | ENSMUSG00000000359
+  ENSMUSG00000000392     chr2   62500943-62574075      - | ENSMUSG00000000392
+  ENSMUSG00000000823     chr2 181582103-181592803      - | ENSMUSG00000000823
+  ENSMUSG00000000826     chr2 181520485-181555133      + | ENSMUSG00000000826
+  ENSMUSG00000000827     chr2 181497142-181517966      + | ENSMUSG00000000827
+  ENSMUSG00000000876     chr2 154585758-154603708      - | ENSMUSG00000000876
+                         gene_id      SYMBOL               GENENAME
+                     &lt;character&gt; &lt;character&gt;            &lt;character&gt;
+  ENSMUSG00000000194      277463      Gpr107 G protein-coupled re..
+  ENSMUSG00000000247       16870        Lhx2 LIM homeobox protein 2
+  ENSMUSG00000000305       12561        Cdh4             cadherin 4
+  ENSMUSG00000000308       12716       Ckmt1 creatine kinase, mit..
+  ENSMUSG00000000359       19700        Rem1 rad and gem related ..
+  ENSMUSG00000000392       14089         Fap fibroblast activatio..
+  ENSMUSG00000000823      269401     Zfp512b zinc finger protein ..
+  ENSMUSG00000000826       13002      Dnajc5 DnaJ heat shock prot..
+  ENSMUSG00000000827       66314     Tpd52l2 tumor protein D52-li..
+  ENSMUSG00000000876       59038       Pxmp4 peroxisomal membrane..
+                                ENSEMBL geneLength     geneChr geneStart
+                            &lt;character&gt;  &lt;integer&gt; &lt;character&gt; &lt;integer&gt;
+  ENSMUSG00000000194 ENSMUSG00000000194      66460        chr2  31152316
+  ENSMUSG00000000247 ENSMUSG00000000247      30453        chr2  38339281
+  ENSMUSG00000000305 ENSMUSG00000000305     456943        chr2 179442431
+  ENSMUSG00000000308 ENSMUSG00000000308       6024        chr2 121357714
+  ENSMUSG00000000359 ENSMUSG00000000359       8248        chr2 152626951
+  ENSMUSG00000000392 ENSMUSG00000000392      73133        chr2  62500943
+  ENSMUSG00000000823 ENSMUSG00000000823      10701        chr2 181582103
+  ENSMUSG00000000826 ENSMUSG00000000826      34649        chr2 181520485
+  ENSMUSG00000000827 ENSMUSG00000000827      20825        chr2 181497142
+  ENSMUSG00000000876 ENSMUSG00000000876      17951        chr2 154585758
+                       geneEnd  geneStrand      geneId          transcriptId
+                     &lt;integer&gt; &lt;character&gt; &lt;character&gt;           &lt;character&gt;
+  ENSMUSG00000000194  31218775           +      277463  ENSMUST00000056433.6
+  ENSMUSG00000000247  38369733           +       16870  ENSMUST00000143783.8
+  ENSMUSG00000000305 179899373           +       12561 ENSMUST00000000314.12
+  ENSMUSG00000000308 121363737           +       12716  ENSMUST00000125812.7
+  ENSMUSG00000000359 152635198           +       19700  ENSMUST00000000369.3
+  ENSMUSG00000000392  62574075           -       14089  ENSMUST00000102732.9
+  ENSMUSG00000000823 181592803           -      269401  ENSMUST00000108789.8
+  ENSMUSG00000000826 181555133           +       13002 ENSMUST00000072334.11
+  ENSMUSG00000000827 181517966           +       66314  ENSMUST00000184588.7
+  ENSMUSG00000000876 154603708           -       59038 ENSMUST00000000896.10
+                            anno     logFC    logCPM         F      PValue
+                     &lt;character&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt;   &lt;numeric&gt;
+  ENSMUSG00000000194        Gene  1.123717   8.74812 137.26552 8.72516e-05
+  ENSMUSG00000000247        Gene -1.608592   5.40640  11.86742 1.87646e-02
+  ENSMUSG00000000305        Gene  2.118219   9.25294 504.51658 3.72434e-06
+  ENSMUSG00000000308        Gene  3.798256   8.63364 420.96960 5.79582e-06
+  ENSMUSG00000000359        Gene  1.908545   3.12253   2.67341 1.64139e-01
+  ENSMUSG00000000392        Gene -2.102269   6.02595  82.37588 2.92695e-04
+  ENSMUSG00000000823        Gene  0.776790   9.69040  21.64298 5.77573e-03
+  ENSMUSG00000000826        Gene  0.991148  11.54446  77.71581 3.35396e-04
+  ENSMUSG00000000827        Gene -0.557763   9.55700  46.64975 1.08655e-03
+  ENSMUSG00000000876        Gene  0.304488   7.07357   4.36632 9.17564e-02
+                          qvalue
+                       &lt;numeric&gt;
+  ENSMUSG00000000194 0.000834921
+  ENSMUSG00000000247 0.033322641
+  ENSMUSG00000000305 0.000490337
+  ENSMUSG00000000308 0.000490337
+  ENSMUSG00000000359 0.211786009
+  ENSMUSG00000000392 0.001579555
+  ENSMUSG00000000823 0.012874947
+  ENSMUSG00000000826 0.001683051
+  ENSMUSG00000000827 0.003701948
+  ENSMUSG00000000876 0.127276923
+  -------
+  seqinfo: 66 sequences from an unspecified genome; no seqlengths</code></pre>
+</div>
+</div>
+<div id="cell-46" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="24">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">rowRanges</span>(rna_subset))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+10
+</div>
+</div>
+<div id="cell-47" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="25">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assay</span>(rna_subset, <span class="st">"counts"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<table class="dataframe caption-top table table-sm table-striped small">
+<caption>A data.frame: 10 × 2</caption>
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th" scope="col">RNA_11half_1.tsv.gz</th>
+<th data-quarto-table-cell-role="th" scope="col">RNA_11half_2.tsv.gz</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th" scope="row">ENSMUSG00000000194</th>
+<td>848.00</td>
+<td>893.35</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th" scope="row">ENSMUSG00000000247</th>
+<td>169.00</td>
+<td>246.00</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th" scope="row">ENSMUSG00000000305</th>
+<td>694.00</td>
+<td>778.00</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th" scope="row">ENSMUSG00000000308</th>
+<td>148.00</td>
+<td>195.00</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th" scope="row">ENSMUSG00000000359</th>
+<td>8.00</td>
+<td>13.00</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th" scope="row">ENSMUSG00000000392</th>
+<td>349.00</td>
+<td>333.00</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th" scope="row">ENSMUSG00000000823</th>
+<td>1851.87</td>
+<td>2077.29</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th" scope="row">ENSMUSG00000000826</th>
+<td>5908.00</td>
+<td>7011.00</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th" scope="row">ENSMUSG00000000827</th>
+<td>2788.23</td>
+<td>2998.49</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th" scope="row">ENSMUSG00000000876</th>
+<td>374.00</td>
+<td>400.00</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="question-3" class="level3" data-number="5.4.3">
+<h3 data-number="5.4.3" class="anchored" data-anchor-id="question-3"><span class="header-section-number">5.4.3</span> Question 3</h3>
+<p>Try to run all other commands from the following image on other <code>SE</code> objects as well.</p>
+<p><img src="../assets/img/se.svg" width="600"></p>
+<div id="cell-49" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="26">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>h3k27ac</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colData</span>(h3k27ac)</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="fu">assays</span>(h3k27ac)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<pre><code>class: RangedSummarizedExperiment 
+dim: 24231 4 
+metadata(2): final.ext param
+assays(2): counts logCPM
+rownames: NULL
+rowData names(18): annotation geneChr ... PValue qvalue
+colnames: NULL
+colData names(6): bam.files totals ... group norm.factors</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<pre><code>DataFrame with 4 rows and 6 columns
+               bam.files    totals       ext      rlen       group norm.factors
+             &lt;character&gt; &lt;integer&gt; &lt;integer&gt; &lt;integer&gt; &lt;character&gt;    &lt;numeric&gt;
+1 ../data/H3K27ac_11ha..  38907314       100        36      11half     0.916676
+2 ../data/H3K27ac_11ha..  38213305       100        36      11half     0.893381
+3 ../data/H3K27ac_15ha..  83981374       100        49      15half     1.096524
+4 ../data/H3K27ac_15ha..  94077476       100        49      15half     1.113600</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<pre><code>List of length 2
+names(2): counts logCPM</code></pre>
+</div>
+</div>
+<div id="cell-50" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="27">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">assay</span>(h3k27ac, <span class="st">"logCPM"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<table class="dataframe caption-top table table-sm table-striped small">
+<caption>A matrix: 6 × 4 of type dbl</caption>
+<tbody>
+<tr class="odd">
+<td>4.157836</td>
+<td>-1.072886</td>
+<td>1.135676</td>
+<td>1.540448</td>
+</tr>
+<tr class="even">
+<td>3.659635</td>
+<td>2.072572</td>
+<td>4.200268</td>
+<td>3.435317</td>
+</tr>
+<tr class="odd">
+<td>3.326437</td>
+<td>2.808303</td>
+<td>4.145176</td>
+<td>3.884800</td>
+</tr>
+<tr class="even">
+<td>3.052044</td>
+<td>2.072572</td>
+<td>4.353945</td>
+<td>4.382375</td>
+</tr>
+<tr class="odd">
+<td>4.226394</td>
+<td>3.944796</td>
+<td>5.805263</td>
+<td>5.680163</td>
+</tr>
+<tr class="even">
+<td>2.507844</td>
+<td>3.655477</td>
+<td>1.135676</td>
+<td>2.417469</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="cell-51" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="28">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">metadata</span>(h3k27ac)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Le chargement a nécessité le package : csaw
+</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<pre><code>$final.ext
+[1] NA
+
+$param
+An object of class "readParam"
+Slot "pe":
+[1] "none"
+
+Slot "max.frag":
+[1] 500
+
+Slot "dedup":
+[1] FALSE
+
+Slot "minq":
+[1] NA
+
+Slot "forward":
+[1] NA
+
+Slot "restrict":
+character(0)
+
+Slot "discard":
+GRanges object with 0 ranges and 0 metadata columns:
+   seqnames    ranges strand
+      &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt;
+  -------
+  seqinfo: no sequences
+
+Slot "processed.discard":
+named list()
+</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="the-granges-object" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="the-granges-object"><span class="header-section-number">5.5</span> The <code>GRanges</code> object</h2>
+<section id="extracting-and-inspecting-granges-from-atac-seq" class="level3" data-number="5.5.1">
+<h3 data-number="5.5.1" class="anchored" data-anchor-id="extracting-and-inspecting-granges-from-atac-seq"><span class="header-section-number">5.5.1</span> Extracting and inspecting <code>GRanges</code> from ATAC-seq</h3>
+<div id="cell-53" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="29">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>gr <span class="ot">&lt;-</span> <span class="fu">rowRanges</span>(atac)</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>gr</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<pre><code>GRanges object with 3656 ranges and 18 metadata columns:
+         seqnames              ranges strand |             annotation   geneChr
+            &lt;Rle&gt;           &lt;IRanges&gt;  &lt;Rle&gt; |            &lt;character&gt; &lt;integer&gt;
+     [1]     chr1     3670547-3672665      * |       Promoter (&lt;=1kb)         1
+     [2]     chr1     4332510-4332710      * | Intron (ENSMUST00000..         1
+     [3]     chr1     4491755-4492573      * |       Promoter (1-2kb)         1
+     [4]     chr1     4571186-4572423      * |      Distal Intergenic         1
+     [5]     chr1     4785062-4786325      * |       Promoter (&lt;=1kb)         1
+     ...      ...                 ...    ... .                    ...       ...
+  [3652]     chr2 181764664-181764891      * |       Promoter (1-2kb)         2
+  [3653]     chr2 181766881-181767875      * |       Promoter (&lt;=1kb)         2
+  [3654]     chr2 181837244-181838655      * |       Promoter (&lt;=1kb)         2
+  [3655]     chr2 181863853-181865066      * |       Promoter (&lt;=1kb)         2
+  [3656]     chr2 181918525-181918853      * |      Distal Intergenic         2
+         geneStart   geneEnd geneLength geneStrand      geneId
+         &lt;integer&gt; &lt;integer&gt;  &lt;integer&gt;  &lt;integer&gt; &lt;character&gt;
+     [1]   3214482   3671498     457017          2      497097
+     [2]   4344146   4360314      16169          2       19888
+     [3]   4492465   4493735       1271          2       20671
+     [4]   4491390   4497354       5965          2       20671
+     [5]   4773206   4785710      12505          2       27395
+     ...       ...       ...        ...        ...         ...
+  [3652] 181763332 181827797      64466          1       17932
+  [3653] 181767029 181795892      28864          1       17932
+  [3654] 181837854 181857461      19608          1      245867
+  [3655] 181864337 181870830       6494          1       67005
+  [3656] 181864360 181866209       1850          1       67005
+                  transcriptId distanceToTSS            ENSEMBL      SYMBOL
+                   &lt;character&gt;     &lt;numeric&gt;        &lt;character&gt; &lt;character&gt;
+     [1]  ENSMUST00000070533.4             0 ENSMUSG00000051951        Xkr4
+     [2]  ENSMUST00000027032.5         27604 ENSMUSG00000025900         Rp1
+     [3]  ENSMUST00000191939.1          1162 ENSMUSG00000025902       Sox17
+     [4]  ENSMUST00000192650.5        -73832 ENSMUSG00000025902       Sox17
+     [5]  ENSMUST00000130201.7             0 ENSMUSG00000033845      Mrpl15
+     ...                   ...           ...                ...         ...
+  [3652] ENSMUST00000081125.10          1332 ENSMUSG00000010505        Myt1
+  [3653]  ENSMUST00000156190.7             0 ENSMUSG00000010505        Myt1
+  [3654] ENSMUST00000029116.13             0 ENSMUSG00000027589      Pcmtd2
+  [3655]  ENSMUST00000039551.8             0 ENSMUSG00000038628      Polr3k
+  [3656]  ENSMUST00000153214.1         54165 ENSMUSG00000038628      Polr3k
+                       GENENAME        anno     logFC    logCPM         F
+                    &lt;character&gt; &lt;character&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt;
+     [1] X-linked Kx blood gr..    Promoter  0.602984  10.45378  41.78446
+     [2] retinitis pigmentosa..      Intron  0.855748   5.18424   3.68371
+     [3] SRY (sex determining..    Promoter -0.620926   7.13469   9.14522
+     [4] SRY (sex determining..  Intergenic -0.511046   8.90885  15.15688
+     [5] mitochondrial riboso..    Promoter  0.540908   8.63469  15.08892
+     ...                    ...         ...       ...       ...       ...
+  [3652] myelin transcription..    Promoter -1.275275   5.54135  10.44866
+  [3653] myelin transcription..    Promoter  0.477658   7.56969   6.03877
+  [3654] protein-L-isoasparta..    Promoter  0.689247   7.92175  16.67881
+  [3655] polymerase (RNA) III..    Promoter  0.241693   9.05746   4.06676
+  [3656] polymerase (RNA) III..  Intergenic  0.394577   6.84745   2.73331
+              PValue      qvalue
+           &lt;numeric&gt;   &lt;numeric&gt;
+     [1] 6.58453e-08 4.81983e-07
+     [2] 6.13517e-02 9.28785e-02
+     [3] 4.12368e-03 8.38540e-03
+     [4] 3.27158e-04 8.67115e-04
+     [5] 3.36058e-04 8.82634e-04
+     ...         ...         ...
+  [3652] 0.002309221  0.00497558
+  [3653] 0.017945118  0.03116850
+  [3654] 0.000181039  0.00051468
+  [3655] 0.049773014  0.07677364
+  [3656] 0.105289776  0.15077925
+  -------
+  seqinfo: 21 sequences from an unspecified genome; no seqlengths</code></pre>
+</div>
+</div>
+<div id="cell-54" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="30">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seqlevels</span>(gr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class="list-inline"><li>'chr1'</li><li>'chr2'</li><li>'chr3'</li><li>'chr4'</li><li>'chr5'</li><li>'chr6'</li><li>'chr7'</li><li>'chr8'</li><li>'chr9'</li><li>'chr10'</li><li>'chr11'</li><li>'chr12'</li><li>'chr13'</li><li>'chr14'</li><li>'chr15'</li><li>'chr16'</li><li>'chr17'</li><li>'chr18'</li><li>'chr19'</li><li>'chrX'</li><li>'chrY'</li></ol>
+</div>
+</div>
+</section>
+<section id="subsetting-regions-on-chr1-with-width-1000-bp" class="level3" data-number="5.5.2">
+<h3 data-number="5.5.2" class="anchored" data-anchor-id="subsetting-regions-on-chr1-with-width-1000-bp"><span class="header-section-number">5.5.2</span> Subsetting regions on <em>chr1</em> with width &gt; 1000 bp</h3>
+<p><code>width</code> (along with seqnames, start, end, and strand) is not in the metadata columns (mcols). It is a core spatial property of the GRanges object itself. It calculates width simply as <em>end - start + 1</em>. For a gene, this represents the entire genomic locus on the chromosome, spanning from the start of the first exon all the way to the end of the last exon, including all the introns.</p>
+<div id="cell-56" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="31">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>subset_gr <span class="ot">&lt;-</span> gr[<span class="fu">seqnames</span>(gr) <span class="sc">==</span> <span class="st">"chr1"</span> <span class="sc">&amp;</span> <span class="fu">width</span>(gr) <span class="sc">&gt;</span> <span class="dv">1000</span>]</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(subset_gr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+838
+</div>
+</div>
+<p>Bioconductor has a specialized <code>subset</code> method for GRanges that allows us to drop the repetitive <code>gr</code> calls, making it look much cleaner:</p>
+<div id="cell-58" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="32">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">subset</span>(gr, seqnames <span class="sc">==</span> <span class="st">"chr1"</span> <span class="sc">&amp;</span> width <span class="sc">&gt;</span> <span class="dv">1000</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<pre><code>GRanges object with 838 ranges and 18 metadata columns:
+        seqnames              ranges strand |        annotation   geneChr
+           &lt;Rle&gt;           &lt;IRanges&gt;  &lt;Rle&gt; |       &lt;character&gt; &lt;integer&gt;
+    [1]     chr1     3670547-3672665      * |  Promoter (&lt;=1kb)         1
+    [2]     chr1     4571186-4572423      * | Distal Intergenic         1
+    [3]     chr1     4785062-4786325      * |  Promoter (&lt;=1kb)         1
+    [4]     chr1     4807268-4808558      * |  Promoter (&lt;=1kb)         1
+    [5]     chr1     4857303-4858480      * |  Promoter (&lt;=1kb)         1
+    ...      ...                 ...    ... .               ...       ...
+  [834]     chr1 193968000-193969035      * | Distal Intergenic         1
+  [835]     chr1 194160689-194161978      * | Distal Intergenic         1
+  [836]     chr1 194619386-194621007      * |  Promoter (&lt;=1kb)         1
+  [837]     chr1 194879295-194880523      * | Distal Intergenic         1
+  [838]     chr1 194976000-194977461      * |  Promoter (&lt;=1kb)         1
+        geneStart   geneEnd geneLength geneStrand      geneId
+        &lt;integer&gt; &lt;integer&gt;  &lt;integer&gt;  &lt;integer&gt; &lt;character&gt;
+    [1]   3214482   3671498     457017          2      497097
+    [2]   4491390   4497354       5965          2       20671
+    [3]   4773206   4785710      12505          2       27395
+    [4]   4807788   4848410      40623          1       18777
+    [5]   4857814   4897905      40092          1       21399
+    ...       ...       ...        ...        ...         ...
+  [834] 194212187 194222759      10573          2       74942
+  [835] 194212187 194222759      10573          2       74942
+  [836] 194619825 194816869     197045          1       18845
+  [837] 194822001 194822064         64          1   100628615
+  [838] 194955759 194976960      21202          2      320400
+                 transcriptId distanceToTSS            ENSEMBL        SYMBOL
+                  &lt;character&gt;     &lt;numeric&gt;        &lt;character&gt;   &lt;character&gt;
+    [1]  ENSMUST00000070533.4             0 ENSMUSG00000051951          Xkr4
+    [2]  ENSMUST00000192650.5        -73832 ENSMUSG00000025902         Sox17
+    [3]  ENSMUST00000130201.7             0 ENSMUSG00000033845        Mrpl15
+    [4]  ENSMUST00000134384.7             0 ENSMUSG00000025903        Lypla1
+    [5] ENSMUST00000081551.13             0 ENSMUSG00000033813         Tcea1
+    ...                   ...           ...                ...           ...
+  [834]  ENSMUST00000193395.1        253724 ENSMUSG00000103692 4930503O07Rik
+  [835]  ENSMUST00000193395.1         60781 ENSMUSG00000103692 4930503O07Rik
+  [836] ENSMUST00000027952.11             0 ENSMUSG00000026640        Plxna2
+  [837]  ENSMUST00000174892.1         57294 ENSMUSG00000092633       Mir3962
+  [838]  ENSMUST00000180780.2             0 ENSMUSG00000097325       Gm16897
+                      GENENAME        anno      logFC    logCPM         F
+                   &lt;character&gt; &lt;character&gt;  &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt;
+    [1] X-linked Kx blood gr..    Promoter  0.6029841  10.45378 41.784460
+    [2] SRY (sex determining..  Intergenic -0.5110459   8.90885 15.156883
+    [3] mitochondrial riboso..    Promoter  0.5409079   8.63469 15.088922
+    [4]    lysophospholipase 1    Promoter  0.0485083   9.02241  0.158018
+    [5] transcription elonga..    Promoter  0.4092797   9.92134 14.681270
+    ...                    ...         ...        ...       ...       ...
+  [834] RIKEN cDNA 4930503O0..  Intergenic   1.789029   6.37400  36.41420
+  [835] RIKEN cDNA 4930503O0..  Intergenic  -2.621150   7.53898 143.60529
+  [836]              plexin A2    Promoter  -0.444863   9.24715  14.79019
+  [837]          microRNA 3962  Intergenic  -1.195438   6.95062  28.66158
+  [838]  predicted gene, 16897    Promoter  -0.246053   8.75503   3.60378
+             PValue      qvalue
+          &lt;numeric&gt;   &lt;numeric&gt;
+    [1] 6.58453e-08 4.81983e-07
+    [2] 3.27158e-04 8.67115e-04
+    [3] 3.36058e-04 8.82634e-04
+    [4] 6.92882e-01 7.45491e-01
+    [5] 3.95063e-04 1.01572e-03
+    ...         ...         ...
+  [834] 2.85224e-07 1.73797e-06
+  [835] 1.50833e-15 1.77316e-13
+  [836] 3.78302e-04 9.79514e-04
+  [837] 2.86565e-06 1.28866e-05
+  [838] 6.41228e-02 9.63951e-02
+  -------
+  seqinfo: 21 sequences from an unspecified genome; no seqlengths</code></pre>
+</div>
+</div>
+</section>
+<section id="plotting-the-width-distribution-of-genomic-ranges" class="level3" data-number="5.5.3">
+<h3 data-number="5.5.3" class="anchored" data-anchor-id="plotting-the-width-distribution-of-genomic-ranges"><span class="header-section-number">5.5.3</span> Plotting the width distribution of genomic ranges</h3>
+<p><code>mcols(gr)</code> (Metadata only) returns only the extra annotations (the “fact sheet”). It returns a DataFrame of things like Gene Name, P-value, or Score. It does not include the actual genomic coordinates (seqnames, start, end, width, strand). <code>as.data.frame(gr)</code> (Everything) flattens the entire GRanges object into a standard R dataframe. The resulting table will have seqnames, start, end, width, and strand as its first five columns, and then it will attach all of the mcols right next to them.</p>
+<p>We must use <code>as.data.frame(gr)</code> here. If we used mcols(gr), the resulting table wouldn’t have the <strong>width</strong> column.</p>
+<div id="cell-60" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="33">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>df_gr <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(gr)</span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df_gr, <span class="fu">aes</span>(<span class="at">x =</span> width)) <span class="sc">+</span></span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">50</span>, <span class="at">fill =</span> <span class="st">"#3366cc"</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb56-7"><a href="#cb56-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Width Distribution of Genomic Ranges"</span>,</span>
+<span id="cb56-8"><a href="#cb56-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Width (bp)"</span>, <span class="at">y =</span> <span class="st">"Count"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="01-omics_data_structures_files/figure-html/cell-34-output-1.png" width="420" height="420" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The <em>geneLength</em> column in the metadata is usually the effective length of the mature mRNA transcript. It is calculated by summing up only the lengths of the exons (ignoring the introns). This is the number used to normalize counts into TPM (Transcripts Per Million).</p>
+</section>
+</section>
+<section id="visualizing-genomic-data" class="level2" data-number="5.6">
+<h2 data-number="5.6" class="anchored" data-anchor-id="visualizing-genomic-data"><span class="header-section-number">5.6</span> Visualizing genomic data</h2>
+<section id="heatmap-of-h3k27ac-signal" class="level3" data-number="5.6.1">
+<h3 data-number="5.6.1" class="anchored" data-anchor-id="heatmap-of-h3k27ac-signal"><span class="header-section-number">5.6.1</span> Heatmap of H3K27ac signal</h3>
+<div id="cell-63" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="34">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>mat <span class="ot">&lt;-</span> <span class="fu">assay</span>(h3k27ac)</span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mat)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<table class="dataframe caption-top table table-sm table-striped small">
+<caption>A matrix: 6 × 4 of type int</caption>
+<tbody>
+<tr class="odd">
+<td>20</td>
+<td>0</td>
+<td>5</td>
+<td>8</td>
+</tr>
+<tr class="even">
+<td>14</td>
+<td>4</td>
+<td>52</td>
+<td>34</td>
+</tr>
+<tr class="odd">
+<td>11</td>
+<td>7</td>
+<td>50</td>
+<td>47</td>
+</tr>
+<tr class="even">
+<td>9</td>
+<td>4</td>
+<td>58</td>
+<td>67</td>
+</tr>
+<tr class="odd">
+<td>21</td>
+<td>16</td>
+<td>161</td>
+<td>167</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>13</td>
+<td>5</td>
+<td>16</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="cell-64" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="35">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Heatmap</span>(</span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>  mat[<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>,],</span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">name =</span> <span class="st">"H3K27ac"</span>,</span>
+<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">show_row_names =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">show_column_names =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb58-6"><a href="#cb58-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">cluster_rows =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb58-7"><a href="#cb58-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">show_row_dend =</span> <span class="cn">FALSE</span>,  <span class="co"># hide row dendrogram</span></span>
+<span id="cb58-8"><a href="#cb58-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">cluster_columns =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="01-omics_data_structures_files/figure-html/cell-36-output-1.png" width="420" height="420" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="question-4" class="level3" data-number="5.6.2">
+<h3 data-number="5.6.2" class="anchored" data-anchor-id="question-4"><span class="header-section-number">5.6.2</span> Question 4</h3>
+<p>Try to run all other commands from the following image on other <code>GRanges</code> from <code>SE</code> objects as well.</p>
+<p><img src="../assets/img/gr.png" width="600"></p>
+<div id="cell-66" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="36">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>gr <span class="ot">&lt;-</span> <span class="fu">rowRanges</span>(h3k4me1)</span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(gr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<pre><code>GRanges object with 6 ranges and 18 metadata columns:
+      seqnames          ranges strand |             annotation   geneChr
+         &lt;Rle&gt;       &lt;IRanges&gt;  &lt;Rle&gt; |            &lt;character&gt; &lt;integer&gt;
+  [1]     chr1 3120410-3120664      * |      Distal Intergenic         1
+  [2]     chr1 3254884-3255166      * | Intron (ENSMUST00000..         1
+  [3]     chr1 3366339-3366557      * | Exon (ENSMUST0000019..         1
+  [4]     chr1 3368377-3368571      * | Exon (ENSMUST0000019..         1
+  [5]     chr1 3398970-3399433      * | Intron (ENSMUST00000..         1
+  [6]     chr1 3399520-3400407      * | Intron (ENSMUST00000..         1
+      geneStart   geneEnd geneLength geneStrand      geneId
+      &lt;integer&gt; &lt;integer&gt;  &lt;integer&gt;  &lt;integer&gt; &lt;character&gt;
+  [1]   3214482   3671498     457017          2      497097
+  [2]   3214482   3671498     457017          2      497097
+  [3]   3214482   3671498     457017          2      497097
+  [4]   3214482   3671498     457017          2      497097
+  [5]   3214482   3671498     457017          2      497097
+  [6]   3214482   3671498     457017          2      497097
+              transcriptId distanceToTSS            ENSEMBL      SYMBOL
+               &lt;character&gt;     &lt;numeric&gt;        &lt;character&gt; &lt;character&gt;
+  [1] ENSMUST00000070533.4        550834 ENSMUSG00000051951        Xkr4
+  [2] ENSMUST00000070533.4        416332 ENSMUSG00000051951        Xkr4
+  [3] ENSMUST00000070533.4        304941 ENSMUSG00000051951        Xkr4
+  [4] ENSMUST00000070533.4        302927 ENSMUSG00000051951        Xkr4
+  [5] ENSMUST00000070533.4        272065 ENSMUSG00000051951        Xkr4
+  [6] ENSMUST00000070533.4        271091 ENSMUSG00000051951        Xkr4
+                    GENENAME        anno     logFC    logCPM         F
+                 &lt;character&gt; &lt;character&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt;
+  [1] X-linked Kx blood gr..  Intergenic  2.530271   3.05733  8.022852
+  [2] X-linked Kx blood gr..      Intron  1.330709   3.35988  4.865120
+  [3] X-linked Kx blood gr..        Exon  1.904164   3.05805  5.515882
+  [4] X-linked Kx blood gr..        Exon  0.245368   3.04948  0.131943
+  [5] X-linked Kx blood gr..      Intron  1.088826   3.98058  6.467585
+  [6] X-linked Kx blood gr..      Intron  1.345539   5.22784 26.869684
+           PValue      qvalue
+        &lt;numeric&gt;   &lt;numeric&gt;
+  [1] 4.63050e-03 4.08230e-02
+  [2] 2.74329e-02 1.34633e-01
+  [3] 1.88685e-02 1.06593e-01
+  [4] 7.16436e-01 8.48565e-01
+  [5] 1.10044e-02 7.42101e-02
+  [6] 2.22912e-07 1.53039e-05
+  -------
+  seqinfo: 24 sequences from an unspecified genome; no seqlengths</code></pre>
+</div>
+</div>
+<div id="cell-67" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="37">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(gr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+41330
+</div>
+</div>
+<p>In the context of ChIP-seq (or ATAC-seq), the core geometry of our GRanges object represents the peaks (the specific, relatively short regions where a protein bound or chromatin is open, often just 200–1000 bp).</p>
+<p>If we have annotated those peaks to nearby genes, the genes themselves have their own “start” and “end” coordinates, which can span tens or hundreds of thousands of base pairs.</p>
+<div id="cell-69" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="38">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">width</span>(gr))  <span class="co"># length between IRanges bounds, not between start and end of gene!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class="list-inline"><li>255</li><li>283</li><li>219</li><li>195</li><li>464</li><li>888</li></ol>
+</div>
+</div>
+<div id="cell-70" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="39">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(gr<span class="sc">$</span>geneLength)  <span class="co"># head(mcols(gr)$geneLength)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class="list-inline"><li>457017</li><li>457017</li><li>457017</li><li>457017</li><li>457017</li><li>457017</li></ol>
+</div>
+</div>
+<p>Understanding how different omics layers are represented in <code>SE</code> and <code>GRanges</code> objects is essential for multi-omics integration, visualization, and downstream analysis.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../notes/enrichment_analysis.html" class="pagination-link" aria-label="Functional Enrichment Analysis: Multi-Omics Integration">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Functional Enrichment Analysis: Multi-Omics Integration</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../notebooks/02-atac_heatmaps.html" class="pagination-link" aria-label="Enriched Heatmaps and identification of regions with different activities">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Enriched Heatmaps and identification of regions with different activities</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -1,0 +1,1559 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>8&nbsp; Overlapping all the datasets – Biology-Informed Multi-Omics Integration</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../notebooks/05-atac_rna_integration.html" rel="next">
+<link href="../notebooks/03-chip_rna_visualization.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-5630e6732664d48c7cde3b526013eeb9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../notebooks/04-genomic_overlap_matrices.html">III. Multi-Omics Integration</a></li><li class="breadcrumb-item"><a href="../notebooks/04-genomic_overlap_matrices.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Overlapping all the datasets</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Biology-Informed Multi-Omics Integration</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">index.html</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">I. Theoretical Reference &amp; Notes</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/epigenetic_analysis_reference_guide.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Epigenetic Analysis Reference Guide</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/normalization_models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Normalization models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/enrichment_analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Functional Enrichment Analysis: Multi-Omics Integration</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">II. Data Structures &amp; Visualization</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/01-omics_data_structures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Datasets, <code>SummarizedExperiment</code>, and <code>GRanges</code></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/02-atac_heatmaps.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Enriched Heatmaps and identification of regions with different activities</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/03-chip_rna_visualization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">ChIP and RNA sequencing data plots</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">III. Multi-Omics Integration</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/04-genomic_overlap_matrices.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Overlapping all the datasets</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/05-atac_rna_integration.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Integrating ATAC and RNA sequencing data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/06-multiomics_integration.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Integrating ATAC, ChIP, and RNA sequencing data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/07-functional_enrichment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Functional enrichment of genomic regions</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">8.1</span> Learning objectives</a></li>
+  <li><a href="#initial-setup-and-data-loading" id="toc-initial-setup-and-data-loading" class="nav-link" data-scroll-target="#initial-setup-and-data-loading"><span class="header-section-number">8.2</span> Initial setup and data loading</a>
+  <ul class="collapse">
+  <li><a href="#loading-required-libraries" id="toc-loading-required-libraries" class="nav-link" data-scroll-target="#loading-required-libraries"><span class="header-section-number">8.2.1</span> Loading required libraries</a></li>
+  <li><a href="#loading-the-summarizedexperiment-objects" id="toc-loading-the-summarizedexperiment-objects" class="nav-link" data-scroll-target="#loading-the-summarizedexperiment-objects"><span class="header-section-number">8.2.2</span> Loading the SummarizedExperiment objects</a></li>
+  <li><a href="#defining-a-custom-function-for-multi-omics-integration" id="toc-defining-a-custom-function-for-multi-omics-integration" class="nav-link" data-scroll-target="#defining-a-custom-function-for-multi-omics-integration"><span class="header-section-number">8.2.3</span> Defining a custom function for multi-omics integration</a></li>
+  </ul></li>
+  <li><a href="#constructing-the-multi-omics-overlap-matrix" id="toc-constructing-the-multi-omics-overlap-matrix" class="nav-link" data-scroll-target="#constructing-the-multi-omics-overlap-matrix"><span class="header-section-number">8.3</span> Constructing the multi-omics Overlap Matrix</a>
+  <ul class="collapse">
+  <li><a href="#processing-and-merging-datasets" id="toc-processing-and-merging-datasets" class="nav-link" data-scroll-target="#processing-and-merging-datasets"><span class="header-section-number">8.3.1</span> Processing and merging datasets</a></li>
+  <li><a href="#finalizing-and-saving-the-integrated-object" id="toc-finalizing-and-saving-the-integrated-object" class="nav-link" data-scroll-target="#finalizing-and-saving-the-integrated-object"><span class="header-section-number">8.3.2</span> Finalizing and saving the integrated object</a></li>
+  <li><a href="#inspecting-the-integrated-object" id="toc-inspecting-the-integrated-object" class="nav-link" data-scroll-target="#inspecting-the-integrated-object"><span class="header-section-number">8.3.3</span> Inspecting the integrated object</a></li>
+  <li><a href="#processing-atac-and-chip-seq-continuous-signals" id="toc-processing-atac-and-chip-seq-continuous-signals" class="nav-link" data-scroll-target="#processing-atac-and-chip-seq-continuous-signals"><span class="header-section-number">8.3.4</span> Processing ATAC and ChIP-seq continuous signals</a></li>
+  <li><a href="#verifying-our-datasets-peak-widths" id="toc-verifying-our-datasets-peak-widths" class="nav-link" data-scroll-target="#verifying-our-datasets-peak-widths"><span class="header-section-number">8.3.5</span> Verifying our dataset’s peak widths</a></li>
+  <li><a href="#unifying-the-coordinate-system-centering-on-atac" id="toc-unifying-the-coordinate-system-centering-on-atac" class="nav-link" data-scroll-target="#unifying-the-coordinate-system-centering-on-atac"><span class="header-section-number">8.3.6</span> Unifying the coordinate system (centering on ATAC)</a></li>
+  <li><a href="#extracting-and-normalizing-bigwig-signals" id="toc-extracting-and-normalizing-bigwig-signals" class="nav-link" data-scroll-target="#extracting-and-normalizing-bigwig-signals"><span class="header-section-number">8.3.7</span> Extracting and normalizing bigWig signals</a></li>
+  </ul></li>
+  <li><a href="#processing-rna-seq-discrete-signals" id="toc-processing-rna-seq-discrete-signals" class="nav-link" data-scroll-target="#processing-rna-seq-discrete-signals"><span class="header-section-number">8.4</span> Processing RNA-seq discrete signals</a></li>
+  <li><a href="#processing-wgbs-dna-methylation-signals" id="toc-processing-wgbs-dna-methylation-signals" class="nav-link" data-scroll-target="#processing-wgbs-dna-methylation-signals"><span class="header-section-number">8.5</span> Processing WGBS (DNA Methylation) signals</a>
+  <ul class="collapse">
+  <li><a href="#reading-the-wgbs-coverage-files" id="toc-reading-the-wgbs-coverage-files" class="nav-link" data-scroll-target="#reading-the-wgbs-coverage-files"><span class="header-section-number">8.5.1</span> Reading the WGBS coverage files</a></li>
+  <li><a href="#handling-high-resolution-wgbs-data" id="toc-handling-high-resolution-wgbs-data" class="nav-link" data-scroll-target="#handling-high-resolution-wgbs-data"><span class="header-section-number">8.5.2</span> Handling high-resolution WGBS data</a></li>
+  <li><a href="#question-1" id="toc-question-1" class="nav-link" data-scroll-target="#question-1"><span class="header-section-number">8.5.3</span> Question 1</a></li>
+  <li><a href="#biological-interpretation-of-dna-methylation" id="toc-biological-interpretation-of-dna-methylation" class="nav-link" data-scroll-target="#biological-interpretation-of-dna-methylation"><span class="header-section-number">8.5.4</span> Biological interpretation of DNA methylation</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../notebooks/04-genomic_overlap_matrices.html">III. Multi-Omics Integration</a></li><li class="breadcrumb-item"><a href="../notebooks/04-genomic_overlap_matrices.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Overlapping all the datasets</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Overlapping all the datasets</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>The core challenge of multi-omics integration is linking datasets that operate on completely different coordinate systems. For example, we might want to link the statistical fold-change of a gene (from RNA-seq) to the physical location of an open chromatin enhancer (from ATAC-seq).</p>
+<section id="learning-objectives" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">8.1</span> Learning objectives</h2>
+<ul>
+<li>Load and explore genomic data using Bioconductor classes such as <code>GRangesList</code> and <code>RangedSummarizedExperiment</code>.</li>
+<li>Subset and filter genomic features based on annotation or genomic coordinates.</li>
+<li>Perform basic overlap and distance-based queries between genomic intervals.</li>
+<li>Integrate multi-assay data (e.g., chromatin marks and gene expression) using shared genomic coordinates.</li>
+</ul>
+</section>
+<section id="initial-setup-and-data-loading" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="initial-setup-and-data-loading"><span class="header-section-number">8.2</span> Initial setup and data loading</h2>
+<p>Before we begin calculating the genomic overlaps, we need to set up our environment by loading the necessary R packages, importing our processed data, and defining a custom helper function.</p>
+<section id="loading-required-libraries" class="level3" data-number="8.2.1">
+<h3 data-number="8.2.1" class="anchored" data-anchor-id="loading-required-libraries"><span class="header-section-number">8.2.1</span> Loading required libraries</h3>
+<div id="cell-3" class="cell" data-message="false" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="1">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">suppressWarnings</span>({</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Core/utility packages</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(parallel)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(R.utils)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Bioconductor</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(SummarizedExperiment)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(rtracklayer)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(gUtils)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Plotting/visualization</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(ComplexHeatmap)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(EnrichedHeatmap)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(circlize)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Data wrangling/Tidyverse</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># (MASKING! Laod last so its verbs never get overwritten)</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(data.table)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(dplyr)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(tibble)</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>}))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section>
+<section id="loading-the-summarizedexperiment-objects" class="level3" data-number="8.2.2">
+<h3 data-number="8.2.2" class="anchored" data-anchor-id="loading-the-summarizedexperiment-objects"><span class="header-section-number">8.2.2</span> Loading the SummarizedExperiment objects</h3>
+<div id="cell-5" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="2">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>atac <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/atac_se.rds"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>rna <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/rna_se.rds"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>h3k4me3 <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/h3k4me3_se.rds"</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>h3k4me1 <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/h3k4me1_se.rds"</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>h3k27me3 <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/h3k27me3_se.rds"</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>h3k27ac <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/h3k27ac_se.rds"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section>
+<section id="defining-a-custom-function-for-multi-omics-integration" class="level3" data-number="8.2.3">
+<h3 data-number="8.2.3" class="anchored" data-anchor-id="defining-a-custom-function-for-multi-omics-integration"><span class="header-section-number">8.2.3</span> Defining a custom function for multi-omics integration</h3>
+<p>Unfortunately, standard Bioconductor packages do not have a simple, built-in “left-join” function for genomic coordinates. To solve this, we define a custom helper function called <code>metaGR()</code>.</p>
+<p>This function takes a primary, target set of genomic regions (<code>gr1</code>) and looks for any physical overlaps with a secondary set of regions (<code>gr2</code>). Wherever a physical overlap occurs, it extracts the statistical metadata columns (like <code>logFC</code> or <code>q-value</code>) from <code>gr2</code> and seamlessly attaches them as new columns to the overlapping region in <code>gr1</code>. If a region in <code>gr1</code> doesn’t overlap with anything, it safely fills those new columns with <code>NA</code>.</p>
+<blockquote class="blockquote">
+<p><strong>Why a minimum overlap of 10?</strong> By default, the R overlap engine registers a “hit” even if two genomic features only touch by a single base pair. Because sequencing data always has a tiny bit of mapping noise at the very edges of peaks, 1-bp or 2-bp overlaps are often accidental false positives. Setting the default minimum overlap to <code>10</code> base pairs (which is roughly one full turn of the DNA double helix) ensures that the physical overlap is robust and represents a genuine biological co-localization!</p>
+</blockquote>
+<div id="cell-7" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="3">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Merges metadata from gr2 onto gr1 based on genomic overlaps</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>metaGR <span class="ot">&lt;-</span> <span class="cf">function</span>(gr1, gr2, <span class="at">minOverlap =</span> <span class="dv">10</span>) {</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 1. Save the original metadata from our primary target object (gr1)</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  original_mcols <span class="ot">&lt;-</span> <span class="fu">mcols</span>(gr1)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 2. Find where the two genomic objects physically overlap</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># gr1 is the "query", gr2 is the "subject"</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  hits <span class="ot">&lt;-</span> <span class="fu">findOverlaps</span>(</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">query =</span> gr1,</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">subject =</span> gr2,</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">minoverlap =</span> minOverlap)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Extract the row indices of the overlapping regions</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  idx_gr1 <span class="ot">&lt;-</span> <span class="fu">queryHits</span>(hits)    <span class="co"># Which regions in gr1 had a match?</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  idx_gr2 <span class="ot">&lt;-</span> <span class="fu">subjectHits</span>(hits)  <span class="co"># Which regions in gr2 did they match with?</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 3. Create a blank metadata table to hold the incoming gr2 data</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># It must be the exact same length as gr1, filled with NAs (for non-overlaps)</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>  new_mcols <span class="ot">&lt;-</span> <span class="fu">DataFrame</span>(</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">nrow =</span> <span class="fu">length</span>(gr1), <span class="at">ncol =</span> <span class="fu">ncol</span>(<span class="fu">mcols</span>(gr2))))</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(new_mcols) <span class="ot">&lt;-</span> <span class="fu">colnames</span>(<span class="fu">mcols</span>(gr2))</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 4. Inject the gr2 metadata exactly into the rows where an overlap occurred</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>  new_mcols[idx_gr1, ] <span class="ot">&lt;-</span> <span class="fu">mcols</span>(gr2)[idx_gr2, , drop <span class="ot">=</span> <span class="cn">FALSE</span>]</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 5. Bind the original gr1 metadata and the newly acquired gr2 metadata together</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mcols</span>(gr1) <span class="ot">&lt;-</span> <span class="fu">cbind</span>(original_mcols, new_mcols)</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Return the fully annotated primary object</span></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(gr1)</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section>
+</section>
+<section id="constructing-the-multi-omics-overlap-matrix" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="constructing-the-multi-omics-overlap-matrix"><span class="header-section-number">8.3</span> Constructing the multi-omics Overlap Matrix</h2>
+<p>We will systematically extract the genomic coordinates (<code>rowRanges</code>) from our ATAC, RNA, and ChIP-seq objects. Rather than trying to overlap the entire genome, we will apply a strict statistical filter to each dataset to isolate only the most highly significant, dynamic features (specifically requiring an <strong>absolute</strong> <code>logFC &gt;= 0.5</code> and a <code>qvalue &lt;= 0.1</code>). Furthermore, since this training course focuses strictly on Chromosomes 1 and 2, we will proactively filter our datasets by <code>seqnames</code> at this early stage to drastically reduce memory usage and computation time.</p>
+<p>To prevent confusing naming collisions when we stitch these datasets together (since they all contain columns identically named “logFC” and “qvalue”), we will prepend a unique identifier prefix (like <code>ATAC_</code> or <code>RNA_</code>) to the metadata of each object. Finally, we will use our <code>metaGR()</code> function to project all of these significant RNA and ChIP-seq features directly onto our foundational ATAC-seq peaks, creating a single, unified Overlap Matrix.</p>
+<section id="processing-and-merging-datasets" class="level3" data-number="8.3.1">
+<h3 data-number="8.3.1" class="anchored" data-anchor-id="processing-and-merging-datasets"><span class="header-section-number">8.3.1</span> Processing and merging datasets</h3>
+<p>The values selected for the filtering is a very common <strong>baseline heuristic</strong>, but it is not a hard law. A <code>qvalue &lt;= 0.1</code> means we are accepting a 10% False Discovery Rate (FDR); and <code>abs(logFC) &gt;= 0.5</code> translates to a fold-change of ~1.41×. In RNA-seq, people often use a stricter <code>logFC &gt;= 1</code> (a true doubling of expression) and <code>q &lt;= 0.05</code>. However, epigenetic marks (like ChIP-seq) are often much “noisier” and have lower dynamic ranges than RNA. Because a massive 2-fold change in a histone mark is rare, relaxing the threshold to <code>0.5</code> is standard practice to avoid throwing away real biology.</p>
+<div id="cell-10" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="4">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract rowRanges and filter peaks with strong signal in chr1 and chr2</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>rd_atac <span class="ot">&lt;-</span> <span class="fu">rowRanges</span>(atac)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>rd_atac_filtered <span class="ot">&lt;-</span> <span class="fu">subset</span>(</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  rd_atac, </span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">abs</span>(logFC) <span class="sc">&gt;=</span> .<span class="dv">5</span> <span class="sc">&amp;</span> </span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  qvalue <span class="sc">&lt;=</span> .<span class="dv">1</span> <span class="sc">&amp;</span> </span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  seqnames <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"chr1"</span>, <span class="st">"chr2"</span>))</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(<span class="fu">elementMetadata</span>(rd_atac_filtered)) <span class="ot">&lt;-</span> <span class="fu">paste</span>(</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">"ATAC"</span>, <span class="fu">colnames</span>(<span class="fu">elementMetadata</span>(rd_atac_filtered)), <span class="at">sep =</span> <span class="st">"_"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div id="cell-11" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="5">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seqlevels</span>(rd_atac_filtered)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class="list-inline"><li>'chr1'</li><li>'chr2'</li><li>'chr3'</li><li>'chr4'</li><li>'chr5'</li><li>'chr6'</li><li>'chr7'</li><li>'chr8'</li><li>'chr9'</li><li>'chr10'</li><li>'chr11'</li><li>'chr12'</li><li>'chr13'</li><li>'chr14'</li><li>'chr15'</li><li>'chr16'</li><li>'chr17'</li><li>'chr18'</li><li>'chr19'</li><li>'chrX'</li><li>'chrY'</li></ol>
+</div>
+</div>
+<p><em>Note: in Bioconductor, the chromosomes (<code>seqnames</code>) are stored internally as an R <code>factor</code>. When we subset an object in R to remove data (like removing “chr3”, “chr4”, etc.), R successfully deletes the physical data, but it <strong>never automatically drops the factor levels</strong>! The object intentionally retains a “memory” of the original chromosome list (the seqinfo metadata), even though the actual count for those chromosomes is now exactly zero. To force the <code>GRanges</code> object to forget the empty chromosomes, we just need to tell it to explicitly drop the unused levels.</em></p>
+<div id="cell-13" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="6">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seqlevelsInUse</span>(rd_atac_filtered)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class="list-inline"><li>'chr1'</li><li>'chr2'</li></ol>
+</div>
+</div>
+<div id="cell-14" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="7">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter differentially expressed genes from chr1 and chr2</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>rd_rna <span class="ot">&lt;-</span> <span class="fu">rowRanges</span>(rna)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>rd_rna_filtered <span class="ot">&lt;-</span> <span class="fu">subset</span>(</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  rd_rna, </span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">abs</span>(logFC) <span class="sc">&gt;=</span> .<span class="dv">5</span> <span class="sc">&amp;</span> qvalue <span class="sc">&lt;=</span> .<span class="dv">1</span> <span class="sc">&amp;</span> seqnames <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"chr1"</span>, <span class="st">"chr2"</span>))</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(<span class="fu">elementMetadata</span>(rd_rna_filtered)) <span class="ot">&lt;-</span> <span class="fu">paste</span>(</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"RNA"</span>, <span class="fu">colnames</span>(<span class="fu">elementMetadata</span>(rd_rna_filtered)), <span class="at">sep =</span> <span class="st">"_"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>In a real-world scenario, the optimal <code>logFC</code> and <code>qvalue</code> thresholds are chosen based on the specific biological question, often by first visualizing the overall data distribution using a <strong>Volcano Plot</strong>. If we are designing an expensive downstream lab experiment (such as a CRISPR knockout screen), we would typically apply strict thresholds (e.g., <code>logFC &gt;= 1</code> and <code>qvalue &lt;= 0.01</code>) to isolate only the most undeniable, bulletproof targets. Conversely, a more permissive approach (such as dropping the <code>logFC</code> filter entirely and relying only on <code>qvalue &lt;= 0.05</code>) is better suited for detecting subtle, systemic shifts. For instance, a transcription factor might only boost its target genes by 20% (<code>logFC = 0.26</code>), but if it does so consistently across a massive network of genes, that subtle shift remains highly biologically significant.</p>
+<div id="cell-16" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="8">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize master object: project RNA data onto ATAC peaks</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>overlap <span class="ot">&lt;-</span> <span class="fu">metaGR</span>(<span class="at">gr1 =</span> rd_atac_filtered, <span class="at">gr2 =</span> rd_rna_filtered)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>When we run <code>metaGR()</code> for the very first time, we are officially initializing our master multi-omics object. We use the filtered ATAC-seq peaks (<code>rd_atac_filtered</code>) as our foundational genomic coordinates (<code>gr1</code>), and project the significant RNA-seq data onto them. Once this master <code>overlap</code> object is created, we simply feed it back into the function as the new <code>gr1</code> target to keep stacking the rest of the histone marks onto it.</p>
+<div id="cell-18" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="9">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter differentially enriched H3K4me3 peaks in chr1 and chr2</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>rd_h3k4me3 <span class="ot">&lt;-</span> <span class="fu">rowRanges</span>(h3k4me3)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>rd_h3k4me3_filtered <span class="ot">&lt;-</span> <span class="fu">subset</span>(</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  rd_h3k4me3, </span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">abs</span>(logFC) <span class="sc">&gt;=</span> .<span class="dv">5</span> <span class="sc">&amp;</span> qvalue <span class="sc">&lt;=</span> .<span class="dv">1</span> <span class="sc">&amp;</span> seqnames <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"chr1"</span>, <span class="st">"chr2"</span>))</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(<span class="fu">elementMetadata</span>(rd_h3k4me3_filtered)) <span class="ot">&lt;-</span> <span class="fu">paste</span>(</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"H3K4me3"</span>, <span class="fu">colnames</span>(<span class="fu">elementMetadata</span>(rd_h3k4me3_filtered)), <span class="at">sep =</span> <span class="st">"_"</span>)</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>overlap <span class="ot">&lt;-</span> <span class="fu">metaGR</span>(<span class="at">gr1 =</span> overlap, <span class="at">gr2 =</span> rd_h3k4me3_filtered)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Because we filtered the datasets <em>before</em> we fed them into <code>metaGR()</code>, <code>metaGR()</code> is completely blind to any genes or histone marks that failed the significance test. If an ATAC-seq peak physically overlaps with a gene, but that gene didn’t change enough to pass our filter, <code>metaGR()</code> simply injects <code>NA</code> into the ATAC peak’s metadata for that RNA or histone modification column. It means any row in our final Overlap Matrix that actually has numbers in it represents a <em>statistically significant, dynamic biological event</em>. If it’s just background noise, it’s safely masked as <code>NA</code>.</p>
+<div id="cell-20" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="10">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter differentially enriched H3K4me1 peaks in chr1 and chr2</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>rd_h3k4me1 <span class="ot">&lt;-</span> <span class="fu">rowRanges</span>(h3k4me1)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>rd_h3k4me1_filtered <span class="ot">&lt;-</span> <span class="fu">subset</span>(</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  rd_h3k4me1, </span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">abs</span>(logFC) <span class="sc">&gt;=</span> .<span class="dv">5</span> <span class="sc">&amp;</span> qvalue <span class="sc">&lt;=</span> .<span class="dv">1</span> <span class="sc">&amp;</span> seqnames <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"chr1"</span>, <span class="st">"chr2"</span>))</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(<span class="fu">elementMetadata</span>(rd_h3k4me1_filtered)) <span class="ot">&lt;-</span> <span class="fu">paste</span>(</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"H3K4me1"</span>, <span class="fu">colnames</span>(<span class="fu">elementMetadata</span>(rd_h3k4me1_filtered)), <span class="at">sep =</span> <span class="st">"_"</span>)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>overlap <span class="ot">&lt;-</span> <span class="fu">metaGR</span>(<span class="at">gr1 =</span> overlap, <span class="at">gr2 =</span> rd_h3k4me1_filtered)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning message in .merge_two_Seqinfo_objects(x, y):
+"Each of the 2 combined objects has sequence levels not in the other:
+  - in 'x': chrY
+  - in 'y': chr4_GL456216_random, chr4_JH584295_random, chrX_GL456233_random, chrUn_JH584304
+  Make sure to always combine/compare objects based on the same reference
+  genome (use suppressWarnings() to suppress this warning)."</code></pre>
+</div>
+</div>
+<div id="cell-21" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="11">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter differentially enriched H3K27me3 peaks in chr 1 and chr2</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>rd_h3k27me3 <span class="ot">&lt;-</span> <span class="fu">rowRanges</span>(h3k27me3)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>rd_h3k27me3_filtered <span class="ot">&lt;-</span> <span class="fu">subset</span>(</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  rd_h3k27me3, </span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">abs</span>(logFC) <span class="sc">&gt;=</span> .<span class="dv">5</span> <span class="sc">&amp;</span> qvalue <span class="sc">&lt;=</span> .<span class="dv">1</span> <span class="sc">&amp;</span> seqnames <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"chr1"</span>, <span class="st">"chr2"</span>))</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(<span class="fu">elementMetadata</span>(rd_h3k27me3_filtered)) <span class="ot">&lt;-</span> <span class="fu">paste</span>(</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"H3K27me3"</span>, <span class="fu">colnames</span>(<span class="fu">elementMetadata</span>(rd_h3k27me3_filtered)), <span class="at">sep =</span> <span class="st">"_"</span>)</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>overlap <span class="ot">&lt;-</span> <span class="fu">metaGR</span>(<span class="at">gr1 =</span> overlap, <span class="at">gr2 =</span> rd_h3k27me3_filtered)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div id="cell-22" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="12">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter differentially enriched H3K27ac peaks in chr1 and chr2</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>rd_h3k27ac <span class="ot">&lt;-</span> <span class="fu">rowRanges</span>(h3k27ac)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>rd_h3k27ac_filtered <span class="ot">&lt;-</span> <span class="fu">subset</span>(</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  rd_h3k27ac, </span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">abs</span>(logFC) <span class="sc">&gt;=</span> .<span class="dv">5</span> <span class="sc">&amp;</span> qvalue <span class="sc">&lt;=</span> .<span class="dv">1</span> <span class="sc">&amp;</span> seqnames <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"chr1"</span>, <span class="st">"chr2"</span>))</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(<span class="fu">elementMetadata</span>(rd_h3k27ac_filtered)) <span class="ot">&lt;-</span> <span class="fu">paste</span>(</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"H3K27ac"</span>, <span class="fu">colnames</span>(<span class="fu">elementMetadata</span>(rd_h3k27ac_filtered)), <span class="at">sep =</span> <span class="st">"_"</span>)</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>overlap <span class="ot">&lt;-</span> <span class="fu">metaGR</span>(<span class="at">gr1 =</span> overlap, <span class="at">gr2 =</span> rd_h3k27ac_filtered)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section>
+<section id="finalizing-and-saving-the-integrated-object" class="level3" data-number="8.3.2">
+<h3 data-number="8.3.2" class="anchored" data-anchor-id="finalizing-and-saving-the-integrated-object"><span class="header-section-number">8.3.2</span> Finalizing and saving the integrated object</h3>
+<p>Now that all of our multi-omics metadata is stitched together onto our foundational ATAC-seq peaks, we assign a unique ID (<code>name</code>) to every peak. This ensures we can easily track specific genomic regions during downstream analysis. Finally, we save the completed <code>GRanges</code> object to disk so it can be instantly loaded in future notebooks.</p>
+<div id="cell-24" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="13">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a unique name field to the metadata and GRanges names</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>overlap<span class="sc">$</span>name <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"peak"</span>, <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(overlap), <span class="at">sep =</span> <span class="st">"_"</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(overlap) <span class="ot">&lt;-</span> overlap<span class="sc">$</span>name</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Create an output directory (if it doesn't exist) and save the object</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="fu">dir.create</span>(<span class="st">"output"</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(<span class="at">object =</span> overlap, <span class="at">file =</span> <span class="st">"output/overlap_data.rds"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section>
+<section id="inspecting-the-integrated-object" class="level3" data-number="8.3.3">
+<h3 data-number="8.3.3" class="anchored" data-anchor-id="inspecting-the-integrated-object"><span class="header-section-number">8.3.3</span> Inspecting the integrated object</h3>
+<p>Before we move on, let’s verify that our multi-omics integration was successful. Our <code>overlap</code> object is still fundamentally an ATAC-seq <code>GRanges</code> object (meaning its physical coordinates represent open chromatin peaks), but its metadata now contains the statistical results from every other dataset we processed.</p>
+<p><em>Note: Keep in mind that <code>overlap</code> is now a pure <code>GRanges</code> object, not a <code>SummarizedExperiment</code> (SE) container. Because of this, SE-specific functions like <code>rowRanges()</code> and <code>colData()</code> will no longer work. Instead, we must use standard <code>GRanges</code> functions to interact with the object, such as <code>length()</code> (to count the peaks), <code>mcols()</code> (to access the metadata), and <code>genome()</code>.</em></p>
+<div id="cell-26" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="14">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Verify all the multi-omics metadata columns are present</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">colnames</span>(<span class="fu">mcols</span>(overlap)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>  [1] "ATAC_annotation"        "ATAC_geneChr"           "ATAC_geneStart"        
+  [4] "ATAC_geneEnd"           "ATAC_geneLength"        "ATAC_geneStrand"       
+  [7] "ATAC_geneId"            "ATAC_transcriptId"      "ATAC_distanceToTSS"    
+ [10] "ATAC_ENSEMBL"           "ATAC_SYMBOL"            "ATAC_GENENAME"         
+ [13] "ATAC_anno"              "ATAC_logFC"             "ATAC_logCPM"           
+ [16] "ATAC_F"                 "ATAC_PValue"            "ATAC_qvalue"           
+ [19] "RNA_Row.names"          "RNA_gene_id"            "RNA_SYMBOL"            
+ [22] "RNA_GENENAME"           "RNA_ENSEMBL"            "RNA_geneLength"        
+ [25] "RNA_geneChr"            "RNA_geneStart"          "RNA_geneEnd"           
+ [28] "RNA_geneStrand"         "RNA_geneId"             "RNA_transcriptId"      
+ [31] "RNA_anno"               "RNA_logFC"              "RNA_logCPM"            
+ [34] "RNA_F"                  "RNA_PValue"             "RNA_qvalue"            
+ [37] "H3K4me3_annotation"     "H3K4me3_geneChr"        "H3K4me3_geneStart"     
+ [40] "H3K4me3_geneEnd"        "H3K4me3_geneLength"     "H3K4me3_geneStrand"    
+ [43] "H3K4me3_geneId"         "H3K4me3_transcriptId"   "H3K4me3_distanceToTSS" 
+ [46] "H3K4me3_ENSEMBL"        "H3K4me3_SYMBOL"         "H3K4me3_GENENAME"      
+ [49] "H3K4me3_anno"           "H3K4me3_logFC"          "H3K4me3_logCPM"        
+ [52] "H3K4me3_F"              "H3K4me3_PValue"         "H3K4me3_qvalue"        
+ [55] "H3K4me1_annotation"     "H3K4me1_geneChr"        "H3K4me1_geneStart"     
+ [58] "H3K4me1_geneEnd"        "H3K4me1_geneLength"     "H3K4me1_geneStrand"    
+ [61] "H3K4me1_geneId"         "H3K4me1_transcriptId"   "H3K4me1_distanceToTSS" 
+ [64] "H3K4me1_ENSEMBL"        "H3K4me1_SYMBOL"         "H3K4me1_GENENAME"      
+ [67] "H3K4me1_anno"           "H3K4me1_logFC"          "H3K4me1_logCPM"        
+ [70] "H3K4me1_F"              "H3K4me1_PValue"         "H3K4me1_qvalue"        
+ [73] "H3K27me3_annotation"    "H3K27me3_geneChr"       "H3K27me3_geneStart"    
+ [76] "H3K27me3_geneEnd"       "H3K27me3_geneLength"    "H3K27me3_geneStrand"   
+ [79] "H3K27me3_geneId"        "H3K27me3_transcriptId"  "H3K27me3_distanceToTSS"
+ [82] "H3K27me3_ENSEMBL"       "H3K27me3_SYMBOL"        "H3K27me3_GENENAME"     
+ [85] "H3K27me3_anno"          "H3K27me3_logFC"         "H3K27me3_logCPM"       
+ [88] "H3K27me3_F"             "H3K27me3_PValue"        "H3K27me3_qvalue"       
+ [91] "H3K27ac_annotation"     "H3K27ac_geneChr"        "H3K27ac_geneStart"     
+ [94] "H3K27ac_geneEnd"        "H3K27ac_geneLength"     "H3K27ac_geneStrand"    
+ [97] "H3K27ac_geneId"         "H3K27ac_transcriptId"   "H3K27ac_distanceToTSS" 
+[100] "H3K27ac_ENSEMBL"        "H3K27ac_SYMBOL"         "H3K27ac_GENENAME"      
+[103] "H3K27ac_anno"           "H3K27ac_logFC"          "H3K27ac_logCPM"        
+[106] "H3K27ac_F"              "H3K27ac_PValue"         "H3K27ac_qvalue"        
+[109] "name"                  </code></pre>
+</div>
+</div>
+<div id="cell-27" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="15">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Chromosomes included in the overlap matrix</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">seqlevelsInUse</span>(overlap))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "chr1" "chr2"</code></pre>
+</div>
+</div>
+</section>
+<section id="processing-atac-and-chip-seq-continuous-signals" class="level3" data-number="8.3.4">
+<h3 data-number="8.3.4" class="anchored" data-anchor-id="processing-atac-and-chip-seq-continuous-signals"><span class="header-section-number">8.3.4</span> Processing ATAC and ChIP-seq continuous signals</h3>
+<p>To visualize the continuous signal of our epigenetic marks (using <code>.bw</code> files), we first need to decide how wide of a genomic window we want to look at. Because different histone modifications have entirely different biological footprints (some are sharp, some are massive and sprawling), the <a href="https://www.encodeproject.org/chip-seq/transcription_factor/">ENCODE Project Consortium</a> and the current literature provide standard recommendations:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 25%">
+<col style="width: 58%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Assays</th>
+<th>Typical Window Size</th>
+<th>Reason / Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>ATAC-seq</strong></td>
+<td>±1 kb</td>
+<td>Narrow peaks, accessibility centered on summit</td>
+</tr>
+<tr class="even">
+<td><strong>H3K4me3</strong></td>
+<td>±1 kb to ±2 kb</td>
+<td>Promoter mark, sharp and narrow peaks</td>
+</tr>
+<tr class="odd">
+<td><strong>H3K4me1</strong></td>
+<td>±2 kb to ±5 kb</td>
+<td>Enhancer-associated, moderately broad</td>
+</tr>
+<tr class="even">
+<td><strong>H3K27me3</strong></td>
+<td>±5 kb to ±10 kb</td>
+<td>Broad repressive domains</td>
+</tr>
+<tr class="odd">
+<td><strong>H3K27ac</strong></td>
+<td>±2 kb to ±5 kb</td>
+<td>Active enhancers/promoters, broader peaks</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="verifying-our-datasets-peak-widths" class="level3" data-number="8.3.5">
+<h3 data-number="8.3.5" class="anchored" data-anchor-id="verifying-our-datasets-peak-widths"><span class="header-section-number">8.3.5</span> Verifying our dataset’s peak widths</h3>
+<p>Let’s now check the actual physical widths of the significant peaks we just filtered. Remind that we already did some preliminary visual exploration of this in the <a href="../notebooks/03-chip_rna_visualization.html">previous notebook</a>, where we plotted width histograms for all four histone marks.</p>
+<p>Here, we will leverage R’s built-in <code>summary()</code> function to efficiently calculate the complete statistical profile of our peak widths (Min, 1st Quartile, Median, Mean, 3rd Quartile, and Max) in a single, clean table. This allows us to quantitatively verify that our data follows the expected biological behavior (e.g., proving that our H3K27me3 peaks are physically much broader than our sharp ATAC peaks).</p>
+<div id="cell-30" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="16">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Bundle the filtered objects into a named list (same as before)</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>gr_list <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"ATAC-seq"</span> <span class="ot">=</span> rd_atac_filtered,</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"H3K4me3"</span>  <span class="ot">=</span> rd_h3k4me3_filtered,</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"H3K4me1"</span>  <span class="ot">=</span> rd_h3k4me1_filtered,</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"H3K27me3"</span> <span class="ot">=</span> rd_h3k27me3_filtered,</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"H3K27ac"</span>  <span class="ot">=</span> rd_h3k27ac_filtered</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Use summary() to calculate all stats, which outputs a matrix</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>stats_matrix <span class="ot">&lt;-</span> <span class="fu">sapply</span>(gr_list, <span class="cf">function</span>(gr) <span class="fu">summary</span>(<span class="fu">width</span>(gr)))</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Transpose (t) the matrix so Assays are rows, and convert to a clean tibble</span></span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>summary_table <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(<span class="fu">t</span>(stats_matrix), <span class="at">rownames =</span> <span class="st">"Assay"</span>)</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(summary_table)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<div class="ansi-escaped-output">
+<pre><span class="ansi-bright-black-fg"># A tibble: 5 × 7</span>
+
+  Assay     Min. `1st Qu.` Median  Mean `3rd Qu.`  Max.
+
+  <span style="font-style:italic" class="ansi-bright-black-fg">&lt;chr&gt;</span>    <span style="font-style:italic" class="ansi-bright-black-fg">&lt;dbl&gt;</span>     <span style="font-style:italic" class="ansi-bright-black-fg">&lt;dbl&gt;</span>  <span style="font-style:italic" class="ansi-bright-black-fg">&lt;dbl&gt;</span> <span style="font-style:italic" class="ansi-bright-black-fg">&lt;dbl&gt;</span>     <span style="font-style:italic" class="ansi-bright-black-fg">&lt;dbl&gt;</span> <span style="font-style:italic" class="ansi-bright-black-fg">&lt;dbl&gt;</span>
+
+<span class="ansi-bright-black-fg">1</span> ATAC-seq   151       640    932  956.     <span style="text-decoration:underline">1</span>236   <span style="text-decoration:underline">3</span>490
+
+<span class="ansi-bright-black-fg">2</span> H3K4me3    191       352    749 <span style="text-decoration:underline">1</span>316.     <span style="text-decoration:underline">1</span>684. <span style="text-decoration:underline">1</span><span style="text-decoration:underline">8</span>723
+
+<span class="ansi-bright-black-fg">3</span> H3K4me1    171       349    563  791.      975  <span style="text-decoration:underline">1</span><span style="text-decoration:underline">2</span>590
+
+<span class="ansi-bright-black-fg">4</span> H3K27me3   176       367    568 <span style="text-decoration:underline">1</span>170.     <span style="text-decoration:underline">1</span>108. <span style="text-decoration:underline">2</span><span style="text-decoration:underline">3</span>571
+
+<span class="ansi-bright-black-fg">5</span> H3K27ac    171       334    618  914.     <span style="text-decoration:underline">1</span>216. <span style="text-decoration:underline">2</span><span style="text-decoration:underline">2</span>276
+</pre>
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>Notice that we used <code>sapply()</code> here instead of <code>lapply()</code>.</p>
+<ul>
+<li><strong><code>lapply</code></strong> (List apply) always returns a basic <strong>list</strong>. If we used it here, we would get a clunky list containing 5 separated summary objects, which is annoying to stitch together.</li>
+<li><strong><code>sapply</code></strong> (Simplified apply) does the exact same loop, but attempts to <strong>simplify</strong> the final output. Because <code>summary()</code> returns exactly 6 numbers for every assay, <code>sapply</code> is smart enough to automatically bind them together into a ready-to-use mathematical matrix!</li>
+</ul>
+</blockquote>
+</section>
+<section id="unifying-the-coordinate-system-centering-on-atac" class="level3" data-number="8.3.6">
+<h3 data-number="8.3.6" class="anchored" data-anchor-id="unifying-the-coordinate-system-centering-on-atac"><span class="header-section-number">8.3.6</span> Unifying the coordinate system (centering on ATAC)</h3>
+<p>As seen in the summary table, our peaks have highly variable widths. Plotting them using their native sizes would result in misaligned heatmaps. To create a unified coordinate system, we will use the exact center (<code>mid</code>) of the ATAC-seq peaks as a universal anchor point, since open chromatin serves as the regulatory hub for these regions.</p>
+<p>Next, we must determine a standardized window size for our analysis. While a few outlier peaks stretch for many kilobases, the core biological signal is much tighter. The median widths for most marks sit between 500bp and 950bp, and over 75% of our peaks (the 3rd Quartile) are smaller than 1.6kb.</p>
+<p>It is important to remember a key structural detail about how we built our <code>overlap</code> object: because we used ATAC-seq as our foundational <code>gr1</code> target during the <code>metaGR()</code> joining process, the physical coordinates of the <code>overlap</code> object <strong>are</strong> the exact ATAC-seq peaks.</p>
+<div id="cell-33" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="17">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Returns ONLY the pure physical coordinates</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">granges</span>(overlap)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<pre><code>GRanges object with 1933 ranges and 0 metadata columns:
+            seqnames              ranges strand
+               &lt;Rle&gt;           &lt;IRanges&gt;  &lt;Rle&gt;
+     peak_1     chr1     3670547-3672665      *
+     peak_2     chr1     4332510-4332710      *
+     peak_3     chr1     4491755-4492573      *
+     peak_4     chr1     4571186-4572423      *
+     peak_5     chr1     4785062-4786325      *
+        ...      ...                 ...    ...
+  peak_1929     chr2 181713633-181714134      *
+  peak_1930     chr2 181714476-181715931      *
+  peak_1931     chr2 181762779-181764180      *
+  peak_1932     chr2 181764664-181764891      *
+  peak_1933     chr2 181837244-181838655      *
+  -------
+  seqinfo: 21 sequences from an unspecified genome; no seqlengths</code></pre>
+</div>
+</div>
+<p>We can thus simply apply the <code>resize()</code> function directly to our master <code>overlap</code> object, and it will instantly collapse every peak in our table down to the exact center point of the open chromatin. Moreover, each unique peak is already perfectly identified in its own row.</p>
+<div id="cell-35" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="18">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract midpoints of peaks to create windows for visualization</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="co"># mid_peaks &lt;- gr.mid(overlap)</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>mid_peaks <span class="ot">&lt;-</span> <span class="fu">resize</span>(overlap, <span class="at">width =</span> <span class="dv">1</span>, <span class="at">fix =</span> <span class="st">"center"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Because the vast majority of our dynamic biological signal fits within a 2,000 base-pair footprint, we will define our universal extraction regions (<code>heatmap_windows</code>) as a <strong>±1kb window</strong> anchored directly on the ATAC-seq <code>mid_peaks</code>. This standardizes our coordinate system and captures the relevant signal of every mark while minimizing empty background noise.</p>
+<div id="cell-37" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="19">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the actual 2000 bp windows we need for the import step</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>heatmap_windows <span class="ot">&lt;-</span> <span class="fu">resize</span>(mid_peaks, <span class="at">width =</span> <span class="dv">2000</span>, <span class="at">fix =</span> <span class="st">"center"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div id="cell-38" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="20">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">seqlevelsInUse</span>(heatmap_windows))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "chr1" "chr2"</code></pre>
+</div>
+</div>
+</section>
+<section id="extracting-and-normalizing-bigwig-signals" class="level3" data-number="8.3.7">
+<h3 data-number="8.3.7" class="anchored" data-anchor-id="extracting-and-normalizing-bigwig-signals"><span class="header-section-number">8.3.7</span> Extracting and normalizing bigWig signals</h3>
+<p>As we saw in the previous notebooks, to process the <a href="../notebooks/02-atac_heatmaps.html">ATAC</a> and <a href="../notebooks/03-chip_rna_visualization.html">ChIP-seq</a> <code>.bw</code> files efficiently, we use a clean <code>lapply()</code> loop for each dataset package. Within these loops, we use <code>rtracklayer::import()</code> and pass our specific 2kb windows to the <code>which</code> argument. This forces R to dynamically read the continuous signal coverage <strong>only</strong> within our exact targeted regions directly from the hard drive, saving RAM and computation time.</p>
+<p>Once the targeted signal is read, the exact same loop immediately feeds it into <code>normalizeToMatrix()</code>, outputting clean lists of normalized matrices that we save as <code>.rds</code> files for downstream visualization.</p>
+<div id="cell-40" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="21">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># -- Process ATAC ---</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co"># (See notebook 02-atac_heatmaps.ipynb for all the details)</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>atac_files <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="st">"data"</span>, <span class="at">pattern =</span> <span class="st">"ATAC"</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(atac_files) <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="at">pattern =</span> <span class="st">"</span><span class="sc">\\</span><span class="st">.bw"</span>, <span class="at">replacement =</span> <span class="st">""</span>, <span class="at">x =</span> <span class="fu">basename</span>(atac_files))</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>atac_bw <span class="ot">&lt;-</span> <span class="fu">lapply</span>(atac_files, <span class="cf">function</span>(x){</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>  a <span class="ot">&lt;-</span> rtracklayer<span class="sc">::</span><span class="fu">import</span>(x, <span class="at">which =</span> heatmap_windows)</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(a)})</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>mat_AS <span class="ot">&lt;-</span> <span class="fu">lapply</span>(atac_bw, <span class="at">FUN =</span> <span class="cf">function</span>(x) {</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">normalizeToMatrix</span>(</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>    x, mid_peaks, <span class="at">mean_mode =</span> <span class="st">"w0"</span>, <span class="at">extend =</span> <span class="dv">1000</span>, <span class="at">value_column =</span> <span class="st">"score"</span>,</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">include_target =</span> <span class="cn">TRUE</span>, <span class="at">w =</span> <span class="dv">20</span>, <span class="at">smooth =</span> T, <span class="at">background =</span> <span class="dv">0</span>)})</span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(mat_AS, <span class="at">file =</span> <span class="st">"output/mat_atac.rds"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning message:
+"Width of `target` are all 1, `include_target` is set to `FALSE`."
+Warning message:
+"Width of `target` are all 1, `include_target` is set to `FALSE`."</code></pre>
+</div>
+</div>
+<div id="cell-41" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="22">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># -- Process ChIP ---</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co"># (See notebook 03-chip_rna_visualization.ipynb for all the details)</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>chip_bw_files <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="st">"data"</span>, <span class="at">pattern =</span> <span class="st">"^H3K.*</span><span class="sc">\\</span><span class="st">.bw$"</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(chip_bw_files) <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">.bw$"</span>, <span class="st">""</span>, <span class="fu">basename</span>(chip_bw_files))</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>chip_matrices <span class="ot">&lt;-</span> <span class="fu">lapply</span>(chip_bw_files, <span class="cf">function</span>(file_path) {</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>  signal <span class="ot">&lt;-</span> rtracklayer<span class="sc">::</span><span class="fu">import</span>(file_path, <span class="at">which =</span> heatmap_windows)</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>  mat <span class="ot">&lt;-</span> <span class="fu">normalizeToMatrix</span>(</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>    signal,</span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">target =</span> mid_peaks,</span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">value_column =</span> <span class="st">"score"</span>,</span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">extend =</span> <span class="dv">1000</span>,</span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">w =</span> <span class="dv">20</span>,</span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">smooth =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">background =</span> <span class="dv">0</span>)</span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(mat)})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Because we grouped all 8 matrices into a single named list (<code>chip_matrices</code>), the most efficient practice is to save the entire list as a single <code>.rds</code> file. However, to ensure perfect compatibility with the downstream code of the original course (which expects individual matrix files), we can also use a quick loop to dynamically save them as separate files based on their names.</p>
+<div id="cell-43" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="23">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Best Practice: Save the entire master list as a single object</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(chip_matrices, <span class="at">file =</span> <span class="st">"output/chip_matrices.rds"</span>)</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Group matrices by histone mark and save each mark's list (11half &amp; 15half) as an individual file</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>marks <span class="ot">&lt;-</span> <span class="fu">unique</span>(<span class="fu">gsub</span>(<span class="st">"_.*"</span>, <span class="st">""</span>, <span class="fu">names</span>(chip_matrices))) <span class="co"># Extracts just "H3K4me3", "H3K27ac", etc.</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Wrapping in invisible() hides the NULLs from printing to the screen</span></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="fu">invisible</span>(<span class="fu">lapply</span>(marks, <span class="cf">function</span>(mark) {</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Subset the list to grab both timepoints for this specific mark</span></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>  mark_list <span class="ot">&lt;-</span> chip_matrices[<span class="fu">grep</span>(mark, <span class="fu">names</span>(chip_matrices))]</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Create a clean lowercase filename like: "output/mat_h3k4me3.rds"</span></span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>  file_name <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"output/mat_"</span>, <span class="fu">tolower</span>(mark), <span class="st">".rds"</span>)</span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">saveRDS</span>(mark_list, <span class="at">file =</span> file_name)</span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a>}))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section>
+</section>
+<section id="processing-rna-seq-discrete-signals" class="level2" data-number="8.4">
+<h2 data-number="8.4" class="anchored" data-anchor-id="processing-rna-seq-discrete-signals"><span class="header-section-number">8.4</span> Processing RNA-seq discrete signals</h2>
+<p>Remind that the RNA-seq data behaves a bit differently than the ATAC/ChIP bigWig files because RNA-seq data is discrete (counts mapped to a gene) rather than continuous genomic coverage. Because of this, we don’t use <code>normalizeToMatrix()</code>. Instead, we just grab the relative fold-changes, just like we did in <a href="../notebooks/03-chip_rna_visualization.html">Notebook 03</a>, and use a standard <code>merge()</code> to map those gene scores directly onto our ATAC peak names.</p>
+<p>As a reminder, rather than plotting raw expression counts, we calculate the relative fold-change by taking the <code>logCPM</code> matrix and subtracting the baseline mean of our E11.5 control samples. We will apply that exact same math here to generate those centered expression scores. Then, using a standard <code>merge()</code>, we will map those gene scores directly onto our corresponding ATAC peak names to complete our RNA-seq matrix.</p>
+<div id="cell-45" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="24">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># -- Process RNA ---</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Create an index mapping the overlapping ATAC peak names to their RNA-seq gene names</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="co"># peak_gene_map &lt;- elementMetadata(overlap)[,c("RNA_Row.names", "name")]</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>peak_gene_map <span class="ot">&lt;-</span> <span class="fu">mcols</span>(overlap)[, <span class="fu">c</span>(<span class="st">"RNA_Row.names"</span>, <span class="st">"name"</span>)]</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="co"># (See notebook 03-chip_rna_visualization.ipynb for all the details)</span></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>log_cpm <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">assay</span>(rna, <span class="st">"logCPM"</span>))</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>idx_11half <span class="ot">&lt;-</span> <span class="fu">grep</span>(<span class="st">"11half"</span>, <span class="fu">colnames</span>(log_cpm))</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>counts_fc <span class="ot">&lt;-</span> log_cpm <span class="sc">-</span> <span class="fu">rowMeans</span>(log_cpm[, idx_11half])</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Merge the gene expression fold-changes with our ATAC peak names using the map</span></span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>mat_RNA <span class="ot">&lt;-</span> <span class="fu">merge</span>(</span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>  peak_gene_map,</span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>  counts_fc,</span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">by.x =</span> <span class="st">"RNA_Row.names"</span>,</span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">by.y =</span> <span class="st">"row.names"</span>,</span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">all.x =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(mat_RNA) <span class="ot">&lt;-</span> mat_RNA<span class="sc">$</span>name</span>
+<span id="cb30-20"><a href="#cb30-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-21"><a href="#cb30-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Safely drop the text ID columns by name so the matrix is purely numeric</span></span>
+<span id="cb30-22"><a href="#cb30-22" aria-hidden="true" tabindex="-1"></a><span class="co"># mat_RNA &lt;- mat_RNA[, -c(1:2)]</span></span>
+<span id="cb30-23"><a href="#cb30-23" aria-hidden="true" tabindex="-1"></a>mat_RNA<span class="sc">$</span>RNA_Row.names <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb30-24"><a href="#cb30-24" aria-hidden="true" tabindex="-1"></a>mat_RNA<span class="sc">$</span>name <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb30-25"><a href="#cb30-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-26"><a href="#cb30-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Clean up column names by removing the file extension</span></span>
+<span id="cb30-27"><a href="#cb30-27" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(mat_RNA) <span class="ot">&lt;-</span> <span class="fu">gsub</span>(</span>
+<span id="cb30-28"><a href="#cb30-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">pattern =</span> <span class="st">"</span><span class="sc">\\</span><span class="st">.tsv</span><span class="sc">\\</span><span class="st">.gz"</span>, <span class="at">replacement =</span> <span class="st">""</span>, <span class="at">x =</span> <span class="fu">colnames</span>(mat_RNA))</span>
+<span id="cb30-29"><a href="#cb30-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-30"><a href="#cb30-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Cast back to a true numeric matrix</span></span>
+<span id="cb30-31"><a href="#cb30-31" aria-hidden="true" tabindex="-1"></a>mat_RNA <span class="ot">&lt;-</span> <span class="fu">data.matrix</span>(mat_RNA)</span>
+<span id="cb30-32"><a href="#cb30-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Strictly reorder to match the master overlap object!</span></span>
+<span id="cb30-33"><a href="#cb30-33" aria-hidden="true" tabindex="-1"></a>mat_RNA <span class="ot">&lt;-</span> mat_RNA[<span class="fu">names</span>(overlap), ]</span>
+<span id="cb30-34"><a href="#cb30-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-35"><a href="#cb30-35" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(mat_RNA, <span class="at">file =</span> <span class="st">"output/mat_rna.rds"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div id="cell-46" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="25">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the first 5 rows of the RNA matrix</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mat_RNA[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>       RNA_11half_1 RNA_11half_2 RNA_15half_1 RNA_15half_2
+peak_1  -0.05267984   0.05267984     1.173054     1.538339
+peak_2           NA           NA           NA           NA
+peak_3           NA           NA           NA           NA
+peak_4           NA           NA           NA           NA
+peak_5           NA           NA           NA           NA</code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>💡 When merging the RNA data onto our ATAC peaks, the <code>all.x = TRUE</code> argument performs a <strong>Left Join</strong>. This forces R to keep every single ATAC peak in our master list (<code>x</code>), even if it doesn’t have a matching significant RNA gene (it simply fills those empty RNA rows with <code>NA</code>). If we forgot this argument, R would default to an “Inner Join” and instantly delete all intergenic ATAC peaks from our matrix.</p>
+</blockquote>
+<p>Because we mapped the RNA data onto our ATAC peaks using <code>metaGR()</code>, and our ATAC peaks were already restricted to <code>chr1</code> and <code>chr2</code>.</p>
+</section>
+<section id="processing-wgbs-dna-methylation-signals" class="level2" data-number="8.5">
+<h2 data-number="8.5" class="anchored" data-anchor-id="processing-wgbs-dna-methylation-signals"><span class="header-section-number">8.5</span> Processing WGBS (DNA Methylation) signals</h2>
+<section id="reading-the-wgbs-coverage-files" class="level3" data-number="8.5.1">
+<h3 data-number="8.5.1" class="anchored" data-anchor-id="reading-the-wgbs-coverage-files"><span class="header-section-number">8.5.1</span> Reading the WGBS coverage files</h3>
+<p>Whole Genome Bisulfite Sequencing (WGBS) measures DNA methylation at CpG dinucleotides. Unlike our ATAC-seq and ChIP-seq data (which is stored in binary <code>.bw</code> files), WGBS data is provided as compressed text <code>.bed.gz</code> files. These files contain explicit columns for read coverage (<code>cov</code>), Methylated counts (<code>Me</code>), Unmethylated counts (<code>Un</code>), and the final methylation ratio (<code>meth</code>).</p>
+<div id="cell-49" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="26">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">dir</span>(<span class="st">"data/"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "ATAC_11half.bw"      "ATAC_15half.bw"      "atac_se.rds"        
+ [4] "H3K27ac_11half.bw"   "H3K27ac_15half.bw"   "h3k27ac_se.rds"     
+ [7] "H3K27me3_11half.bw"  "H3K27me3_15half.bw"  "h3k27me3_se.rds"    
+[10] "H3K4me1_11half.bw"   "H3K4me1_15half.bw"   "h3k4me1_se.rds"     
+[13] "H3K4me3_11half.bw"   "H3K4me3_15half.bw"   "h3k4me3_se.rds"     
+[16] "RNA_11half_1.tsv.gz" "RNA_11half_2.tsv.gz" "RNA_15half_1.tsv.gz"
+[19] "RNA_15half_2.tsv.gz" "rna_se.rds"          "WGBS_11half.bed.gz" 
+[22] "WGBS_15half.bed.gz" </code></pre>
+</div>
+</div>
+<p>Because these are text files, we will use the lightning-fast <code>data.table::fread()</code> function to read them into R, convert them into <code>GRanges</code> objects, and then feed them into <code>normalizeToMatrix()</code>.</p>
+<div id="cell-51" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="27">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Bisulfite seq coverage files after methylation call</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>bs_files <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="st">"data"</span>, <span class="at">pattern =</span> <span class="st">"WGBS"</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(bs_files) <span class="ot">&lt;-</span> <span class="fu">gsub</span>(</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">pattern =</span> <span class="st">"</span><span class="sc">\\</span><span class="st">.bed.gz"</span>, <span class="at">replacement =</span> <span class="st">""</span>, <span class="at">x =</span> <span class="fu">basename</span>(bs_files))</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Read the fast text files and convert to GRanges</span></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>bs_cov <span class="ot">&lt;-</span> <span class="fu">lapply</span>(bs_files, <span class="cf">function</span>(x) {</span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>  gr <span class="ot">&lt;-</span> <span class="fu">GRanges</span>(</span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">fread</span>(</span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">input =</span> x, </span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">sep =</span> <span class="st">" "</span>, <span class="at">quote =</span> F, <span class="at">stringsAsFactors =</span> F, <span class="at">data.table =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">nThread =</span> parallel<span class="sc">::</span><span class="fu">detectCores</span>(), <span class="at">showProgress =</span> F, </span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"seqnames"</span>, <span class="st">"start"</span>, <span class="st">"end"</span>, <span class="st">"cov"</span>, <span class="st">"Me"</span>, <span class="st">"Un"</span>, <span class="st">"meth"</span>)</span>
+<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Filter for only chr1 and chr2</span></span>
+<span id="cb35-18"><a href="#cb35-18" aria-hidden="true" tabindex="-1"></a>  gr <span class="ot">&lt;-</span> <span class="fu">subset</span>(gr, seqnames <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"chr1"</span>, <span class="st">"chr2"</span>))</span>
+<span id="cb35-19"><a href="#cb35-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-20"><a href="#cb35-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(gr)</span>
+<span id="cb35-21"><a href="#cb35-21" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section>
+<section id="handling-high-resolution-wgbs-data" class="level3" data-number="8.5.2">
+<h3 data-number="8.5.2" class="anchored" data-anchor-id="handling-high-resolution-wgbs-data"><span class="header-section-number">8.5.2</span> Handling high-resolution WGBS data</h3>
+<p>We didn’t use <code>metaGR()</code> to pull the WGBS methylation data into our master <code>overlap</code> table alongside the ATAC, ChIP, and RNA-seq data because of the specific <strong>genomic resolution</strong>.</p>
+<ul>
+<li><strong>ATAC, ChIP, and RNA</strong> are all “Region-level” data. When an ATAC peak (~1kb) overlaps a gene or a ChIP peak, it is generally a simple 1-to-1 relationship, which <code>metaGR()</code> handles perfectly.</li>
+<li><strong>WGBS data</strong> operates at <strong>Single Base-Pair Resolution</strong> (individual CpG sites).</li>
+</ul>
+<p>A single 1kb ATAC-seq peak might contain <strong>50 different CpG sites</strong>. If we used <code>metaGR()</code> to join them, the spatial join engine would blindly grab the methylation data of the very <em>first</em> CpG it touched and throw the other 49 away! This would result in completely inaccurate methylation profiling for that regulatory region.</p>
+<p>Instead of forcing single-bp statistics into our master table, we handle WGBS data entirely during the <strong>Continuous Signal</strong> extraction phase.</p>
+<p>By passing our WGBS <code>GRanges</code> objects directly into <code>normalizeToMatrix()</code>, the software properly reads all 50 CpGs inside the 2kb window and smoothly averages them across the ATAC peak, allowing us to visualize the true methylation burden correctly.</p>
+<p>Because we are measuring a methylation <em>percentage</em> instead of standard read pileups, we must change two critical arguments in <code>normalizeToMatrix()</code>: * <code>value_column = "meth"</code>: We explicitly extract the methylation ratio rather than the read coverage depth. * <code>mean_mode = "absolute"</code>: By default, the software calculates a weighted mean (<code>"w0"</code>), which weights the signal based on how physically wide the overlapping genomic regions are (e.g., broad ChIP-seq peaks). Because our WGBS data operates at the single-nucleotide level (where every CpG is exactly 1 base pair wide), weighting by width is unnecessary. We override this to <code>"absolute"</code> to tell the function to simply take the straight, arithmetic mean of the methylation scores inside each window bin. * <code>background = N</code>: In ChIP-seq, if there are no reads, the signal is <code>0</code>. But in WGBS, if there are no reads covering a CpG, we simply don’t know the methylation status! Therefore, the background <em>must</em> be <code>NA</code> (unknown). If we left it as 0, we would mathematically trick R into thinking those unsequenced regions were completely unmethylated!</p>
+<div id="cell-53" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="28">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Normalized matrices</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>mat_bs <span class="ot">&lt;-</span> <span class="fu">lapply</span>(bs_cov, <span class="at">FUN =</span> <span class="cf">function</span>(x) {</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">normalizeToMatrix</span>(</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>    x, mid_peaks,</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">value_column =</span> <span class="st">"meth"</span>, </span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_mode =</span> <span class="st">"absolute"</span>, </span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">extend =</span> <span class="dv">1000</span>, </span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># include_target = TRUE, </span></span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">smooth =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">background =</span> <span class="cn">NA</span>)})</span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(mat_bs, <span class="at">file =</span> <span class="st">"output/mat_bs.rds"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning message:
+"Smoothing is failed for one row because there are very few signals
+overlapped to it. Please use `failed_rows(mat)` to get the index of the
+failed row and consider to remove it."
+All signal values are within [0, 1], so we assume it is methylation
+signal. Automatically set limit [0, 1] to the smoothed values. If this
+is not the case, set argument `limit = NA` in the function to remove
+the limits. Set `verbose = FALSE` to turn off this message.
+
+Warning message:
+"Smoothing is failed for one row because there are very few signals
+overlapped to it. Please use `failed_rows(mat)` to get the index of the
+failed row and consider to remove it."</code></pre>
+</div>
+</div>
+<div id="cell-54" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="29">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Print a few rows and columns from the first WGBS matrix</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mat_bs<span class="sc">$</span>WGBS_11half[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">45</span><span class="sc">:</span><span class="dv">50</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>             u45       u46       u47       u48       u49       u50
+peak_1 0.0000000 0.0000000 0.0000000 0.0000000 0.0000000 0.0000000
+peak_2 0.0625000 0.0625000 0.0625000 0.0625000 0.0625000 0.0625000
+peak_3 0.1956267 0.1890559 0.1824142 0.1757514 0.1691174 0.1625621
+peak_4 0.2356774 0.2323634 0.2276826 0.2218883 0.2152339 0.2079729
+peak_5 0.2162887 0.2130513 0.2100990 0.2082533 0.2083358 0.2095957</code></pre>
+</div>
+</div>
+</section>
+<section id="question-1" class="level3" data-number="8.5.3">
+<h3 data-number="8.5.3" class="anchored" data-anchor-id="question-1"><span class="header-section-number">8.5.3</span> Question 1</h3>
+<p><strong>Make an <code>EnrichedHeatmap</code></strong> of methylation data.</p>
+<p>To create our composite <code>EnrichedHeatmap</code> for the methylation data, we can take full advantage of the highly modular code architecture we developed in earlier notebooks.</p>
+<p>First, we need to upgrade our custom plotting function (<code>make_EH_custom</code>). Because our WGBS matrices contain <code>NA</code> values (to represent unsequenced background), our original color-scaling math would instantly crash. We simply need to update the <code>quantile()</code> math inside our custom function to include <code>na.rm = TRUE</code>, allowing it to safely ignore missing data.</p>
+<p>Furthermore, we need to upgrade the function’s color-mapping capabilities. The <code>colorRamp2</code> function strictly requires the exact same number of numerical anchor points as there are colors in the provided palette. To make our custom function truly universal, i.e., it can dynamically handle a 2-color gradient, a 3-color diverging map (like blue-white-red), or even a massive 11-color continuous palette, we will use the <code>seq()</code> function. This automatically generates a perfectly spaced mathematical sequence of anchor points from <code>vmin</code> to <code>vmax</code> that matches the exact length of any color palette we pass to it.</p>
+<div id="cell-56" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="30">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>make_EH_custom_na <span class="ot">&lt;-</span> <span class="cf">function</span>(</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  norm_mat, hm_name, <span class="at">split_rows =</span> <span class="cn">NULL</span>,</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">width =</span> <span class="fu">unit</span>(<span class="dv">1</span>, <span class="st">"null"</span>), <span class="at">height =</span> <span class="cn">NULL</span>, <span class="at">top_anno_height =</span> grid<span class="sc">::</span><span class="fu">unit</span>(<span class="fl">1.5</span>, <span class="st">"cm"</span>), </span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">pal =</span> RColorBrewer<span class="sc">::</span><span class="fu">brewer.pal</span>(<span class="at">n =</span> <span class="dv">9</span>, <span class="at">name =</span> <span class="st">"RdBu"</span>), </span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_fill =</span> <span class="st">"white"</span>, <span class="at">line_colors =</span> <span class="cn">NULL</span>) {</span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Added na.rm = TRUE to handle WGBS missing values</span></span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>  vmin <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">quantile</span>(norm_mat, <span class="fu">c</span>(<span class="fl">0.01</span>), <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>  vmax <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">quantile</span>(norm_mat, <span class="fu">c</span>(<span class="fl">0.99</span>), <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>  vmid <span class="ot">&lt;-</span> (vmin <span class="sc">+</span> vmax) <span class="sc">/</span> <span class="dv">2</span></span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a>  legend_ticks <span class="ot">&lt;-</span> <span class="fu">c</span>(vmin, vmid, vmax)</span>
+<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Generate exactly enough anchor points to match the palette size</span></span>
+<span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a>  color_breaks <span class="ot">&lt;-</span> <span class="fu">seq</span>(</span>
+<span id="cb40-15"><a href="#cb40-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">from =</span> vmin, <span class="at">to =</span> vmax, <span class="at">length.out =</span> <span class="fu">length</span>(pal))</span>
+<span id="cb40-16"><a href="#cb40-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-17"><a href="#cb40-17" aria-hidden="true" tabindex="-1"></a>  col_fun <span class="ot">&lt;-</span> <span class="fu">colorRamp2</span>(</span>
+<span id="cb40-18"><a href="#cb40-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> color_breaks, </span>
+<span id="cb40-19"><a href="#cb40-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">colors =</span> pal)</span>
+<span id="cb40-20"><a href="#cb40-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-21"><a href="#cb40-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">EnrichedHeatmap</span>(</span>
+<span id="cb40-22"><a href="#cb40-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">mat =</span> norm_mat, <span class="at">name =</span> hm_name, <span class="at">row_split =</span> split_rows, </span>
+<span id="cb40-23"><a href="#cb40-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">width =</span> width, <span class="at">height =</span> height, </span>
+<span id="cb40-24"><a href="#cb40-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">row_title =</span> <span class="cn">NULL</span>, <span class="at">col =</span> col_fun, <span class="at">column_title =</span> hm_name, </span>
+<span id="cb40-25"><a href="#cb40-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">column_title_gp =</span> <span class="fu">gpar</span>(<span class="at">fontsize =</span> <span class="dv">10</span>, <span class="at">fill =</span> col_fill), </span>
+<span id="cb40-26"><a href="#cb40-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis_name =</span> <span class="fu">c</span>(<span class="st">"-1kb"</span>, <span class="st">"mid"</span>, <span class="st">"1kb"</span>), </span>
+<span id="cb40-27"><a href="#cb40-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">heatmap_legend_param =</span> <span class="fu">list</span>(</span>
+<span id="cb40-28"><a href="#cb40-28" aria-hidden="true" tabindex="-1"></a>      <span class="at">at =</span> legend_ticks, <span class="at">labels =</span> <span class="fu">round</span>(legend_ticks, <span class="at">digits =</span> <span class="dv">1</span>), </span>
+<span id="cb40-29"><a href="#cb40-29" aria-hidden="true" tabindex="-1"></a>      <span class="at">title_gp =</span> <span class="fu">gpar</span>(<span class="at">fontsize =</span> <span class="dv">8</span>), <span class="at">labels_gp =</span> <span class="fu">gpar</span>(<span class="at">fontsize =</span> <span class="dv">7</span>)), </span>
+<span id="cb40-30"><a href="#cb40-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">top_annotation =</span> <span class="fu">HeatmapAnnotation</span>(</span>
+<span id="cb40-31"><a href="#cb40-31" aria-hidden="true" tabindex="-1"></a>      <span class="at">lines =</span> <span class="fu">anno_enriched</span>(</span>
+<span id="cb40-32"><a href="#cb40-32" aria-hidden="true" tabindex="-1"></a>        <span class="at">height =</span> top_anno_height, </span>
+<span id="cb40-33"><a href="#cb40-33" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis_param =</span> <span class="fu">list</span>(<span class="at">facing =</span> <span class="st">"inside"</span>),</span>
+<span id="cb40-34"><a href="#cb40-34" aria-hidden="true" tabindex="-1"></a>        <span class="at">gp =</span> <span class="fu">gpar</span>(<span class="at">col =</span> line_colors))))}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Notice that inside our <code>make_EH_custom_na</code> function, the x-axis labels are strictly hardcoded as <code>axis_name = c("-1kb", "mid", "1kb")</code>. This works perfectly for our current analysis because we explicitly chose a 2kb total window earlier.</p>
+<p>However, if we decide to experiment and change our <code>extend</code> window size in the future (e.g., expanding to ±5kb for broad marks), these visual labels will be mathematically incorrect! For now, we will leave it as-is, but we will look at ways to make these labels dynamic and fully “upgrade” this function later in the course.</p>
+<p>Next, we will extract the <code>ATAC_anno</code> metadata directly from our master <code>overlap</code> object to dynamically build the left-side color bar (which splits our peaks into “Promoter”, “Intron”, and intergenic groups).</p>
+<div id="cell-58" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="31">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>split_anno <span class="ot">&lt;-</span> <span class="fu">mcols</span>(overlap)<span class="sc">$</span>ATAC_anno</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(split_anno) <span class="ot">&lt;-</span> <span class="fu">names</span>(overlap)</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>anno_colors <span class="ot">&lt;-</span> RColorBrewer<span class="sc">::</span><span class="fu">brewer.pal</span>(</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="fu">length</span>(<span class="fu">unique</span>(split_anno)), <span class="at">name =</span> <span class="st">"Set1"</span>)</span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(anno_colors) <span class="ot">&lt;-</span> <span class="fu">sort</span>(<span class="fu">unique</span>(split_anno))</span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>eh_annotations <span class="ot">&lt;-</span> <span class="fu">rowAnnotation</span>(</span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">df =</span> <span class="fu">data.frame</span>(<span class="at">Annotation =</span> split_anno), </span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="fu">list</span>(<span class="at">Annotation =</span> anno_colors), </span>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">show_annotation_name =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Finally, we will pass our two WGBS normalized matrices (E11.5 and E15.5) through our upgraded custom function, link them together with the annotation bar (<code>+</code>), and globally split the rows using the <code>draw()</code> function.</p>
+<div id="cell-60" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="32">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>eh_wgbs_11h <span class="ot">&lt;-</span> <span class="fu">make_EH_custom_na</span>(</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">norm_mat =</span> mat_bs[[<span class="st">"WGBS_11half"</span>]], </span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">hm_name =</span> <span class="st">'WGBS-E11.5'</span>, </span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_fill =</span> <span class="st">'pink'</span>)</span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>eh_wgbs_15h <span class="ot">&lt;-</span> <span class="fu">make_EH_custom_na</span>(</span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">norm_mat =</span> mat_bs[[<span class="st">"WGBS_15half"</span>]], </span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">hm_name =</span> <span class="st">'WGBS-E15.5'</span>, </span>
+<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_fill =</span> <span class="st">'paleturquoise'</span>)</span>
+<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a><span class="fu">draw</span>(</span>
+<span id="cb42-12"><a href="#cb42-12" aria-hidden="true" tabindex="-1"></a>  eh_annotations <span class="sc">+</span> eh_wgbs_11h <span class="sc">+</span> eh_wgbs_15h, </span>
+<span id="cb42-13"><a href="#cb42-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">split =</span> split_anno)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04-genomic_overlap_matrices_files/figure-html/cell-33-output-1.png" width="420" height="420" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="biological-interpretation-of-dna-methylation" class="level3" data-number="8.5.4">
+<h3 data-number="8.5.4" class="anchored" data-anchor-id="biological-interpretation-of-dna-methylation"><span class="header-section-number">8.5.4</span> Biological interpretation of DNA methylation</h3>
+<p>Looking at our generated heatmaps, we can draw several immediate observational conclusions:</p>
+<ol type="1">
+<li><strong>No glaring global differences:</strong> By naked eye, the global methylation profiles (Blue = 0% unmethylated, Red = 50% methylated) between E11.5 and E15.5 look virtually identical. There is no massive, genome-wide shift in methylation at these open chromatin regions between the two developmental stages.</li>
+<li><strong>Promoters are unmethylated:</strong> Thanks to our annotation splitting, we can clearly see that <strong>Promoter</strong> regions are intensely red (unmethylated). Furthermore, there is a distinct “dip” of unmethylated DNA exactly at the <code>mid</code> point of the ATAC peak. This makes perfect biological sense: active regulatory hubs must remain unmethylated to keep the DNA physically open for transcription factors.</li>
+<li><strong>Introns and Intergenic regions are more methylated:</strong> In contrast, the <strong>Intron</strong> and <strong>Intergenic</strong> blocks are noticeably more blue, indicating a higher level of basal methylation compared to the promoters.</li>
+</ol>
+<p>While these visual <strong>stratifications</strong> provide fantastic biological context, we cannot definitively say if specific, individual peaks significantly gained or lost methylation between the two stages. To prove that mathematically, we would need to extract the raw <code>Me</code> and <code>Un</code> counts and run a heavy <strong>statistical modeling</strong> package (like <code>DSS</code> or <code>methylKit</code>) to generate formal <code>p-values</code> and <code>logFC</code> scores.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../notebooks/03-chip_rna_visualization.html" class="pagination-link" aria-label="ChIP and RNA sequencing data plots">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">ChIP and RNA sequencing data plots</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../notebooks/05-atac_rna_integration.html" class="pagination-link" aria-label="Integrating ATAC and RNA sequencing data">
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Integrating ATAC and RNA sequencing data</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

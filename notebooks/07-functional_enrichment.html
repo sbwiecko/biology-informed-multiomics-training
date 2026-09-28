@@ -1,0 +1,1696 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>11&nbsp; Functional enrichment of genomic regions – Biology-Informed Multi-Omics Integration</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../notebooks/06-multiomics_integration.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-5630e6732664d48c7cde3b526013eeb9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../notebooks/04-genomic_overlap_matrices.html">III. Multi-Omics Integration</a></li><li class="breadcrumb-item"><a href="../notebooks/07-functional_enrichment.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Functional enrichment of genomic regions</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Biology-Informed Multi-Omics Integration</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">index.html</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">I. Theoretical Reference &amp; Notes</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/epigenetic_analysis_reference_guide.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Epigenetic Analysis Reference Guide</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/normalization_models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Normalization models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/enrichment_analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Functional Enrichment Analysis: Multi-Omics Integration</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">II. Data Structures &amp; Visualization</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/01-omics_data_structures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Datasets, <code>SummarizedExperiment</code>, and <code>GRanges</code></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/02-atac_heatmaps.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Enriched Heatmaps and identification of regions with different activities</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/03-chip_rna_visualization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">ChIP and RNA sequencing data plots</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">III. Multi-Omics Integration</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/04-genomic_overlap_matrices.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Overlapping all the datasets</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/05-atac_rna_integration.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Integrating ATAC and RNA sequencing data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/06-multiomics_integration.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Integrating ATAC, ChIP, and RNA sequencing data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/07-functional_enrichment.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Functional enrichment of genomic regions</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">11.1</span> Learning objectives</a></li>
+  <li><a href="#environment-setup-data-loading" id="toc-environment-setup-data-loading" class="nav-link" data-scroll-target="#environment-setup-data-loading"><span class="header-section-number">11.2</span> Environment setup &amp; data loading</a>
+  <ul class="collapse">
+  <li><a href="#loading-the-required-libraries" id="toc-loading-the-required-libraries" class="nav-link" data-scroll-target="#loading-the-required-libraries"><span class="header-section-number">11.2.1</span> Loading the required libraries</a></li>
+  <li><a href="#importing-the-multi-omics-overlap-data" id="toc-importing-the-multi-omics-overlap-data" class="nav-link" data-scroll-target="#importing-the-multi-omics-overlap-data"><span class="header-section-number">11.2.2</span> Importing the multi-omics overlap data</a></li>
+  <li><a href="#exploring-the-silenced-regions" id="toc-exploring-the-silenced-regions" class="nav-link" data-scroll-target="#exploring-the-silenced-regions"><span class="header-section-number">11.2.3</span> Exploring the “Silenced” Regions</a></li>
+  </ul></li>
+  <li><a href="#genomic-region-enrichment-via-rgreat" id="toc-genomic-region-enrichment-via-rgreat" class="nav-link" data-scroll-target="#genomic-region-enrichment-via-rgreat"><span class="header-section-number">11.3</span> Genomic region enrichment via rGREAT</a>
+  <ul class="collapse">
+  <li><a href="#subsetting-the-genomic-ranges" id="toc-subsetting-the-genomic-ranges" class="nav-link" data-scroll-target="#subsetting-the-genomic-ranges"><span class="header-section-number">11.3.1</span> Subsetting the Genomic Ranges</a></li>
+  <li><a href="#executing-the-great-algorithm" id="toc-executing-the-great-algorithm" class="nav-link" data-scroll-target="#executing-the-great-algorithm"><span class="header-section-number">11.3.2</span> Executing the GREAT algorithm</a></li>
+  <li><a href="#qaqc-verifying-the-great-mapping" id="toc-qaqc-verifying-the-great-mapping" class="nav-link" data-scroll-target="#qaqc-verifying-the-great-mapping"><span class="header-section-number">11.3.3</span> QA/QC: verifying the GREAT mapping</a></li>
+  </ul></li>
+  <li><a href="#visualizing-and-interpreting-enrichment-results" id="toc-visualizing-and-interpreting-enrichment-results" class="nav-link" data-scroll-target="#visualizing-and-interpreting-enrichment-results"><span class="header-section-number">11.4</span> Visualizing and interpreting enrichment results</a>
+  <ul class="collapse">
+  <li><a href="#statistical-significance-the-volcano-plot" id="toc-statistical-significance-the-volcano-plot" class="nav-link" data-scroll-target="#statistical-significance-the-volcano-plot"><span class="header-section-number">11.4.1</span> Statistical significance: the Volcano plot</a></li>
+  <li><a href="#physical-mapping-region-gene-associations" id="toc-physical-mapping-region-gene-associations" class="nav-link" data-scroll-target="#physical-mapping-region-gene-associations"><span class="header-section-number">11.4.2</span> Physical mapping: region-gene associations</a></li>
+  <li><a href="#exploring-the-raw-data" id="toc-exploring-the-raw-data" class="nav-link" data-scroll-target="#exploring-the-raw-data"><span class="header-section-number">11.4.3</span> Exploring the raw data</a></li>
+  <li><a href="#downstream-filtering-of-biological-pathways" id="toc-downstream-filtering-of-biological-pathways" class="nav-link" data-scroll-target="#downstream-filtering-of-biological-pathways"><span class="header-section-number">11.4.4</span> Downstream filtering of biological pathways</a></li>
+  <li><a href="#clustering-redundant-pathways-semantic-similarity" id="toc-clustering-redundant-pathways-semantic-similarity" class="nav-link" data-scroll-target="#clustering-redundant-pathways-semantic-similarity"><span class="header-section-number">11.4.5</span> Clustering redundant pathways (semantic similarity)</a></li>
+  <li><a href="#exploring-the-silenced-regions-1" id="toc-exploring-the-silenced-regions-1" class="nav-link" data-scroll-target="#exploring-the-silenced-regions-1"><span class="header-section-number">11.4.6</span> Exploring the “Silenced” regions</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../notebooks/04-genomic_overlap_matrices.html">III. Multi-Omics Integration</a></li><li class="breadcrumb-item"><a href="../notebooks/07-functional_enrichment.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Functional enrichment of genomic regions</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Functional enrichment of genomic regions</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>In the previous notebooks, we successfully integrated ATAC-seq, ChIP-seq, RNA-seq, and WGBS data to classify thousands of genomic regions into distinct biological states (e.g., <em>Active Promoters</em>, <em>Lost Enhancers</em>, <em>Silenced</em>). However, assigning a biological label to a genomic coordinate is only half the battle. To truly understand the developmental biology of our system (E11.5 to E15.5), we need to ask: <strong>What biological pathways do these specific regulatory regions actually control?</strong></p>
+<p>In this notebook, we will perform <strong>Functional Enrichment Analysis</strong>. Unlike standard RNA-seq analysis (which relies on isolated lists of genes), we will use <strong>GREAT</strong> (Genomic Regions Enrichment of Annotations Tool) to mathematically map our physical, non-coding regulatory coordinates directly to biological functions.</p>
+<section id="learning-objectives" class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">11.1</span> Learning objectives</h2>
+<ul>
+<li>Use the <code>rGREAT</code> package to map cis-regulatory elements directly to biological pathways.</li>
+<li>Generate Volcano plots and region-gene association graphs to diagnose enrichment significance.</li>
+<li>Use the <code>simplifyEnrichment</code> package to collapse hundreds of highly redundant Gene Ontology (GO) terms into clustered functional groups.</li>
+<li>Interpret the actual biological meaning behind the pathways enriched in our <em>Active Promoters</em>.</li>
+</ul>
+</section>
+<section id="environment-setup-data-loading" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="environment-setup-data-loading"><span class="header-section-number">11.2</span> Environment setup &amp; data loading</h2>
+<p>Because we are mathematically mapping raw genomic coordinates to biological meaning, we need to load massive <strong>Annotation Databases</strong> that contain the physical coordinates and pathway annotations for our specific organism (Mouse).</p>
+<section id="loading-the-required-libraries" class="level3" data-number="11.2.1">
+<h3 data-number="11.2.1" class="anchored" data-anchor-id="loading-the-required-libraries"><span class="header-section-number">11.2.1</span> Loading the required libraries</h3>
+<div id="cell-2" class="cell" data-message="false" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="1">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">suppressWarnings</span>({</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(dplyr)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Core analytical packages for region enrichment and clustering</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(magick)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(rGREAT)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(simplifyEnrichment)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(flexclust)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Transcript Database containing the exact physical coordinates </span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># for every known gene in the Mouse `mm10` genome</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(TxDb.Mmusculus.UCSC.mm10.knownGene)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Organism-level database that links mouse gene IDs to human-readable GO terms</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(org.Mm.eg.db)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>}))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section>
+<section id="importing-the-multi-omics-overlap-data" class="level3" data-number="11.2.2">
+<h3 data-number="11.2.2" class="anchored" data-anchor-id="importing-the-multi-omics-overlap-data"><span class="header-section-number">11.2.2</span> Importing the multi-omics overlap data</h3>
+<p>We will start by loading the final, fully-annotated <code>GRanges</code> object that we generated in the previous notebooks. This object contains all of our ATAC-seq peaks, cross-referenced against RNA-seq, and tagged with their final biological regulatory category.</p>
+<div id="cell-4" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="2">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the annotated overlap object</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>overlap <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"output/overlap_multiomics_state.rds"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Contingency table to view the categories we can test</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(overlap<span class="sc">$</span>Multiomics_State)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<pre><code>
+             Active    Active Promoters           Dec. Acc.    Gained Enhancers 
+                248                  99                 580                  18 
+          Inc. Acc.         Incongruent      Lost Enhancers           Repressed 
+                516                 166                   9                 126 
+Repressed Promoters            Silenced 
+                  5                 166 </code></pre>
+</div>
+</div>
+</section>
+<section id="exploring-the-silenced-regions" class="level3" data-number="11.2.3">
+<h3 data-number="11.2.3" class="anchored" data-anchor-id="exploring-the-silenced-regions"><span class="header-section-number">11.2.3</span> Exploring the “Silenced” Regions</h3>
+<p>We just saw that our <strong>Active Promoters</strong> are strongly enriched for synapse formation and neurodevelopment. However, as cells differentiate, they must also permanently repress genes from earlier progenitor stages or alternative cell lineages.</p>
+<p>To investigate this repression, we will analyze the <strong><code>Silenced</code></strong> category. As we saw in our contingency table, this cluster contains a robust <strong>166 regions</strong>, providing excellent statistical power for the <code>rGREAT</code> algorithm. More importantly, these regions share a highly specific multi-omics signature: a severe decrease in chromatin accessibility (ATAC-seq) and active acetylation (H3K27ac), a massive gain in Polycomb-mediated repression (H3K27me3), and a clear downregulation in target gene expression (RNA-seq).</p>
+<p>Let’s quickly re-run our enrichment pipeline on these 166 regions to see exactly what biological pathways the developing brain is actively shutting down!</p>
+</section>
+</section>
+<section id="genomic-region-enrichment-via-rgreat" class="level2" data-number="11.3">
+<h2 data-number="11.3" class="anchored" data-anchor-id="genomic-region-enrichment-via-rgreat"><span class="header-section-number">11.3</span> Genomic region enrichment via rGREAT</h2>
+<p>Now that we have selected our target category, we need to extract those specific physical coordinates from our massive overlapping dataset and feed them into the <strong>GREAT</strong> algorithm.</p>
+<section id="subsetting-the-genomic-ranges" class="level3" data-number="11.3.1">
+<h3 data-number="11.3.1" class="anchored" data-anchor-id="subsetting-the-genomic-ranges"><span class="header-section-number">11.3.1</span> Subsetting the Genomic Ranges</h3>
+<p>First, we use standard R indexing to extract only the 99 peaks classified as <code>Active Promoters</code>.</p>
+<div id="cell-7" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="3">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract only the Active Promoters using the cleaner subset() method</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>gr <span class="ot">&lt;-</span> <span class="fu">subset</span>(overlap, Multiomics_State <span class="sc">==</span> <span class="st">"Active Promoters"</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Drop empty chromosome levels using the official Bioconductor method</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">seqlevels</span>(gr) <span class="ot">&lt;-</span> <span class="fu">seqlevelsInUse</span>(gr)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the isolated object to verify we have exactly 99 ranges</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>gr</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<pre><code>GRanges object with 99 ranges and 111 metadata columns:
+            seqnames              ranges strand |        ATAC_annotation
+               &lt;Rle&gt;           &lt;IRanges&gt;  &lt;Rle&gt; |            &lt;character&gt;
+     peak_1     chr1     3670547-3672665      * |       Promoter (&lt;=1kb)
+    peak_14     chr1     9298449-9300284      * |       Promoter (&lt;=1kb)
+    peak_69     chr1   25228208-25229714      * |       Promoter (&lt;=1kb)
+    peak_70     chr1   25504015-25505076      * | Exon (ENSMUST0000014..
+    peak_83     chr1   34578812-34580363      * |       Promoter (&lt;=1kb)
+        ...      ...                 ...    ... .                    ...
+  peak_1902     chr2 178175169-178175887      * |       Promoter (&lt;=1kb)
+  peak_1922     chr2 181134082-181135787      * |       Promoter (&lt;=1kb)
+  peak_1923     chr2 181156149-181157204      * |       Promoter (&lt;=1kb)
+  peak_1925     chr2 181313272-181314836      * |       Promoter (&lt;=1kb)
+  peak_1930     chr2 181714476-181715931      * |       Promoter (&lt;=1kb)
+            ATAC_geneChr ATAC_geneStart ATAC_geneEnd ATAC_geneLength
+               &lt;integer&gt;      &lt;integer&gt;    &lt;integer&gt;       &lt;integer&gt;
+     peak_1            1        3214482      3671498          457017
+    peak_14            1        8361475      9298573          937099
+    peak_69            1       25067476     25228826          161351
+    peak_70            1       25276404     25277954            1551
+    peak_83            1       34579657     34590944           11288
+        ...          ...            ...          ...             ...
+  peak_1902            2      178175349    178336491          161143
+  peak_1922            2      181075579    181135214           59636
+  peak_1923            2      181147653    181157014            9362
+  peak_1925            2      181306459    181314500            8042
+  peak_1930            2      181715016    181720985            5970
+            ATAC_geneStrand ATAC_geneId     ATAC_transcriptId
+                  &lt;integer&gt; &lt;character&gt;           &lt;character&gt;
+     peak_1               2      497097  ENSMUST00000070533.4
+    peak_14               2       71096  ENSMUST00000132064.7
+    peak_69               2      210933  ENSMUST00000126626.7
+    peak_70               2   100504323  ENSMUST00000193138.1
+    peak_83               1      211383 ENSMUST00000052670.10
+        ...             ...         ...                   ...
+  peak_1902               1       74189  ENSMUST00000108915.7
+  peak_1922               2       16536  ENSMUST00000149964.8
+  peak_1923               2       13628  ENSMUST00000055990.7
+  peak_1925               2       20262  ENSMUST00000103045.3
+  peak_1930               1       18389  ENSMUST00000071585.9
+            ATAC_distanceToTSS       ATAC_ENSEMBL ATAC_SYMBOL
+                     &lt;numeric&gt;        &lt;character&gt; &lt;character&gt;
+     peak_1                  0 ENSMUSG00000051951        Xkr4
+    peak_14                  0 ENSMUSG00000025909       Sntg1
+    peak_69                  0 ENSMUSG00000033569      Adgrb3
+    peak_70            -226061 ENSMUSG00000104257     Gm20172
+    peak_83                  0 ENSMUSG00000045174       Amer3
+        ...                ...                ...         ...
+  peak_1902                  0 ENSMUSG00000027525     Phactr3
+  peak_1922                  0 ENSMUSG00000016346       Kcnq2
+  peak_1923                  0 ENSMUSG00000016349      Eef1a2
+  peak_1925                  0 ENSMUSG00000027581       Stmn3
+  peak_1930                  0 ENSMUSG00000027584       Oprl1
+                     ATAC_GENENAME   ATAC_anno ATAC_logFC ATAC_logCPM    ATAC_F
+                       &lt;character&gt; &lt;character&gt;  &lt;numeric&gt;   &lt;numeric&gt; &lt;numeric&gt;
+     peak_1 X-linked Kx blood gr..    Promoter   0.602984    10.45378  41.78446
+    peak_14    syntrophin, gamma 1    Promoter   0.960798     8.76438  46.46418
+    peak_69 adhesion G protein-c..    Promoter   0.986539     8.25070  40.79772
+    peak_70  predicted gene, 20172        Exon   0.802232     6.45404   8.85783
+    peak_83 APC membrane recruit..    Promoter   1.376255     8.69661  86.70410
+        ...                    ...         ...        ...         ...       ...
+  peak_1902 phosphatase and acti..    Promoter   0.714177     6.72118   8.78683
+  peak_1922 potassium voltage-ga..    Promoter   0.912713     8.10930  32.69152
+  peak_1923 eukaryotic translati..    Promoter   1.338590     7.82461  54.99971
+  peak_1925        stathmin-like 3    Promoter   0.892601     8.12151  30.64904
+  peak_1930 opioid receptor-like 1    Promoter   1.213349     7.47748  37.29439
+            ATAC_PValue ATAC_qvalue      RNA_Row.names RNA_gene_id  RNA_SYMBOL
+              &lt;numeric&gt;   &lt;numeric&gt;        &lt;character&gt; &lt;character&gt; &lt;character&gt;
+     peak_1 6.58453e-08 4.81983e-07 ENSMUSG00000051951      497097        Xkr4
+    peak_14 1.97965e-08 1.70296e-07 ENSMUSG00000025909       71096       Sntg1
+    peak_69 8.55724e-08 6.07481e-07 ENSMUSG00000033569      210933      Adgrb3
+    peak_70 4.69864e-03 9.38854e-03 ENSMUSG00000033569      210933      Adgrb3
+    peak_83 4.98564e-12 1.57133e-10 ENSMUSG00000045174      211383       Amer3
+        ...         ...         ...                ...         ...         ...
+  peak_1902 4.85335e-03 9.67494e-03 ENSMUSG00000027525       74189     Phactr3
+  peak_1922 8.37488e-07 4.46335e-06 ENSMUSG00000016346       16536       Kcnq2
+  peak_1923 2.58482e-09 2.97631e-08 ENSMUSG00000016349       13628      Eef1a2
+  peak_1925 1.54857e-06 7.67150e-06 ENSMUSG00000027581       20262       Stmn3
+  peak_1930 2.22741e-07 1.40677e-06 ENSMUSG00000027584       18389       Oprl1
+                      RNA_GENENAME        RNA_ENSEMBL RNA_geneLength
+                       &lt;character&gt;        &lt;character&gt;      &lt;integer&gt;
+     peak_1 X-linked Kx blood gr.. ENSMUSG00000051951         457017
+    peak_14    syntrophin, gamma 1 ENSMUSG00000025909         938404
+    peak_69 adhesion G protein-c.. ENSMUSG00000033569         762232
+    peak_70 adhesion G protein-c.. ENSMUSG00000033569         762232
+    peak_83 APC membrane recruit.. ENSMUSG00000045174          11288
+        ...                    ...                ...            ...
+  peak_1902 phosphatase and acti.. ENSMUSG00000027525         219518
+  peak_1922 potassium voltage-ga.. ENSMUSG00000016346          59722
+  peak_1923 eukaryotic translati.. ENSMUSG00000016349           9362
+  peak_1925        stathmin-like 3 ENSMUSG00000027581           8042
+  peak_1930 opioid receptor-like 1 ENSMUSG00000027584           5970
+            RNA_geneChr RNA_geneStart RNA_geneEnd RNA_geneStrand  RNA_geneId
+            &lt;character&gt;     &lt;integer&gt;   &lt;integer&gt;    &lt;character&gt; &lt;character&gt;
+     peak_1        chr1       3214482     3671498              -      497097
+    peak_14        chr1       8361475     9299878              -       71096
+    peak_69        chr1      25067476    25829707              -      210933
+    peak_70        chr1      25067476    25829707              -      210933
+    peak_83        chr1      34579657    34590944              +      211383
+        ...         ...           ...         ...            ...         ...
+  peak_1902        chr2     178118975   178338492              +       74189
+  peak_1922        chr2     181075579   181135300              -       16536
+  peak_1923        chr2     181147653   181157014              -       13628
+  peak_1925        chr2     181306459   181314500              -       20262
+  peak_1930        chr2     181715016   181720985              +       18389
+                 RNA_transcriptId    RNA_anno RNA_logFC RNA_logCPM     RNA_F
+                      &lt;character&gt; &lt;character&gt; &lt;numeric&gt;  &lt;numeric&gt; &lt;numeric&gt;
+     peak_1  ENSMUST00000070533.4        Gene   1.37498    5.62452   33.7077
+    peak_14  ENSMUST00000132064.7        Gene   4.03266    5.98830  192.7039
+    peak_69  ENSMUST00000126626.7        Gene   1.96492    8.73183  107.5339
+    peak_70  ENSMUST00000126626.7        Gene   1.96492    8.73183  107.5339
+    peak_83 ENSMUST00000052670.10        Gene   2.29007    8.17011  191.9172
+        ...                   ...         ...       ...        ...       ...
+  peak_1902  ENSMUST00000108917.7        Gene   1.75721    7.97049  103.8623
+  peak_1922  ENSMUST00000149964.8        Gene   1.08069    9.08113   43.8401
+  peak_1923  ENSMUST00000055990.7        Gene   4.06536    6.16441  278.0522
+  peak_1925  ENSMUST00000103045.3        Gene   1.87268   12.05944  135.2780
+  peak_1930  ENSMUST00000071585.9        Gene   1.87383    9.02372  145.0766
+             RNA_PValue  RNA_qvalue     H3K4me3_annotation H3K4me3_geneChr
+              &lt;numeric&gt;   &lt;numeric&gt;            &lt;character&gt;       &lt;integer&gt;
+     peak_1 2.24273e-03 0.006288707       Promoter (&lt;=1kb)               1
+    peak_14 3.88128e-05 0.000618058       Promoter (&lt;=1kb)               1
+    peak_69 1.56060e-04 0.001091928       Promoter (&lt;=1kb)               1
+    peak_70 1.56060e-04 0.001091928 Exon (ENSMUST0000014..               1
+    peak_83 3.90118e-05 0.000618058       Promoter (&lt;=1kb)               1
+        ...         ...         ...                    ...             ...
+  peak_1902 1.69461e-04 0.001152960       Promoter (&lt;=1kb)               2
+  peak_1922 1.25004e-03 0.004047574       Promoter (&lt;=1kb)               2
+  peak_1923 1.59710e-05 0.000490337       Promoter (&lt;=1kb)               2
+  peak_1925 9.03474e-05 0.000834961       Promoter (&lt;=1kb)               2
+  peak_1930 7.64282e-05 0.000816625       Promoter (&lt;=1kb)               2
+            H3K4me3_geneStart H3K4me3_geneEnd H3K4me3_geneLength
+                    &lt;integer&gt;       &lt;integer&gt;          &lt;integer&gt;
+     peak_1           3214482         3671498             457017
+    peak_14           8361475         9298573             937099
+    peak_69          25067476        25228826             161351
+    peak_70          25276404        25277954               1551
+    peak_83          34579657        34590944              11288
+        ...               ...             ...                ...
+  peak_1902         178175349       178336491             161143
+  peak_1922         181075579       181135214              59636
+  peak_1923         181147653       181157014               9362
+  peak_1925         181306459       181314500               8042
+  peak_1930         181715016       181720985               5970
+            H3K4me3_geneStrand H3K4me3_geneId  H3K4me3_transcriptId
+                     &lt;integer&gt;    &lt;character&gt;           &lt;character&gt;
+     peak_1                  2         497097  ENSMUST00000070533.4
+    peak_14                  2          71096  ENSMUST00000132064.7
+    peak_69                  2         210933  ENSMUST00000126626.7
+    peak_70                  2      100504323  ENSMUST00000193138.1
+    peak_83                  1         211383 ENSMUST00000052670.10
+        ...                ...            ...                   ...
+  peak_1902                  1          74189  ENSMUST00000108915.7
+  peak_1922                  2          16536  ENSMUST00000149964.8
+  peak_1923                  2          13628  ENSMUST00000055990.7
+  peak_1925                  2          20262  ENSMUST00000103045.3
+  peak_1930                  1          18389  ENSMUST00000071585.9
+            H3K4me3_distanceToTSS    H3K4me3_ENSEMBL H3K4me3_SYMBOL
+                        &lt;numeric&gt;        &lt;character&gt;    &lt;character&gt;
+     peak_1                     0 ENSMUSG00000051951           Xkr4
+    peak_14                     0 ENSMUSG00000025909          Sntg1
+    peak_69                     0 ENSMUSG00000033569         Adgrb3
+    peak_70               -226252 ENSMUSG00000104257        Gm20172
+    peak_83                     0 ENSMUSG00000045174          Amer3
+        ...                   ...                ...            ...
+  peak_1902                    56 ENSMUSG00000027525        Phactr3
+  peak_1922                     0 ENSMUSG00000016346          Kcnq2
+  peak_1923                     0 ENSMUSG00000016349         Eef1a2
+  peak_1925                     0 ENSMUSG00000027581          Stmn3
+  peak_1930                     0 ENSMUSG00000027584          Oprl1
+                  H3K4me3_GENENAME H3K4me3_anno H3K4me3_logFC H3K4me3_logCPM
+                       &lt;character&gt;  &lt;character&gt;     &lt;numeric&gt;      &lt;numeric&gt;
+     peak_1 X-linked Kx blood gr..     Promoter      0.607114        9.26749
+    peak_14    syntrophin, gamma 1     Promoter      0.787977        8.64434
+    peak_69 adhesion G protein-c..     Promoter      1.205708        7.52475
+    peak_70  predicted gene, 20172         Exon      2.657731        2.48914
+    peak_83 APC membrane recruit..     Promoter      1.158232        8.07772
+        ...                    ...          ...           ...            ...
+  peak_1902 phosphatase and acti..     Promoter      1.655324        3.89074
+  peak_1922 potassium voltage-ga..     Promoter      0.750262        8.80515
+  peak_1923 eukaryotic translati..     Promoter      1.819209        7.73711
+  peak_1925        stathmin-like 3     Promoter      0.615019        8.78460
+  peak_1930 opioid receptor-like 1     Promoter      1.978607        7.54088
+            H3K4me3_F H3K4me3_PValue H3K4me3_qvalue H3K4me1_annotation
+            &lt;numeric&gt;      &lt;numeric&gt;      &lt;numeric&gt;        &lt;character&gt;
+     peak_1 135.44293    4.65079e-31    1.28968e-29               &lt;NA&gt;
+    peak_14 149.35508    4.76345e-34    1.46952e-32               &lt;NA&gt;
+    peak_69 146.70663    1.76407e-33    5.27723e-32               &lt;NA&gt;
+    peak_70   6.77423    9.26510e-03    2.58814e-02               &lt;NA&gt;
+    peak_83 203.92865    1.03211e-45    4.76122e-44               &lt;NA&gt;
+        ...       ...            ...            ...                ...
+  peak_1902    14.963    1.10494e-04    4.90024e-04               &lt;NA&gt;
+  peak_1922   151.440    1.69973e-34    5.34388e-33               &lt;NA&gt;
+  peak_1923   332.565    7.40439e-73    6.76816e-71   Promoter (&lt;=1kb)
+  peak_1925   103.048    4.54823e-24    9.80353e-23   Promoter (&lt;=1kb)
+  peak_1930   325.324    2.42880e-71    2.10325e-69   Promoter (&lt;=1kb)
+            H3K4me1_geneChr H3K4me1_geneStart H3K4me1_geneEnd
+                  &lt;integer&gt;         &lt;integer&gt;       &lt;integer&gt;
+     peak_1            &lt;NA&gt;              &lt;NA&gt;            &lt;NA&gt;
+    peak_14            &lt;NA&gt;              &lt;NA&gt;            &lt;NA&gt;
+    peak_69            &lt;NA&gt;              &lt;NA&gt;            &lt;NA&gt;
+    peak_70            &lt;NA&gt;              &lt;NA&gt;            &lt;NA&gt;
+    peak_83            &lt;NA&gt;              &lt;NA&gt;            &lt;NA&gt;
+        ...             ...               ...             ...
+  peak_1902            &lt;NA&gt;              &lt;NA&gt;            &lt;NA&gt;
+  peak_1922            &lt;NA&gt;              &lt;NA&gt;            &lt;NA&gt;
+  peak_1923               2         181147653       181157014
+  peak_1925               2         181306459       181314500
+  peak_1930               2         181715703       181719372
+            H3K4me1_geneLength H3K4me1_geneStrand H3K4me1_geneId
+                     &lt;integer&gt;          &lt;integer&gt;    &lt;character&gt;
+     peak_1               &lt;NA&gt;               &lt;NA&gt;           &lt;NA&gt;
+    peak_14               &lt;NA&gt;               &lt;NA&gt;           &lt;NA&gt;
+    peak_69               &lt;NA&gt;               &lt;NA&gt;           &lt;NA&gt;
+    peak_70               &lt;NA&gt;               &lt;NA&gt;           &lt;NA&gt;
+    peak_83               &lt;NA&gt;               &lt;NA&gt;           &lt;NA&gt;
+        ...                ...                ...            ...
+  peak_1902               &lt;NA&gt;               &lt;NA&gt;           &lt;NA&gt;
+  peak_1922               &lt;NA&gt;               &lt;NA&gt;           &lt;NA&gt;
+  peak_1923               9362                  2          13628
+  peak_1925               8042                  2          20262
+  peak_1930               3670                  1          18389
+            H3K4me1_transcriptId H3K4me1_distanceToTSS    H3K4me1_ENSEMBL
+                     &lt;character&gt;             &lt;numeric&gt;        &lt;character&gt;
+     peak_1                 &lt;NA&gt;                    NA               &lt;NA&gt;
+    peak_14                 &lt;NA&gt;                    NA               &lt;NA&gt;
+    peak_69                 &lt;NA&gt;                    NA               &lt;NA&gt;
+    peak_70                 &lt;NA&gt;                    NA               &lt;NA&gt;
+    peak_83                 &lt;NA&gt;                    NA               &lt;NA&gt;
+        ...                  ...                   ...                ...
+  peak_1902                 &lt;NA&gt;                    NA               &lt;NA&gt;
+  peak_1922                 &lt;NA&gt;                    NA               &lt;NA&gt;
+  peak_1923 ENSMUST00000055990.7                   -64 ENSMUSG00000016349
+  peak_1925 ENSMUST00000103045.3                   911 ENSMUSG00000027581
+  peak_1930 ENSMUST00000184127.1                    38 ENSMUSG00000027584
+            H3K4me1_SYMBOL       H3K4me1_GENENAME H3K4me1_anno H3K4me1_logFC
+               &lt;character&gt;            &lt;character&gt;  &lt;character&gt;     &lt;numeric&gt;
+     peak_1           &lt;NA&gt;                   &lt;NA&gt;         &lt;NA&gt;             0
+    peak_14           &lt;NA&gt;                   &lt;NA&gt;         &lt;NA&gt;             0
+    peak_69           &lt;NA&gt;                   &lt;NA&gt;         &lt;NA&gt;             0
+    peak_70           &lt;NA&gt;                   &lt;NA&gt;         &lt;NA&gt;             0
+    peak_83           &lt;NA&gt;                   &lt;NA&gt;         &lt;NA&gt;             0
+        ...            ...                    ...          ...           ...
+  peak_1902           &lt;NA&gt;                   &lt;NA&gt;         &lt;NA&gt;      0.000000
+  peak_1922           &lt;NA&gt;                   &lt;NA&gt;         &lt;NA&gt;      0.000000
+  peak_1923         Eef1a2 eukaryotic translati..     Promoter      0.932761
+  peak_1925          Stmn3        stathmin-like 3     Promoter      0.612051
+  peak_1930          Oprl1 opioid receptor-like 1     Promoter      1.086359
+            H3K4me1_logCPM H3K4me1_F H3K4me1_PValue H3K4me1_qvalue
+                 &lt;numeric&gt; &lt;numeric&gt;      &lt;numeric&gt;      &lt;numeric&gt;
+     peak_1             NA        NA             NA             NA
+    peak_14             NA        NA             NA             NA
+    peak_69             NA        NA             NA             NA
+    peak_70             NA        NA             NA             NA
+    peak_83             NA        NA             NA             NA
+        ...            ...       ...            ...            ...
+  peak_1902             NA        NA             NA             NA
+  peak_1922             NA        NA             NA             NA
+  peak_1923        5.74097   20.7805    5.22563e-06    2.25916e-04
+  peak_1925        6.38866   15.0376    1.06225e-04    2.45541e-03
+  peak_1930        6.13490   36.7670    1.39101e-09    1.90365e-07
+            H3K27me3_annotation H3K27me3_geneChr H3K27me3_geneStart
+                    &lt;character&gt;        &lt;integer&gt;          &lt;integer&gt;
+     peak_1                &lt;NA&gt;             &lt;NA&gt;               &lt;NA&gt;
+    peak_14    Promoter (&lt;=1kb)                1            8361475
+    peak_69                &lt;NA&gt;             &lt;NA&gt;               &lt;NA&gt;
+    peak_70                &lt;NA&gt;             &lt;NA&gt;               &lt;NA&gt;
+    peak_83    Promoter (&lt;=1kb)                1           34579657
+        ...                 ...              ...                ...
+  peak_1902                &lt;NA&gt;             &lt;NA&gt;               &lt;NA&gt;
+  peak_1922    Promoter (&lt;=1kb)                2          181080503
+  peak_1923    Promoter (&lt;=1kb)                2          181147653
+  peak_1925    Promoter (&lt;=1kb)                2          181306459
+  peak_1930                &lt;NA&gt;             &lt;NA&gt;               &lt;NA&gt;
+            H3K27me3_geneEnd H3K27me3_geneLength H3K27me3_geneStrand
+                   &lt;integer&gt;           &lt;integer&gt;           &lt;integer&gt;
+     peak_1             &lt;NA&gt;                &lt;NA&gt;                &lt;NA&gt;
+    peak_14          9299238              937764                   2
+    peak_69             &lt;NA&gt;                &lt;NA&gt;                &lt;NA&gt;
+    peak_70             &lt;NA&gt;                &lt;NA&gt;                &lt;NA&gt;
+    peak_83         34590944               11288                   1
+        ...              ...                 ...                 ...
+  peak_1902             &lt;NA&gt;                &lt;NA&gt;                &lt;NA&gt;
+  peak_1922        181134922               54420                   2
+  peak_1923        181157014                9362                   2
+  peak_1925        181314500                8042                   2
+  peak_1930             &lt;NA&gt;                &lt;NA&gt;                &lt;NA&gt;
+            H3K27me3_geneId H3K27me3_transcriptId H3K27me3_distanceToTSS
+                &lt;character&gt;           &lt;character&gt;              &lt;numeric&gt;
+     peak_1            &lt;NA&gt;                  &lt;NA&gt;                     NA
+    peak_14           71096  ENSMUST00000140295.7                      0
+    peak_69            &lt;NA&gt;                  &lt;NA&gt;                     NA
+    peak_70            &lt;NA&gt;                  &lt;NA&gt;                     NA
+    peak_83          211383 ENSMUST00000052670.10                   -733
+        ...             ...                   ...                    ...
+  peak_1902            &lt;NA&gt;                  &lt;NA&gt;                     NA
+  peak_1922           16536  ENSMUST00000103049.9                      0
+  peak_1923           13628  ENSMUST00000055990.7                      0
+  peak_1925           20262  ENSMUST00000103045.3                   -125
+  peak_1930            &lt;NA&gt;                  &lt;NA&gt;                     NA
+              H3K27me3_ENSEMBL H3K27me3_SYMBOL      H3K27me3_GENENAME
+                   &lt;character&gt;     &lt;character&gt;            &lt;character&gt;
+     peak_1               &lt;NA&gt;            &lt;NA&gt;                   &lt;NA&gt;
+    peak_14 ENSMUSG00000025909           Sntg1    syntrophin, gamma 1
+    peak_69               &lt;NA&gt;            &lt;NA&gt;                   &lt;NA&gt;
+    peak_70               &lt;NA&gt;            &lt;NA&gt;                   &lt;NA&gt;
+    peak_83 ENSMUSG00000045174           Amer3 APC membrane recruit..
+        ...                ...             ...                    ...
+  peak_1902               &lt;NA&gt;            &lt;NA&gt;                   &lt;NA&gt;
+  peak_1922 ENSMUSG00000016346           Kcnq2 potassium voltage-ga..
+  peak_1923 ENSMUSG00000016349          Eef1a2 eukaryotic translati..
+  peak_1925 ENSMUSG00000027581           Stmn3        stathmin-like 3
+  peak_1930               &lt;NA&gt;            &lt;NA&gt;                   &lt;NA&gt;
+            H3K27me3_anno H3K27me3_logFC H3K27me3_logCPM H3K27me3_F
+              &lt;character&gt;      &lt;numeric&gt;       &lt;numeric&gt;  &lt;numeric&gt;
+     peak_1          &lt;NA&gt;       0.000000              NA         NA
+    peak_14      Promoter      -0.578443         7.07069    8.17212
+    peak_69          &lt;NA&gt;       0.000000              NA         NA
+    peak_70          &lt;NA&gt;       0.000000              NA         NA
+    peak_83      Promoter      -0.926854         5.73161    7.12230
+        ...           ...            ...             ...        ...
+  peak_1902          &lt;NA&gt;        0.00000              NA         NA
+  peak_1922      Promoter       -1.01484         9.08503    81.5584
+  peak_1923      Promoter       -1.18230         8.57170    84.1744
+  peak_1925      Promoter       -1.14450         6.24934    16.4223
+  peak_1930          &lt;NA&gt;        0.00000              NA         NA
+            H3K27me3_PValue H3K27me3_qvalue     H3K27ac_annotation
+                  &lt;numeric&gt;       &lt;numeric&gt;            &lt;character&gt;
+     peak_1              NA              NA       Promoter (&lt;=1kb)
+    peak_14      0.00426473       0.0616407       Promoter (&lt;=1kb)
+    peak_69              NA              NA       Promoter (&lt;=1kb)
+    peak_70              NA              NA Exon (ENSMUST0000014..
+    peak_83      0.00762819       0.0899976       Promoter (&lt;=1kb)
+        ...             ...             ...                    ...
+  peak_1902              NA              NA       Promoter (&lt;=1kb)
+  peak_1922     2.09500e-19     7.17349e-17       Promoter (&lt;=1kb)
+  peak_1923     5.65224e-20     2.06724e-17       Promoter (&lt;=1kb)
+  peak_1925     5.11572e-05     1.99691e-03       Promoter (&lt;=1kb)
+  peak_1930              NA              NA       Promoter (&lt;=1kb)
+            H3K27ac_geneChr H3K27ac_geneStart H3K27ac_geneEnd
+                  &lt;integer&gt;         &lt;integer&gt;       &lt;integer&gt;
+     peak_1               1           3214482         3671498
+    peak_14               1           8361475         9298573
+    peak_69               1          25067476        25228826
+    peak_70               1          25276404        25277954
+    peak_83               1          34579657        34590944
+        ...             ...               ...             ...
+  peak_1902               2         178175349       178336491
+  peak_1922               2         181080503       181134922
+  peak_1923               2         181147653       181157014
+  peak_1925               2         181306459       181314500
+  peak_1930               2         181715016       181720985
+            H3K27ac_geneLength H3K27ac_geneStrand H3K27ac_geneId
+                     &lt;integer&gt;          &lt;integer&gt;    &lt;character&gt;
+     peak_1             457017                  2         497097
+    peak_14             937099                  2          71096
+    peak_69             161351                  2         210933
+    peak_70               1551                  2      100504323
+    peak_83              11288                  1         211383
+        ...                ...                ...            ...
+  peak_1902             161143                  1          74189
+  peak_1922              54420                  2          16536
+  peak_1923               9362                  2          13628
+  peak_1925               8042                  2          20262
+  peak_1930               5970                  1          18389
+             H3K27ac_transcriptId H3K27ac_distanceToTSS    H3K27ac_ENSEMBL
+                      &lt;character&gt;             &lt;numeric&gt;        &lt;character&gt;
+     peak_1  ENSMUST00000070533.4                     0 ENSMUSG00000051951
+    peak_14  ENSMUST00000132064.7                     0 ENSMUSG00000025909
+    peak_69  ENSMUST00000126626.7                     0 ENSMUSG00000033569
+    peak_70  ENSMUST00000193138.1               -226214 ENSMUSG00000104257
+    peak_83 ENSMUST00000052670.10                     0 ENSMUSG00000045174
+        ...                   ...                   ...                ...
+  peak_1902  ENSMUST00000108915.7                     0 ENSMUSG00000027525
+  peak_1922  ENSMUST00000103049.9                     0 ENSMUSG00000016346
+  peak_1923  ENSMUST00000055990.7                     0 ENSMUSG00000016349
+  peak_1925  ENSMUST00000103045.3                     0 ENSMUSG00000027581
+  peak_1930  ENSMUST00000071585.9                     0 ENSMUSG00000027584
+            H3K27ac_SYMBOL       H3K27ac_GENENAME H3K27ac_anno H3K27ac_logFC
+               &lt;character&gt;            &lt;character&gt;  &lt;character&gt;     &lt;numeric&gt;
+     peak_1           Xkr4 X-linked Kx blood gr..     Promoter       1.25269
+    peak_14          Sntg1    syntrophin, gamma 1     Promoter       2.25132
+    peak_69         Adgrb3 adhesion G protein-c..     Promoter       1.71288
+    peak_70        Gm20172  predicted gene, 20172         Exon       2.45135
+    peak_83          Amer3 APC membrane recruit..     Promoter       1.44331
+        ...            ...                    ...          ...           ...
+  peak_1902        Phactr3 phosphatase and acti..     Promoter      1.382198
+  peak_1922          Kcnq2 potassium voltage-ga..     Promoter      0.909119
+  peak_1923         Eef1a2 eukaryotic translati..     Promoter      1.426917
+  peak_1925          Stmn3        stathmin-like 3     Promoter      1.337649
+  peak_1930          Oprl1 opioid receptor-like 1     Promoter      1.363849
+            H3K27ac_logCPM H3K27ac_F H3K27ac_PValue H3K27ac_qvalue        name
+                 &lt;numeric&gt; &lt;numeric&gt;      &lt;numeric&gt;      &lt;numeric&gt; &lt;character&gt;
+     peak_1        8.81735  151.4959    1.67395e-34    4.08130e-32      peak_1
+    peak_14        7.44136  188.6314    1.91288e-42    6.62156e-40     peak_14
+    peak_69        7.75798  148.3754    7.82086e-34    1.80483e-31     peak_69
+    peak_70        5.04358   34.5321    4.36085e-09    1.34796e-07     peak_70
+    peak_83        7.35920   86.0818    2.18441e-20    2.14293e-18     peak_83
+        ...            ...       ...            ...            ...         ...
+  peak_1902        6.22622   35.9816    2.07855e-09    6.74235e-08   peak_1902
+  peak_1922        8.31643   64.4153    1.15104e-15    7.72601e-14   peak_1922
+  peak_1923        7.39512   86.2073    2.05151e-20    2.03730e-18   peak_1923
+  peak_1925        8.00741  111.4177    7.08864e-26    1.02853e-23   peak_1925
+  peak_1930        7.84616  104.9298    1.79151e-24    2.34334e-22   peak_1930
+            Regulatory_State Multiomics_State
+                 &lt;character&gt;      &lt;character&gt;
+     peak_1           Active Active Promoters
+    peak_14           Active Active Promoters
+    peak_69           Active Active Promoters
+    peak_70           Active Active Promoters
+    peak_83           Active Active Promoters
+        ...              ...              ...
+  peak_1902           Active Active Promoters
+  peak_1922           Active Active Promoters
+  peak_1923           Active Active Promoters
+  peak_1925           Active Active Promoters
+  peak_1930           Active Active Promoters
+  -------
+  seqinfo: 2 sequences from an unspecified genome; no seqlengths</code></pre>
+</div>
+</div>
+<p>Notice that we re-assign the <code>seqlevels</code>. As discussed in <a href="../notebooks/04-genomic_overlap_matrices.html">a previous notebook</a>, when we subset a <code>GRanges</code> object, it remembers <em>all</em> the original chromosomes, even the ones that now have 0 peaks. Dropping these “empty” chromosomes is a critical sanitization step to prevent downstream algorithms from crashing or miscalculating genome background sizes.</p>
+</section>
+<section id="executing-the-great-algorithm" class="level3" data-number="11.3.2">
+<h3 data-number="11.3.2" class="anchored" data-anchor-id="executing-the-great-algorithm"><span class="header-section-number">11.3.2</span> Executing the GREAT algorithm</h3>
+<p>Now we pass our isolated coordinates directly to the <code>great()</code> function.</p>
+<p>Unlike standard RNA-seq enrichment that relies on isolated gene names, GREAT maps <strong>physical genome space</strong>. Because our ATAC-seq peaks are mostly non-coding regulatory elements (like distal enhancers), they rarely sit directly <em>inside</em> the genes they regulate.</p>
+<p>To solve this, GREAT calculates a <strong>“regulatory domain”</strong> for every known gene in the mouse genome by starting at the Transcription Start Site (TSS): 1. <strong>Basal Domain:</strong> It first assigns a core regulatory region immediately surrounding the TSS (typically 5kb upstream and 1kb downstream). 2. <strong>Distal Extension:</strong> It then extends this domain outward in both directions along the chromosome until it hits the regulatory domain of the nearest neighboring gene (up to a massive maximum of 1,000 kb!).</p>
+<p>GREAT then maps our 99 ATAC-seq peaks to see which of these extended regulatory domains they physically fall into. This allows us to accurately link distal regulatory DNA to the specific biological pathways they control.</p>
+<div id="cell-10" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="4">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the Genomic Regions Enrichment of Annotations Tool</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">great</span>(</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">gr =</span> gr, </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">gene_sets =</span> <span class="st">"BP"</span>,   <span class="co"># testing against the **Biological Process** GO</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">tss_source =</span> <span class="st">"mm10"</span> <span class="co"># use the Mouse mm10 database to locate the TSS</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>* TSS source: TxDb.
+
+* check whether TxDb package 'TxDb.Mmusculus.UCSC.mm10.knownGene' is installed.
+
+* gene ID type in the extended TSS is 'Entrez Gene ID'.
+
+* restrict chromosomes to 'chr1, chr2, chr3, chr4, chr5, chr6, chr7, chr8, chr9, chr10,
+    chr11, chr12, chr13, chr14, chr15, chr16, chr17, chr18, chr19, chrX, chrY, chrM'.
+
+* 20598/24515 protein-coding genes left.
+
+* update seqinfo to the selected chromosomes.
+
+* TSS extension mode is 'basalPlusExt'.
+
+* construct the basal domains by extending 5000bp to upstream and 1000bp to downsteram of TSS.
+
+* calculate distances to neighbour regions.
+
+* extend to both sides until reaching the neighbour genes or to the maximal extension.
+
+* use GO:BP ontology with 14957 gene sets (source: org.Mm.eg.db).
+
+* check gene ID type in `gene_sets` and in `extended_tss`.
+
+* use whole genome as background.
+
+* remove excluded regions from background.
+
+* overlap `gr` to background regions (based on midpoint).
+
+* in total 99 `gr`.
+
+* overlap extended TSS to background regions.
+
+* check which genes are in the gene sets.
+
+* only take gene sets with size &gt;= 5.
+
+* in total 9288 gene sets.
+
+* overlap `gr` to every extended TSS.
+
+* perform binomial test for each biological term.
+</code></pre>
+</div>
+</div>
+<p><em>Notice that it says <code>* restrict chromosomes to chr1, chr2...</code>. <code>rGREAT</code> is actually smart enough to automatically filter out weird unplaced contigs based on its internal TSS database. However, applying <code>seqlevelsInUse()</code> immediately after subsetting is still a crucial Bioconductor habit to learn, as many other downstream algorithms will crash or miscalculate background statistics if they detect empty chromosomes sitting in our object’s metadata.</em></p>
+</section>
+<section id="qaqc-verifying-the-great-mapping" class="level3" data-number="11.3.3">
+<h3 data-number="11.3.3" class="anchored" data-anchor-id="qaqc-verifying-the-great-mapping"><span class="header-section-number">11.3.3</span> QA/QC: verifying the GREAT mapping</h3>
+<p>Before we jump into the visualizations, simply printing the <code>res</code> object provides a critical Quality Control check.</p>
+<p>It tells us exactly how many of our 99 physical ATAC-seq peaks successfully intersected with the mathematical regulatory domain of a known gene. If the vast majority of our peaks mapped successfully, we have the green light to proceed to pathway visualization.</p>
+<div id="cell-13" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="5">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Print a summary of the GREAT object</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(res)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>99 regions are associated to 113 genes' extended TSSs.
+  TSS source: TxDb.Mmusculus.UCSC.mm10.knownGene
+  Genome: mm10
+  OrgDb: org.Mm.eg.db
+  Gene sets: BP
+  Background: whole genome excluding gaps
+Mode: Basal plus extension
+  Proximal: 5000 bp upstream, 1000 bp downstream,
+  plus Distal: up to 1000000 bp</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="visualizing-and-interpreting-enrichment-results" class="level2" data-number="11.4">
+<h2 data-number="11.4" class="anchored" data-anchor-id="visualizing-and-interpreting-enrichment-results"><span class="header-section-number">11.4</span> Visualizing and interpreting enrichment results</h2>
+<p>Now that the GREAT algorithm has successfully mapped our ATAC-seq peaks to biological pathways, we need to extract biological meaning from the statistics. We will explore and refine our results using four distinct approaches.</p>
+<section id="statistical-significance-the-volcano-plot" class="level3" data-number="11.4.1">
+<h3 data-number="11.4.1" class="anchored" data-anchor-id="statistical-significance-the-volcano-plot"><span class="header-section-number">11.4.1</span> Statistical significance: the Volcano plot</h3>
+<p>Because <code>rGREAT</code> is built specifically for genomic regions, its native <code>plotVolcano()</code> function operates a little differently than a standard RNA-seq volcano plot. Instead of plotting individual genes, each dot on this plot represents an entire <strong>Biological Pathway</strong>.</p>
+<div id="cell-15" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="6">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate a Volcano plot directly from the GREAT results object.</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># GREAT actually runs two mathematical tests simultaneously, so this will </span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the Fold Enrichment vs P-value for BOTH the Binomial test (genomic space) </span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># and the Hypergeometric test (gene count).</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plotVolcano</span>(res)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="07-functional_enrichment_files/figure-html/cell-7-output-1.png" width="420" height="420" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Each dot represents an entire <strong>Biological Pathway</strong>. To find the most meaningful networks, we must read the plot across three dimensions:</p>
+<ul>
+<li><strong>Location (Significance &amp; Enrichment):</strong> The true “winners” fly into the <strong>top-right quadrant</strong> (above the <span class="math inline">\(p=0.05\)</span> significance threshold and <span class="math inline">\(&gt;2\times\)</span> fold enrichment).</li>
+<li><strong>Dot Size (Pathway Size):</strong> Massive dark red dots near the bottom have many hits (~55 peaks), but because they are huge, generic pathways, hitting them is expected by pure random chance.</li>
+<li><strong>Color (Absolute Hits):</strong> The small blue dots in the top-right only have ~5 peak hits. However, because those pathways are physically tiny (small dot size), getting even 5 hits is incredibly rare. These represent highly specific, tightly coordinated biological networks.</li>
+</ul>
+</section>
+<section id="physical-mapping-region-gene-associations" class="level3" data-number="11.4.2">
+<h3 data-number="11.4.2" class="anchored" data-anchor-id="physical-mapping-region-gene-associations"><span class="header-section-number">11.4.2</span> Physical mapping: region-gene associations</h3>
+<p>Now that we know which biological pathways are enriched, we need to inspect the physical mapping that generated those statistics. How exactly did GREAT assign our 99 ATAC-seq peaks to target genes? Did they map to local promoters, or long-range distal regions?</p>
+<div id="cell-18" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="7">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># options(repr.plot.width = 12, repr.plot.height = 6)</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate three diagnostic bar plots showing exactly how many genes </span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># each ATAC-seq peak was mapped to, and the physical distance to the TSS.</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plotRegionGeneAssociations</span>(res)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="07-functional_enrichment_files/figure-html/cell-8-output-1.png" width="420" height="420" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>These three plots perfectly validate the multi-omics classification pipeline we built in our previous notebook:</p>
+<ul>
+<li><strong>Plot 1 (Left - Genes per Region):</strong> We see 0 red hits, meaning 100% of our peaks successfully mapped to at least one gene! Most peaks map to 1 or 2 genes (because GREAT’s “extension” rule often hits immediate neighbors).</li>
+<li><strong>Plots 2 &amp; 3 (Distance to TSS):</strong> Because we specifically isolated the <code>Active Promoters</code> cluster for this analysis, we biologically expect these peaks to sit directly on top of genes. The massive spike exactly at <code>0 kb</code> physically proves that our multi-omics logic successfully isolated true promoters!</li>
+</ul>
+<p><em>(Note: The smaller bars further out at 50-500kb simply reflect that genes are packed tightly together, and one gene’s promoter might physically overlap with the extended regulatory domain of a distant neighbor).</em></p>
+</section>
+<section id="exploring-the-raw-data" class="level3" data-number="11.4.3">
+<h3 data-number="11.4.3" class="anchored" data-anchor-id="exploring-the-raw-data"><span class="header-section-number">11.4.3</span> Exploring the raw data</h3>
+<p>While the Volcano plot gives us a great high-level view of our enriched pathways, we now need to dig deeper into the actual biology. To do this, we must extract the raw data so we can systematically sort the pathways by significance and identify the exact names of the target genes our ATAC-seq peaks hit.</p>
+<p><em>While <code>rGREAT</code> does come with a built-in interactive dashboard (<code>shinyReport(res)</code>), <strong>Shiny applications do not play nicely with Jupyter Notebooks.</strong> Launching a Shiny app will hijack the R kernel. In many Jupyter environments, attempting to stop the Shiny app will completely crash the R session, forcing to restart the kernel and run all previous cells from the beginning.</em></p>
+<div id="cell-21" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="8">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># (Optional) Launch the interactive GREAT dashboard. </span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Warning: This will freeze the Jupyter kernel until manually interrupted!</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># shinyReport(res)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Instead of relying on a clunky dashboard, we can extract the raw mathematical results into a standard R dataframe.</p>
+<div id="cell-23" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="9">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract the full enrichment table into a standard dataframe</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>tb <span class="ot">&lt;-</span> <span class="fu">getEnrichmentTable</span>(res)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># View the top 6 most significantly enriched pathways</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">head</span>(tb))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>           id                                                   description
+1  GO:0099509 regulation of presynaptic cytosolic calcium ion concentration
+3  GO:0070050                                   neuron cellular homeostasis
+4  GO:0051480             regulation of cytosolic calcium ion concentration
+5  GO:1901385          regulation of voltage-gated calcium channel activity
+10 GO:0019226                                 transmission of nerve impulse
+11 GO:0098655                     monoatomic cation transmembrane transport
+   genome_fraction observed_region_hits fold_enrichment      p_value
+1      0.004255723                    8       18.988097 1.305671e-08
+3      0.006914366                    8       11.686983 5.113900e-07
+4      0.010302148                    8        7.843809 9.447899e-06
+5      0.003398694                    5       14.860134 2.486941e-05
+10     0.018695488                    9        4.862622 1.062248e-04
+11     0.087208298                   21        2.432351 1.102352e-04
+       p_adjust mean_tss_dist observed_gene_hits gene_set_size
+1  5.222684e-06        120058                  5            29
+3  1.022780e-04        120058                  5            69
+4  1.259720e-03        120058                  5            82
+5  2.486941e-03        128355                  3            27
+10 7.349016e-03         81545                  7           119
+11 7.349016e-03         93654                 19           868
+   fold_enrichment_hyper p_value_hyper p_adjust_hyper
+1               31.42814  4.859233e-07   4.859233e-05
+3               13.20893  3.862111e-05   5.327049e-04
+4               11.11483  8.860743e-05   1.042440e-03
+5               20.25369  4.271773e-04   3.797131e-03
+10              10.72254  4.188185e-06   1.047046e-04
+11               3.99007  2.437046e-07   3.249395e-05</code></pre>
+</div>
+</div>
+</section>
+<section id="downstream-filtering-of-biological-pathways" class="level3" data-number="11.4.4">
+<h3 data-number="11.4.4" class="anchored" data-anchor-id="downstream-filtering-of-biological-pathways"><span class="header-section-number">11.4.4</span> Downstream filtering of biological pathways</h3>
+<p>Because <code>getEnrichmentTable()</code> returns a standard R dataframe, we are no longer trapped inside a “black box” bioinformatics tool. We can use the exact same <code>dplyr</code> data wrangling skills we learned in previous notebooks to aggressively mine this table for biological meaning.</p>
+<p>Here are three highly practical examples of how we can filter our pathway results both mathematically and biologically.</p>
+<div id="cell-25" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="10">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Filter Mathematically: Keep only highly significant pathways (FDR &lt; 0.05)</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>sig_pathways <span class="ot">&lt;-</span> tb <span class="sc">%&gt;%</span> <span class="fu">filter</span>(p_adjust <span class="sc">&lt;</span> <span class="fl">0.05</span>)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Filter by Evidence: Keep pathways hit by at least 5 of our ATAC peaks</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co"># (GREAT outputs specific columns tracking region hits)</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>robust_pathways <span class="ot">&lt;-</span> sig_pathways <span class="sc">%&gt;%</span> <span class="fu">filter</span>(observed_region_hits <span class="sc">&gt;=</span> <span class="dv">5</span>)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Filter Biologically: Search for specific pathway keywords (e.g., 'calcium' or 'synap')</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>calcium_pathways <span class="ot">&lt;-</span> tb <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">grepl</span>(<span class="st">"calcium|synap"</span>, description, <span class="at">ignore.case =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="co"># View our biologically targeted pathways</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">head</span>(calcium_pathways))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>          id                                                   description
+1 GO:0099509 regulation of presynaptic cytosolic calcium ion concentration
+2 GO:0051480             regulation of cytosolic calcium ion concentration
+3 GO:1901385          regulation of voltage-gated calcium channel activity
+4 GO:0006874                         intracellular calcium ion homeostasis
+5 GO:2000300                     regulation of synaptic vesicle exocytosis
+6 GO:0070588                           calcium ion transmembrane transport
+  genome_fraction observed_region_hits fold_enrichment      p_value
+1     0.004255723                    8       18.988097 1.305671e-08
+2     0.010302148                    8        7.843809 9.447899e-06
+3     0.003398694                    5       14.860134 2.486941e-05
+4     0.025446934                   10        3.969441 2.254245e-04
+5     0.009403625                    6        6.444968 3.672851e-04
+6     0.039552568                   12        3.064583 5.528246e-04
+      p_adjust mean_tss_dist observed_gene_hits gene_set_size
+1 5.222684e-06        120058                  5            29
+2 1.259720e-03        120058                  5            82
+3 2.486941e-03        128355                  3            27
+4 1.001887e-02         96075                  7           229
+5 1.224284e-02         92670                  4            71
+6 1.474199e-02         80239                  9           350
+  fold_enrichment_hyper p_value_hyper p_adjust_hyper
+1             31.428135  4.859233e-07   4.859233e-05
+2             11.114828  8.860743e-05   1.042440e-03
+3             20.253687  4.271773e-04   3.797131e-03
+4              5.571975  2.725825e-04   2.659341e-03
+5             10.269475  6.287080e-04   4.699258e-03
+6              4.687282  1.348578e-04   1.419555e-03</code></pre>
+</div>
+</div>
+</section>
+<section id="clustering-redundant-pathways-semantic-similarity" class="level3" data-number="11.4.5">
+<h3 data-number="11.4.5" class="anchored" data-anchor-id="clustering-redundant-pathways-semantic-similarity"><span class="header-section-number">11.4.5</span> Clustering redundant pathways (semantic similarity)</h3>
+<p>As we just saw in our filtered data table above, the Gene Ontology (GO) database is notoriously redundant. Because our active promoters are enriched for calcium signaling, the database returned <em>regulation of presynaptic cytosolic calcium</em>, <em>intracellular calcium ion homeostasis</em>, and <em>calcium ion transmembrane transport</em> as completely separate pathways.</p>
+<p>If we don’t mathematically compress this data, we will be forced to manually read through hundreds of nearly identical terms. To make sense of this massive, repetitive list, we can use the <code>simplifyEnrichment</code> package. This algorithm calculates the <strong>Semantic Similarity</strong> between all of our significant GO terms (how closely related they are in the biological tree) and physically clusters them into clean, high-level functional blocks.</p>
+<div id="cell-27" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="11">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract the exact GO IDs for our statistically significant pathways</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>sig_go_ids <span class="ot">&lt;-</span> tb<span class="sc">$</span>id[tb<span class="sc">$</span>p_adjust <span class="sc">&lt;</span> <span class="fl">0.05</span>]</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the semantic similarity matrix and cluster the redundant terms</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co"># (Note: This might take a minute as it mathematically compares hundreds of GO terms!)</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>cl <span class="ot">&lt;-</span> <span class="fu">simplifyGO</span>(sig_go_ids)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>You haven't provided value for `ont`, guess it as `BP`.
+
+relations: is_a, part_of, regulates, negatively_regulates, positively_regulates
+
+IC_method: IC_annotation
+
+term_sim_method: Sim_XGraSM_2013
+
+IC_method: IC_annotation
+
+Cluster 41 terms by 'binary_cut'...
+ 4 clusters, used 0.2807021 secs.
+
+Perform keywords enrichment for 4 GO lists...
+</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="07-functional_enrichment_files/figure-html/cell-12-output-2.png" width="420" height="420" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This visualization condenses the repetitive results. The red diagonal matrix mathematically groups all the 41 GO terms into distinct clusters based on their similarity. Instead of forcing us to read dozens of nearly identical pathway names, the algorithm generates clean word clouds summarizing the overarching biological function of each block: calcium homeostasis, synaptic transport, membrane potential, and learning behavior.</p>
+<div id="cell-29" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="12">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate a heatmap summarizing our high-level biological clusters</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summarizeGO</span>(</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">go_id =</span> sig_go_ids, </span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="sc">-</span><span class="fu">log10</span>(tb<span class="sc">$</span>p_adjust[tb<span class="sc">$</span>p_adjust <span class="sc">&lt;</span> <span class="fl">0.05</span>]), </span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">axis_label =</span> <span class="st">"average -log10(p.adjust)"</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>You haven't provided value for `ont`, guess it as `BP`.
+
+term_sim_method: Sim_XGraSM_2013
+
+IC_method: IC_annotation
+
+Cluster 41 terms by 'binary_cut'...
+ 4 clusters, used 0.2557878 secs.
+
+Perform keywords enrichment for 4 GO lists...
+</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="07-functional_enrichment_files/figure-html/cell-13-output-2.png" width="420" height="420" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This bar chart summarizes our data by showing the average statistical significance of each functional block. The “calcium homeostasis” cluster is by far the most statistically robust group (the longest bar), indicating that calcium signaling is a primary molecular driver in these cells.</p>
+<p>Biologically, this makes perfect sense; E11.5 to E15.5 is a critical embryonic window for neural development, involving rapid neuronal differentiation and synapse formation. The fact that our mathematically isolated <em>Active Promoters</em> are overwhelmingly driving ion transport, synaptic transmission, and learning circuitry perfectly aligns with early neural maturation. Our multi-omics integration successfully captured the exact developmental window where the embryonic brain begins to wire itself.</p>
+</section>
+<section id="exploring-the-silenced-regions-1" class="level3" data-number="11.4.6">
+<h3 data-number="11.4.6" class="anchored" data-anchor-id="exploring-the-silenced-regions-1"><span class="header-section-number">11.4.6</span> Exploring the “Silenced” regions</h3>
+<p>We just saw that our <strong>Active Promoters</strong> are strongly enriched for synapse formation and neurodevelopment. However, as cells differentiate, they must also permanently repress genes from earlier progenitor stages or alternative cell lineages.</p>
+<p>To investigate this repression, we will analyze the <strong><code>Silenced</code></strong> category. As we saw in our contingency table, this cluster contains a robust <strong>166 regions</strong>, providing excellent statistical power for the <code>rGREAT</code> algorithm. More importantly, these regions share a highly specific multi-omics signature: a severe decrease in chromatin accessibility (ATAC-seq) and active acetylation (H3K27ac), a massive gain in Polycomb-mediated repression (H3K27me3), and a clear downregulation in target gene expression (RNA-seq).</p>
+<p>Let’s quickly re-run our enrichment pipeline on these 166 regions to see exactly what biological pathways the developing brain is actively shutting down.</p>
+<div id="cell-32" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="13">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>gr_silenced <span class="ot">&lt;-</span> <span class="fu">subset</span>(overlap, Multiomics_State <span class="sc">==</span> <span class="st">"Silenced"</span>)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">seqlevels</span>(gr_silenced) <span class="ot">&lt;-</span> <span class="fu">seqlevelsInUse</span>(gr_silenced)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>res_silenced <span class="ot">&lt;-</span> <span class="fu">great</span>(</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">gr =</span> gr_silenced, </span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">gene_sets =</span> <span class="st">"BP"</span>, </span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">tss_source =</span> <span class="st">"mm10"</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>* TSS source: TxDb.
+
+* extended_tss is already cached, directly use it.
+
+* use GO:BP ontology with 14957 gene sets (source: org.Mm.eg.db).
+
+* check gene ID type in `gene_sets` and in `extended_tss`.
+
+* use whole genome as background.
+
+* remove excluded regions from background.
+
+* overlap `gr` to background regions (based on midpoint).
+
+* in total 166 `gr`.
+
+* overlap extended TSS to background regions.
+
+* check which genes are in the gene sets.
+
+* only take gene sets with size &gt;= 5.
+
+* in total 9288 gene sets.
+
+* overlap `gr` to every extended TSS.
+
+* perform binomial test for each biological term.
+</code></pre>
+</div>
+</div>
+<div id="cell-33" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="14">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate the Volcano plot for the silenced regions</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plotVolcano</span>(res_silenced)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="07-functional_enrichment_files/figure-html/cell-15-output-1.png" width="420" height="420" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Notice how different this Volcano plot is compared to our <code>Active Promoters</code>. The significance scores reach massively higher (<span class="math inline">\(p &lt; 10^{-17}\)</span>), and there is an absolute swarm of pathways flying into the top-right quadrant.</p>
+<p>While a differentiating cell only needs to activate a small, highly targeted set of pathways to become a neuron, it must simultaneously repress <em>massive, heavily populated</em> gene networks associated with every other possible cell fate. Because Polycomb (H3K27me3) coordinates the shutdown of these massive networks all at once, the statistical enrichment for repression is mathematically off the charts.</p>
+<div id="cell-35" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="15">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>tb_silenced <span class="ot">&lt;-</span> <span class="fu">getEnrichmentTable</span>(res_silenced)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>sig_go_ids_silenced <span class="ot">&lt;-</span> tb_silenced<span class="sc">$</span>id[tb_silenced<span class="sc">$</span>p_adjust <span class="sc">&lt;</span> <span class="fl">0.05</span>]</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>cl_silenced <span class="ot">&lt;-</span> <span class="fu">suppressMessages</span>(</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">simplifyGO</span>(sig_go_ids_silenced))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="07-functional_enrichment_files/figure-html/cell-16-output-1.png" width="420" height="420" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>While our <code>Active Promoters</code> enriched for just 41 pathways, the <code>Silenced</code> regions enriched for <strong>hundreds</strong>.</p>
+<p>The semantic similarity matrix above mathematically groups this massive list into distinct functional blocks. Looking closely at the word clouds on the right, we can see the algorithm successfully clustered terms related to <strong>Collagen</strong> (connective tissue), <strong>Endothelial</strong> (blood vessels), and <strong>Striated Muscle</strong>.</p>
+<div id="cell-37" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="16">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressMessages</span>(</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarizeGO</span>(</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">go_id =</span> sig_go_ids_silenced, </span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span><span class="fu">log10</span>(tb_silenced<span class="sc">$</span>p_adjust[tb_silenced<span class="sc">$</span>p_adjust <span class="sc">&lt;</span> <span class="fl">0.05</span>]), </span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis_label =</span> <span class="st">"average -log10(p.adjust)"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="07-functional_enrichment_files/figure-html/cell-17-output-1.png" width="420" height="420" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This bar chart highlights the average statistical significance of our repressed functional blocks. Notice that the significance scale is much higher than what we saw in the Active Promoters. The “collagen” (connective tissue) cluster is by far the most statistically <em>repressed</em> group, closely followed by general embryonic morphogenesis, endothelial cell migration, and cellular proliferation.</p>
+<p>Biologically, this validates the E11.5 to E15.5 developmental timeline. As the embryonic brain rapidly develops and neurons terminally differentiate, the cells must make permanent fate decisions. While we saw our <code>Active Promoters</code> turning <em>on</em> synapses and calcium signaling, this plot reveals the exact opposite side of the development process. The developing neural tissue is actively and permanently crushing alternative mesoderm lineages—like collagen, endothelial cells, and striated muscle, using Polycomb-mediated silencing.</p>
+<p>Furthermore, the strong repression of the “proliferation” cluster perfectly aligns with the biology of early neurogenesis, as mature neurons must become post-mitotic and stop dividing. By mathematically integrating ATAC, ChIP, and RNA-seq, our multi-omics pipeline has successfully decoded the entire developmental decision-making process of the cell!</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../notebooks/06-multiomics_integration.html" class="pagination-link" aria-label="Integrating ATAC, ChIP, and RNA sequencing data">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Integrating ATAC, ChIP, and RNA sequencing data</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

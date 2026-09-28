@@ -1,0 +1,1611 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>9&nbsp; Integrating ATAC and RNA sequencing data – Biology-Informed Multi-Omics Integration</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../notebooks/06-multiomics_integration.html" rel="next">
+<link href="../notebooks/04-genomic_overlap_matrices.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-5630e6732664d48c7cde3b526013eeb9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../notebooks/04-genomic_overlap_matrices.html">III. Multi-Omics Integration</a></li><li class="breadcrumb-item"><a href="../notebooks/05-atac_rna_integration.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Integrating ATAC and RNA sequencing data</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Biology-Informed Multi-Omics Integration</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">index.html</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">I. Theoretical Reference &amp; Notes</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/epigenetic_analysis_reference_guide.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Epigenetic Analysis Reference Guide</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/normalization_models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Normalization models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/enrichment_analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Functional Enrichment Analysis: Multi-Omics Integration</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">II. Data Structures &amp; Visualization</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/01-omics_data_structures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Datasets, <code>SummarizedExperiment</code>, and <code>GRanges</code></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/02-atac_heatmaps.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Enriched Heatmaps and identification of regions with different activities</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/03-chip_rna_visualization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">ChIP and RNA sequencing data plots</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">III. Multi-Omics Integration</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/04-genomic_overlap_matrices.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Overlapping all the datasets</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/05-atac_rna_integration.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Integrating ATAC and RNA sequencing data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/06-multiomics_integration.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Integrating ATAC, ChIP, and RNA sequencing data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/07-functional_enrichment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Functional enrichment of genomic regions</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">9.1</span> Learning objectives</a></li>
+  <li><a href="#defining-functional-genomic-states" id="toc-defining-functional-genomic-states" class="nav-link" data-scroll-target="#defining-functional-genomic-states"><span class="header-section-number">9.2</span> Defining functional genomic states</a></li>
+  <li><a href="#initial-setup-and-data-loading" id="toc-initial-setup-and-data-loading" class="nav-link" data-scroll-target="#initial-setup-and-data-loading"><span class="header-section-number">9.3</span> Initial setup and data loading</a>
+  <ul class="collapse">
+  <li><a href="#importing-processed-datasets" id="toc-importing-processed-datasets" class="nav-link" data-scroll-target="#importing-processed-datasets"><span class="header-section-number">9.3.1</span> Importing processed datasets</a></li>
+  </ul></li>
+  <li><a href="#categorizing-genomic-regions-by-multi-omics-behavior" id="toc-categorizing-genomic-regions-by-multi-omics-behavior" class="nav-link" data-scroll-target="#categorizing-genomic-regions-by-multi-omics-behavior"><span class="header-section-number">9.4</span> Categorizing genomic regions by multi-omics behavior</a></li>
+  <li><a href="#visualizing-multi-omics-integration" id="toc-visualizing-multi-omics-integration" class="nav-link" data-scroll-target="#visualizing-multi-omics-integration"><span class="header-section-number">9.5</span> Visualizing multi-omics integration</a>
+  <ul class="collapse">
+  <li><a href="#recycling-our-custom-plotting-function" id="toc-recycling-our-custom-plotting-function" class="nav-link" data-scroll-target="#recycling-our-custom-plotting-function"><span class="header-section-number">9.5.1</span> Recycling our custom plotting function</a></li>
+  <li><a href="#atac-seq-signal-heatmaps" id="toc-atac-seq-signal-heatmaps" class="nav-link" data-scroll-target="#atac-seq-signal-heatmaps"><span class="header-section-number">9.5.2</span> ATAC-seq signal heatmaps</a></li>
+  <li><a href="#interpreting-atac-seq-accessibility-clusters" id="toc-interpreting-atac-seq-accessibility-clusters" class="nav-link" data-scroll-target="#interpreting-atac-seq-accessibility-clusters"><span class="header-section-number">9.5.3</span> Interpreting ATAC-seq accessibility clusters</a></li>
+  <li><a href="#rna-seq-expression-heatmap" id="toc-rna-seq-expression-heatmap" class="nav-link" data-scroll-target="#rna-seq-expression-heatmap"><span class="header-section-number">9.5.4</span> RNA-seq expression heatmap</a></li>
+  <li><a href="#rna-seq-expression-patterns" id="toc-rna-seq-expression-patterns" class="nav-link" data-scroll-target="#rna-seq-expression-patterns"><span class="header-section-number">9.5.5</span> RNA-seq expression patterns</a></li>
+  <li><a href="#constructing-the-composite-multi-omics-heatmap" id="toc-constructing-the-composite-multi-omics-heatmap" class="nav-link" data-scroll-target="#constructing-the-composite-multi-omics-heatmap"><span class="header-section-number">9.5.6</span> Constructing the composite multi-omics heatmap</a></li>
+  <li><a href="#reordering-biological-categories" id="toc-reordering-biological-categories" class="nav-link" data-scroll-target="#reordering-biological-categories"><span class="header-section-number">9.5.7</span> Reordering biological categories</a></li>
+  <li><a href="#global-vsualization-settings" id="toc-global-vsualization-settings" class="nav-link" data-scroll-target="#global-vsualization-settings"><span class="header-section-number">9.5.8</span> Global vsualization settings</a></li>
+  <li><a href="#decoding-the-multi-omics-landscape" id="toc-decoding-the-multi-omics-landscape" class="nav-link" data-scroll-target="#decoding-the-multi-omics-landscape"><span class="header-section-number">9.5.9</span> Decoding the Multi-Omics landscape</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../notebooks/04-genomic_overlap_matrices.html">III. Multi-Omics Integration</a></li><li class="breadcrumb-item"><a href="../notebooks/05-atac_rna_integration.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Integrating ATAC and RNA sequencing data</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Integrating ATAC and RNA sequencing data</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="learning-objectives" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">9.1</span> Learning objectives</h2>
+<ul>
+<li>Load and manipulate <code>SummarizedExperiment</code> objects containing ATAC-seq and RNA-seq data.</li>
+<li>Understand how to categorize genomic regions based on combined accessibility (ATAC) and expression (RNA) changes.</li>
+<li>Annotate genomic regions with meaningful biological categories such as “Active”, “Repressed”, “Silent”, and others.</li>
+<li>Use the <code>ComplexHeatmap</code> and <code>EnrichedHeatmap</code> packages to visualize multi-omics data with customizable heatmaps.</li>
+<li>Implement and modify heatmap functions to integrate and compare ATAC and RNA signal patterns across samples.</li>
+<li>Adjust factor levels to control the order of categories in heatmaps for clear biological interpretation.</li>
+<li>Combine multiple heatmaps and annotations for integrative visualization of chromatin accessibility and gene expression.</li>
+</ul>
+</section>
+<section id="defining-functional-genomic-states" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="defining-functional-genomic-states"><span class="header-section-number">9.2</span> Defining functional genomic states</h2>
+<p>Integrating chromatin accessibility (ATAC-seq) and gene expression (RNA-seq) data allows us to map the genome’s dynamic regulatory landscape. For this course, we will use a simplified, fold-change-driven approach to categorize these <strong>functional states</strong>. Because our datasets were already pre-filtered for <strong>statistical significance</strong>, we will use basic logical conditions on the <code>logFC</code> values to assign categories. This keeps the coding pipeline straightforward while effectively illustrating the core biological concepts.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 11%">
+<col style="width: 4%">
+<col style="width: 8%">
+<col style="width: 61%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Category</th>
+<th style="text-align: center;">ATAC-seq</th>
+<th style="text-align: center;">RNA-seq</th>
+<th style="text-align: left;">Biological interpretation</th>
+<th style="text-align: left;">Analysis pipeline logic</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;"><strong>Active</strong></td>
+<td style="text-align: center;">↑</td>
+<td style="text-align: center;">↑</td>
+<td style="text-align: left;">Open chromatin and high gene expression; marks an actively transcribed gene or highly active regulatory element.</td>
+<td style="text-align: left;"><code>ATAC_logFC &gt; 0 &amp; RNA_logFC &gt; 0</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: right;"><strong>Repressed</strong></td>
+<td style="text-align: center;">↓</td>
+<td style="text-align: center;">↓</td>
+<td style="text-align: left;">Closed chromatin and low/no gene expression; indicates a stably silenced gene or inactive regulatory element.</td>
+<td style="text-align: left;"><code>ATAC_logFC &lt; 0 &amp; RNA_logFC &lt; 0</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;"><strong>Silencer Activation</strong></td>
+<td style="text-align: center;">↑</td>
+<td style="text-align: center;">↓</td>
+<td style="text-align: left;">Chromatin becomes accessible while expression drops; indicates a repressor or silencer element becoming active.</td>
+<td style="text-align: left;"><code>ATAC_logFC &gt; 0 &amp; RNA_logFC &lt; 0</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: right;"><strong>Incongruent</strong></td>
+<td style="text-align: center;">↓</td>
+<td style="text-align: center;">↑</td>
+<td style="text-align: left;">Closed chromatin but high gene expression; suggests very efficient transcription or regulation from a highly distant active element.</td>
+<td style="text-align: left;"><code>ATAC_logFC &lt; 0 &amp; RNA_logFC &gt; 0</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;"><strong>Increased Accessibility</strong></td>
+<td style="text-align: center;">↑</td>
+<td style="text-align: center;"><code>NA</code> (~ No change)</td>
+<td style="text-align: left;">Chromatin becomes more accessible but expression remains unchanged; suggests a “primed” region prepared for future activation.</td>
+<td style="text-align: left;"><code>ATAC_logFC &gt; 0 &amp; is.na(RNA_logFC)</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: right;"><strong>Decreased Accessibility</strong></td>
+<td style="text-align: center;">↓</td>
+<td style="text-align: center;"><code>NA</code> (~ No change)</td>
+<td style="text-align: left;">Chromatin becomes less accessible but expression remains unchanged; indicates a localized regulatory shift that does not impact overall transcripts.</td>
+<td style="text-align: left;"><code>ATAC_logFC &lt; 0 &amp; is.na(RNA_logFC)</code></td>
+</tr>
+</tbody>
+</table>
+<p><em>Note: More details can be found in the <a href="../notes/epigenetic_analysis_reference_guide.html">comprehensive epigenetic analysis reference guide</a>.</em></p>
+<p><a href="../notebooks/04-genomic_overlap_matrices.html">In our previous preparation steps</a>, we explicitly filtered our ATAC and RNA datasets to only include features with statistically significant changes (<code>abs(logFC) &gt;= .5</code> and <code>qvalue &lt;= .1</code>). This pre-filtering ensures that categories requiring dual changes (like <strong>Active</strong> or <strong>Repressed</strong>) are highly robust.</p>
+<p>However, because we removed non-significant genes prior to merging, an <code>NA</code> in our RNA column simply means a region didn’t overlap a <em>significantly changing</em> gene. To keep this course module straightforward, our pipeline maps these <code>NA</code> values to the “Increased/Decreased Accessibility” categories.</p>
+<p>This limitation also highlights the challenge of distinguishing a genuinely ‘Silent’ state, characterized by decreased chromatin accessibility and an absolute lack of gene expression, from a ‘Repressed’ state. Attempting to programmatically assign a ‘Silent’ category using only missing <code>logFC</code> values (<code>NA</code>) is inaccurate, as it conflates genes that are completely turned off with genes that are actively expressed but simply unchanged. For this reason, the ‘Silent’ category has been intentionally omitted from our simplified logic.</p>
+<p>In a more advanced bioinformatics pipeline, we would merge the full, unfiltered datasets first. This would allow us to evaluate baseline raw counts (<code>baseMean</code>) to mathematically distinguish a genuinely <strong>Silent</strong> region (zero baseline transcripts) from a primed region where the gene is actively expressed but statistically unchanged.</p>
+</section>
+<section id="initial-setup-and-data-loading" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="initial-setup-and-data-loading"><span class="header-section-number">9.3</span> Initial setup and data loading</h2>
+<p>Before integrating the data, we need to load our required R packages and import the processed <code>SummarizedExperiment</code> objects and normalized matrices that we generated in previous notebooks. Because all the heavy preprocessing and signal extraction is already complete, we no longer need to load intensive data-wrangling packages, and can focus entirely on visualization and integration.</p>
+<div id="cell-3" class="cell" data-message="false" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="1">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">suppressWarnings</span>({</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(SummarizedExperiment)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(ComplexHeatmap)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(EnrichedHeatmap)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(circlize)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(dplyr)  <span class="co"># used for case_when()</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>}))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<section id="importing-processed-datasets" class="level3" data-number="9.3.1">
+<h3 data-number="9.3.1" class="anchored" data-anchor-id="importing-processed-datasets"><span class="header-section-number">9.3.1</span> Importing processed datasets</h3>
+<p>Here we load our master <code>overlap</code> annotation object and the normalized signal matrices.</p>
+<p>Note that we are <em>not</em> loading the genome-wide <code>atac_se.rds</code> and <code>rna_se.rds</code> <code>SummarizedExperiment</code> objects in this notebook because we are focusing entirely on visualizing the highly significant, pre-filtered regions we extracted in the <a href="../notebooks/04-genomic_overlap_matrices.html">previous notebook</a>.</p>
+<p>As a brief reminder, here are the core steps we took previously to generate these highly refined files:</p>
+<ul>
+<li><strong>Master <code>overlap</code> annotation object:</strong> Generated by mapping physical overlaps between our highly significant ATAC-seq peak regions and RNA-seq gene annotations (using our custom <code>metaGR()</code> function), seamlessly joining their statistical metadata together into a single <code>GRanges</code> object.</li>
+<li><strong>Normalized signal matrices:</strong> Created using <code>normalizeToMatrix()</code> to extract continuous signal coverage from bigWig files across fixed genomic windows (e.g., +/- 1 kb around peak centers), formatted as mathematical grids for immediate heatmap visualization.</li>
+</ul>
+<div id="cell-5" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="2">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>overlap <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"output/overlap_data.rds"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>mat_ATAC <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"output/mat_atac.rds"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>mat_RNA <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"output/mat_rna.rds"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section>
+</section>
+<section id="categorizing-genomic-regions-by-multi-omics-behavior" class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="categorizing-genomic-regions-by-multi-omics-behavior"><span class="header-section-number">9.4</span> Categorizing genomic regions by multi-omics behavior</h2>
+<p>As we established in the biological framework during our introduction, combining ATAC-seq (chromatin accessibility) with RNA-seq (gene expression) allows us to mathematically infer the functional state of these regulatory elements.</p>
+<p>Using the <code>logFC</code> directions from our master <code>overlap</code> object, we will explicitly annotate every peak into one of these core biological states:</p>
+<ul>
+<li><strong>Active:</strong> Both accessibility and expression increase (e.g., chromatin opening to allow transcription machinery to bind).</li>
+<li><strong>Repressed:</strong> Accessibility increases, but expression decreases (e.g., chromatin opening specifically to allow a transcriptional <em>repressor</em> to dock).</li>
+<li><strong>Silenced:</strong> Both accessibility and expression decrease (e.g., chromatin physically tightening to shut down a gene).</li>
+<li><strong>Incongruent:</strong> Accessibility decreases while expression increases (often driven by complex distal interactions or alternate promoters).</li>
+<li><strong>Inc.&nbsp;Acc. / Dec.&nbsp;Acc.:</strong> Accessibility changes, but there is no corresponding RNA-seq gene data (e.g., distant intergenic regulatory regions).</li>
+</ul>
+<div id="cell-7" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="3">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use case_when to dynamically calculate the biological state in one elegant sweep</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>overlap<span class="sc">$</span>Regulatory_State <span class="ot">&lt;-</span> <span class="fu">case_when</span>(</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  overlap<span class="sc">$</span>ATAC_logFC <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">&amp;</span> overlap<span class="sc">$</span>RNA_logFC <span class="sc">&gt;</span> <span class="dv">0</span>  <span class="sc">~</span> <span class="st">"Active"</span>, </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  overlap<span class="sc">$</span>ATAC_logFC <span class="sc">&lt;</span> <span class="dv">0</span> <span class="sc">&amp;</span> overlap<span class="sc">$</span>RNA_logFC <span class="sc">&lt;</span> <span class="dv">0</span>  <span class="sc">~</span> <span class="st">"Silenced"</span>, </span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  overlap<span class="sc">$</span>ATAC_logFC <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">&amp;</span> overlap<span class="sc">$</span>RNA_logFC <span class="sc">&lt;</span> <span class="dv">0</span>  <span class="sc">~</span> <span class="st">"Repressed"</span>, </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  overlap<span class="sc">$</span>ATAC_logFC <span class="sc">&lt;</span> <span class="dv">0</span> <span class="sc">&amp;</span> overlap<span class="sc">$</span>RNA_logFC <span class="sc">&gt;</span> <span class="dv">0</span>  <span class="sc">~</span> <span class="st">"Incongruent"</span>, </span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># For intergenic regions where there is no matching RNA gene</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  overlap<span class="sc">$</span>ATAC_logFC <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">&amp;</span> <span class="fu">is.na</span>(overlap<span class="sc">$</span>RNA_logFC) <span class="sc">~</span> <span class="st">"Inc. Acc."</span>, </span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  overlap<span class="sc">$</span>ATAC_logFC <span class="sc">&lt;</span> <span class="dv">0</span> <span class="sc">&amp;</span> <span class="fu">is.na</span>(overlap<span class="sc">$</span>RNA_logFC) <span class="sc">~</span> <span class="st">"Dec. Acc."</span>, </span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Default fallback if anything slips through (NA is not NULL!)</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Also note that dtype is CHAR, so it cannot be NA</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="cn">TRUE</span> <span class="sc">~</span> <span class="cn">NA_character_</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(<span class="at">object =</span> overlap, <span class="at">file =</span> <span class="st">"output/overlap_regulatory_status.rds"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div id="cell-8" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="4">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>overlap</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<pre><code>GRanges object with 1933 ranges and 110 metadata columns:
+            seqnames              ranges strand |        ATAC_annotation
+               &lt;Rle&gt;           &lt;IRanges&gt;  &lt;Rle&gt; |            &lt;character&gt;
+     peak_1     chr1     3670547-3672665      * |       Promoter (&lt;=1kb)
+     peak_2     chr1     4332510-4332710      * | Intron (ENSMUST00000..
+     peak_3     chr1     4491755-4492573      * |       Promoter (1-2kb)
+     peak_4     chr1     4571186-4572423      * |      Distal Intergenic
+     peak_5     chr1     4785062-4786325      * |       Promoter (&lt;=1kb)
+        ...      ...                 ...    ... .                    ...
+  peak_1929     chr2 181713633-181714134      * |       Promoter (&lt;=1kb)
+  peak_1930     chr2 181714476-181715931      * |       Promoter (&lt;=1kb)
+  peak_1931     chr2 181762779-181764180      * |       Promoter (&lt;=1kb)
+  peak_1932     chr2 181764664-181764891      * |       Promoter (1-2kb)
+  peak_1933     chr2 181837244-181838655      * |       Promoter (&lt;=1kb)
+            ATAC_geneChr ATAC_geneStart ATAC_geneEnd ATAC_geneLength
+               &lt;integer&gt;      &lt;integer&gt;    &lt;integer&gt;       &lt;integer&gt;
+     peak_1            1        3214482      3671498          457017
+     peak_2            1        4344146      4360314           16169
+     peak_3            1        4492465      4493735            1271
+     peak_4            1        4491390      4497354            5965
+     peak_5            1        4773206      4785710           12505
+        ...          ...            ...          ...             ...
+  peak_1929            2      181715016    181720985            5970
+  peak_1930            2      181715016    181720985            5970
+  peak_1931            2      181763332    181827797           64466
+  peak_1932            2      181763332    181827797           64466
+  peak_1933            2      181837854    181857461           19608
+            ATAC_geneStrand ATAC_geneId     ATAC_transcriptId
+                  &lt;integer&gt; &lt;character&gt;           &lt;character&gt;
+     peak_1               2      497097  ENSMUST00000070533.4
+     peak_2               2       19888  ENSMUST00000027032.5
+     peak_3               2       20671  ENSMUST00000191939.1
+     peak_4               2       20671  ENSMUST00000192650.5
+     peak_5               2       27395  ENSMUST00000130201.7
+        ...             ...         ...                   ...
+  peak_1929               1       18389  ENSMUST00000071585.9
+  peak_1930               1       18389  ENSMUST00000071585.9
+  peak_1931               1       17932 ENSMUST00000081125.10
+  peak_1932               1       17932 ENSMUST00000081125.10
+  peak_1933               1      245867 ENSMUST00000029116.13
+            ATAC_distanceToTSS       ATAC_ENSEMBL ATAC_SYMBOL
+                     &lt;numeric&gt;        &lt;character&gt; &lt;character&gt;
+     peak_1                  0 ENSMUSG00000051951        Xkr4
+     peak_2              27604 ENSMUSG00000025900         Rp1
+     peak_3               1162 ENSMUSG00000025902       Sox17
+     peak_4             -73832 ENSMUSG00000025902       Sox17
+     peak_5                  0 ENSMUSG00000033845      Mrpl15
+        ...                ...                ...         ...
+  peak_1929               -882 ENSMUSG00000027584       Oprl1
+  peak_1930                  0 ENSMUSG00000027584       Oprl1
+  peak_1931                  0 ENSMUSG00000010505        Myt1
+  peak_1932               1332 ENSMUSG00000010505        Myt1
+  peak_1933                  0 ENSMUSG00000027589      Pcmtd2
+                     ATAC_GENENAME   ATAC_anno ATAC_logFC ATAC_logCPM    ATAC_F
+                       &lt;character&gt; &lt;character&gt;  &lt;numeric&gt;   &lt;numeric&gt; &lt;numeric&gt;
+     peak_1 X-linked Kx blood gr..    Promoter   0.602984    10.45378  41.78446
+     peak_2 retinitis pigmentosa..      Intron   0.855748     5.18424   3.68371
+     peak_3 SRY (sex determining..    Promoter  -0.620926     7.13469   9.14522
+     peak_4 SRY (sex determining..  Intergenic  -0.511046     8.90885  15.15688
+     peak_5 mitochondrial riboso..    Promoter   0.540908     8.63469  15.08892
+        ...                    ...         ...        ...         ...       ...
+  peak_1929 opioid receptor-like 1    Promoter   1.922716     6.37607   40.6570
+  peak_1930 opioid receptor-like 1    Promoter   1.213349     7.47748   37.2944
+  peak_1931 myelin transcription..    Promoter  -2.192918     7.94745  146.4501
+  peak_1932 myelin transcription..    Promoter  -1.275275     5.54135   10.4487
+  peak_1933 protein-L-isoasparta..    Promoter   0.689247     7.92175   16.6788
+            ATAC_PValue ATAC_qvalue      RNA_Row.names RNA_gene_id  RNA_SYMBOL
+              &lt;numeric&gt;   &lt;numeric&gt;        &lt;character&gt; &lt;character&gt; &lt;character&gt;
+     peak_1 6.58453e-08 4.81983e-07 ENSMUSG00000051951      497097        Xkr4
+     peak_2 6.13517e-02 9.28785e-02               &lt;NA&gt;        &lt;NA&gt;        &lt;NA&gt;
+     peak_3 4.12368e-03 8.38540e-03               &lt;NA&gt;        &lt;NA&gt;        &lt;NA&gt;
+     peak_4 3.27158e-04 8.67115e-04               &lt;NA&gt;        &lt;NA&gt;        &lt;NA&gt;
+     peak_5 3.36058e-04 8.82634e-04               &lt;NA&gt;        &lt;NA&gt;        &lt;NA&gt;
+        ...         ...         ...                ...         ...         ...
+  peak_1929 8.88771e-08 6.28500e-07               &lt;NA&gt;        &lt;NA&gt;        &lt;NA&gt;
+  peak_1930 2.22741e-07 1.40677e-06 ENSMUSG00000027584       18389       Oprl1
+  peak_1931 1.07660e-15 1.40573e-13 ENSMUSG00000010505       17932        Myt1
+  peak_1932 2.30922e-03 4.97558e-03 ENSMUSG00000010505       17932        Myt1
+  peak_1933 1.81039e-04 5.14680e-04               &lt;NA&gt;        &lt;NA&gt;        &lt;NA&gt;
+                      RNA_GENENAME        RNA_ENSEMBL RNA_geneLength
+                       &lt;character&gt;        &lt;character&gt;      &lt;integer&gt;
+     peak_1 X-linked Kx blood gr.. ENSMUSG00000051951         457017
+     peak_2                   &lt;NA&gt;               &lt;NA&gt;           &lt;NA&gt;
+     peak_3                   &lt;NA&gt;               &lt;NA&gt;           &lt;NA&gt;
+     peak_4                   &lt;NA&gt;               &lt;NA&gt;           &lt;NA&gt;
+     peak_5                   &lt;NA&gt;               &lt;NA&gt;           &lt;NA&gt;
+        ...                    ...                ...            ...
+  peak_1929                   &lt;NA&gt;               &lt;NA&gt;           &lt;NA&gt;
+  peak_1930 opioid receptor-like 1 ENSMUSG00000027584           5970
+  peak_1931 myelin transcription.. ENSMUSG00000010505          64466
+  peak_1932 myelin transcription.. ENSMUSG00000010505          64466
+  peak_1933                   &lt;NA&gt;               &lt;NA&gt;           &lt;NA&gt;
+            RNA_geneChr RNA_geneStart RNA_geneEnd RNA_geneStrand  RNA_geneId
+            &lt;character&gt;     &lt;integer&gt;   &lt;integer&gt;    &lt;character&gt; &lt;character&gt;
+     peak_1        chr1       3214482     3671498              -      497097
+     peak_2        &lt;NA&gt;          &lt;NA&gt;        &lt;NA&gt;           &lt;NA&gt;        &lt;NA&gt;
+     peak_3        &lt;NA&gt;          &lt;NA&gt;        &lt;NA&gt;           &lt;NA&gt;        &lt;NA&gt;
+     peak_4        &lt;NA&gt;          &lt;NA&gt;        &lt;NA&gt;           &lt;NA&gt;        &lt;NA&gt;
+     peak_5        &lt;NA&gt;          &lt;NA&gt;        &lt;NA&gt;           &lt;NA&gt;        &lt;NA&gt;
+        ...         ...           ...         ...            ...         ...
+  peak_1929        &lt;NA&gt;          &lt;NA&gt;        &lt;NA&gt;           &lt;NA&gt;        &lt;NA&gt;
+  peak_1930        chr2     181715016   181720985              +       18389
+  peak_1931        chr2     181763332   181827797              +       17932
+  peak_1932        chr2     181763332   181827797              +       17932
+  peak_1933        &lt;NA&gt;          &lt;NA&gt;        &lt;NA&gt;           &lt;NA&gt;        &lt;NA&gt;
+                 RNA_transcriptId    RNA_anno RNA_logFC RNA_logCPM     RNA_F
+                      &lt;character&gt; &lt;character&gt; &lt;numeric&gt;  &lt;numeric&gt; &lt;numeric&gt;
+     peak_1  ENSMUST00000070533.4        Gene   1.37498    5.62452   33.7077
+     peak_2                  &lt;NA&gt;        &lt;NA&gt;        NA         NA        NA
+     peak_3                  &lt;NA&gt;        &lt;NA&gt;        NA         NA        NA
+     peak_4                  &lt;NA&gt;        &lt;NA&gt;        NA         NA        NA
+     peak_5                  &lt;NA&gt;        &lt;NA&gt;        NA         NA        NA
+        ...                   ...         ...       ...        ...       ...
+  peak_1929                  &lt;NA&gt;        &lt;NA&gt;        NA         NA        NA
+  peak_1930  ENSMUST00000071585.9        Gene   1.87383    9.02372   145.077
+  peak_1931 ENSMUST00000081125.10        Gene  -1.76404    8.78746   142.012
+  peak_1932 ENSMUST00000081125.10        Gene  -1.76404    8.78746   142.012
+  peak_1933                  &lt;NA&gt;        &lt;NA&gt;        NA         NA        NA
+             RNA_PValue  RNA_qvalue H3K4me3_annotation H3K4me3_geneChr
+              &lt;numeric&gt;   &lt;numeric&gt;        &lt;character&gt;       &lt;integer&gt;
+     peak_1  0.00224273  0.00628871   Promoter (&lt;=1kb)               1
+     peak_2          NA          NA               &lt;NA&gt;            &lt;NA&gt;
+     peak_3          NA          NA               &lt;NA&gt;            &lt;NA&gt;
+     peak_4          NA          NA  Distal Intergenic               1
+     peak_5          NA          NA               &lt;NA&gt;            &lt;NA&gt;
+        ...         ...         ...                ...             ...
+  peak_1929          NA          NA               &lt;NA&gt;            &lt;NA&gt;
+  peak_1930 7.64282e-05 0.000816625   Promoter (&lt;=1kb)               2
+  peak_1931 8.04360e-05 0.000822152   Promoter (&lt;=1kb)               2
+  peak_1932 8.04360e-05 0.000822152   Promoter (&lt;=1kb)               2
+  peak_1933          NA          NA               &lt;NA&gt;            &lt;NA&gt;
+            H3K4me3_geneStart H3K4me3_geneEnd H3K4me3_geneLength
+                    &lt;integer&gt;       &lt;integer&gt;          &lt;integer&gt;
+     peak_1           3214482         3671498             457017
+     peak_2              &lt;NA&gt;            &lt;NA&gt;               &lt;NA&gt;
+     peak_3              &lt;NA&gt;            &lt;NA&gt;               &lt;NA&gt;
+     peak_4           4491390         4497354               5965
+     peak_5              &lt;NA&gt;            &lt;NA&gt;               &lt;NA&gt;
+        ...               ...             ...                ...
+  peak_1929              &lt;NA&gt;            &lt;NA&gt;               &lt;NA&gt;
+  peak_1930         181715016       181720985               5970
+  peak_1931         181763332       181827797              64466
+  peak_1932         181763332       181827797              64466
+  peak_1933              &lt;NA&gt;            &lt;NA&gt;               &lt;NA&gt;
+            H3K4me3_geneStrand H3K4me3_geneId  H3K4me3_transcriptId
+                     &lt;integer&gt;    &lt;character&gt;           &lt;character&gt;
+     peak_1                  2         497097  ENSMUST00000070533.4
+     peak_2               &lt;NA&gt;           &lt;NA&gt;                  &lt;NA&gt;
+     peak_3               &lt;NA&gt;           &lt;NA&gt;                  &lt;NA&gt;
+     peak_4                  2          20671  ENSMUST00000192650.5
+     peak_5               &lt;NA&gt;           &lt;NA&gt;                  &lt;NA&gt;
+        ...                ...            ...                   ...
+  peak_1929               &lt;NA&gt;           &lt;NA&gt;                  &lt;NA&gt;
+  peak_1930                  1          18389  ENSMUST00000071585.9
+  peak_1931                  1          17932 ENSMUST00000081125.10
+  peak_1932                  1          17932 ENSMUST00000081125.10
+  peak_1933               &lt;NA&gt;           &lt;NA&gt;                  &lt;NA&gt;
+            H3K4me3_distanceToTSS    H3K4me3_ENSEMBL H3K4me3_SYMBOL
+                        &lt;numeric&gt;        &lt;character&gt;    &lt;character&gt;
+     peak_1                     0 ENSMUSG00000051951           Xkr4
+     peak_2                    NA               &lt;NA&gt;           &lt;NA&gt;
+     peak_3                    NA               &lt;NA&gt;           &lt;NA&gt;
+     peak_4                -73878 ENSMUSG00000025902          Sox17
+     peak_5                    NA               &lt;NA&gt;           &lt;NA&gt;
+        ...                   ...                ...            ...
+  peak_1929                    NA               &lt;NA&gt;           &lt;NA&gt;
+  peak_1930                     0 ENSMUSG00000027584          Oprl1
+  peak_1931                     0 ENSMUSG00000010505           Myt1
+  peak_1932                     0 ENSMUSG00000010505           Myt1
+  peak_1933                    NA               &lt;NA&gt;           &lt;NA&gt;
+                  H3K4me3_GENENAME H3K4me3_anno H3K4me3_logFC H3K4me3_logCPM
+                       &lt;character&gt;  &lt;character&gt;     &lt;numeric&gt;      &lt;numeric&gt;
+     peak_1 X-linked Kx blood gr..     Promoter      0.607114        9.26749
+     peak_2                   &lt;NA&gt;         &lt;NA&gt;            NA             NA
+     peak_3                   &lt;NA&gt;         &lt;NA&gt;            NA             NA
+     peak_4 SRY (sex determining..   Intergenic      0.567068        7.36589
+     peak_5                   &lt;NA&gt;         &lt;NA&gt;            NA             NA
+        ...                    ...          ...           ...            ...
+  peak_1929                   &lt;NA&gt;         &lt;NA&gt;            NA             NA
+  peak_1930 opioid receptor-like 1     Promoter       1.97861        7.54088
+  peak_1931 myelin transcription..     Promoter      -2.26675        6.33414
+  peak_1932 myelin transcription..     Promoter      -2.26675        6.33414
+  peak_1933                   &lt;NA&gt;         &lt;NA&gt;            NA             NA
+            H3K4me3_F H3K4me3_PValue H3K4me3_qvalue H3K4me1_annotation
+            &lt;numeric&gt;      &lt;numeric&gt;      &lt;numeric&gt;        &lt;character&gt;
+     peak_1  135.4429    4.65079e-31    1.28968e-29               &lt;NA&gt;
+     peak_2        NA             NA             NA               &lt;NA&gt;
+     peak_3        NA             NA             NA               &lt;NA&gt;
+     peak_4   33.3348    8.04296e-09    6.25198e-08               &lt;NA&gt;
+     peak_5        NA             NA             NA   Promoter (&lt;=1kb)
+        ...       ...            ...            ...                ...
+  peak_1929        NA             NA             NA               &lt;NA&gt;
+  peak_1930   325.324    2.42880e-71    2.10325e-69   Promoter (&lt;=1kb)
+  peak_1931   316.946    1.38385e-69    1.13845e-67               &lt;NA&gt;
+  peak_1932   316.946    1.38385e-69    1.13845e-67               &lt;NA&gt;
+  peak_1933        NA             NA             NA   Promoter (&lt;=1kb)
+            H3K4me1_geneChr H3K4me1_geneStart H3K4me1_geneEnd
+                  &lt;integer&gt;         &lt;integer&gt;       &lt;integer&gt;
+     peak_1            &lt;NA&gt;              &lt;NA&gt;            &lt;NA&gt;
+     peak_2            &lt;NA&gt;              &lt;NA&gt;            &lt;NA&gt;
+     peak_3            &lt;NA&gt;              &lt;NA&gt;            &lt;NA&gt;
+     peak_4            &lt;NA&gt;              &lt;NA&gt;            &lt;NA&gt;
+     peak_5               1           4783572         4785692
+        ...             ...               ...             ...
+  peak_1929            &lt;NA&gt;              &lt;NA&gt;            &lt;NA&gt;
+  peak_1930               2         181715703       181719372
+  peak_1931            &lt;NA&gt;              &lt;NA&gt;            &lt;NA&gt;
+  peak_1932            &lt;NA&gt;              &lt;NA&gt;            &lt;NA&gt;
+  peak_1933               2         181837913       181857446
+            H3K4me1_geneLength H3K4me1_geneStrand H3K4me1_geneId
+                     &lt;integer&gt;          &lt;integer&gt;    &lt;character&gt;
+     peak_1               &lt;NA&gt;               &lt;NA&gt;           &lt;NA&gt;
+     peak_2               &lt;NA&gt;               &lt;NA&gt;           &lt;NA&gt;
+     peak_3               &lt;NA&gt;               &lt;NA&gt;           &lt;NA&gt;
+     peak_4               &lt;NA&gt;               &lt;NA&gt;           &lt;NA&gt;
+     peak_5               2121                  2          27395
+        ...                ...                ...            ...
+  peak_1929               &lt;NA&gt;               &lt;NA&gt;           &lt;NA&gt;
+  peak_1930               3670                  1          18389
+  peak_1931               &lt;NA&gt;               &lt;NA&gt;           &lt;NA&gt;
+  peak_1932               &lt;NA&gt;               &lt;NA&gt;           &lt;NA&gt;
+  peak_1933              19534                  1         245867
+            H3K4me1_transcriptId H3K4me1_distanceToTSS    H3K4me1_ENSEMBL
+                     &lt;character&gt;             &lt;numeric&gt;        &lt;character&gt;
+     peak_1                 &lt;NA&gt;                    NA               &lt;NA&gt;
+     peak_2                 &lt;NA&gt;                    NA               &lt;NA&gt;
+     peak_3                 &lt;NA&gt;                    NA               &lt;NA&gt;
+     peak_4                 &lt;NA&gt;                    NA               &lt;NA&gt;
+     peak_5 ENSMUST00000132625.1                   412 ENSMUSG00000033845
+        ...                  ...                   ...                ...
+  peak_1929                 &lt;NA&gt;                    NA               &lt;NA&gt;
+  peak_1930 ENSMUST00000184127.1                    38 ENSMUSG00000027584
+  peak_1931                 &lt;NA&gt;                    NA               &lt;NA&gt;
+  peak_1932                 &lt;NA&gt;                    NA               &lt;NA&gt;
+  peak_1933 ENSMUST00000108754.7                   318 ENSMUSG00000027589
+            H3K4me1_SYMBOL       H3K4me1_GENENAME H3K4me1_anno H3K4me1_logFC
+               &lt;character&gt;            &lt;character&gt;  &lt;character&gt;     &lt;numeric&gt;
+     peak_1           &lt;NA&gt;                   &lt;NA&gt;         &lt;NA&gt;            NA
+     peak_2           &lt;NA&gt;                   &lt;NA&gt;         &lt;NA&gt;            NA
+     peak_3           &lt;NA&gt;                   &lt;NA&gt;         &lt;NA&gt;            NA
+     peak_4           &lt;NA&gt;                   &lt;NA&gt;         &lt;NA&gt;            NA
+     peak_5         Mrpl15 mitochondrial riboso..     Promoter      0.674968
+        ...            ...                    ...          ...           ...
+  peak_1929           &lt;NA&gt;                   &lt;NA&gt;         &lt;NA&gt;            NA
+  peak_1930          Oprl1 opioid receptor-like 1     Promoter      1.086359
+  peak_1931           &lt;NA&gt;                   &lt;NA&gt;         &lt;NA&gt;            NA
+  peak_1932           &lt;NA&gt;                   &lt;NA&gt;         &lt;NA&gt;            NA
+  peak_1933         Pcmtd2 protein-L-isoasparta..     Promoter      0.767955
+            H3K4me1_logCPM H3K4me1_F H3K4me1_PValue H3K4me1_qvalue
+                 &lt;numeric&gt; &lt;numeric&gt;      &lt;numeric&gt;      &lt;numeric&gt;
+     peak_1             NA        NA             NA             NA
+     peak_2             NA        NA             NA             NA
+     peak_3             NA        NA             NA             NA
+     peak_4             NA        NA             NA             NA
+     peak_5        5.83337   12.1017     0.00050642     0.00802852
+        ...            ...       ...            ...            ...
+  peak_1929             NA        NA             NA             NA
+  peak_1930        6.13490   36.7670    1.39101e-09    1.90365e-07
+  peak_1931             NA        NA             NA             NA
+  peak_1932             NA        NA             NA             NA
+  peak_1933        6.07534   18.4909    1.72723e-05    5.94889e-04
+            H3K27me3_annotation H3K27me3_geneChr H3K27me3_geneStart
+                    &lt;character&gt;        &lt;integer&gt;          &lt;integer&gt;
+     peak_1                &lt;NA&gt;             &lt;NA&gt;               &lt;NA&gt;
+     peak_2                &lt;NA&gt;             &lt;NA&gt;               &lt;NA&gt;
+     peak_3    Promoter (&lt;=1kb)                1            4492465
+     peak_4                &lt;NA&gt;             &lt;NA&gt;               &lt;NA&gt;
+     peak_5                &lt;NA&gt;             &lt;NA&gt;               &lt;NA&gt;
+        ...                 ...              ...                ...
+  peak_1929                &lt;NA&gt;             &lt;NA&gt;               &lt;NA&gt;
+  peak_1930                &lt;NA&gt;             &lt;NA&gt;               &lt;NA&gt;
+  peak_1931                &lt;NA&gt;             &lt;NA&gt;               &lt;NA&gt;
+  peak_1932                &lt;NA&gt;             &lt;NA&gt;               &lt;NA&gt;
+  peak_1933                &lt;NA&gt;             &lt;NA&gt;               &lt;NA&gt;
+            H3K27me3_geneEnd H3K27me3_geneLength H3K27me3_geneStrand
+                   &lt;integer&gt;           &lt;integer&gt;           &lt;integer&gt;
+     peak_1             &lt;NA&gt;                &lt;NA&gt;                &lt;NA&gt;
+     peak_2             &lt;NA&gt;                &lt;NA&gt;                &lt;NA&gt;
+     peak_3          4493735                1271                   2
+     peak_4             &lt;NA&gt;                &lt;NA&gt;                &lt;NA&gt;
+     peak_5             &lt;NA&gt;                &lt;NA&gt;                &lt;NA&gt;
+        ...              ...                 ...                 ...
+  peak_1929             &lt;NA&gt;                &lt;NA&gt;                &lt;NA&gt;
+  peak_1930             &lt;NA&gt;                &lt;NA&gt;                &lt;NA&gt;
+  peak_1931             &lt;NA&gt;                &lt;NA&gt;                &lt;NA&gt;
+  peak_1932             &lt;NA&gt;                &lt;NA&gt;                &lt;NA&gt;
+  peak_1933             &lt;NA&gt;                &lt;NA&gt;                &lt;NA&gt;
+            H3K27me3_geneId H3K27me3_transcriptId H3K27me3_distanceToTSS
+                &lt;character&gt;           &lt;character&gt;              &lt;numeric&gt;
+     peak_1            &lt;NA&gt;                  &lt;NA&gt;                     NA
+     peak_2            &lt;NA&gt;                  &lt;NA&gt;                     NA
+     peak_3           20671  ENSMUST00000191939.1                      0
+     peak_4            &lt;NA&gt;                  &lt;NA&gt;                     NA
+     peak_5            &lt;NA&gt;                  &lt;NA&gt;                     NA
+        ...             ...                   ...                    ...
+  peak_1929            &lt;NA&gt;                  &lt;NA&gt;                     NA
+  peak_1930            &lt;NA&gt;                  &lt;NA&gt;                     NA
+  peak_1931            &lt;NA&gt;                  &lt;NA&gt;                     NA
+  peak_1932            &lt;NA&gt;                  &lt;NA&gt;                     NA
+  peak_1933            &lt;NA&gt;                  &lt;NA&gt;                     NA
+              H3K27me3_ENSEMBL H3K27me3_SYMBOL      H3K27me3_GENENAME
+                   &lt;character&gt;     &lt;character&gt;            &lt;character&gt;
+     peak_1               &lt;NA&gt;            &lt;NA&gt;                   &lt;NA&gt;
+     peak_2               &lt;NA&gt;            &lt;NA&gt;                   &lt;NA&gt;
+     peak_3 ENSMUSG00000025902           Sox17 SRY (sex determining..
+     peak_4               &lt;NA&gt;            &lt;NA&gt;                   &lt;NA&gt;
+     peak_5               &lt;NA&gt;            &lt;NA&gt;                   &lt;NA&gt;
+        ...                ...             ...                    ...
+  peak_1929               &lt;NA&gt;            &lt;NA&gt;                   &lt;NA&gt;
+  peak_1930               &lt;NA&gt;            &lt;NA&gt;                   &lt;NA&gt;
+  peak_1931               &lt;NA&gt;            &lt;NA&gt;                   &lt;NA&gt;
+  peak_1932               &lt;NA&gt;            &lt;NA&gt;                   &lt;NA&gt;
+  peak_1933               &lt;NA&gt;            &lt;NA&gt;                   &lt;NA&gt;
+            H3K27me3_anno H3K27me3_logFC H3K27me3_logCPM H3K27me3_F
+              &lt;character&gt;      &lt;numeric&gt;       &lt;numeric&gt;  &lt;numeric&gt;
+     peak_1          &lt;NA&gt;             NA              NA         NA
+     peak_2          &lt;NA&gt;             NA              NA         NA
+     peak_3      Promoter        -1.0597         9.04668    87.0802
+     peak_4          &lt;NA&gt;             NA              NA         NA
+     peak_5          &lt;NA&gt;             NA              NA         NA
+        ...           ...            ...             ...        ...
+  peak_1929          &lt;NA&gt;             NA              NA         NA
+  peak_1930          &lt;NA&gt;             NA              NA         NA
+  peak_1931          &lt;NA&gt;             NA              NA         NA
+  peak_1932          &lt;NA&gt;             NA              NA         NA
+  peak_1933          &lt;NA&gt;             NA              NA         NA
+            H3K27me3_PValue H3K27me3_qvalue H3K27ac_annotation H3K27ac_geneChr
+                  &lt;numeric&gt;       &lt;numeric&gt;        &lt;character&gt;       &lt;integer&gt;
+     peak_1              NA              NA   Promoter (&lt;=1kb)               1
+     peak_2              NA              NA               &lt;NA&gt;            &lt;NA&gt;
+     peak_3     1.32026e-20     5.28858e-18               &lt;NA&gt;            &lt;NA&gt;
+     peak_4              NA              NA               &lt;NA&gt;            &lt;NA&gt;
+     peak_5              NA              NA   Promoter (&lt;=1kb)               1
+        ...             ...             ...                ...             ...
+  peak_1929              NA              NA   Promoter (&lt;=1kb)               2
+  peak_1930              NA              NA   Promoter (&lt;=1kb)               2
+  peak_1931              NA              NA   Promoter (&lt;=1kb)               2
+  peak_1932              NA              NA   Promoter (&lt;=1kb)               2
+  peak_1933              NA              NA   Promoter (&lt;=1kb)               2
+            H3K27ac_geneStart H3K27ac_geneEnd H3K27ac_geneLength
+                    &lt;integer&gt;       &lt;integer&gt;          &lt;integer&gt;
+     peak_1           3214482         3671498             457017
+     peak_2              &lt;NA&gt;            &lt;NA&gt;               &lt;NA&gt;
+     peak_3              &lt;NA&gt;            &lt;NA&gt;               &lt;NA&gt;
+     peak_4              &lt;NA&gt;            &lt;NA&gt;               &lt;NA&gt;
+     peak_5           4783572         4785692               2121
+        ...               ...             ...                ...
+  peak_1929         181715016       181720985               5970
+  peak_1930         181715016       181720985               5970
+  peak_1931         181763332       181827797              64466
+  peak_1932         181763332       181827797              64466
+  peak_1933         181837854       181857461              19608
+            H3K27ac_geneStrand H3K27ac_geneId  H3K27ac_transcriptId
+                     &lt;integer&gt;    &lt;character&gt;           &lt;character&gt;
+     peak_1                  2         497097  ENSMUST00000070533.4
+     peak_2               &lt;NA&gt;           &lt;NA&gt;                  &lt;NA&gt;
+     peak_3               &lt;NA&gt;           &lt;NA&gt;                  &lt;NA&gt;
+     peak_4               &lt;NA&gt;           &lt;NA&gt;                  &lt;NA&gt;
+     peak_5                  2          27395  ENSMUST00000132625.1
+        ...                ...            ...                   ...
+  peak_1929                  1          18389  ENSMUST00000071585.9
+  peak_1930                  1          18389  ENSMUST00000071585.9
+  peak_1931                  1          17932 ENSMUST00000081125.10
+  peak_1932                  1          17932 ENSMUST00000081125.10
+  peak_1933                  1         245867 ENSMUST00000029116.13
+            H3K27ac_distanceToTSS    H3K27ac_ENSEMBL H3K27ac_SYMBOL
+                        &lt;numeric&gt;        &lt;character&gt;    &lt;character&gt;
+     peak_1                     0 ENSMUSG00000051951           Xkr4
+     peak_2                    NA               &lt;NA&gt;           &lt;NA&gt;
+     peak_3                    NA               &lt;NA&gt;           &lt;NA&gt;
+     peak_4                    NA               &lt;NA&gt;           &lt;NA&gt;
+     peak_5                     0 ENSMUSG00000033845         Mrpl15
+        ...                   ...                ...            ...
+  peak_1929                     0 ENSMUSG00000027584          Oprl1
+  peak_1930                     0 ENSMUSG00000027584          Oprl1
+  peak_1931                     0 ENSMUSG00000010505           Myt1
+  peak_1932                     0 ENSMUSG00000010505           Myt1
+  peak_1933                     0 ENSMUSG00000027589         Pcmtd2
+                  H3K27ac_GENENAME H3K27ac_anno H3K27ac_logFC H3K27ac_logCPM
+                       &lt;character&gt;  &lt;character&gt;     &lt;numeric&gt;      &lt;numeric&gt;
+     peak_1 X-linked Kx blood gr..     Promoter       1.25269        8.81735
+     peak_2                   &lt;NA&gt;         &lt;NA&gt;            NA             NA
+     peak_3                   &lt;NA&gt;         &lt;NA&gt;            NA             NA
+     peak_4                   &lt;NA&gt;         &lt;NA&gt;            NA             NA
+     peak_5 mitochondrial riboso..     Promoter       1.07555        6.41736
+        ...                    ...          ...           ...            ...
+  peak_1929 opioid receptor-like 1     Promoter      1.363849        7.84616
+  peak_1930 opioid receptor-like 1     Promoter      1.363849        7.84616
+  peak_1931 myelin transcription..     Promoter     -0.640374        9.23253
+  peak_1932 myelin transcription..     Promoter     -0.640374        9.23253
+  peak_1933 protein-L-isoasparta..     Promoter      0.791927        6.70742
+            H3K27ac_F H3K27ac_PValue H3K27ac_qvalue        name
+            &lt;numeric&gt;      &lt;numeric&gt;      &lt;numeric&gt; &lt;character&gt;
+     peak_1  151.4959    1.67395e-34    4.08130e-32      peak_1
+     peak_2        NA             NA             NA      peak_2
+     peak_3        NA             NA             NA      peak_3
+     peak_4        NA             NA             NA      peak_4
+     peak_5   26.5442    2.63728e-07    5.98352e-06      peak_5
+        ...       ...            ...            ...         ...
+  peak_1929  104.9298    1.79151e-24    2.34334e-22   peak_1929
+  peak_1930  104.9298    1.79151e-24    2.34334e-22   peak_1930
+  peak_1931   53.0025    3.64753e-13    1.90481e-11   peak_1931
+  peak_1932   53.0025    3.64753e-13    1.90481e-11   peak_1932
+  peak_1933   18.4367    1.77717e-05    2.82934e-04   peak_1933
+            Regulatory_State
+                 &lt;character&gt;
+     peak_1           Active
+     peak_2        Inc. Acc.
+     peak_3        Dec. Acc.
+     peak_4        Dec. Acc.
+     peak_5        Inc. Acc.
+        ...              ...
+  peak_1929        Inc. Acc.
+  peak_1930           Active
+  peak_1931         Silenced
+  peak_1932         Silenced
+  peak_1933        Inc. Acc.
+  -------
+  seqinfo: 21 sequences from an unspecified genome; no seqlengths</code></pre>
+</div>
+</div>
+<div id="cell-9" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="5">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(overlap<span class="sc">$</span>Regulatory_State[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Active"    "Inc. Acc." "Dec. Acc." "Dec. Acc." "Inc. Acc."</code></pre>
+</div>
+</div>
+</section>
+<section id="visualizing-multi-omics-integration" class="level2" data-number="9.5">
+<h2 data-number="9.5" class="anchored" data-anchor-id="visualizing-multi-omics-integration"><span class="header-section-number">9.5</span> Visualizing multi-omics integration</h2>
+<p>To visually prove the direct relationship between chromatin accessibility and gene expression, we will leverage the modular architecture we built using the <code>EnrichedHeatmap</code> and <code>ComplexHeatmap</code> packages.</p>
+<p>Our integration strategy will follow three clear steps:</p>
+<ol type="1">
+<li><strong>The ATAC-seq Heatmap:</strong> We will reuse our robust <code>make_EH_custom_na()</code> wrapper function (which we successfully used for our ChIP-seq and WGBS data) to plot the continuous ATAC-seq signal over our regulatory regions. Crucially, we will split the rows of this heatmap by the newly calculated <code>Regulatory_State</code> categories we just defined.</li>
+<li><strong>The RNA-seq Heatmap:</strong> Because RNA-seq data is discrete (a single fold-change value per gene) rather than continuous genomic coverage, we cannot use <code>EnrichedHeatmap</code>. Instead, we will construct a standard <code>ComplexHeatmap</code> block to visualize the corresponding gene expression changes.</li>
+<li><strong>Multi-omics Assembly:</strong> Finally, we will stitch the continuous ATAC-seq block and the discrete RNA-seq block together side-by-side. This will allow us to visually validate our biological categories (e.g., verifying that the “Active” cluster truly has high accessibility and high expression).</li>
+</ol>
+<section id="recycling-our-custom-plotting-function" class="level3" data-number="9.5.1">
+<h3 data-number="9.5.1" class="anchored" data-anchor-id="recycling-our-custom-plotting-function"><span class="header-section-number">9.5.1</span> Recycling our custom plotting function</h3>
+<p>To ensure our color scaling and formatting remains mathematically consistent across our entire course, we need to reuse the heatmap plotting function we perfected in previous notebooks (<code>custom_enrichedheatmap_plotting</code>).</p>
+<p>Rather than redundantly copy-pasting this large block of code across every notebook, we have saved it into a dedicated, external R script. We can instantly load this tool into our environment using a single <code>source()</code> command.</p>
+<div id="cell-12" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="6">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load our custom multi-omics plotting tool from the external script</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># (Note that the R kernel environment was launched from the root of the main project folder)</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"scripts/custom_enrichedheatmap_plotting.R"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<blockquote class="blockquote">
+<p>While our custom wrapper perfectly automates the most critical layout settings, there are hundreds of other parameters available to tweak almost every single pixel of our plots! If we ever need to heavily customize specific fonts, borders, grid gaps, or annotation orientations, we should explore the incredibly comprehensive <a href="https://jokergoo.github.io/ComplexHeatmap-reference/book/">official ComplexHeatmap documentation</a> and <a href="https://jokergoo.github.io/EnrichedHeatmap-reference/book/">EnrichedHeatmap documentation</a>.</p>
+</blockquote>
+</section>
+<section id="atac-seq-signal-heatmaps" class="level3" data-number="9.5.2">
+<h3 data-number="9.5.2" class="anchored" data-anchor-id="atac-seq-signal-heatmaps"><span class="header-section-number">9.5.2</span> ATAC-seq signal heatmaps</h3>
+<p>We want to stratify the E11.5 and E15.5 ATAC-seq data using our newly calculated <code>Regulatory_State</code> categories. For that, we define an annotation vector (<code>split_anno</code>) to physically split the rows of the heatmap into functional clusters, and generate a narrow, adjacent color strip (<code>anno_hm</code>) to visually label each of these distinct biological states (Active, Silenced, Repressed, etc.), just as we did previously using genomic annotation.</p>
+<div id="cell-15" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="7">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>split_state <span class="ot">&lt;-</span> overlap<span class="sc">$</span>Regulatory_State</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(split_state) <span class="ot">&lt;-</span> <span class="fu">names</span>(overlap)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">head</span>(split_state))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>     peak_1      peak_2      peak_3      peak_4      peak_5      peak_6 
+   "Active" "Inc. Acc." "Dec. Acc." "Dec. Acc." "Inc. Acc." "Dec. Acc." </code></pre>
+</div>
+</div>
+<p>Just as we did in the previous notebooks when we labeled our peaks by their physical location (Promoter vs.&nbsp;Intron) or genomic annotations (Exon, Intron, etc.), we will dynamically assign a distinct color from the <code>Set1</code> palette to each of our newly defined biological categories (Active, Silenced, Repressed, etc.).</p>
+<div id="cell-17" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="8">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Dynamically grab enough colors from Set1 for our distinct biological states</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>state_names <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(<span class="fu">sort</span>(<span class="fu">unique</span>(split_state)))</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>anno_colors <span class="ot">&lt;-</span> RColorBrewer<span class="sc">::</span><span class="fu">brewer.pal</span>(<span class="at">n =</span> <span class="fu">length</span>(state_names), <span class="at">name =</span> <span class="st">"Set1"</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(anno_colors) <span class="ot">&lt;-</span> state_names</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<blockquote class="blockquote">
+<p>Notice that we wrap our unique categories in <code>na.omit()</code>. Because our <code>case_when()</code> logic earlier included a fallback <code>NA</code> for any peaks that didn’t perfectly match our mathematical criteria, the <code>unique()</code> function would accidentally count <code>NA</code> as a distinct biological category and try to assign a color to it! <code>na.omit()</code> safely purges any missing values from the list before we build our color palette.</p>
+</blockquote>
+<div id="cell-19" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="9">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>eh_state_anno <span class="ot">&lt;-</span> <span class="fu">rowAnnotation</span>(</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">df =</span> <span class="fu">data.frame</span>(<span class="at">Regulatory_State =</span> split_state), </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="fu">list</span>(<span class="at">Regulatory_State =</span> anno_colors), </span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">show_annotation_name =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># show_legend = FALSE,  # Hides the stubborn right-side legend</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">annotation_legend_param =</span> <span class="fu">list</span>(<span class="at">Regulatory_State =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">"Regulatory State"</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>When assembling complex multi-omics figures, the <code>ComplexHeatmap</code> layout engine can force row annotation legends (like our <code>Regulatory State</code> colors) to strictly follow the continuous heatmaps on the right side of the plot. If we want to physically separate them and move our categorical metadata to the bottom while keeping the continuous heatmaps on the right, we have to bypass the automatic layout engine.</p>
+<p>To achieve this structural layout, we first disable the automatic legend generation inside our <code>eh_state_anno</code> object (by passing <code>show_legend = FALSE</code>). We then use the advanced <code>Legend()</code> function to manually reconstruct it as a standalone object (<code>lgd_state</code>), formatting it to print horizontally. We can thus inject this custom legend directly into our <code>draw()</code> function via the <code>annotation_legend_list</code> argument, giving us absolute architectural control over where it is ultimately placed.</p>
+<div id="cell-21" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="10">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>eh_atac_11h <span class="ot">&lt;-</span> <span class="fu">custom_enrichedheatmap_plotting</span>(</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">norm_mat =</span> mat_ATAC[[<span class="st">"ATAC_11half"</span>]], </span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">hm_name =</span> <span class="st">"AS-E11.5"</span>, </span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">hm_width =</span> <span class="fu">unit</span>(<span class="dv">2</span>, <span class="st">"cm"</span>), <span class="at">hm_height =</span> <span class="fu">unit</span>(<span class="dv">8</span>, <span class="st">"cm"</span>), </span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">top_anno_height =</span> <span class="fu">unit</span>(.<span class="dv">8</span>, <span class="st">"cm"</span>), </span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_fill =</span> <span class="st">"pink"</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>eh_atac_15h <span class="ot">&lt;-</span> <span class="fu">custom_enrichedheatmap_plotting</span>(</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">norm_mat =</span> mat_ATAC[[<span class="st">"ATAC_15half"</span>]], </span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">hm_name =</span> <span class="st">"AS-E15.5"</span>, </span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">hm_width =</span> <span class="fu">unit</span>(<span class="dv">2</span>, <span class="st">"cm"</span>), <span class="at">hm_height =</span> <span class="fu">unit</span>(<span class="dv">8</span>, <span class="st">"cm"</span>), </span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">top_anno_height =</span> <span class="fu">unit</span>(.<span class="dv">8</span>, <span class="st">"cm"</span>), </span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_fill =</span> <span class="st">"paleturquoise"</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Manually build the Regulatory State legend so we can force it to the bottom</span></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a><span class="co"># lgd_state &lt;- Legend(</span></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a><span class="co">#   labels = names(anno_colors), </span></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a><span class="co">#   legend_gp = gpar(fill = anno_colors), </span></span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a><span class="co">#   title = "Regulatory State", </span></span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a><span class="co">#   direction = "horizontal")</span></span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a><span class="fu">draw</span>(</span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>  eh_state_anno <span class="sc">+</span> eh_atac_11h <span class="sc">+</span> eh_atac_15h, </span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>  <span class="co"># annotation_legend_list = lgd_state, </span></span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">split =</span> split_state, </span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05-atac_rna_integration_files/figure-html/cell-11-output-1.png" width="420" height="420" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="interpreting-atac-seq-accessibility-clusters" class="level3" data-number="9.5.3">
+<h3 data-number="9.5.3" class="anchored" data-anchor-id="interpreting-atac-seq-accessibility-clusters"><span class="header-section-number">9.5.3</span> Interpreting ATAC-seq accessibility clusters</h3>
+<p>As expected, the categories defined by decreasing accessibility (<code>Dec. Acc.</code>, <code>Incongruent</code>, and <code>Silenced</code>) show a <em>clear, global loss of ATAC signal</em> as we transition from E11.5 to E15.5. The chromatin in these regions is physically <em>shutting down</em> during development. Conversely, the categories defined by increasing accessibility (<code>Active</code>, <code>Inc. Acc.</code>, and <code>Repressed</code>) clearly gain intensity in E15.5 (the E15.5 heatmap scales up to 2.3, whereas E11.5 only goes to 0.7).</p>
+<p>Counter-intuitively, the raw ATAC signal in the <code>Dec. Acc.</code> cluster (at E11.5) appears significantly stronger and physically <em>wider</em> than the signal seen in the <code>Inc. Acc.</code> cluster (at E15.5). This suggests that the open regulatory regions driving early developmental states (E11.5) might exist in massive, highly accessible “super-enhancer” clusters, whereas the newly opening regions required later in development (E15.5) are much more tightly and narrowly focused.</p>
+<p>We often assume that regions driving active, increasing gene expression (the red <code>Active</code> cluster) would have the most blindingly intense ATAC signal. However, looking at the heatmap, the signal intensity is surprisingly moderate compared to the <code>Dec. Acc.</code> group. This confirms that a regulatory element doesn’t need to be a massive, gaping hole in the chromatin to successfully drive gene expression; it only needs to be open <em>just enough</em> to let the specific transcription machinery dock.</p>
+</section>
+<section id="rna-seq-expression-heatmap" class="level3" data-number="9.5.4">
+<h3 data-number="9.5.4" class="anchored" data-anchor-id="rna-seq-expression-heatmap"><span class="header-section-number">9.5.4</span> RNA-seq expression heatmap</h3>
+<p>Our RNA-seq data consists of discrete, normalized expression values (one mathematical value per gene, per sample). Therefore, just as we did in <a href="../notebooks/03-chip_rna_visualization.html">Notebook 3</a>, we will map this data onto a standard <code>ComplexHeatmap</code> block rather than an <code>EnrichedHeatmap</code>. To keep our analysis biologically consistent, we will continue to stratify these rows using the exact same <code>split_state</code> categories we just applied to the ATAC-seq data, allowing us to observe how gene expression behaves within each of our defined regulatory states.</p>
+<div id="cell-24" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="11">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">colnames</span>(mat_RNA))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "RNA_11half_1" "RNA_11half_2" "RNA_15half_1" "RNA_15half_2"</code></pre>
+</div>
+</div>
+<div id="cell-25" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="12">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">100</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Refactor/rename the RNA matrix column headers</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>rna_groups <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">grepl</span>(<span class="st">"11half"</span>, <span class="fu">colnames</span>(mat_RNA)), <span class="st">"E11.5"</span>, <span class="st">"E15.5"</span>)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>rna_hm <span class="ot">&lt;-</span> <span class="fu">Heatmap</span>(</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">matrix =</span> mat_RNA, </span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">row_split =</span> split_state,  <span class="co"># Stratify rows by biological category</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">cluster_columns =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">cluster_rows =</span> <span class="cn">FALSE</span>,  <span class="co"># CRITICAL: prevents clustering from crashing on NA values!</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">show_row_names =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">show_column_names =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">row_title_rot =</span> <span class="dv">0</span>,  <span class="co"># Forces the split category labels to print horizontally</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">show_row_dend =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">na_col =</span> <span class="st">"grey"</span>,  <span class="co"># Grey out regions with no RNA data</span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">width =</span> <span class="fu">unit</span>(<span class="dv">2</span>, <span class="st">"cm"</span>), <span class="at">height =</span> <span class="fu">unit</span>(<span class="dv">8</span>, <span class="st">"cm"</span>), </span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">top_annotation =</span> <span class="fu">HeatmapAnnotation</span>(</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">group =</span> rna_groups, </span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">show_annotation_name =</span> <span class="cn">FALSE</span>), </span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">heatmap_legend_param =</span> <span class="fu">list</span>(</span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">at =</span> scales<span class="sc">::</span><span class="fu">pretty_breaks</span>(<span class="at">n =</span> <span class="dv">2</span>)(</span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>      <span class="fu">range</span>(mat_RNA, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)),</span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels_gp =</span> <span class="fu">gpar</span>(<span class="at">fontsize =</span> <span class="dv">7</span>), </span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"log2(FC)"</span>))</span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a><span class="fu">draw</span>(rna_hm, <span class="at">merge_legend =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05-atac_rna_integration_files/figure-html/cell-13-output-1.png" width="420" height="420" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><em>Notice that we add <code>merge_legend = TRUE</code> to our final <code>draw()</code> command. While this parameter is typically used to deduplicate mathematically identical colorbars, it also serves as a brilliant layout trick. Because our new composite figure mixes three disparate types of legends (the main heatmap scales, a row annotation for biological state, and a column annotation for the RNA stages), the default layout algorithm will often scatter them side-by-side into different zones on the page. This command acts as a strict architectural override, forcing the engine to collect every single legend and pack them into one beautifully stacked vertical column on the right.</em></p>
+</section>
+<section id="rna-seq-expression-patterns" class="level3" data-number="9.5.5">
+<h3 data-number="9.5.5" class="anchored" data-anchor-id="rna-seq-expression-patterns"><span class="header-section-number">9.5.5</span> RNA-seq expression patterns</h3>
+<p>Looking specifically at the RNA-seq heatmap block, we can cleanly visualize the distinct transcriptional fates of our genes during development:</p>
+<ol type="1">
+<li><p><strong>The Upregulated Genes (Red):</strong> The <code>Active</code> and <code>Incongruent</code> clusters display a striking shift from a pale E11.5 baseline to a deep red E15.5 state. This visually confirms that the genes linked to these regulatory regions are strongly upregulated and actively turning on as embryonic development progresses.</p></li>
+<li><p><strong>The Downregulated Genes (Blue):</strong> Conversely, the <code>Silenced</code> and <code>Repressed</code> clusters transition from the E11.5 baseline into a deep blue state in E15.5. This vividly demonstrates transcriptional shutdown, confirming that these specific genes are being deactivated in the later embryonic stage.</p></li>
+<li><p><strong>The Transcriptional “Grey Zones”:</strong> Notice that the massive <code>Dec. Acc.</code> and <code>Inc. Acc.</code> blocks are completely grey (<code>NA</code>). This perfectly visualizes our mathematical filtering: these specific categories represent dynamic regions that lack any significant corresponding gene expression data. They remain transcriptionally silent or statistically insignificant in our RNA analysis.</p></li>
+</ol>
+</section>
+<section id="constructing-the-composite-multi-omics-heatmap" class="level3" data-number="9.5.6">
+<h3 data-number="9.5.6" class="anchored" data-anchor-id="constructing-the-composite-multi-omics-heatmap"><span class="header-section-number">9.5.6</span> Constructing the composite multi-omics heatmap</h3>
+<p>Using the <code>+</code> operator provided by <code>ComplexHeatmap</code>, we can now concatenate our colored biological annotation bar, the continuous ATAC-seq accessibility heatmaps, and the discrete RNA-seq expression heatmap into a single, highly informative composite figure.</p>
+<p>By passing our <code>split_state</code> categories directly into the global <code>draw()</code> engine (which <strong>overrides</strong> individual settings), the entire composite visualization is perfectly stratified, allowing us to seamlessly validate the functional relationship between chromatin state and gene expression in a single glance.</p>
+<div id="cell-29" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="13">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>composite_ht <span class="ot">&lt;-</span> eh_state_anno <span class="sc">+</span> eh_atac_11h <span class="sc">+</span> eh_atac_15h <span class="sc">+</span> rna_hm</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">draw</span>(</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  composite_ht, </span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">split =</span> split_state,  <span class="co"># global splitting</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># annotation_legend_list = lgd_state, </span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># annotation_legend_side = "right", </span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">heatmap_legend_side =</span> <span class="st">"bottom"</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05-atac_rna_integration_files/figure-html/cell-14-output-1.png" width="420" height="420" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="reordering-biological-categories" class="level3" data-number="9.5.7">
+<h3 data-number="9.5.7" class="anchored" data-anchor-id="reordering-biological-categories"><span class="header-section-number">9.5.7</span> Reordering biological categories</h3>
+<p><strong>Exercise:</strong> Can you change the order of the heatmap regions to follow this exact biological hierarchy? 1. Active 2. Repressed 3. Silent 4. Incongruent 5. Dec.&nbsp;Acc. 6. Inc.&nbsp;Acc.</p>
+<p><em><strong>Hint:</strong></em> The <code>split</code> argument in the <code>draw()</code> function automatically orders the heatmap splits based on the factor levels of the provided grouping variable (<code>split_anno</code>).</p>
+<p>To reorder the layout, we convert our <code>split_state</code> text vector into a formal R <code>factor</code>, explicitly defining the <code>levels</code> in our exact desired biological hierarchy.</p>
+<p>Because <code>ComplexHeatmap</code> is highly optimized, its layout engine will automatically detect these new factor levels and physically reorder the rows to match. The best part of this object-oriented design is that we <strong>do not</strong> need to recompute any of the heavy ATAC or RNA heatmaps! We simply re-instantiate the lightweight <code>eh_state_anno</code> color bar so it learns the new order, stitch it right back onto our existing heatmap objects, and effortlessly render the plot.</p>
+<div id="cell-31" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="14">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">unique</span>(split_state))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Active"      "Inc. Acc."   "Dec. Acc."   "Incongruent" "Silenced"   
+[6] "Repressed"  </code></pre>
+</div>
+</div>
+<div id="cell-32" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="15">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert to a strict factor with the desired hierarchical order</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>split_state_reordered <span class="ot">&lt;-</span> <span class="fu">factor</span>(</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  split_state, </span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">levels =</span> <span class="fu">c</span>(</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Active"</span>, <span class="st">"Repressed"</span>, <span class="st">"Silenced"</span>, <span class="st">"Incongruent"</span>, <span class="st">"Dec. Acc."</span>, <span class="st">"Inc. Acc."</span>))</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Re-instantiate the row annotation ONLY so it learns the new order</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>eh_state_anno <span class="ot">&lt;-</span> <span class="fu">rowAnnotation</span>(</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">df =</span> <span class="fu">data.frame</span>(<span class="at">Regulatory_State =</span> split_state_reordered), </span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="fu">list</span>(<span class="at">Regulatory_State =</span> anno_colors), </span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">show_annotation_name =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">annotation_legend_param =</span> <span class="fu">list</span>(<span class="at">Regulatory_State =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">"Regulatory State"</span>)))</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="co"># 3Redraw the composite plot</span></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>composite_ht_2 <span class="ot">&lt;-</span> eh_state_anno <span class="sc">+</span> eh_atac_11h <span class="sc">+</span> eh_atac_15h <span class="sc">+</span> rna_hm</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section>
+<section id="global-vsualization-settings" class="level3" data-number="9.5.8">
+<h3 data-number="9.5.8" class="anchored" data-anchor-id="global-vsualization-settings"><span class="header-section-number">9.5.8</span> Global vsualization settings</h3>
+<p>Instead of manually tweaking the borders, title padding, and legend spacing for every single heatmap we create, <code>ComplexHeatmap</code> provides a powerful global options engine called <code>ht_opt</code>. By configuring these aesthetic rules just once per R session, they will automatically apply to every subsequent plot, guaranteeing a polished, publication-ready look with minimal code.</p>
+<div id="cell-34" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="16">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Shrinks the empty space between the main heatmap and its title (e.g., "ATAC-E11.5")</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>ht_opt<span class="sc">$</span>TITLE_PADDING <span class="ot">&lt;-</span> <span class="fu">unit</span>(<span class="dv">1</span>, <span class="st">"mm"</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Controls the spacing between multiple different legend boxes so they don't overlap</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>ht_opt<span class="sc">$</span>legend_gap <span class="ot">&lt;-</span> <span class="fu">unit</span>(<span class="dv">3</span>, <span class="st">"mm"</span>)</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Shrinks the physical height of the colored squares/bars inside the legend</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>ht_opt<span class="sc">$</span>legend_grid_height <span class="ot">&lt;-</span> <span class="fu">unit</span>(<span class="dv">2</span>, <span class="st">"mm"</span>)</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Shrinks the physical width of the colored squares/bars inside the legend</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>ht_opt<span class="sc">$</span>legend_grid_width <span class="ot">&lt;-</span> <span class="fu">unit</span>(<span class="dv">2</span>, <span class="st">"mm"</span>)</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Squeezes the empty gap between the main heatmap body and the legend itself</span></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>ht_opt<span class="sc">$</span>HEATMAP_LEGEND_PADDING <span class="ot">&lt;-</span> <span class="fu">unit</span>(<span class="dv">1</span>, <span class="st">"mm"</span>)</span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Automatically draws a clean, sharp black border around every heatmap matrix!</span></span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>ht_opt<span class="sc">$</span>heatmap_border <span class="ot">&lt;-</span> <span class="cn">TRUE</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div id="cell-35" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="17">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">draw</span>(composite_ht_2, <span class="at">split =</span> split_state_reordered, <span class="at">heatmap_legend_side =</span> <span class="st">"bottom"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05-atac_rna_integration_files/figure-html/cell-18-output-1.png" width="420" height="420" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="decoding-the-multi-omics-landscape" class="level3" data-number="9.5.9">
+<h3 data-number="9.5.9" class="anchored" data-anchor-id="decoding-the-multi-omics-landscape"><span class="header-section-number">9.5.9</span> Decoding the Multi-Omics landscape</h3>
+<p>By perfectly aligning continuous chromatin accessibility (ATAC-seq) with discrete transcriptional output (RNA-seq), this composite heatmap reveals the stunning complexity of epigenetic regulation during embryonic development. We can visually validate several profound biological paradigms in a single glance:</p>
+<section id="the-classic-paradigms-active-silenced" class="level4" data-number="9.5.9.1">
+<h4 data-number="9.5.9.1" class="anchored" data-anchor-id="the-classic-paradigms-active-silenced"><span class="header-section-number">9.5.9.1</span> The Classic Paradigms (Active &amp; Silenced)</h4>
+<p>The <strong>Active</strong> (Red) and <strong>Silenced</strong> (Yellow) clusters clearly demonstrate the classic “central dogma” of epigenetics: - <strong>Active:</strong> We see the ATAC signal physically widening and intensifying in E15.5, allowing the transcription machinery to dock. This structurally drives the massive surge in gene expression visually confirmed in the red RNA-seq block. - <strong>Silenced:</strong> Conversely, we see the chromatin physically condensing and shutting down (loss of ATAC signal in E15.5), which directly results in the severe deactivation of the corresponding genes (blue RNA-seq block).</p>
+</section>
+<section id="the-repressive-elements-repressed" class="level4" data-number="9.5.9.2">
+<h4 data-number="9.5.9.2" class="anchored" data-anchor-id="the-repressive-elements-repressed"><span class="header-section-number">9.5.9.2</span> The Repressive Elements (Repressed)</h4>
+<p>Biology is rarely perfectly linear. In the <strong>Repressed</strong> (Orange) cluster, the chromatin actually <em>gains</em> massive accessibility in E15.5. However, the corresponding RNA-seq block turns deep blue, indicating the gene is strongly shut off. This visually proves that newly opened DNA is not always an activator; these specific regions are likely acting as docking sites for powerful <strong>transcriptional repressors</strong>.</p>
+</section>
+<section id="the-decoupled-elements-incongruent" class="level4" data-number="9.5.9.3">
+<h4 data-number="9.5.9.3" class="anchored" data-anchor-id="the-decoupled-elements-incongruent"><span class="header-section-number">9.5.9.3</span> The Decoupled Elements (Incongruent)</h4>
+<p>The <strong>Incongruent</strong> (Purple) cluster shows the exact opposite paradox: the local chromatin is physically closing down (loss of ATAC signal), yet the gene strongly turns on (red RNA). This implies that these genes are no longer dependent on this specific local element, and are likely being driven by a different, distant “super-enhancer” looping in from elsewhere in the genome.</p>
+</section>
+<section id="the-structural-dna-dec.-acc.-inc.-acc." class="level4" data-number="9.5.9.4">
+<h4 data-number="9.5.9.4" class="anchored" data-anchor-id="the-structural-dna-dec.-acc.-inc.-acc."><span class="header-section-number">9.5.9.4</span> The Structural DNA (Dec.&nbsp;Acc. &amp; Inc.&nbsp;Acc.)</h4>
+<p>Finally, the massive bottom blocks represent regions undergoing massive structural changes (violent opening or closing of chromatin) without any corresponding significant gene expression (grey RNA). This perfectly illustrates a critical lesson: <strong>chromatin accessibility does not guarantee transcription</strong>. Many of these regions are structural elements, distant intergenic enhancers preparing for a later developmental stage, or regions driving non-coding RNAs not captured in our matrix.</p>
+
+
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../notebooks/04-genomic_overlap_matrices.html" class="pagination-link" aria-label="Overlapping all the datasets">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Overlapping all the datasets</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../notebooks/06-multiomics_integration.html" class="pagination-link" aria-label="Integrating ATAC, ChIP, and RNA sequencing data">
+        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Integrating ATAC, ChIP, and RNA sequencing data</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -1,0 +1,1578 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>7&nbsp; ChIP and RNA sequencing data plots – Biology-Informed Multi-Omics Integration</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../notebooks/04-genomic_overlap_matrices.html" rel="next">
+<link href="../notebooks/02-atac_heatmaps.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-5630e6732664d48c7cde3b526013eeb9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../notebooks/01-omics_data_structures.html">II. Data Structures &amp; Visualization</a></li><li class="breadcrumb-item"><a href="../notebooks/03-chip_rna_visualization.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">ChIP and RNA sequencing data plots</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Biology-Informed Multi-Omics Integration</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">index.html</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">I. Theoretical Reference &amp; Notes</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/epigenetic_analysis_reference_guide.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Epigenetic Analysis Reference Guide</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/normalization_models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Normalization models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/enrichment_analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Functional Enrichment Analysis: Multi-Omics Integration</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">II. Data Structures &amp; Visualization</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/01-omics_data_structures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Datasets, <code>SummarizedExperiment</code>, and <code>GRanges</code></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/02-atac_heatmaps.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Enriched Heatmaps and identification of regions with different activities</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/03-chip_rna_visualization.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">ChIP and RNA sequencing data plots</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">III. Multi-Omics Integration</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/04-genomic_overlap_matrices.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Overlapping all the datasets</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/05-atac_rna_integration.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Integrating ATAC and RNA sequencing data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/06-multiomics_integration.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Integrating ATAC, ChIP, and RNA sequencing data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/07-functional_enrichment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Functional enrichment of genomic regions</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">7.1</span> Learning objectives</a></li>
+  <li><a href="#loading-libraries" id="toc-loading-libraries" class="nav-link" data-scroll-target="#loading-libraries"><span class="header-section-number">7.2</span> Loading libraries</a></li>
+  <li><a href="#preparing-the-chip-seq-se-object" id="toc-preparing-the-chip-seq-se-object" class="nav-link" data-scroll-target="#preparing-the-chip-seq-se-object"><span class="header-section-number">7.3</span> Preparing the ChIP-seq SE object</a>
+  <ul class="collapse">
+  <li><a href="#loading-the-rds-files" id="toc-loading-the-rds-files" class="nav-link" data-scroll-target="#loading-the-rds-files"><span class="header-section-number">7.3.1</span> Loading the RDS files</a></li>
+  <li><a href="#exploratory-data-analysis" id="toc-exploratory-data-analysis" class="nav-link" data-scroll-target="#exploratory-data-analysis"><span class="header-section-number">7.3.2</span> Exploratory data analysis</a></li>
+  <li><a href="#interpreting-chip-seq-peak-widths" id="toc-interpreting-chip-seq-peak-widths" class="nav-link" data-scroll-target="#interpreting-chip-seq-peak-widths"><span class="header-section-number">7.3.3</span> Interpreting ChIP-seq peak widths</a></li>
+  </ul></li>
+  <li><a href="#question-1" id="toc-question-1" class="nav-link" data-scroll-target="#question-1"><span class="header-section-number">7.4</span> Question 1</a>
+  <ul class="collapse">
+  <li><a href="#proposed-strategy" id="toc-proposed-strategy" class="nav-link" data-scroll-target="#proposed-strategy"><span class="header-section-number">7.4.1</span> Proposed strategy</a></li>
+  <li><a href="#defining-anchor-regions-from-differentially-accessible-chromatin" id="toc-defining-anchor-regions-from-differentially-accessible-chromatin" class="nav-link" data-scroll-target="#defining-anchor-regions-from-differentially-accessible-chromatin"><span class="header-section-number">7.4.2</span> Defining anchor regions from differentially accessible chromatin</a></li>
+  <li><a href="#extracting-and-normalizing-continuous-chip-seq-signal" id="toc-extracting-and-normalizing-continuous-chip-seq-signal" class="nav-link" data-scroll-target="#extracting-and-normalizing-continuous-chip-seq-signal"><span class="header-section-number">7.4.3</span> Extracting and normalizing continuous ChIP-seq signal</a></li>
+  <li><a href="#constructing-and-combining-the-heatmaps" id="toc-constructing-and-combining-the-heatmaps" class="nav-link" data-scroll-target="#constructing-and-combining-the-heatmaps"><span class="header-section-number">7.4.4</span> Constructing and combining the heatmaps</a></li>
+  <li><a href="#analyzing-histone-mark-distributions-across-genomic-features" id="toc-analyzing-histone-mark-distributions-across-genomic-features" class="nav-link" data-scroll-target="#analyzing-histone-mark-distributions-across-genomic-features"><span class="header-section-number">7.4.5</span> Analyzing histone mark distributions across genomic features</a></li>
+  </ul></li>
+  <li><a href="#analysis-of-the-rna-seq-data" id="toc-analysis-of-the-rna-seq-data" class="nav-link" data-scroll-target="#analysis-of-the-rna-seq-data"><span class="header-section-number">7.5</span> Analysis of the RNA-seq data</a>
+  <ul class="collapse">
+  <li><a href="#loading-the-rna-seq-se-object" id="toc-loading-the-rna-seq-se-object" class="nav-link" data-scroll-target="#loading-the-rna-seq-se-object"><span class="header-section-number">7.5.1</span> Loading the RNA-seq SE object</a></li>
+  <li><a href="#heatmap-of-log-normalized-counts" id="toc-heatmap-of-log-normalized-counts" class="nav-link" data-scroll-target="#heatmap-of-log-normalized-counts"><span class="header-section-number">7.5.2</span> Heatmap of Log-normalized counts</a></li>
+  <li><a href="#changing-visualization-to-relative-expression" id="toc-changing-visualization-to-relative-expression" class="nav-link" data-scroll-target="#changing-visualization-to-relative-expression"><span class="header-section-number">7.5.3</span> Changing visualization to relative expression</a></li>
+  <li><a href="#adding-column-annotations" id="toc-adding-column-annotations" class="nav-link" data-scroll-target="#adding-column-annotations"><span class="header-section-number">7.5.4</span> Adding column annotations</a></li>
+  </ul></li>
+  <li><a href="#question-2" id="toc-question-2" class="nav-link" data-scroll-target="#question-2"><span class="header-section-number">7.6</span> Question 2</a>
+  <ul class="collapse">
+  <li><a href="#a-note-on-visualizing-expression-changes" id="toc-a-note-on-visualizing-expression-changes" class="nav-link" data-scroll-target="#a-note-on-visualizing-expression-changes"><span class="header-section-number">7.6.1</span> A note on visualizing expression changes</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../notebooks/01-omics_data_structures.html">II. Data Structures &amp; Visualization</a></li><li class="breadcrumb-item"><a href="../notebooks/03-chip_rna_visualization.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">ChIP and RNA sequencing data plots</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">ChIP and RNA sequencing data plots</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="learning-objectives" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">7.1</span> Learning objectives</h2>
+<ul>
+<li>Load and explore <code>SummarizedExperiment</code> objects for ChIP-seq and RNA-seq data.</li>
+<li>Visualize ChIP-seq signal enrichment across genomic regions using the <code>EnrichedHeatmap</code> package.</li>
+<li>Generate and interpret RNA-seq expression heatmaps using the <code>ComplexHeatmap</code> package.</li>
+<li>Transform RNA-seq data to highlight differential expression using log fold-change.</li>
+<li>Annotate heatmaps with sample metadata to enhance interpretability.</li>
+<li>Split and visualize RNA-seq data based on gene regulation status (up- or down-regulated).</li>
+<li>Compare and reflect on the similarities and differences in visualization techniques between ChIP-seq and RNA-seq data.</li>
+</ul>
+</section>
+<section id="loading-libraries" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="loading-libraries"><span class="header-section-number">7.2</span> Loading libraries</h2>
+<div id="cell-2" class="cell" data-message="false" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="1">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">suppressWarnings</span>({</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(SummarizedExperiment)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(GenomicRanges)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(EnrichedHeatmap)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(ComplexHeatmap)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(gUtils)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(rtracklayer)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(circlize)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>}))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section>
+<section id="preparing-the-chip-seq-se-object" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="preparing-the-chip-seq-se-object"><span class="header-section-number">7.3</span> Preparing the ChIP-seq SE object</h2>
+<section id="loading-the-rds-files" class="level3" data-number="7.3.1">
+<h3 data-number="7.3.1" class="anchored" data-anchor-id="loading-the-rds-files"><span class="header-section-number">7.3.1</span> Loading the RDS files</h3>
+<p>As in the first notebook, we load the <code>SummarizedExperiment</code> for the ChIP-seq data.</p>
+<div id="cell-4" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="2">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>h3k4me3 <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/h3k4me3_se.rds"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>h3k4me1 <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/h3k4me1_se.rds"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>h3k27me3 <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/h3k27me3_se.rds"</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>h3k27ac <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/h3k27ac_se.rds"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>We check the structure of one of these objects.</p>
+<div id="cell-6" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="3">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>h3k4me3</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<pre><code>class: RangedSummarizedExperiment 
+dim: 4936 4 
+metadata(2): final.ext param
+assays(2): counts logCPM
+rownames: NULL
+rowData names(18): annotation geneChr ... PValue qvalue
+colnames: NULL
+colData names(6): bam.files totals ... group norm.factors</code></pre>
+</div>
+</div>
+<div id="cell-7" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="4">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colData</span>(h3k4me3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<pre><code>DataFrame with 4 rows and 6 columns
+               bam.files    totals       ext      rlen       group norm.factors
+             &lt;character&gt; &lt;integer&gt; &lt;integer&gt; &lt;integer&gt; &lt;character&gt;    &lt;numeric&gt;
+1 ../data/H3K4me3_11ha..  38077388       100        36      11half     0.922457
+2 ../data/H3K4me3_11ha..  33020628       100        36      11half     0.852379
+3 ../data/H3K4me3_15ha..  78731363       100        49      15half     1.119011
+4 ../data/H3K4me3_15ha..  91317562       100        49      15half     1.136546</code></pre>
+</div>
+</div>
+<div id="cell-8" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="5">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>rd_h3k4me3 <span class="ot">&lt;-</span> <span class="fu">rowRanges</span>(h3k4me3)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>rd_h3k4me3</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<pre><code>GRanges object with 4936 ranges and 18 metadata columns:
+         seqnames              ranges strand |             annotation   geneChr
+            &lt;Rle&gt;           &lt;IRanges&gt;  &lt;Rle&gt; |            &lt;character&gt; &lt;integer&gt;
+     [1]     chr1     3667266-3667503      * | Intron (ENSMUST00000..         1
+     [2]     chr1     3668238-3668743      * | Intron (ENSMUST00000..         1
+     [3]     chr1     3669041-3672787      * |       Promoter (&lt;=1kb)         1
+     [4]     chr1     4491514-4493868      * |       Promoter (&lt;=1kb)         1
+     [5]     chr1     4496194-4496402      * |       Promoter (&lt;=1kb)         1
+     ...      ...                 ...    ... .                    ...       ...
+  [4932]     chr2 181765975-181766393      * |       Promoter (&lt;=1kb)         2
+  [4933]     chr2 181766549-181770566      * |       Promoter (&lt;=1kb)         2
+  [4934]     chr2 181837343-181839141      * |       Promoter (&lt;=1kb)         2
+  [4935]     chr2 181863316-181865849      * |       Promoter (&lt;=1kb)         2
+  [4936]     chr2 181953101-181953592      * |      Distal Intergenic         2
+         geneStart   geneEnd geneLength geneStrand      geneId
+         &lt;integer&gt; &lt;integer&gt;  &lt;integer&gt;  &lt;integer&gt; &lt;character&gt;
+     [1]   3214482   3671498     457017          2      497097
+     [2]   3214482   3671498     457017          2      497097
+     [3]   3214482   3671498     457017          2      497097
+     [4]   4492465   4493735       1271          2       20671
+     [5]   4491713   4496363       4651          2       20671
+     ...       ...       ...        ...        ...         ...
+  [4932] 181767029 181795892      28864          1       17932
+  [4933] 181767029 181795892      28864          1       17932
+  [4934] 181837854 181857461      19608          1      245867
+  [4935] 181864337 181870830       6494          1       67005
+  [4936] 181991129 182003861      12733          1      672125
+                  transcriptId distanceToTSS            ENSEMBL      SYMBOL
+                   &lt;character&gt;     &lt;numeric&gt;        &lt;character&gt; &lt;character&gt;
+     [1]  ENSMUST00000070533.4          3995 ENSMUSG00000051951        Xkr4
+     [2]  ENSMUST00000070533.4          2755 ENSMUSG00000051951        Xkr4
+     [3]  ENSMUST00000070533.4             0 ENSMUSG00000051951        Xkr4
+     [4]  ENSMUST00000191939.1             0 ENSMUSG00000025902       Sox17
+     [5]  ENSMUST00000116652.7             0 ENSMUSG00000025902       Sox17
+     ...                   ...           ...                ...         ...
+  [4932]  ENSMUST00000156190.7          -636 ENSMUSG00000010505        Myt1
+  [4933]  ENSMUST00000156190.7             0 ENSMUSG00000010505        Myt1
+  [4934] ENSMUST00000029116.13             0 ENSMUSG00000027589      Pcmtd2
+  [4935]  ENSMUST00000039551.8             0 ENSMUSG00000038628      Polr3k
+  [4936]  ENSMUST00000071760.7        -37537 ENSMUSG00000098505     Gm14496
+                       GENENAME        anno       logFC    logCPM           F
+                    &lt;character&gt; &lt;character&gt;   &lt;numeric&gt; &lt;numeric&gt;   &lt;numeric&gt;
+     [1] X-linked Kx blood gr..      Intron   -0.373770   2.28064   0.2530847
+     [2] X-linked Kx blood gr..      Intron    1.861338   3.79682  16.3418021
+     [3] X-linked Kx blood gr..    Promoter    0.607114   9.26749 135.4429255
+     [4] SRY (sex determining..    Promoter   -0.259414   6.39021   3.9624216
+     [5] SRY (sex determining..    Promoter   -0.195908   2.51613   0.0873602
+     ...                    ...         ...         ...       ...         ...
+  [4932] myelin transcription..    Promoter -1.42147743   3.08745  10.2690521
+  [4933] myelin transcription..    Promoter  0.50942696   8.25885  50.8903963
+  [4934] protein-L-isoasparta..    Promoter -0.00811134   7.80433   0.0102742
+  [4935] polymerase (RNA) III..    Promoter -0.13758781   8.78019   5.6852857
+  [4936]   predicted gene 14496  Intergenic  0.40807614   4.43807   1.9921177
+              PValue      qvalue
+           &lt;numeric&gt;   &lt;numeric&gt;
+     [1] 6.14925e-01 7.15697e-01
+     [2] 5.33720e-05 2.50660e-04
+     [3] 4.65079e-31 1.28968e-29
+     [4] 4.65601e-02 9.65633e-02
+     [5] 7.67568e-01 8.34518e-01
+     ...         ...         ...
+  [4932] 1.35802e-03 4.81764e-03
+  [4933] 1.06052e-12 1.19242e-11
+  [4934] 9.19266e-01 9.43150e-01
+  [4935] 1.71305e-02 4.32734e-02
+  [4936] 1.58158e-01 2.56714e-01
+  -------
+  seqinfo: 33 sequences from an unspecified genome; no seqlengths</code></pre>
+</div>
+</div>
+</section>
+<section id="exploratory-data-analysis" class="level3" data-number="7.3.2">
+<h3 data-number="7.3.2" class="anchored" data-anchor-id="exploratory-data-analysis"><span class="header-section-number">7.3.2</span> Exploratory data analysis</h3>
+<p>Histone methylation (especially active marks like H3K4me3 at promoters) can have very sharp, well-defined boundaries compared to the broader regions of accessibility we see in ATAC-seq or repressive marks.</p>
+<div id="cell-10" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="6">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Summary statistics of H3K4me3 peak width:"</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">width</span>(rd_h3k4me3))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Summary statistics of H3K4me3 peak width:</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  191.0   279.8   749.0  1283.9  2009.0 18723.0 </code></pre>
+</div>
+</div>
+<p>We can actually directly compare the peak width distributions and “sharpness” for all the ChIP-seq datasets using histograms.</p>
+<div id="cell-12" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="7">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a named list of your 4 SE objects</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>se_list <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"H3K4me3"</span> <span class="ot">=</span> h3k4me3,</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"H3K4me1"</span> <span class="ot">=</span> h3k4me1,</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"H3K27me3"</span> <span class="ot">=</span> h3k27me3,</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"H3K27ac"</span> <span class="ot">=</span> h3k27ac)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the plotting layout to 2 rows by 2 columns</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Loop through the list</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (mark_name <span class="cf">in</span> <span class="fu">names</span>(se_list)) {</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Extract the specific SE object</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>  se <span class="ot">&lt;-</span> se_list[[mark_name]]</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Extract the genomic ranges</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>  gr <span class="ot">&lt;-</span> <span class="fu">rowRanges</span>(se)</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Plot the histogram</span></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hist</span>(</span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">width</span>(gr),</span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="dv">10000</span>,</span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">3000</span>),    <span class="co"># Zoom in on widths up to 3000bp</span></span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">main =</span> <span class="fu">paste</span>(<span class="st">"Peak Widths:"</span>, mark_name),</span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">xlab =</span> <span class="st">"Width (bp)"</span></span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Reset the layout back to a standard 1x1 plot when done</span></span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="03-chip_rna_visualization_files/figure-html/cell-8-output-1.png" width="420" height="420" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="interpreting-chip-seq-peak-widths" class="level3" data-number="7.3.3">
+<h3 data-number="7.3.3" class="anchored" data-anchor-id="interpreting-chip-seq-peak-widths"><span class="header-section-number">7.3.3</span> Interpreting ChIP-seq peak widths</h3>
+<p>Histone modifications (like H3K4me3 or H3K27ac) are physically attached to the histone proteins that make up a nucleosome. A single nucleosome wraps roughly <strong>147 base pairs</strong> of DNA. Because the modification sits on the nucleosome, the absolute minimum biological “footprint” that can be captured is the size of one nucleosome (around ~150 bp), like we observe on the histograms.</p>
+<p>Moreover, during the ChIP-seq protocol, the DNA is physically sheared (via sonication or enzymatic digestion) before sequencing. We typically aim to shear the DNA into fragments of about 200 to 500 base pairs. Because the sequence reads come from the ends of these fragments, it is virtually impossible for the sequencing to resolve a peak that is narrower than the size of the fragments we physically cut the DNA into.</p>
+<p>Furthermore, the software used to detect these peaks (usually <em>MACS2</em>) has built-in parameters to filter out noise. <em>MACS2</em> models the average fragment length (which it often estimates to be ~150-250 bp) and deliberately ignores or merges signal that is smaller than that expected fragment size, because a 30 bp “peak” is almost certainly just random sequencing noise rather than a true modified nucleosome.</p>
+<p>While H3K4me3 is typically a sharp mark found at promoters (~200–1000 bp), we observe a subset of peaks extending well beyond 3,000 bp. These <strong>broad H3K4me3 domains</strong> are a well-documented biological phenomenon that typically mark highly transcribed, lineage-defining genes with large CpG islands or multiple transcription start sites.</p>
+</section>
+</section>
+<section id="question-1" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="question-1"><span class="header-section-number">7.4</span> Question 1</h2>
+<p><strong>Similar to ATAC-seq data, please create <code>EnrichedHeatmap</code> for all ChIP-seq datasets and observe difference in genome activity at different genomic regions.</strong></p>
+<section id="proposed-strategy" class="level3" data-number="7.4.1">
+<h3 data-number="7.4.1" class="anchored" data-anchor-id="proposed-strategy"><span class="header-section-number">7.4.1</span> Proposed strategy</h3>
+<p>The goal of this exercise is to visualize and compare the spatial distribution of four different histone modifications (H3K4me3, H3K4me1, H3K27ac, H3K27me3) across specific genomic regions to infer chromatin state and genome activity.</p>
+<p>To accurately compare the histone marks, we need a common set of genomic anchor regions. Since ATAC-seq peaks represent all open chromatin (both promoters and enhancers), we can use the <strong>ATAC-seq peak centers</strong> (generated in the <a href="../notebooks/02-atac_heatmaps.html">previous notebook</a>) as our universal anchor points. Alternatively, we could combine the peak ranges from all 4 ChIP-seq objects into a consensus set, but using the ATAC peaks is conceptually cleaner as it defines “all potentially active regulatory regions.” (And I have the intuition that we would finally combine all of this data at the end of the course ;-)</p>
+<section id="h3k27me3-and-the-chromatin-states" class="level4" data-number="7.4.1.1">
+<h4 data-number="7.4.1.1" class="anchored" data-anchor-id="h3k27me3-and-the-chromatin-states"><span class="header-section-number">7.4.1.1</span> H3K27me3 and the chromatin states</h4>
+<p>Because ATAC-seq captures open chromatin, using it as our “universal anchor” creates a massive bias. It works beautifully for H3K4me3, H3K4me1, and H3K27ac because those marks actively push the chromatin open. But what about H3K27me3 (the repressive mark)? If a genomic region is heavily repressed by H3K27me3, the chromatin there is tightly closed (inactive). Because it is closed, the ATAC-seq machinery can’t get in, meaning there is no ATAC-seq peak there.</p>
+<p>If we force H3K27me3 to be plotted using ATAC-seq anchors, we will only see H3K27me3 at weird, transitioning, or “bivalent” regions that happen to be slightly open. We will completely blind ourselves to the deeply repressed, true heterochromatin regions where H3K27me3 is actually the strongest.</p>
+</section>
+<section id="expected-final-figure-layout" class="level4" data-number="7.4.1.2">
+<h4 data-number="7.4.1.2" class="anchored" data-anchor-id="expected-final-figure-layout"><span class="header-section-number">7.4.1.2</span> Expected final figure layout</h4>
+<p>The final visualization will be a highly informative, multi-panel composite heatmap generated via the <code>EnrichedHeatmap</code> and <code>ComplexHeatmap</code> packages, as we learned throughout the previous notebook:</p>
+<ul>
+<li>Horizontal panels: 8 side-by-side heatmaps representing the continuous bigWig signal (4 histone marks × 2 developmental stages: E11.5 and E15.5)</li>
+<li>Row splitting (vertical): the rows (genomic regions) will be split by Genomic Annotation (e.g., Promoters vs.&nbsp;Distal Intergenic/Intron, etc.). This allows us to clearly observe how H3K4me3 specifically enriches at promoters, while H3K4me1 enriches at distal enhancers</li>
+<li>Top annotations: above each heatmap, a summarized meta-profile (<em>line plot</em>) will show the average signal intensity across the 2kb window, all colored in black (default)</li>
+<li>Ordering: rows will be ordered by the overall intensity of the ATAC-seq signal or the H3K27ac signal to smoothly transition from highly active to less active regions</li>
+</ul>
+</section>
+</section>
+<section id="defining-anchor-regions-from-differentially-accessible-chromatin" class="level3" data-number="7.4.2">
+<h3 data-number="7.4.2" class="anchored" data-anchor-id="defining-anchor-regions-from-differentially-accessible-chromatin"><span class="header-section-number">7.4.2</span> Defining anchor regions from differentially accessible chromatin</h3>
+<p>We will rely on the ATAC-seq data processed in the previous notebook, specifically extracting the <code>rowRanges</code> from the ATAC-seq <code>SummarizedExperiment</code> and filtering for <strong>significantly differentially accessible regions</strong> (using <code>qvalue</code> and <code>logFC</code> thresholds) exclusively on chromosomes 1 and 2.</p>
+<p>Also remind that once we have isolated these significant ATAC-seq peaks, we used the <code>resize(width = 1, fix = "center")</code> function to collapse each peak down to its exact 1-bp midpoint. These midpoints will now serve as the universal anchors for our <code>EnrichedHeatmap</code> windows, ensuring that all 4 ChIP-seq datasets are visualized and compared across the exact same spatial coordinates.</p>
+<div id="cell-16" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="8">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Loading the ATAC-seq dataset</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>atac <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/atac_se.rds"</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Extracting the Genomic Ranges</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>rd_atac <span class="ot">&lt;-</span> <span class="fu">rowRanges</span>(atac)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Filtering by logFC, qvalue and seqnames (chromosomes)</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>rd_atac_filtered <span class="ot">&lt;-</span> <span class="fu">subset</span>(</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  rd_atac,</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">abs</span>(logFC) <span class="sc">&gt;=</span> <span class="fl">0.5</span> <span class="sc">&amp;</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  qvalue <span class="sc">&lt;=</span> <span class="fl">0.1</span> <span class="sc">&amp;</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  seqnames <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"chr1"</span>, <span class="st">"chr2"</span>))</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Add an "ATAC_" prefix to all the metadata columns in rd_atac_filtered</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="co"># (!GOOD PRACTICE preventing multi-omics collisions)</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(<span class="fu">elementMetadata</span>(rd_atac_filtered)) <span class="ot">&lt;-</span> <span class="fu">paste</span>(</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>  <span class="st">"ATAC"</span>, <span class="fu">colnames</span>(<span class="fu">elementMetadata</span>(rd_atac_filtered)), <span class="at">sep =</span> <span class="st">"_"</span></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Finding peak centers</span></span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>mid_peaks <span class="ot">&lt;-</span> <span class="fu">resize</span>(rd_atac_filtered, <span class="at">width =</span> <span class="dv">1</span>, <span class="at">fix =</span> <span class="st">"center"</span>)</span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Identify the ATAC peaks</span></span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a><span class="co"># (!GOOD PRACTICE for traceability)</span></span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(mid_peaks) <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"peak"</span>, <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(mid_peaks), <span class="at">sep =</span> <span class="st">"_"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div id="cell-17" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="9">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mid_peaks, <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<pre><code>GRanges object with 3 ranges and 18 metadata columns:
+         seqnames    ranges strand |        ATAC_annotation ATAC_geneChr
+            &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; |            &lt;character&gt;    &lt;integer&gt;
+  peak_1     chr1   3671606      * |       Promoter (&lt;=1kb)            1
+  peak_2     chr1   4332610      * | Intron (ENSMUST00000..            1
+  peak_3     chr1   4492164      * |       Promoter (1-2kb)            1
+         ATAC_geneStart ATAC_geneEnd ATAC_geneLength ATAC_geneStrand
+              &lt;integer&gt;    &lt;integer&gt;       &lt;integer&gt;       &lt;integer&gt;
+  peak_1        3214482      3671498          457017               2
+  peak_2        4344146      4360314           16169               2
+  peak_3        4492465      4493735            1271               2
+         ATAC_geneId    ATAC_transcriptId ATAC_distanceToTSS       ATAC_ENSEMBL
+         &lt;character&gt;          &lt;character&gt;          &lt;numeric&gt;        &lt;character&gt;
+  peak_1      497097 ENSMUST00000070533.4                  0 ENSMUSG00000051951
+  peak_2       19888 ENSMUST00000027032.5              27604 ENSMUSG00000025900
+  peak_3       20671 ENSMUST00000191939.1               1162 ENSMUSG00000025902
+         ATAC_SYMBOL          ATAC_GENENAME   ATAC_anno ATAC_logFC ATAC_logCPM
+         &lt;character&gt;            &lt;character&gt; &lt;character&gt;  &lt;numeric&gt;   &lt;numeric&gt;
+  peak_1        Xkr4 X-linked Kx blood gr..    Promoter   0.602984    10.45378
+  peak_2         Rp1 retinitis pigmentosa..      Intron   0.855748     5.18424
+  peak_3       Sox17 SRY (sex determining..    Promoter  -0.620926     7.13469
+            ATAC_F ATAC_PValue ATAC_qvalue
+         &lt;numeric&gt;   &lt;numeric&gt;   &lt;numeric&gt;
+  peak_1  41.78446 6.58453e-08 4.81983e-07
+  peak_2   3.68371 6.13517e-02 9.28785e-02
+  peak_3   9.14522 4.12368e-03 8.38540e-03
+  -------
+  seqinfo: 21 sequences from an unspecified genome; no seqlengths</code></pre>
+</div>
+</div>
+</section>
+<section id="extracting-and-normalizing-continuous-chip-seq-signal" class="level3" data-number="7.4.3">
+<h3 data-number="7.4.3" class="anchored" data-anchor-id="extracting-and-normalizing-continuous-chip-seq-signal"><span class="header-section-number">7.4.3</span> Extracting and normalizing continuous ChIP-seq signal</h3>
+<p>To extract the continuous ChIP-seq signal, we first retrieve the paths for the 8 ChIP-seq <code>.bw</code> (bigWig) files from the <code>data/</code> directory. Next, we define our target extraction regions, or <code>heatmap_windows</code>, by expanding our ATAC <code>mid_peaks</code> to the desired viewing window size (for example, using <code>resize(mid_peaks, width = 2000, fix = "center")</code>, just as we did in the previous notebook).</p>
+<p>Because there is exactly one bigWig file per condition (4 histone marks × 2 developmental stages), the most elegant and “R-like” approach is to grab all 8 files at once and process them using a single <code>lapply()</code> function, rather than writing complicated nested loops. Within this single loop, we use <code>rtracklayer::import()</code> and pass our specific windows to the <code>which</code> argument. This forces R to dynamically read the continuous signal coverage only within our exact targeted regions directly from the hard drive, massively saving RAM and computation time.</p>
+<p>Once the targeted signal is read, the exact same loop immediately feeds it into <code>normalizeToMatrix()</code>, outputting a clean list of 8 normalized matrices ready for <code>EnrichedHeatmap</code>.</p>
+<div id="cell-19" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="10">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get all 8 ChIP-seq bigWig files at once using the regex:</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co">#    ^H3K   -&gt; The file name MUST start with "H3K" (ignores the ATAC files)</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co">#    .*     -&gt; Followed by any sequence of characters (e.g., "4me3_11half")</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co">#    \\.bw$ -&gt; And MUST end exactly with the literal ".bw" extension</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>chip_bw_files <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="st">"data"</span>, <span class="at">pattern =</span> <span class="st">"^H3K.*</span><span class="sc">\\</span><span class="st">.bw$"</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Give them clean names for the list (e.g., "H3K4me3_11half")</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(chip_bw_files) <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">.bw$"</span>, <span class="st">""</span>, <span class="fu">basename</span>(chip_bw_files))</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the actual 2000 bp windows we need for the heatmap</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>heatmap_windows <span class="ot">&lt;-</span> <span class="fu">resize</span>(mid_peaks, <span class="at">width =</span> <span class="dv">2000</span>, <span class="at">fix =</span> <span class="st">"center"</span>)</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Use a single lapply loop to process all 8 files</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>chip_matrices <span class="ot">&lt;-</span> <span class="fu">lapply</span>(chip_bw_files, <span class="cf">function</span>(file_path) {</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Import ONLY the regions overlapping our heatmap_windows</span></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>  signal <span class="ot">&lt;-</span> rtracklayer<span class="sc">::</span><span class="fu">import</span>(file_path, <span class="at">which =</span> heatmap_windows)</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Convert the signal to a normalized matrix for EnrichedHeatmap</span></span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>  mat <span class="ot">&lt;-</span> <span class="fu">normalizeToMatrix</span>(</span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>    signal,                 <span class="co"># bigWig data</span></span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">target =</span> mid_peaks,     <span class="co"># anchor ("point 0")</span></span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">value_column =</span> <span class="st">"score"</span>, <span class="co"># read coverage values</span></span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">extend =</span> <span class="dv">1000</span>,          <span class="co"># 2 kb-wide window</span></span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">w =</span> <span class="dv">20</span>,                 <span class="co"># binning size of 20 bp</span></span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">smooth =</span> <span class="cn">TRUE</span>,          <span class="co"># LOESS smoothing</span></span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">background =</span> <span class="dv">0</span>          <span class="co"># noise floor</span></span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(mat)</span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div id="cell-20" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="11">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># View of few columns and peaks from the first matrix</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>chip_matrices[[<span class="dv">1</span>]][<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">45</span><span class="sc">:</span><span class="dv">50</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<table class="dataframe caption-top table table-sm table-striped small">
+<caption>A matrix: 5 × 6 of type dbl</caption>
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th" scope="col">u45</th>
+<th data-quarto-table-cell-role="th" scope="col">u46</th>
+<th data-quarto-table-cell-role="th" scope="col">u47</th>
+<th data-quarto-table-cell-role="th" scope="col">u48</th>
+<th data-quarto-table-cell-role="th" scope="col">u49</th>
+<th data-quarto-table-cell-role="th" scope="col">u50</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th" scope="row">peak_1</th>
+<td>0.41785877</td>
+<td>0.36655732</td>
+<td>0.34175880</td>
+<td>0.35650114</td>
+<td>0.41155756</td>
+<td>0.46620710</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th" scope="row">peak_2</th>
+<td>0.01211658</td>
+<td>0.02286782</td>
+<td>0.03310115</td>
+<td>0.03916861</td>
+<td>0.04122399</td>
+<td>0.03931726</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th" scope="row">peak_3</th>
+<td>0.11026432</td>
+<td>0.07951743</td>
+<td>0.05068564</td>
+<td>0.03356038</td>
+<td>0.02665345</td>
+<td>0.02502023</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th" scope="row">peak_4</th>
+<td>0.69515939</td>
+<td>0.68179722</td>
+<td>0.65382211</td>
+<td>0.61544447</td>
+<td>0.56406654</td>
+<td>0.51900573</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th" scope="row">peak_5</th>
+<td>0.12519382</td>
+<td>0.12562346</td>
+<td>0.13146672</td>
+<td>0.14713624</td>
+<td>0.17450900</td>
+<td>0.20114145</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="constructing-and-combining-the-heatmaps" class="level3" data-number="7.4.4">
+<h3 data-number="7.4.4" class="anchored" data-anchor-id="constructing-and-combining-the-heatmaps"><span class="header-section-number">7.4.4</span> Constructing and combining the heatmaps</h3>
+<p>With our list of 8 normalized matrices prepared, we can now translate this numerical data into a visual map of the chromatin landscape. We will generate an individual <code>EnrichedHeatmap</code> object for each matrix. To streamline this process and ensure perfect formatting consistency, we will utilize an upgraded custom wrapper function (<code>make_EH_custom</code>). Rather than building each heatmap from scratch, this function automates several advanced features: 1. <strong>Dynamic Color Scaling:</strong> It automatically calculates a responsive color scale based on the 1st and 99th percentiles of each specific matrix (using <code>circlize::colorRamp2</code>), and perfectly aligns the legend ticks. 2. <strong>Proportional Layout Engine:</strong> By defaulting to the <code>grid</code> graphic’s flexible <code>width = unit(1, "null")</code> unit, it ensures that when we stitch multiple heatmaps together, they will dynamically stretch and divide the page space perfectly equally! Here is the perfectly tweaked bullet point to clarify that your hardcoded default precisely mirrors the native software! 3. <strong>Architectural Control:</strong> It exposes a <code>top_anno_height</code> parameter (which we safely defaulted to <code>1.5 cm</code> to precisely mirror the software’s native default behavior), giving us the ability to elegantly squeeze or expand the vertical size of the top summary meta-profile plots on the fly without complex math.</p>
+<p><em>Note: This custom function has pre-defined x-axis labels hard-coded as <code>c("-1kb", "mid", "1kb")</code>. In the future, if the genomic window being analyzed is different from the current 2000 bp window centered on the ATAC-seq peaks, be sure to make the appropriate changes to the axis_name argument.</em></p>
+<p>To highlight how these marks behave differently across distinct regulatory elements, we will pass our ATAC peak annotations to the <code>split_rows</code> argument (separating, “Promoters” from “Exon”, “Intron” and “Intergenic” regions).</p>
+<p>Finally, leveraging the power of the <code>ComplexHeatmap</code> ecosystem, we can seamlessly concatenate all 8 resulting heatmaps side-by-side using the simple <code>+</code> operator. Just as we did before, we will also append a <code>rowAnnotation</code> block to the side of the figure—visually tagging the rows with their associated metadata—to create a highly informative, unified composite figure.</p>
+<div id="cell-22" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="12">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Upgraded version of the original custom function</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>make_EH_custom <span class="ot">&lt;-</span> <span class="cf">function</span>(</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  norm_mat, hm_name, <span class="at">split_rows =</span> <span class="cn">NULL</span>,</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">width =</span> <span class="fu">unit</span>(<span class="dv">1</span>, <span class="st">"null"</span>), <span class="at">height =</span> <span class="cn">NULL</span>, <span class="at">top_anno_height =</span> grid<span class="sc">::</span><span class="fu">unit</span>(<span class="fl">1.5</span>, <span class="st">"cm"</span>), </span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">heatmap_cols =</span> <span class="fu">c</span>(<span class="st">"white"</span>, <span class="st">"red"</span>), <span class="at">col_fill =</span> <span class="st">"white"</span>,</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">line_colors =</span> <span class="cn">NULL</span>) {</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculate ticks for the legend</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>  vmin <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">quantile</span>(norm_mat, <span class="fu">c</span>(<span class="fl">0.01</span>)))</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>  vmax <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">quantile</span>(norm_mat, <span class="fu">c</span>(<span class="fl">0.99</span>)))</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>  vmid <span class="ot">&lt;-</span> (vmin <span class="sc">+</span> vmax) <span class="sc">/</span> <span class="dv">2</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>  legend_ticks <span class="ot">&lt;-</span> <span class="fu">c</span>(vmin, vmid, vmax)</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Define color scale based on 1st and 99th percentiles (vmin and vmax)</span></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>  col_fun <span class="ot">&lt;-</span> <span class="fu">colorRamp2</span>(<span class="fu">c</span>(vmin, vmax), heatmap_cols)</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Generate and return the heatmap</span></span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">EnrichedHeatmap</span>(</span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">mat =</span> norm_mat, <span class="at">name =</span> hm_name, <span class="at">row_split =</span> split_rows,</span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">row_title =</span> <span class="cn">NULL</span>, <span class="at">col =</span> col_fun, <span class="at">column_title =</span> hm_name,</span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">column_title_gp =</span> <span class="fu">gpar</span>(<span class="at">fontsize =</span> <span class="dv">10</span>, <span class="at">fill =</span> col_fill),</span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">width =</span> width, <span class="at">height =</span> height,</span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis_name =</span> <span class="fu">c</span>(<span class="st">"-1kb"</span>, <span class="st">"mid"</span>, <span class="st">"1kb"</span>),</span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">heatmap_legend_param =</span> <span class="fu">list</span>(</span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a>      <span class="at">at =</span> legend_ticks, <span class="at">labels =</span> <span class="fu">round</span>(legend_ticks, <span class="at">digits =</span> <span class="dv">1</span>),</span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>      <span class="at">title_gp =</span> <span class="fu">gpar</span>(<span class="at">fontsize =</span> <span class="dv">8</span>), <span class="at">labels_gp =</span> <span class="fu">gpar</span>(<span class="at">fontsize =</span> <span class="dv">7</span>)),</span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">top_annotation =</span> <span class="fu">HeatmapAnnotation</span>(</span>
+<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a>      <span class="at">lines =</span> <span class="fu">anno_enriched</span>(</span>
+<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a>        <span class="at">height =</span> top_anno_height, </span>
+<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis_param =</span> <span class="fu">list</span>(</span>
+<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a>        <span class="co"># gp = gpar(fontsize = 7, lwd = 0.4),</span></span>
+<span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a>        <span class="at">side =</span> <span class="st">"right"</span>, <span class="at">facing =</span> <span class="st">"inside"</span>),</span>
+<span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a>        <span class="at">gp =</span> <span class="fu">gpar</span>(<span class="at">col =</span> line_colors))))}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Let’s now create the indicudal heatmaps objects, using colors similar to what is shown on the course logo.</p>
+<div id="cell-24" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="13">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(chip_matrices)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class="list-inline"><li>'H3K27ac_11half'</li><li>'H3K27ac_15half'</li><li>'H3K27me3_11half'</li><li>'H3K27me3_15half'</li><li>'H3K4me1_11half'</li><li>'H3K4me1_15half'</li><li>'H3K4me3_11half'</li><li>'H3K4me3_15half'</li></ol>
+</div>
+</div>
+<div id="cell-25" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="14">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Heatmaps for the H3K4me1 data</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co"># REMINDER - `[ ]`returns a list, while `$ ` (or `[[ ]]`) </span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># returns the actual object inside the list.</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>eh_h3k4me1_11h <span class="ot">&lt;-</span> <span class="fu">make_EH_custom</span>(</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">norm_mat =</span> chip_matrices<span class="sc">$</span>H3K4me1_11half,</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">hm_name =</span> <span class="st">'K4me1-E11.5'</span>,</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_fill =</span> <span class="st">'pink'</span>,</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># width = unit(2, "cm"), height = unit(8, "cm"),</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">heatmap_cols =</span> <span class="fu">c</span>(<span class="st">'white'</span>, <span class="st">'darkblue'</span>))</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>eh_h3k4me1_15h <span class="ot">&lt;-</span> <span class="fu">make_EH_custom</span>(</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">norm_mat =</span> chip_matrices<span class="sc">$</span>H3K4me1_15half,</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">hm_name =</span> <span class="st">'K4me1-E15.5'</span>,</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_fill =</span> <span class="st">'paleturquoise'</span>,</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># width = unit(2, "cm"), height = unit(8, "cm"),</span></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">heatmap_cols =</span> <span class="fu">c</span>(<span class="st">'white'</span>, <span class="st">'darkblue'</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div id="cell-26" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="15">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Heatmaps for the H3K4me3 data</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>eh_h3k4me3_11h <span class="ot">&lt;-</span> <span class="fu">make_EH_custom</span>(</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">norm_mat =</span> chip_matrices<span class="sc">$</span>H3K4me3_11half,</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">hm_name =</span> <span class="st">'K4me3-E11.5'</span>,</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_fill =</span> <span class="st">'pink'</span>,</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">heatmap_cols =</span> <span class="fu">c</span>(<span class="st">'white'</span>, <span class="st">'darkgreen'</span>))</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>eh_h3k4me3_15h <span class="ot">&lt;-</span> <span class="fu">make_EH_custom</span>(</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">norm_mat =</span> chip_matrices<span class="sc">$</span>H3K4me3_15half,</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">hm_name =</span> <span class="st">'K4me3-E15.5'</span>,</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_fill =</span> <span class="st">'paleturquoise'</span>,</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">heatmap_cols =</span> <span class="fu">c</span>(<span class="st">'white'</span>, <span class="st">'darkgreen'</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div id="cell-27" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="16">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Heatmaps for the H3K27me3 data</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>eh_h3k27me3_11h <span class="ot">&lt;-</span> <span class="fu">make_EH_custom</span>(</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">norm_mat =</span> chip_matrices<span class="sc">$</span>H3K27me3_11half,</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">hm_name =</span> <span class="st">'K27me3-E11.5'</span>,</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_fill =</span> <span class="st">'pink'</span>,</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">heatmap_cols =</span> <span class="fu">c</span>(<span class="st">'white'</span>, <span class="st">'darkorchid'</span>))</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>eh_h3k27me3_15h <span class="ot">&lt;-</span> <span class="fu">make_EH_custom</span>(</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">norm_mat =</span> chip_matrices<span class="sc">$</span>H3K27me3_15half,</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">hm_name =</span> <span class="st">'K27me3-E15.5'</span>,</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_fill =</span> <span class="st">'paleturquoise'</span>,</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">heatmap_cols =</span> <span class="fu">c</span>(<span class="st">'white'</span>, <span class="st">'darkorchid'</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div id="cell-28" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="17">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Heatmaps for the H3K27ac data</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>eh_h3k27ac_11h <span class="ot">&lt;-</span> <span class="fu">make_EH_custom</span>(</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">norm_mat =</span> chip_matrices<span class="sc">$</span>H3K27ac_11half,</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">hm_name =</span> <span class="st">'K27ac-E11.5'</span>,</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_fill =</span> <span class="st">'pink'</span>,</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">heatmap_cols =</span> <span class="fu">c</span>(<span class="st">'white'</span>, <span class="st">'darkred'</span>))</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>eh_h3k27ac_15h <span class="ot">&lt;-</span> <span class="fu">make_EH_custom</span>(</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">norm_mat =</span> chip_matrices<span class="sc">$</span>H3K27ac_15half,</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">hm_name =</span> <span class="st">'K27ac-E15.5'</span>,</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_fill =</span> <span class="st">'paleturquoise'</span>,</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">heatmap_cols =</span> <span class="fu">c</span>(<span class="st">'white'</span>, <span class="st">'darkred'</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div id="cell-29" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="18">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Retrieve the genomic annotations (e.g., "Promoter", "Intron", "Intergenic") </span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>split_anno <span class="ot">&lt;-</span> mid_peaks<span class="sc">$</span>ATAC_anno</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Attach the original peak IDs as names to this new vector</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(split_anno) <span class="ot">&lt;-</span> <span class="fu">names</span>(mid_peaks)</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>anno_colors <span class="ot">&lt;-</span> RColorBrewer<span class="sc">::</span><span class="fu">brewer.pal</span>(</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="fu">length</span>(<span class="fu">unique</span>(split_anno)), <span class="at">name =</span> <span class="st">"Set1"</span>)</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(anno_colors) <span class="ot">&lt;-</span> <span class="fu">sort</span>(<span class="fu">unique</span>(split_anno))</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Prepare the annotations</span></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>eh_annotations <span class="ot">&lt;-</span> <span class="fu">rowAnnotation</span>(</span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">df =</span> <span class="fu">data.frame</span>(<span class="at">Annotation =</span> split_anno),</span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="fu">list</span>(<span class="at">Annotation =</span> anno_colors),</span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">show_annotation_name =</span> <span class="cn">FALSE</span></span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>In the <code>ComplexHeatmap</code> ecosystem, when we combine heatmaps using <code>+</code>, they are merged together into a single master object called a HeatmapList. Because the rows are strictly locked together across all 8 heatmaps, we don’t need to split them individually.</p>
+<p>By passing <code>split = split_anno</code> directly into the <code>draw()</code> function, we are applying the split globally to the entire composite figure at the very end. We don’t have to pass <code>split_rows</code> 8 separate times in our <code>make_EH_custom</code> function, which guarantees that every single heatmap is forced to split in the exact same way simultaneously. Moreover, R only has to calculate the splitting logic once for the master figure, rather than recalculating it 8 times!</p>
+<div id="cell-31" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="19">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">repr.plot.width =</span> <span class="dv">20</span>, <span class="at">repr.plot.height =</span> <span class="dv">10</span>)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fu">draw</span>(</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  eh_annotations</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="sc">+</span> eh_h3k4me1_11h <span class="sc">+</span> eh_h3k4me1_15h </span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>  <span class="sc">+</span> eh_h3k4me3_11h <span class="sc">+</span> eh_h3k4me3_15h </span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  <span class="sc">+</span> eh_h3k27me3_11h <span class="sc">+</span> eh_h3k27me3_15h </span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>  <span class="sc">+</span> eh_h3k27ac_11h <span class="sc">+</span> eh_h3k27ac_15h, </span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">split =</span> split_anno, </span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># merge_legend = TRUE, </span></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">heatmap_legend_side =</span> <span class="st">"bottom"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="03-chip_rna_visualization_files/figure-html/cell-20-output-1.png" width="1200" height="600" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><em>Note: Because we allowed each histone mark to dynamically scale its colors based on its own signal strength (i.e., the color scale is dynamically calculated based on the 1st and 99th percentiles of each individual matrix), we must have separate legends. This means the actual numeric scale is different for every single heatmap. Moreover, <code>merge_legend</code> only combines legends that share the exact same title. Therefore, the <code>merge_legend</code> argument has no effect here.</em></p>
+</section>
+<section id="analyzing-histone-mark-distributions-across-genomic-features" class="level3" data-number="7.4.5">
+<h3 data-number="7.4.5" class="anchored" data-anchor-id="analyzing-histone-mark-distributions-across-genomic-features"><span class="header-section-number">7.4.5</span> Analyzing histone mark distributions across genomic features</h3>
+<p>In the composite heatmap, the <strong>H3K4me3</strong> signal is entirely restricted to the violet (<em>Promoter</em>) block and absent everywhere else. As the canonical <strong>“Active Promoter”</strong> mark, H3K4me3 is dynamically placed directly around the Transcription Start Site (TSS) by specific enzymes (like MLL/COMPASS complexes) that associate with the transcription machinery. Seeing this signal cleanly restricted to the promoter block confirms the high quality of the data and strictly adheres to expected biological principles.</p>
+<p>Unlike H3K4me3, <strong>H3K27ac</strong> marks <strong>both</strong> active promoters and active enhancers, which perfectly explains its strong presence across the promoter, intergenic, and intronic blocks. Interestingly, a temporal shift is visible: H3K27ac signal is higher in distal regions (intergenic/introns) at E11.5, but becomes relatively stronger at promoters by E15.5. This represents a classic developmental signature. At E11.5, cells are still highly plastic and maintain massive networks of active distal enhancers. As they mature to E15.5, many of these broad enhancer networks shut down, while specific terminal genes become aggressively transcribed.</p>
+<p>A striking feature of the visualization is the distinct lack of signal (<em>white space</em>) directly in the middle of the promoters for <strong>H3K4me1</strong> and, to a lesser extent, <strong>H3K27me3</strong>. Because these heatmaps are centered precisely on <em>ATAC-seq peaks</em>, the exact middle (<code>mid</code>) represents open chromatin where nucleosomes have been physically displaced to allow transcription factors to bind. Since histone marks require a histone protein to attach to, the signal completely drops to zero in this physical “hole,” resulting in a characteristic <strong>bimodal (twin-peak) signal</strong> on the flanking nucleosomes. Furthermore, because H3K4me1 is traditionally an enhancer mark, the central nucleosomes at active promoters get heavily decorated with H3K4me3 instead, physically displacing H3K4me1 to the outer edges and explaining the wide central “dip.”</p>
+<p>Overall, the visualization successfully captures the known epigenetic landscape: H3K4me3 strictly identifies active promoters, H3K27ac identifies both promoters and enhancers while highlighting developmental transitions, and the fine spatial resolution accurately maps nucleosome depletion directly at the ATAC-seq peak centers.</p>
+</section>
+</section>
+<section id="analysis-of-the-rna-seq-data" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="analysis-of-the-rna-seq-data"><span class="header-section-number">7.5</span> Analysis of the RNA-seq data</h2>
+<p>Having deeply explored the spatial distribution of chromatin accessibility (ATAC-seq; previous notebook) and histone modifications (ChIP-seq) across regulatory elements, we now shift our focus to the functional output of these epigenetic changes: <strong>gene expression</strong>.</p>
+<p>Unlike ChIP-seq, where we used <code>EnrichedHeatmap</code> to visualize the continuous spatial footprint of modifications across 2kb genomic windows, RNA-seq data is fundamentally different. Here, we are working with discrete transcription levels quantified as <strong>normalized read counts per gene</strong>. Therefore, the heatmaps we generate in this section will be standard expression heatmaps (where rows represent individual genes, columns represent experimental conditions, and color intensity reflects the expression level). This will allow us to identify clusters of co-regulated genes and track how expression profiles shift between E11.5 and E15.5.</p>
+<section id="loading-the-rna-seq-se-object" class="level3" data-number="7.5.1">
+<h3 data-number="7.5.1" class="anchored" data-anchor-id="loading-the-rna-seq-se-object"><span class="header-section-number">7.5.1</span> Loading the RNA-seq SE object</h3>
+<p>To begin, we will load the <code>SummarizedExperiment</code> object containing our processed RNA-seq count matrices and associated metadata.</p>
+<div id="cell-36" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="20">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>rna <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/rna_se.rds"</span>)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>rna</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<pre><code>class: RangedSummarizedExperiment 
+dim: 2216 4 
+metadata(0):
+assays(2): counts logCPM
+rownames(2216): ENSMUSG00000000194 ENSMUSG00000000247 ...
+  ENSMUSG00000103948 ENSMUSG00000104257
+rowData names(18): Row.names gene_id ... PValue qvalue
+colnames(4): RNA_11half_1.tsv.gz RNA_11half_2.tsv.gz
+  RNA_15half_1.tsv.gz RNA_15half_2.tsv.gz
+colData names(2): sample group</code></pre>
+</div>
+</div>
+<p>In a typical RNA-seq experiment, finding 1,000 to 4,000 significant Differentially Expressed Genes (DEGs) is a very normal, healthy result👍</p>
+</section>
+<section id="heatmap-of-log-normalized-counts" class="level3" data-number="7.5.2">
+<h3 data-number="7.5.2" class="anchored" data-anchor-id="heatmap-of-log-normalized-counts"><span class="header-section-number">7.5.2</span> Heatmap of Log-normalized counts</h3>
+<p>To visualize the global gene expression profile, we will switch from <code>EnrichedHeatmap</code> to the <a href="https://jokergoo.github.io/ComplexHeatmap/reference/Heatmap.html"><code>Heatmap()</code> function from the <code>ComplexHeatmap</code> package</a> (different from the <code>heatmap()</code> function from base R).</p>
+<p>Instead of plotting raw read counts, which are heavily skewed by total sequencing depth and extreme outliers, we extract the <code>logCPM</code> (<em>log2 Counts Per Million</em>) matrix directly from the <code>SummarizedExperiment</code> object. The <code>logCPM</code> transformation normalizes the data for library size and compresses the massive dynamic range of RNA expression into a scale that is much better suited for visual clustering.</p>
+<div id="cell-39" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="21">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Back to standard Jupyter Notebook plotting options</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">repr.plot.width =</span> <span class="dv">7</span>, <span class="at">repr.plot.height =</span> <span class="dv">7</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div id="cell-40" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="22">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Heatmap</span>(</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">matrix =</span> <span class="fu">as.matrix</span>(<span class="fu">assay</span>(rna, <span class="st">"logCPM"</span>)),</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">name =</span> <span class="st">"logCPM"</span>,  <span class="co"># internal name of the heatmap; also used for the legend title</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">cluster_columns =</span> <span class="cn">FALSE</span>,  <span class="co"># prevents automatic sample rearrangement</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">show_row_names =</span> <span class="cn">FALSE</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="03-chip_rna_visualization_files/figure-html/cell-23-output-1.png" width="420" height="420" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="changing-visualization-to-relative-expression" class="level3" data-number="7.5.3">
+<h3 data-number="7.5.3" class="anchored" data-anchor-id="changing-visualization-to-relative-expression"><span class="header-section-number">7.5.3</span> Changing visualization to relative expression</h3>
+<p>Plotting absolute <code>logCPM</code> is useful for seeing overall expression levels, but it can make it difficult to quickly spot dynamic <em>changes</em> between the developmental stages. A gene that is constantly highly expressed will visually overwhelm a lowly expressed gene that dramatically doubles in transcription.</p>
+<p>To make the developmental shifts immediately obvious, we can transform our absolute expression matrix into a <strong>relative expression matrix</strong>. Because our data is already on a <code>log2</code> scale, we can easily <em>approximate</em> the log-fold change simply by subtracting the baseline expression (the mean of the E11.5 samples) from every sample in the matrix.</p>
+<p>By centering the data on E11.5, the E11.5 columns will become effectively zero (our baseline). The E15.5 columns will then reflect the relative change: positive values will indicate genes that are <strong>up-regulated</strong> as development proceeds, while negative values will indicate genes that are <strong>down-regulated</strong>.</p>
+<div id="cell-42" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="23">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract the data and immediately cast to a true numeric matrix</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>log_cpm <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">assay</span>(rna, <span class="st">"logCPM"</span>))</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Identify the columns belonging to the E11.5 baseline group</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>idx_11half <span class="ot">&lt;-</span> <span class="fu">grep</span>(</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">pattern =</span> <span class="st">"11half"</span>,</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">colnames</span>(log_cpm))</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Subtract the E11.5 baseline mean (row-by-row)</span></span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>counts_fc <span class="ot">&lt;-</span> log_cpm <span class="sc">-</span> <span class="fu">rowMeans</span>(log_cpm[, idx_11half])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div id="cell-43" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="24">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Heatmap</span>(</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">matrix =</span> counts_fc,</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">name =</span> <span class="st">"log2_FC"</span>,  <span class="co"># no parenthesis allowed in the name!</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">cluster_columns =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">show_row_names =</span> <span class="cn">FALSE</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="03-chip_rna_visualization_files/figure-html/cell-25-output-1.png" width="420" height="420" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><em>Note: while we are manually calculating these relative fold-changes across the matrix columns to generate a centered heatmap here, we will extract and analyze the rigorously calculated statistical <code>logFC</code> from the differential analysis table later in the notebook.</em></p>
+</section>
+<section id="adding-column-annotations" class="level3" data-number="7.5.4">
+<h3 data-number="7.5.4" class="anchored" data-anchor-id="adding-column-annotations"><span class="header-section-number">7.5.4</span> Adding column annotations</h3>
+<p>Now that our heatmap matrix is structured correctly, we can improve the aesthetics by adding a color-coded annotation bar to the top of our columns. This visually identifies which samples belong to E11.5 and E15.5 at a single glance, without the reader needing to squint at the text labels.</p>
+<p>To achieve this, we extract the sample metadata directly from the <code>rna</code> object using <code>colData()</code>. In addition, we take advantage of the <code>scales</code> package: <a href="https://www.rdocumentation.org/packages/scales/versions/0.4.1/topics/pretty_breaks">its <code>pretty_breaks</code> function</a> dynamically looks at the minimum and maximum values of our matrix to calculate exactly 3 “pretty” (round) numbers for our legend ticks. Finally, we adjust the width and height slightly to make the heatmap look more professional.</p>
+<p><em>Tip: The <code>drop = FALSE</code> argument prevents a single-column <code>data.frame</code> from collapsing into a nameless vector. This ensures <code>HeatmapAnnotation</code> receives a true dataframe (always check the documentation…) and can automatically pull the correct label name (like “Group” or “Stage”).</em></p>
+<div id="cell-46" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="25">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colData</span>(rna)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<pre><code>DataFrame with 4 rows and 2 columns
+                                 sample    group
+                            &lt;character&gt; &lt;factor&gt;
+RNA_11half_1.tsv.gz RNA_11half_1.tsv.gz   11half
+RNA_11half_2.tsv.gz RNA_11half_2.tsv.gz   11half
+RNA_15half_1.tsv.gz RNA_15half_1.tsv.gz   15half
+RNA_15half_2.tsv.gz RNA_15half_2.tsv.gz   15half</code></pre>
+</div>
+</div>
+<div id="cell-47" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="26">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">100</span>)  <span class="co"># Forces R to always pick the exact same "random" colors</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="fu">Heatmap</span>(</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">matrix =</span> counts_fc,</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># name = "log2_FC",</span></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">cluster_columns =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">show_row_names =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">show_column_names =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">top_annotation =</span> <span class="fu">HeatmapAnnotation</span>(</span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">df =</span> <span class="fu">colData</span>(rna)[ , <span class="st">'group'</span>, <span class="at">drop =</span> <span class="cn">FALSE</span>]</span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">width =</span> <span class="fu">unit</span>(<span class="dv">4</span>, <span class="st">"cm"</span>),</span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">height =</span> <span class="fu">unit</span>(<span class="dv">8</span>, <span class="st">"cm"</span>),</span>
+<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">heatmap_legend_param =</span> <span class="fu">list</span>(</span>
+<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">at =</span> scales<span class="sc">::</span><span class="fu">pretty_breaks</span>(<span class="at">n =</span> <span class="dv">3</span>)(</span>
+<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a>      <span class="fu">range</span>(counts_fc, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)),</span>
+<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"log2(FC)"</span>  <span class="co"># fancier display name</span></span>
+<span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb34-19"><a href="#cb34-19" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="03-chip_rna_visualization_files/figure-html/cell-27-output-1.png" width="420" height="420" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="question-2" class="level2" data-number="7.6">
+<h2 data-number="7.6" class="anchored" data-anchor-id="question-2"><span class="header-section-number">7.6</span> Question 2</h2>
+<p><strong>Similar to <code>EnrichedHeatmap</code>, we can also split RNA-seq data based on logFC. Can you try to do this?</strong></p>
+<p>Just as we split our spatial ChIP-seq heatmaps by genomic regions (Promoter vs Intergenic), we can split our RNA-seq expression heatmap by gene behavior. The most logical way to do this is to physically separate the genes based on their statistical fold-change (<code>logFC</code>).</p>
+<p>We will extract the pre-calculated statistical <code>logFC</code> from the <code>rowData(rna)</code> metadata. Because <code>logFC</code> is a continuous number, we must convert it into distinct, discrete groups (e.g., “Up-regulated” and “Down-regulated”) so the software knows how to draw the split. We then simply pass this new grouping vector directly into the <code>row_split</code> argument of our <code>Heatmap()</code> function.</p>
+<div id="cell-49" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="27">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract the statistical logFC for all genes</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Remind rowRanges stores the physical genomic coordinates,</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="co"># while rowData stores the statistical metadata as a DataFrame</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>logFC <span class="ot">&lt;-</span> <span class="fu">rowData</span>(rna)[, <span class="st">"logFC"</span>]</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(logFC)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<pre><code>    Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
+-6.94492 -0.60775  0.05993  0.31056  0.98024  8.98301 </code></pre>
+</div>
+</div>
+<div id="cell-50" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="28">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Categorize the genes (here we split strictly at 0), but we can </span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="co"># change the 0 to 1 or 2 if we want to be more strict</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>gene_status <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(logFC <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="st">"Up-regulated"</span>, <span class="st">"Down-regulated"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>We can rename the factor levels in the <code>rna</code> metadata to the corresponding biological names before we draw the heatmap.</p>
+<div id="cell-52" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="29">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colData</span>(rna)<span class="sc">$</span>group <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colData</span>(rna)<span class="sc">$</span>group <span class="sc">==</span> <span class="st">"11half"</span>, <span class="st">"E11.5"</span>, <span class="st">"E15.5"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>By default, heatmaps are rendered automatically upon creation. To gain precise control over the layout of our various legends, we first save the heatmap to an object and then explicitly render it using the <code>draw()</code> function. During this construction phase, we also apply a critical aesthetic trick: by passing <code>show_annotation_name = FALSE</code> deep inside the <code>HeatmapAnnotation()</code> function, we force the engine to hide the redundant column grouping label. Without this specific override, <code>ComplexHeatmap</code> would forcefully print the word “group” on the far right edge of the plot, creating an ugly, illegible text collision overlapping directly on top of our heatmap colors.</p>
+<div id="cell-54" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="30">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">100</span>)</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>ht <span class="ot">&lt;-</span> <span class="fu">Heatmap</span>(</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">matrix =</span> counts_fc, </span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">row_split =</span> gene_status, </span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">cluster_columns =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">show_row_names =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">show_column_names =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">show_row_dend =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">width =</span> <span class="fu">unit</span>(<span class="dv">4</span>, <span class="st">"cm"</span>), <span class="at">height =</span> <span class="fu">unit</span>(<span class="dv">8</span>, <span class="st">"cm"</span>), </span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">top_annotation =</span> <span class="fu">HeatmapAnnotation</span>(</span>
+<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">df =</span> <span class="fu">colData</span>(rna)[,<span class="dv">2</span>, <span class="at">drop =</span> <span class="cn">FALSE</span>],</span>
+<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">show_annotation_name =</span> <span class="cn">FALSE</span>  <span class="co"># Remove 'group' annotation name</span></span>
+<span id="cb39-14"><a href="#cb39-14" aria-hidden="true" tabindex="-1"></a>  ), </span>
+<span id="cb39-15"><a href="#cb39-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">heatmap_legend_param =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">"log2(FC)"</span>)</span>
+<span id="cb39-16"><a href="#cb39-16" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb39-17"><a href="#cb39-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-18"><a href="#cb39-18" aria-hidden="true" tabindex="-1"></a><span class="fu">draw</span>(ht, <span class="at">annotation_legend_side =</span> <span class="st">"bottom"</span>, <span class="at">heatmap_legend_side =</span> <span class="st">"right"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="03-chip_rna_visualization_files/figure-html/cell-31-output-1.png" width="420" height="420" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="a-note-on-visualizing-expression-changes" class="level3" data-number="7.6.1">
+<h3 data-number="7.6.1" class="anchored" data-anchor-id="a-note-on-visualizing-expression-changes"><span class="header-section-number">7.6.1</span> A note on visualizing expression changes</h3>
+<p>By manually centering the matrix, we preserve all 4 individual columns (samples). This allows us to visually verify replicate consistency, observe the underlying biological noise, and see exactly how each sample behaves within its group. In contrast, the true <code>logFC</code> is a single, aggregated statistical value per gene. Plotting it directly would result in a 1-column heatmap that completely hides sample-level variability.</p>
+<p>There are many valid ways to visualize RNA-seq data, and we will cover other powerful methods for displaying these statistical results later in the course. For a deeper dive into standard RNA-seq workflows, differential expression statistics, and visualizations, you can refer to my previous <a href="https://github.com/sbwiecko/RNAseq_UPenn">RNA-seq course on GitHub</a>.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../notebooks/02-atac_heatmaps.html" class="pagination-link" aria-label="Enriched Heatmaps and identification of regions with different activities">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Enriched Heatmaps and identification of regions with different activities</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../notebooks/04-genomic_overlap_matrices.html" class="pagination-link" aria-label="Overlapping all the datasets">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Overlapping all the datasets</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
