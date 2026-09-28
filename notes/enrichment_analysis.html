@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>4&nbsp; Functional Enrichment Analysis: Multi-Omics Integration – Biology-Informed Multi-Omics Integration</title>
+<title>enrichment_analysis – Biology-Informed Multi-Omics Integration</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -36,8 +36,6 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../notebooks/01-omics_data_structures.html" rel="next">
-<link href="../notes/normalization_models.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -47,7 +45,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-5630e6732664d48c7cde3b526013eeb9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-93c2f64124fc842a968b101e89420266.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -108,7 +106,7 @@ window.Quarto = {
 
 </head>
 
-<body class="nav-sidebar floating quarto-light">
+<body class="nav-sidebar docked quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -117,7 +115,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../notes/epigenetic_analysis_reference_guide.html">I. Theoretical Reference &amp; Notes</a></li><li class="breadcrumb-item"><a href="../notes/enrichment_analysis.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Functional Enrichment Analysis: Multi-Omics Integration</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../notes/enrichment_analysis.html">Functional Enrichment Analysis: Multi-Omics Integration</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -129,7 +127,7 @@ window.Quarto = {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Biology-Informed Multi-Omics Integration</a> 
@@ -145,102 +143,69 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">index.html</span></span></a>
+ <span class="menu-text">Biology-Informed Multi-Omics Integration</span></a>
   </div>
 </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">I. Theoretical Reference &amp; Notes</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../notes/epigenetic_analysis_reference_guide.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Epigenetic Analysis Reference Guide</span></span></a>
+ <span class="menu-text">Epigenetic Analysis Reference Guide</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../notes/normalization_models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Normalization models</span></span></a>
+ <span class="menu-text">Normalization models</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../notes/enrichment_analysis.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Functional Enrichment Analysis: Multi-Omics Integration</span></span></a>
+ <span class="menu-text">Functional Enrichment Analysis: Multi-Omics Integration</span></a>
   </div>
 </li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">II. Data Structures &amp; Visualization</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../notebooks/01-omics_data_structures.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Datasets, <code>SummarizedExperiment</code>, and <code>GRanges</code></span></span></a>
+ <span class="menu-text">Datasets, <code>SummarizedExperiment</code>, and <code>GRanges</code></span></a>
   </div>
 </li>
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../notebooks/02-atac_heatmaps.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Enriched Heatmaps and identification of regions with different activities</span></span></a>
+ <span class="menu-text">Enriched Heatmaps and identification of regions with different activities</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../notebooks/03-chip_rna_visualization.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">ChIP and RNA sequencing data plots</span></span></a>
+ <span class="menu-text">ChIP and RNA sequencing data plots</span></a>
   </div>
 </li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
- <span class="menu-text">III. Multi-Omics Integration</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../notebooks/04-genomic_overlap_matrices.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Overlapping all the datasets</span></span></a>
+ <span class="menu-text">Overlapping all the datasets</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../notebooks/05-atac_rna_integration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Integrating ATAC and RNA sequencing data</span></span></a>
+ <span class="menu-text">Integrating ATAC and RNA sequencing data</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../notebooks/06-multiomics_integration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Integrating ATAC, ChIP, and RNA sequencing data</span></span></a>
+ <span class="menu-text">Integrating ATAC, ChIP, and RNA sequencing data</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../notebooks/07-functional_enrichment.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Functional enrichment of genomic regions</span></span></a>
+ <span class="menu-text">Functional enrichment of genomic regions</span></a>
   </div>
 </li>
-      </ul>
-  </li>
     </ul>
     </div>
 </nav>
@@ -248,41 +213,30 @@ window.Quarto = {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
+    <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#overview-of-enrichment-analysis" id="toc-overview-of-enrichment-analysis" class="nav-link active" data-scroll-target="#overview-of-enrichment-analysis"><span class="header-section-number">4.1</span> Overview of Enrichment Analysis</a></li>
-  <li><a href="#database-challenges-semantic-similarity" id="toc-database-challenges-semantic-similarity" class="nav-link" data-scroll-target="#database-challenges-semantic-similarity"><span class="header-section-number">4.2</span> Database Challenges &amp; Semantic Similarity</a></li>
-  <li><a href="#cis-regulatory-regions-great" id="toc-cis-regulatory-regions-great" class="nav-link" data-scroll-target="#cis-regulatory-regions-great"><span class="header-section-number">4.3</span> Cis-Regulatory Regions &amp; GREAT</a></li>
-  <li><a href="#connection-to-the-practical-exercise" id="toc-connection-to-the-practical-exercise" class="nav-link" data-scroll-target="#connection-to-the-practical-exercise"><span class="header-section-number">4.4</span> Connection to the Practical Exercise</a></li>
+  <li><a href="#functional-enrichment-analysis-multi-omics-integration" id="toc-functional-enrichment-analysis-multi-omics-integration" class="nav-link active" data-scroll-target="#functional-enrichment-analysis-multi-omics-integration">Functional Enrichment Analysis: Multi-Omics Integration</a>
+  <ul class="collapse">
+  <li><a href="#overview-of-enrichment-analysis" id="toc-overview-of-enrichment-analysis" class="nav-link" data-scroll-target="#overview-of-enrichment-analysis">Overview of Enrichment Analysis</a></li>
+  <li><a href="#database-challenges-semantic-similarity" id="toc-database-challenges-semantic-similarity" class="nav-link" data-scroll-target="#database-challenges-semantic-similarity">Database Challenges &amp; Semantic Similarity</a></li>
+  <li><a href="#cis-regulatory-regions-great" id="toc-cis-regulatory-regions-great" class="nav-link" data-scroll-target="#cis-regulatory-regions-great">Cis-Regulatory Regions &amp; GREAT</a></li>
+  <li><a href="#connection-to-the-practical-exercise" id="toc-connection-to-the-practical-exercise" class="nav-link" data-scroll-target="#connection-to-the-practical-exercise">Connection to the Practical Exercise</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../notes/epigenetic_analysis_reference_guide.html">I. Theoretical Reference &amp; Notes</a></li><li class="breadcrumb-item"><a href="../notes/enrichment_analysis.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Functional Enrichment Analysis: Multi-Omics Integration</span></a></li></ol></nav>
-<div class="quarto-title">
-<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Functional Enrichment Analysis: Multi-Omics Integration</span></h1>
-</div>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
 
 
-<div class="quarto-title-meta">
 
-    
-  
-    
-  </div>
-  
-
-
-</header>
-
-
+<section id="functional-enrichment-analysis-multi-omics-integration" class="level1">
+<h1>Functional Enrichment Analysis: Multi-Omics Integration</h1>
 <p>This document summarizes the core concepts of functional enrichment analysis for multi-omics data, bridging the theoretical foundations from the lecture slides with the practical implementation in the accompanying R/Jupyter notebook.</p>
-<section id="overview-of-enrichment-analysis" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="overview-of-enrichment-analysis"><span class="header-section-number">4.1</span> Overview of Enrichment Analysis</h2>
+<section id="overview-of-enrichment-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="overview-of-enrichment-analysis">Overview of Enrichment Analysis</h2>
 <p>The primary goal of functional enrichment analysis is to extract biologically meaningful insights from long lists of genes. Instead of analyzing genes in isolation, these methods evaluate sets of genes to identify overactive or suppressed biological pathways.</p>
 <p>The three primary methodologies include:</p>
 <ul>
@@ -303,8 +257,8 @@ window.Quarto = {
 </ul></li>
 </ul>
 </section>
-<section id="database-challenges-semantic-similarity" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="database-challenges-semantic-similarity"><span class="header-section-number">4.2</span> Database Challenges &amp; Semantic Similarity</h2>
+<section id="database-challenges-semantic-similarity" class="level2">
+<h2 class="anchored" data-anchor-id="database-challenges-semantic-similarity">Database Challenges &amp; Semantic Similarity</h2>
 <p>Enrichment relies heavily on curated databases like Gene Ontology (GO), KEGG, and Reactome.</p>
 <ul>
 <li><strong>The Resolution Problem:</strong> The GO database (split into Biological Process, Molecular Function, and Cellular Component) contains highly similar or overlapping terms, such as “cell cycle” and “mitosis”.</li>
@@ -312,8 +266,8 @@ window.Quarto = {
 </ul>
 <p>Here is the expanded section, integrating the details of how GREAT calculates domains, maps peaks, and runs its statistical tests:</p>
 </section>
-<section id="cis-regulatory-regions-great" class="level2" data-number="4.3">
-<h2 data-number="4.3" class="anchored" data-anchor-id="cis-regulatory-regions-great"><span class="header-section-number">4.3</span> Cis-Regulatory Regions &amp; GREAT</h2>
+<section id="cis-regulatory-regions-great" class="level2">
+<h2 class="anchored" data-anchor-id="cis-regulatory-regions-great">Cis-Regulatory Regions &amp; GREAT</h2>
 <p>Standard enrichment tools fail when analyzing non-coding regions or distal regulatory elements.</p>
 <ul>
 <li><strong>GREAT (Genomic Regions Enrichment of Annotations Tool):</strong> Designed to accurately link cis-regulatory regions (like enhancers or ATAC-seq peaks) to the specific biological pathways they control. It solves the distal regulation problem in three distinct steps:
@@ -326,8 +280,8 @@ window.Quarto = {
 <li><strong>rGREAT Integration:</strong> The <code>rGREAT</code> R/Bioconductor package allows this functional enrichment to be executed directly on genomic regions.</li>
 </ul>
 </section>
-<section id="connection-to-the-practical-exercise" class="level2" data-number="4.4">
-<h2 data-number="4.4" class="anchored" data-anchor-id="connection-to-the-practical-exercise"><span class="header-section-number">4.4</span> Connection to the Practical Exercise</h2>
+<section id="connection-to-the-practical-exercise" class="level2">
+<h2 class="anchored" data-anchor-id="connection-to-the-practical-exercise">Connection to the Practical Exercise</h2>
 <p>The accompanying Jupyter notebook perfectly mirrors this methodology by applying <code>rGREAT</code> to multi-omics overlap data.</p>
 <ul>
 <li>It isolates a specific genomic cluster (“Active Promoters”) from an ATAC/RNA overlap matrix.</li>
@@ -335,6 +289,7 @@ window.Quarto = {
 </ul>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -411,7 +366,7 @@ window.Quarto = {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/sbwiecko\.github\.io\/biology-informed-multiomics-training\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -738,18 +693,6 @@ window.Quarto = {
     }
   });
   </script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
-      <a href="../notes/normalization_models.html" class="pagination-link" aria-label="Normalization models">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Normalization models</span></span>
-      </a>          
-  </div>
-  <div class="nav-page nav-page-next">
-      <a href="../notebooks/01-omics_data_structures.html" class="pagination-link" aria-label="Datasets, `SummarizedExperiment`, and `GRanges`">
-        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Datasets, <code>SummarizedExperiment</code>, and <code>GRanges</code></span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
-  </div>
-</nav>
 </div> <!-- /content -->
 
 

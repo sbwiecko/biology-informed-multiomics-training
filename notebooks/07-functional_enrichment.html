@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>11&nbsp; Functional enrichment of genomic regions – Biology-Informed Multi-Omics Integration</title>
+<title>Functional enrichment of genomic regions – Biology-Informed Multi-Omics Integration</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -71,7 +71,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../notebooks/06-multiomics_integration.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -81,7 +80,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-5630e6732664d48c7cde3b526013eeb9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-93c2f64124fc842a968b101e89420266.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -142,7 +141,7 @@ window.Quarto = {
 
 </head>
 
-<body class="nav-sidebar floating quarto-light">
+<body class="nav-sidebar docked quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -151,7 +150,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../notebooks/04-genomic_overlap_matrices.html">III. Multi-Omics Integration</a></li><li class="breadcrumb-item"><a href="../notebooks/07-functional_enrichment.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Functional enrichment of genomic regions</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../notebooks/07-functional_enrichment.html">Functional enrichment of genomic regions</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -163,7 +162,7 @@ window.Quarto = {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Biology-Informed Multi-Omics Integration</a> 
@@ -179,102 +178,69 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">index.html</span></span></a>
+ <span class="menu-text">Biology-Informed Multi-Omics Integration</span></a>
   </div>
 </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">I. Theoretical Reference &amp; Notes</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../notes/epigenetic_analysis_reference_guide.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Epigenetic Analysis Reference Guide</span></span></a>
+ <span class="menu-text">Epigenetic Analysis Reference Guide</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../notes/normalization_models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Normalization models</span></span></a>
+ <span class="menu-text">Normalization models</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../notes/enrichment_analysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Functional Enrichment Analysis: Multi-Omics Integration</span></span></a>
+ <span class="menu-text">Functional Enrichment Analysis: Multi-Omics Integration</span></a>
   </div>
 </li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">II. Data Structures &amp; Visualization</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../notebooks/01-omics_data_structures.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Datasets, <code>SummarizedExperiment</code>, and <code>GRanges</code></span></span></a>
+ <span class="menu-text">Datasets, <code>SummarizedExperiment</code>, and <code>GRanges</code></span></a>
   </div>
 </li>
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../notebooks/02-atac_heatmaps.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Enriched Heatmaps and identification of regions with different activities</span></span></a>
+ <span class="menu-text">Enriched Heatmaps and identification of regions with different activities</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../notebooks/03-chip_rna_visualization.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">ChIP and RNA sequencing data plots</span></span></a>
+ <span class="menu-text">ChIP and RNA sequencing data plots</span></a>
   </div>
 </li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
- <span class="menu-text">III. Multi-Omics Integration</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../notebooks/04-genomic_overlap_matrices.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Overlapping all the datasets</span></span></a>
+ <span class="menu-text">Overlapping all the datasets</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../notebooks/05-atac_rna_integration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Integrating ATAC and RNA sequencing data</span></span></a>
+ <span class="menu-text">Integrating ATAC and RNA sequencing data</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../notebooks/06-multiomics_integration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Integrating ATAC, ChIP, and RNA sequencing data</span></span></a>
+ <span class="menu-text">Integrating ATAC, ChIP, and RNA sequencing data</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../notebooks/07-functional_enrichment.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Functional enrichment of genomic regions</span></span></a>
+ <span class="menu-text">Functional enrichment of genomic regions</span></a>
   </div>
 </li>
-      </ul>
-  </li>
     </ul>
     </div>
 </nav>
@@ -282,30 +248,30 @@ window.Quarto = {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
+    <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">11.1</span> Learning objectives</a></li>
-  <li><a href="#environment-setup-data-loading" id="toc-environment-setup-data-loading" class="nav-link" data-scroll-target="#environment-setup-data-loading"><span class="header-section-number">11.2</span> Environment setup &amp; data loading</a>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning objectives</a></li>
+  <li><a href="#environment-setup-data-loading" id="toc-environment-setup-data-loading" class="nav-link" data-scroll-target="#environment-setup-data-loading">Environment setup &amp; data loading</a>
   <ul class="collapse">
-  <li><a href="#loading-the-required-libraries" id="toc-loading-the-required-libraries" class="nav-link" data-scroll-target="#loading-the-required-libraries"><span class="header-section-number">11.2.1</span> Loading the required libraries</a></li>
-  <li><a href="#importing-the-multi-omics-overlap-data" id="toc-importing-the-multi-omics-overlap-data" class="nav-link" data-scroll-target="#importing-the-multi-omics-overlap-data"><span class="header-section-number">11.2.2</span> Importing the multi-omics overlap data</a></li>
-  <li><a href="#exploring-the-silenced-regions" id="toc-exploring-the-silenced-regions" class="nav-link" data-scroll-target="#exploring-the-silenced-regions"><span class="header-section-number">11.2.3</span> Exploring the “Silenced” Regions</a></li>
+  <li><a href="#loading-the-required-libraries" id="toc-loading-the-required-libraries" class="nav-link" data-scroll-target="#loading-the-required-libraries">Loading the required libraries</a></li>
+  <li><a href="#importing-the-multi-omics-overlap-data" id="toc-importing-the-multi-omics-overlap-data" class="nav-link" data-scroll-target="#importing-the-multi-omics-overlap-data">Importing the multi-omics overlap data</a></li>
+  <li><a href="#exploring-the-silenced-regions" id="toc-exploring-the-silenced-regions" class="nav-link" data-scroll-target="#exploring-the-silenced-regions">Exploring the “Silenced” Regions</a></li>
   </ul></li>
-  <li><a href="#genomic-region-enrichment-via-rgreat" id="toc-genomic-region-enrichment-via-rgreat" class="nav-link" data-scroll-target="#genomic-region-enrichment-via-rgreat"><span class="header-section-number">11.3</span> Genomic region enrichment via rGREAT</a>
+  <li><a href="#genomic-region-enrichment-via-rgreat" id="toc-genomic-region-enrichment-via-rgreat" class="nav-link" data-scroll-target="#genomic-region-enrichment-via-rgreat">Genomic region enrichment via rGREAT</a>
   <ul class="collapse">
-  <li><a href="#subsetting-the-genomic-ranges" id="toc-subsetting-the-genomic-ranges" class="nav-link" data-scroll-target="#subsetting-the-genomic-ranges"><span class="header-section-number">11.3.1</span> Subsetting the Genomic Ranges</a></li>
-  <li><a href="#executing-the-great-algorithm" id="toc-executing-the-great-algorithm" class="nav-link" data-scroll-target="#executing-the-great-algorithm"><span class="header-section-number">11.3.2</span> Executing the GREAT algorithm</a></li>
-  <li><a href="#qaqc-verifying-the-great-mapping" id="toc-qaqc-verifying-the-great-mapping" class="nav-link" data-scroll-target="#qaqc-verifying-the-great-mapping"><span class="header-section-number">11.3.3</span> QA/QC: verifying the GREAT mapping</a></li>
+  <li><a href="#subsetting-the-genomic-ranges" id="toc-subsetting-the-genomic-ranges" class="nav-link" data-scroll-target="#subsetting-the-genomic-ranges">Subsetting the Genomic Ranges</a></li>
+  <li><a href="#executing-the-great-algorithm" id="toc-executing-the-great-algorithm" class="nav-link" data-scroll-target="#executing-the-great-algorithm">Executing the GREAT algorithm</a></li>
+  <li><a href="#qaqc-verifying-the-great-mapping" id="toc-qaqc-verifying-the-great-mapping" class="nav-link" data-scroll-target="#qaqc-verifying-the-great-mapping">QA/QC: verifying the GREAT mapping</a></li>
   </ul></li>
-  <li><a href="#visualizing-and-interpreting-enrichment-results" id="toc-visualizing-and-interpreting-enrichment-results" class="nav-link" data-scroll-target="#visualizing-and-interpreting-enrichment-results"><span class="header-section-number">11.4</span> Visualizing and interpreting enrichment results</a>
+  <li><a href="#visualizing-and-interpreting-enrichment-results" id="toc-visualizing-and-interpreting-enrichment-results" class="nav-link" data-scroll-target="#visualizing-and-interpreting-enrichment-results">Visualizing and interpreting enrichment results</a>
   <ul class="collapse">
-  <li><a href="#statistical-significance-the-volcano-plot" id="toc-statistical-significance-the-volcano-plot" class="nav-link" data-scroll-target="#statistical-significance-the-volcano-plot"><span class="header-section-number">11.4.1</span> Statistical significance: the Volcano plot</a></li>
-  <li><a href="#physical-mapping-region-gene-associations" id="toc-physical-mapping-region-gene-associations" class="nav-link" data-scroll-target="#physical-mapping-region-gene-associations"><span class="header-section-number">11.4.2</span> Physical mapping: region-gene associations</a></li>
-  <li><a href="#exploring-the-raw-data" id="toc-exploring-the-raw-data" class="nav-link" data-scroll-target="#exploring-the-raw-data"><span class="header-section-number">11.4.3</span> Exploring the raw data</a></li>
-  <li><a href="#downstream-filtering-of-biological-pathways" id="toc-downstream-filtering-of-biological-pathways" class="nav-link" data-scroll-target="#downstream-filtering-of-biological-pathways"><span class="header-section-number">11.4.4</span> Downstream filtering of biological pathways</a></li>
-  <li><a href="#clustering-redundant-pathways-semantic-similarity" id="toc-clustering-redundant-pathways-semantic-similarity" class="nav-link" data-scroll-target="#clustering-redundant-pathways-semantic-similarity"><span class="header-section-number">11.4.5</span> Clustering redundant pathways (semantic similarity)</a></li>
-  <li><a href="#exploring-the-silenced-regions-1" id="toc-exploring-the-silenced-regions-1" class="nav-link" data-scroll-target="#exploring-the-silenced-regions-1"><span class="header-section-number">11.4.6</span> Exploring the “Silenced” regions</a></li>
+  <li><a href="#statistical-significance-the-volcano-plot" id="toc-statistical-significance-the-volcano-plot" class="nav-link" data-scroll-target="#statistical-significance-the-volcano-plot">Statistical significance: the Volcano plot</a></li>
+  <li><a href="#physical-mapping-region-gene-associations" id="toc-physical-mapping-region-gene-associations" class="nav-link" data-scroll-target="#physical-mapping-region-gene-associations">Physical mapping: region-gene associations</a></li>
+  <li><a href="#exploring-the-raw-data" id="toc-exploring-the-raw-data" class="nav-link" data-scroll-target="#exploring-the-raw-data">Exploring the raw data</a></li>
+  <li><a href="#downstream-filtering-of-biological-pathways" id="toc-downstream-filtering-of-biological-pathways" class="nav-link" data-scroll-target="#downstream-filtering-of-biological-pathways">Downstream filtering of biological pathways</a></li>
+  <li><a href="#clustering-redundant-pathways-semantic-similarity" id="toc-clustering-redundant-pathways-semantic-similarity" class="nav-link" data-scroll-target="#clustering-redundant-pathways-semantic-similarity">Clustering redundant pathways (semantic similarity)</a></li>
+  <li><a href="#exploring-the-silenced-regions-1" id="toc-exploring-the-silenced-regions-1" class="nav-link" data-scroll-target="#exploring-the-silenced-regions-1">Exploring the “Silenced” regions</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -313,9 +279,9 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../notebooks/04-genomic_overlap_matrices.html">III. Multi-Omics Integration</a></li><li class="breadcrumb-item"><a href="../notebooks/07-functional_enrichment.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Functional enrichment of genomic regions</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Functional enrichment of genomic regions</span></h1>
+<h1 class="title">Functional enrichment of genomic regions</h1>
 </div>
 
 
@@ -334,8 +300,8 @@ window.Quarto = {
 
 <p>In the previous notebooks, we successfully integrated ATAC-seq, ChIP-seq, RNA-seq, and WGBS data to classify thousands of genomic regions into distinct biological states (e.g., <em>Active Promoters</em>, <em>Lost Enhancers</em>, <em>Silenced</em>). However, assigning a biological label to a genomic coordinate is only half the battle. To truly understand the developmental biology of our system (E11.5 to E15.5), we need to ask: <strong>What biological pathways do these specific regulatory regions actually control?</strong></p>
 <p>In this notebook, we will perform <strong>Functional Enrichment Analysis</strong>. Unlike standard RNA-seq analysis (which relies on isolated lists of genes), we will use <strong>GREAT</strong> (Genomic Regions Enrichment of Annotations Tool) to mathematically map our physical, non-coding regulatory coordinates directly to biological functions.</p>
-<section id="learning-objectives" class="level2" data-number="11.1">
-<h2 data-number="11.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">11.1</span> Learning objectives</h2>
+<section id="learning-objectives" class="level2">
+<h2 class="anchored" data-anchor-id="learning-objectives">Learning objectives</h2>
 <ul>
 <li>Use the <code>rGREAT</code> package to map cis-regulatory elements directly to biological pathways.</li>
 <li>Generate Volcano plots and region-gene association graphs to diagnose enrichment significance.</li>
@@ -343,12 +309,12 @@ window.Quarto = {
 <li>Interpret the actual biological meaning behind the pathways enriched in our <em>Active Promoters</em>.</li>
 </ul>
 </section>
-<section id="environment-setup-data-loading" class="level2" data-number="11.2">
-<h2 data-number="11.2" class="anchored" data-anchor-id="environment-setup-data-loading"><span class="header-section-number">11.2</span> Environment setup &amp; data loading</h2>
+<section id="environment-setup-data-loading" class="level2">
+<h2 class="anchored" data-anchor-id="environment-setup-data-loading">Environment setup &amp; data loading</h2>
 <p>Because we are mathematically mapping raw genomic coordinates to biological meaning, we need to load massive <strong>Annotation Databases</strong> that contain the physical coordinates and pathway annotations for our specific organism (Mouse).</p>
-<section id="loading-the-required-libraries" class="level3" data-number="11.2.1">
-<h3 data-number="11.2.1" class="anchored" data-anchor-id="loading-the-required-libraries"><span class="header-section-number">11.2.1</span> Loading the required libraries</h3>
-<div id="cell-2" class="cell" data-message="false" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="1">
+<section id="loading-the-required-libraries" class="level3">
+<h3 class="anchored" data-anchor-id="loading-the-required-libraries">Loading the required libraries</h3>
+<div id="cell-3" class="cell" data-message="false" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">suppressWarnings</span>({</span>
@@ -370,10 +336,10 @@ window.Quarto = {
 </details>
 </div>
 </section>
-<section id="importing-the-multi-omics-overlap-data" class="level3" data-number="11.2.2">
-<h3 data-number="11.2.2" class="anchored" data-anchor-id="importing-the-multi-omics-overlap-data"><span class="header-section-number">11.2.2</span> Importing the multi-omics overlap data</h3>
+<section id="importing-the-multi-omics-overlap-data" class="level3">
+<h3 class="anchored" data-anchor-id="importing-the-multi-omics-overlap-data">Importing the multi-omics overlap data</h3>
 <p>We will start by loading the final, fully-annotated <code>GRanges</code> object that we generated in the previous notebooks. This object contains all of our ATAC-seq peaks, cross-referenced against RNA-seq, and tagged with their final biological regulatory category.</p>
-<div id="cell-4" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="2">
+<div id="cell-5" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the annotated overlap object</span></span>
@@ -393,20 +359,20 @@ Repressed Promoters            Silenced
 </div>
 </div>
 </section>
-<section id="exploring-the-silenced-regions" class="level3" data-number="11.2.3">
-<h3 data-number="11.2.3" class="anchored" data-anchor-id="exploring-the-silenced-regions"><span class="header-section-number">11.2.3</span> Exploring the “Silenced” Regions</h3>
+<section id="exploring-the-silenced-regions" class="level3">
+<h3 class="anchored" data-anchor-id="exploring-the-silenced-regions">Exploring the “Silenced” Regions</h3>
 <p>We just saw that our <strong>Active Promoters</strong> are strongly enriched for synapse formation and neurodevelopment. However, as cells differentiate, they must also permanently repress genes from earlier progenitor stages or alternative cell lineages.</p>
 <p>To investigate this repression, we will analyze the <strong><code>Silenced</code></strong> category. As we saw in our contingency table, this cluster contains a robust <strong>166 regions</strong>, providing excellent statistical power for the <code>rGREAT</code> algorithm. More importantly, these regions share a highly specific multi-omics signature: a severe decrease in chromatin accessibility (ATAC-seq) and active acetylation (H3K27ac), a massive gain in Polycomb-mediated repression (H3K27me3), and a clear downregulation in target gene expression (RNA-seq).</p>
 <p>Let’s quickly re-run our enrichment pipeline on these 166 regions to see exactly what biological pathways the developing brain is actively shutting down!</p>
 </section>
 </section>
-<section id="genomic-region-enrichment-via-rgreat" class="level2" data-number="11.3">
-<h2 data-number="11.3" class="anchored" data-anchor-id="genomic-region-enrichment-via-rgreat"><span class="header-section-number">11.3</span> Genomic region enrichment via rGREAT</h2>
+<section id="genomic-region-enrichment-via-rgreat" class="level2">
+<h2 class="anchored" data-anchor-id="genomic-region-enrichment-via-rgreat">Genomic region enrichment via rGREAT</h2>
 <p>Now that we have selected our target category, we need to extract those specific physical coordinates from our massive overlapping dataset and feed them into the <strong>GREAT</strong> algorithm.</p>
-<section id="subsetting-the-genomic-ranges" class="level3" data-number="11.3.1">
-<h3 data-number="11.3.1" class="anchored" data-anchor-id="subsetting-the-genomic-ranges"><span class="header-section-number">11.3.1</span> Subsetting the Genomic Ranges</h3>
+<section id="subsetting-the-genomic-ranges" class="level3">
+<h3 class="anchored" data-anchor-id="subsetting-the-genomic-ranges">Subsetting the Genomic Ranges</h3>
 <p>First, we use standard R indexing to extract only the 99 peaks classified as <code>Active Promoters</code>.</p>
-<div id="cell-7" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="3">
+<div id="cell-8" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract only the Active Promoters using the cleaner subset() method</span></span>
@@ -842,13 +808,13 @@ Repressed Promoters            Silenced
 </div>
 <p>Notice that we re-assign the <code>seqlevels</code>. As discussed in <a href="../notebooks/04-genomic_overlap_matrices.html">a previous notebook</a>, when we subset a <code>GRanges</code> object, it remembers <em>all</em> the original chromosomes, even the ones that now have 0 peaks. Dropping these “empty” chromosomes is a critical sanitization step to prevent downstream algorithms from crashing or miscalculating genome background sizes.</p>
 </section>
-<section id="executing-the-great-algorithm" class="level3" data-number="11.3.2">
-<h3 data-number="11.3.2" class="anchored" data-anchor-id="executing-the-great-algorithm"><span class="header-section-number">11.3.2</span> Executing the GREAT algorithm</h3>
+<section id="executing-the-great-algorithm" class="level3">
+<h3 class="anchored" data-anchor-id="executing-the-great-algorithm">Executing the GREAT algorithm</h3>
 <p>Now we pass our isolated coordinates directly to the <code>great()</code> function.</p>
 <p>Unlike standard RNA-seq enrichment that relies on isolated gene names, GREAT maps <strong>physical genome space</strong>. Because our ATAC-seq peaks are mostly non-coding regulatory elements (like distal enhancers), they rarely sit directly <em>inside</em> the genes they regulate.</p>
 <p>To solve this, GREAT calculates a <strong>“regulatory domain”</strong> for every known gene in the mouse genome by starting at the Transcription Start Site (TSS): 1. <strong>Basal Domain:</strong> It first assigns a core regulatory region immediately surrounding the TSS (typically 5kb upstream and 1kb downstream). 2. <strong>Distal Extension:</strong> It then extends this domain outward in both directions along the chromosome until it hits the regulatory domain of the nearest neighboring gene (up to a massive maximum of 1,000 kb!).</p>
 <p>GREAT then maps our 99 ATAC-seq peaks to see which of these extended regulatory domains they physically fall into. This allows us to accurately link distal regulatory DNA to the specific biological pathways they control.</p>
-<div id="cell-10" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="4">
+<div id="cell-11" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the Genomic Regions Enrichment of Annotations Tool</span></span>
@@ -908,11 +874,11 @@ Repressed Promoters            Silenced
 </div>
 <p><em>Notice that it says <code>* restrict chromosomes to chr1, chr2...</code>. <code>rGREAT</code> is actually smart enough to automatically filter out weird unplaced contigs based on its internal TSS database. However, applying <code>seqlevelsInUse()</code> immediately after subsetting is still a crucial Bioconductor habit to learn, as many other downstream algorithms will crash or miscalculate background statistics if they detect empty chromosomes sitting in our object’s metadata.</em></p>
 </section>
-<section id="qaqc-verifying-the-great-mapping" class="level3" data-number="11.3.3">
-<h3 data-number="11.3.3" class="anchored" data-anchor-id="qaqc-verifying-the-great-mapping"><span class="header-section-number">11.3.3</span> QA/QC: verifying the GREAT mapping</h3>
+<section id="qaqc-verifying-the-great-mapping" class="level3">
+<h3 class="anchored" data-anchor-id="qaqc-verifying-the-great-mapping">QA/QC: verifying the GREAT mapping</h3>
 <p>Before we jump into the visualizations, simply printing the <code>res</code> object provides a critical Quality Control check.</p>
 <p>It tells us exactly how many of our 99 physical ATAC-seq peaks successfully intersected with the mathematical regulatory domain of a known gene. If the vast majority of our peaks mapped successfully, we have the green light to proceed to pathway visualization.</p>
-<div id="cell-13" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="5">
+<div id="cell-14" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Print a summary of the GREAT object</span></span>
@@ -932,13 +898,13 @@ Mode: Basal plus extension
 </div>
 </section>
 </section>
-<section id="visualizing-and-interpreting-enrichment-results" class="level2" data-number="11.4">
-<h2 data-number="11.4" class="anchored" data-anchor-id="visualizing-and-interpreting-enrichment-results"><span class="header-section-number">11.4</span> Visualizing and interpreting enrichment results</h2>
+<section id="visualizing-and-interpreting-enrichment-results" class="level2">
+<h2 class="anchored" data-anchor-id="visualizing-and-interpreting-enrichment-results">Visualizing and interpreting enrichment results</h2>
 <p>Now that the GREAT algorithm has successfully mapped our ATAC-seq peaks to biological pathways, we need to extract biological meaning from the statistics. We will explore and refine our results using four distinct approaches.</p>
-<section id="statistical-significance-the-volcano-plot" class="level3" data-number="11.4.1">
-<h3 data-number="11.4.1" class="anchored" data-anchor-id="statistical-significance-the-volcano-plot"><span class="header-section-number">11.4.1</span> Statistical significance: the Volcano plot</h3>
+<section id="statistical-significance-the-volcano-plot" class="level3">
+<h3 class="anchored" data-anchor-id="statistical-significance-the-volcano-plot">Statistical significance: the Volcano plot</h3>
 <p>Because <code>rGREAT</code> is built specifically for genomic regions, its native <code>plotVolcano()</code> function operates a little differently than a standard RNA-seq volcano plot. Instead of plotting individual genes, each dot on this plot represents an entire <strong>Biological Pathway</strong>.</p>
-<div id="cell-15" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="6">
+<div id="cell-16" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate a Volcano plot directly from the GREAT results object.</span></span>
@@ -962,10 +928,10 @@ Mode: Basal plus extension
 <li><strong>Color (Absolute Hits):</strong> The small blue dots in the top-right only have ~5 peak hits. However, because those pathways are physically tiny (small dot size), getting even 5 hits is incredibly rare. These represent highly specific, tightly coordinated biological networks.</li>
 </ul>
 </section>
-<section id="physical-mapping-region-gene-associations" class="level3" data-number="11.4.2">
-<h3 data-number="11.4.2" class="anchored" data-anchor-id="physical-mapping-region-gene-associations"><span class="header-section-number">11.4.2</span> Physical mapping: region-gene associations</h3>
+<section id="physical-mapping-region-gene-associations" class="level3">
+<h3 class="anchored" data-anchor-id="physical-mapping-region-gene-associations">Physical mapping: region-gene associations</h3>
 <p>Now that we know which biological pathways are enriched, we need to inspect the physical mapping that generated those statistics. How exactly did GREAT assign our 99 ATAC-seq peaks to target genes? Did they map to local promoters, or long-range distal regions?</p>
-<div id="cell-18" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="7">
+<div id="cell-19" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># options(repr.plot.width = 12, repr.plot.height = 6)</span></span>
@@ -989,11 +955,11 @@ Mode: Basal plus extension
 </ul>
 <p><em>(Note: The smaller bars further out at 50-500kb simply reflect that genes are packed tightly together, and one gene’s promoter might physically overlap with the extended regulatory domain of a distant neighbor).</em></p>
 </section>
-<section id="exploring-the-raw-data" class="level3" data-number="11.4.3">
-<h3 data-number="11.4.3" class="anchored" data-anchor-id="exploring-the-raw-data"><span class="header-section-number">11.4.3</span> Exploring the raw data</h3>
+<section id="exploring-the-raw-data" class="level3">
+<h3 class="anchored" data-anchor-id="exploring-the-raw-data">Exploring the raw data</h3>
 <p>While the Volcano plot gives us a great high-level view of our enriched pathways, we now need to dig deeper into the actual biology. To do this, we must extract the raw data so we can systematically sort the pathways by significance and identify the exact names of the target genes our ATAC-seq peaks hit.</p>
 <p><em>While <code>rGREAT</code> does come with a built-in interactive dashboard (<code>shinyReport(res)</code>), <strong>Shiny applications do not play nicely with Jupyter Notebooks.</strong> Launching a Shiny app will hijack the R kernel. In many Jupyter environments, attempting to stop the Shiny app will completely crash the R session, forcing to restart the kernel and run all previous cells from the beginning.</em></p>
-<div id="cell-21" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="8">
+<div id="cell-22" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># (Optional) Launch the interactive GREAT dashboard. </span></span>
@@ -1003,7 +969,7 @@ Mode: Basal plus extension
 </details>
 </div>
 <p>Instead of relying on a clunky dashboard, we can extract the raw mathematical results into a standard R dataframe.</p>
-<div id="cell-23" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="9">
+<div id="cell-24" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="9">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract the full enrichment table into a standard dataframe</span></span>
@@ -1044,11 +1010,11 @@ Mode: Basal plus extension
 </div>
 </div>
 </section>
-<section id="downstream-filtering-of-biological-pathways" class="level3" data-number="11.4.4">
-<h3 data-number="11.4.4" class="anchored" data-anchor-id="downstream-filtering-of-biological-pathways"><span class="header-section-number">11.4.4</span> Downstream filtering of biological pathways</h3>
+<section id="downstream-filtering-of-biological-pathways" class="level3">
+<h3 class="anchored" data-anchor-id="downstream-filtering-of-biological-pathways">Downstream filtering of biological pathways</h3>
 <p>Because <code>getEnrichmentTable()</code> returns a standard R dataframe, we are no longer trapped inside a “black box” bioinformatics tool. We can use the exact same <code>dplyr</code> data wrangling skills we learned in previous notebooks to aggressively mine this table for biological meaning.</p>
 <p>Here are three highly practical examples of how we can filter our pathway results both mathematically and biologically.</p>
-<div id="cell-25" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="10">
+<div id="cell-26" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="10">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Filter Mathematically: Keep only highly significant pathways (FDR &lt; 0.05)</span></span>
@@ -1096,11 +1062,11 @@ Mode: Basal plus extension
 </div>
 </div>
 </section>
-<section id="clustering-redundant-pathways-semantic-similarity" class="level3" data-number="11.4.5">
-<h3 data-number="11.4.5" class="anchored" data-anchor-id="clustering-redundant-pathways-semantic-similarity"><span class="header-section-number">11.4.5</span> Clustering redundant pathways (semantic similarity)</h3>
+<section id="clustering-redundant-pathways-semantic-similarity" class="level3">
+<h3 class="anchored" data-anchor-id="clustering-redundant-pathways-semantic-similarity">Clustering redundant pathways (semantic similarity)</h3>
 <p>As we just saw in our filtered data table above, the Gene Ontology (GO) database is notoriously redundant. Because our active promoters are enriched for calcium signaling, the database returned <em>regulation of presynaptic cytosolic calcium</em>, <em>intracellular calcium ion homeostasis</em>, and <em>calcium ion transmembrane transport</em> as completely separate pathways.</p>
 <p>If we don’t mathematically compress this data, we will be forced to manually read through hundreds of nearly identical terms. To make sense of this massive, repetitive list, we can use the <code>simplifyEnrichment</code> package. This algorithm calculates the <strong>Semantic Similarity</strong> between all of our significant GO terms (how closely related they are in the biological tree) and physically clusters them into clean, high-level functional blocks.</p>
-<div id="cell-27" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="11">
+<div id="cell-28" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="11">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract the exact GO IDs for our statistically significant pathways</span></span>
@@ -1136,7 +1102,7 @@ Perform keywords enrichment for 4 GO lists...
 </div>
 </div>
 <p>This visualization condenses the repetitive results. The red diagonal matrix mathematically groups all the 41 GO terms into distinct clusters based on their similarity. Instead of forcing us to read dozens of nearly identical pathway names, the algorithm generates clean word clouds summarizing the overarching biological function of each block: calcium homeostasis, synaptic transport, membrane potential, and learning behavior.</p>
-<div id="cell-29" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="12">
+<div id="cell-30" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="12">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate a heatmap summarizing our high-level biological clusters</span></span>
@@ -1170,12 +1136,12 @@ Perform keywords enrichment for 4 GO lists...
 <p>This bar chart summarizes our data by showing the average statistical significance of each functional block. The “calcium homeostasis” cluster is by far the most statistically robust group (the longest bar), indicating that calcium signaling is a primary molecular driver in these cells.</p>
 <p>Biologically, this makes perfect sense; E11.5 to E15.5 is a critical embryonic window for neural development, involving rapid neuronal differentiation and synapse formation. The fact that our mathematically isolated <em>Active Promoters</em> are overwhelmingly driving ion transport, synaptic transmission, and learning circuitry perfectly aligns with early neural maturation. Our multi-omics integration successfully captured the exact developmental window where the embryonic brain begins to wire itself.</p>
 </section>
-<section id="exploring-the-silenced-regions-1" class="level3" data-number="11.4.6">
-<h3 data-number="11.4.6" class="anchored" data-anchor-id="exploring-the-silenced-regions-1"><span class="header-section-number">11.4.6</span> Exploring the “Silenced” regions</h3>
+<section id="exploring-the-silenced-regions-1" class="level3">
+<h3 class="anchored" data-anchor-id="exploring-the-silenced-regions-1">Exploring the “Silenced” regions</h3>
 <p>We just saw that our <strong>Active Promoters</strong> are strongly enriched for synapse formation and neurodevelopment. However, as cells differentiate, they must also permanently repress genes from earlier progenitor stages or alternative cell lineages.</p>
 <p>To investigate this repression, we will analyze the <strong><code>Silenced</code></strong> category. As we saw in our contingency table, this cluster contains a robust <strong>166 regions</strong>, providing excellent statistical power for the <code>rGREAT</code> algorithm. More importantly, these regions share a highly specific multi-omics signature: a severe decrease in chromatin accessibility (ATAC-seq) and active acetylation (H3K27ac), a massive gain in Polycomb-mediated repression (H3K27me3), and a clear downregulation in target gene expression (RNA-seq).</p>
 <p>Let’s quickly re-run our enrichment pipeline on these 166 regions to see exactly what biological pathways the developing brain is actively shutting down.</p>
-<div id="cell-32" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="13">
+<div id="cell-33" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="13">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>gr_silenced <span class="ot">&lt;-</span> <span class="fu">subset</span>(overlap, Multiomics_State <span class="sc">==</span> <span class="st">"Silenced"</span>)</span>
@@ -1218,7 +1184,7 @@ Perform keywords enrichment for 4 GO lists...
 </code></pre>
 </div>
 </div>
-<div id="cell-33" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="14">
+<div id="cell-34" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="14">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate the Volcano plot for the silenced regions</span></span>
@@ -1234,7 +1200,7 @@ Perform keywords enrichment for 4 GO lists...
 </div>
 <p>Notice how different this Volcano plot is compared to our <code>Active Promoters</code>. The significance scores reach massively higher (<span class="math inline">\(p &lt; 10^{-17}\)</span>), and there is an absolute swarm of pathways flying into the top-right quadrant.</p>
 <p>While a differentiating cell only needs to activate a small, highly targeted set of pathways to become a neuron, it must simultaneously repress <em>massive, heavily populated</em> gene networks associated with every other possible cell fate. Because Polycomb (H3K27me3) coordinates the shutdown of these massive networks all at once, the statistical enrichment for repression is mathematically off the charts.</p>
-<div id="cell-35" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="15">
+<div id="cell-36" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="15">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>tb_silenced <span class="ot">&lt;-</span> <span class="fu">getEnrichmentTable</span>(res_silenced)</span>
@@ -1253,7 +1219,7 @@ Perform keywords enrichment for 4 GO lists...
 </div>
 <p>While our <code>Active Promoters</code> enriched for just 41 pathways, the <code>Silenced</code> regions enriched for <strong>hundreds</strong>.</p>
 <p>The semantic similarity matrix above mathematically groups this massive list into distinct functional blocks. Looking closely at the word clouds on the right, we can see the algorithm successfully clustered terms related to <strong>Collagen</strong> (connective tissue), <strong>Endothelial</strong> (blood vessels), and <strong>Striated Muscle</strong>.</p>
-<div id="cell-37" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="16">
+<div id="cell-38" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="16">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressMessages</span>(</span>
@@ -1352,7 +1318,7 @@ Perform keywords enrichment for 4 GO lists...
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/sbwiecko\.github\.io\/biology-informed-multiomics-training\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -1679,15 +1645,6 @@ Perform keywords enrichment for 4 GO lists...
     }
   });
   </script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
-      <a href="../notebooks/06-multiomics_integration.html" class="pagination-link" aria-label="Integrating ATAC, ChIP, and RNA sequencing data">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Integrating ATAC, ChIP, and RNA sequencing data</span></span>
-      </a>          
-  </div>
-  <div class="nav-page nav-page-next">
-  </div>
-</nav>
 </div> <!-- /content -->
 
 

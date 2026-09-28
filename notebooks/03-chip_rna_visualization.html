@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>7&nbsp; ChIP and RNA sequencing data plots – Biology-Informed Multi-Omics Integration</title>
+<title>ChIP and RNA sequencing data plots – Biology-Informed Multi-Omics Integration</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -71,8 +71,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../notebooks/04-genomic_overlap_matrices.html" rel="next">
-<link href="../notebooks/02-atac_heatmaps.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -82,7 +80,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-5630e6732664d48c7cde3b526013eeb9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-93c2f64124fc842a968b101e89420266.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -117,7 +115,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="nav-sidebar floating quarto-light">
+<body class="nav-sidebar docked quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -126,7 +124,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../notebooks/01-omics_data_structures.html">II. Data Structures &amp; Visualization</a></li><li class="breadcrumb-item"><a href="../notebooks/03-chip_rna_visualization.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">ChIP and RNA sequencing data plots</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../notebooks/03-chip_rna_visualization.html">ChIP and RNA sequencing data plots</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -138,7 +136,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Biology-Informed Multi-Omics Integration</a> 
@@ -154,102 +152,69 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">index.html</span></span></a>
+ <span class="menu-text">Biology-Informed Multi-Omics Integration</span></a>
   </div>
 </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">I. Theoretical Reference &amp; Notes</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../notes/epigenetic_analysis_reference_guide.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Epigenetic Analysis Reference Guide</span></span></a>
+ <span class="menu-text">Epigenetic Analysis Reference Guide</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../notes/normalization_models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Normalization models</span></span></a>
+ <span class="menu-text">Normalization models</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../notes/enrichment_analysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Functional Enrichment Analysis: Multi-Omics Integration</span></span></a>
+ <span class="menu-text">Functional Enrichment Analysis: Multi-Omics Integration</span></a>
   </div>
 </li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">II. Data Structures &amp; Visualization</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../notebooks/01-omics_data_structures.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Datasets, <code>SummarizedExperiment</code>, and <code>GRanges</code></span></span></a>
+ <span class="menu-text">Datasets, <code>SummarizedExperiment</code>, and <code>GRanges</code></span></a>
   </div>
 </li>
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../notebooks/02-atac_heatmaps.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Enriched Heatmaps and identification of regions with different activities</span></span></a>
+ <span class="menu-text">Enriched Heatmaps and identification of regions with different activities</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../notebooks/03-chip_rna_visualization.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">ChIP and RNA sequencing data plots</span></span></a>
+ <span class="menu-text">ChIP and RNA sequencing data plots</span></a>
   </div>
 </li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
- <span class="menu-text">III. Multi-Omics Integration</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../notebooks/04-genomic_overlap_matrices.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Overlapping all the datasets</span></span></a>
+ <span class="menu-text">Overlapping all the datasets</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../notebooks/05-atac_rna_integration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Integrating ATAC and RNA sequencing data</span></span></a>
+ <span class="menu-text">Integrating ATAC and RNA sequencing data</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../notebooks/06-multiomics_integration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Integrating ATAC, ChIP, and RNA sequencing data</span></span></a>
+ <span class="menu-text">Integrating ATAC, ChIP, and RNA sequencing data</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../notebooks/07-functional_enrichment.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Functional enrichment of genomic regions</span></span></a>
+ <span class="menu-text">Functional enrichment of genomic regions</span></a>
   </div>
 </li>
-      </ul>
-  </li>
     </ul>
     </div>
 </nav>
@@ -257,35 +222,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
+    <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">7.1</span> Learning objectives</a></li>
-  <li><a href="#loading-libraries" id="toc-loading-libraries" class="nav-link" data-scroll-target="#loading-libraries"><span class="header-section-number">7.2</span> Loading libraries</a></li>
-  <li><a href="#preparing-the-chip-seq-se-object" id="toc-preparing-the-chip-seq-se-object" class="nav-link" data-scroll-target="#preparing-the-chip-seq-se-object"><span class="header-section-number">7.3</span> Preparing the ChIP-seq SE object</a>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning objectives</a></li>
+  <li><a href="#loading-libraries" id="toc-loading-libraries" class="nav-link" data-scroll-target="#loading-libraries">Loading libraries</a></li>
+  <li><a href="#preparing-the-chip-seq-se-object" id="toc-preparing-the-chip-seq-se-object" class="nav-link" data-scroll-target="#preparing-the-chip-seq-se-object">Preparing the ChIP-seq SE object</a>
   <ul class="collapse">
-  <li><a href="#loading-the-rds-files" id="toc-loading-the-rds-files" class="nav-link" data-scroll-target="#loading-the-rds-files"><span class="header-section-number">7.3.1</span> Loading the RDS files</a></li>
-  <li><a href="#exploratory-data-analysis" id="toc-exploratory-data-analysis" class="nav-link" data-scroll-target="#exploratory-data-analysis"><span class="header-section-number">7.3.2</span> Exploratory data analysis</a></li>
-  <li><a href="#interpreting-chip-seq-peak-widths" id="toc-interpreting-chip-seq-peak-widths" class="nav-link" data-scroll-target="#interpreting-chip-seq-peak-widths"><span class="header-section-number">7.3.3</span> Interpreting ChIP-seq peak widths</a></li>
+  <li><a href="#loading-the-rds-files" id="toc-loading-the-rds-files" class="nav-link" data-scroll-target="#loading-the-rds-files">Loading the RDS files</a></li>
+  <li><a href="#exploratory-data-analysis" id="toc-exploratory-data-analysis" class="nav-link" data-scroll-target="#exploratory-data-analysis">Exploratory data analysis</a></li>
+  <li><a href="#interpreting-chip-seq-peak-widths" id="toc-interpreting-chip-seq-peak-widths" class="nav-link" data-scroll-target="#interpreting-chip-seq-peak-widths">Interpreting ChIP-seq peak widths</a></li>
   </ul></li>
-  <li><a href="#question-1" id="toc-question-1" class="nav-link" data-scroll-target="#question-1"><span class="header-section-number">7.4</span> Question 1</a>
+  <li><a href="#question-1" id="toc-question-1" class="nav-link" data-scroll-target="#question-1">Question 1</a>
   <ul class="collapse">
-  <li><a href="#proposed-strategy" id="toc-proposed-strategy" class="nav-link" data-scroll-target="#proposed-strategy"><span class="header-section-number">7.4.1</span> Proposed strategy</a></li>
-  <li><a href="#defining-anchor-regions-from-differentially-accessible-chromatin" id="toc-defining-anchor-regions-from-differentially-accessible-chromatin" class="nav-link" data-scroll-target="#defining-anchor-regions-from-differentially-accessible-chromatin"><span class="header-section-number">7.4.2</span> Defining anchor regions from differentially accessible chromatin</a></li>
-  <li><a href="#extracting-and-normalizing-continuous-chip-seq-signal" id="toc-extracting-and-normalizing-continuous-chip-seq-signal" class="nav-link" data-scroll-target="#extracting-and-normalizing-continuous-chip-seq-signal"><span class="header-section-number">7.4.3</span> Extracting and normalizing continuous ChIP-seq signal</a></li>
-  <li><a href="#constructing-and-combining-the-heatmaps" id="toc-constructing-and-combining-the-heatmaps" class="nav-link" data-scroll-target="#constructing-and-combining-the-heatmaps"><span class="header-section-number">7.4.4</span> Constructing and combining the heatmaps</a></li>
-  <li><a href="#analyzing-histone-mark-distributions-across-genomic-features" id="toc-analyzing-histone-mark-distributions-across-genomic-features" class="nav-link" data-scroll-target="#analyzing-histone-mark-distributions-across-genomic-features"><span class="header-section-number">7.4.5</span> Analyzing histone mark distributions across genomic features</a></li>
+  <li><a href="#proposed-strategy" id="toc-proposed-strategy" class="nav-link" data-scroll-target="#proposed-strategy">Proposed strategy</a></li>
+  <li><a href="#defining-anchor-regions-from-differentially-accessible-chromatin" id="toc-defining-anchor-regions-from-differentially-accessible-chromatin" class="nav-link" data-scroll-target="#defining-anchor-regions-from-differentially-accessible-chromatin">Defining anchor regions from differentially accessible chromatin</a></li>
+  <li><a href="#extracting-and-normalizing-continuous-chip-seq-signal" id="toc-extracting-and-normalizing-continuous-chip-seq-signal" class="nav-link" data-scroll-target="#extracting-and-normalizing-continuous-chip-seq-signal">Extracting and normalizing continuous ChIP-seq signal</a></li>
+  <li><a href="#constructing-and-combining-the-heatmaps" id="toc-constructing-and-combining-the-heatmaps" class="nav-link" data-scroll-target="#constructing-and-combining-the-heatmaps">Constructing and combining the heatmaps</a></li>
+  <li><a href="#analyzing-histone-mark-distributions-across-genomic-features" id="toc-analyzing-histone-mark-distributions-across-genomic-features" class="nav-link" data-scroll-target="#analyzing-histone-mark-distributions-across-genomic-features">Analyzing histone mark distributions across genomic features</a></li>
   </ul></li>
-  <li><a href="#analysis-of-the-rna-seq-data" id="toc-analysis-of-the-rna-seq-data" class="nav-link" data-scroll-target="#analysis-of-the-rna-seq-data"><span class="header-section-number">7.5</span> Analysis of the RNA-seq data</a>
+  <li><a href="#analysis-of-the-rna-seq-data" id="toc-analysis-of-the-rna-seq-data" class="nav-link" data-scroll-target="#analysis-of-the-rna-seq-data">Analysis of the RNA-seq data</a>
   <ul class="collapse">
-  <li><a href="#loading-the-rna-seq-se-object" id="toc-loading-the-rna-seq-se-object" class="nav-link" data-scroll-target="#loading-the-rna-seq-se-object"><span class="header-section-number">7.5.1</span> Loading the RNA-seq SE object</a></li>
-  <li><a href="#heatmap-of-log-normalized-counts" id="toc-heatmap-of-log-normalized-counts" class="nav-link" data-scroll-target="#heatmap-of-log-normalized-counts"><span class="header-section-number">7.5.2</span> Heatmap of Log-normalized counts</a></li>
-  <li><a href="#changing-visualization-to-relative-expression" id="toc-changing-visualization-to-relative-expression" class="nav-link" data-scroll-target="#changing-visualization-to-relative-expression"><span class="header-section-number">7.5.3</span> Changing visualization to relative expression</a></li>
-  <li><a href="#adding-column-annotations" id="toc-adding-column-annotations" class="nav-link" data-scroll-target="#adding-column-annotations"><span class="header-section-number">7.5.4</span> Adding column annotations</a></li>
+  <li><a href="#loading-the-rna-seq-se-object" id="toc-loading-the-rna-seq-se-object" class="nav-link" data-scroll-target="#loading-the-rna-seq-se-object">Loading the RNA-seq SE object</a></li>
+  <li><a href="#heatmap-of-log-normalized-counts" id="toc-heatmap-of-log-normalized-counts" class="nav-link" data-scroll-target="#heatmap-of-log-normalized-counts">Heatmap of Log-normalized counts</a></li>
+  <li><a href="#changing-visualization-to-relative-expression" id="toc-changing-visualization-to-relative-expression" class="nav-link" data-scroll-target="#changing-visualization-to-relative-expression">Changing visualization to relative expression</a></li>
+  <li><a href="#adding-column-annotations" id="toc-adding-column-annotations" class="nav-link" data-scroll-target="#adding-column-annotations">Adding column annotations</a></li>
   </ul></li>
-  <li><a href="#question-2" id="toc-question-2" class="nav-link" data-scroll-target="#question-2"><span class="header-section-number">7.6</span> Question 2</a>
+  <li><a href="#question-2" id="toc-question-2" class="nav-link" data-scroll-target="#question-2">Question 2</a>
   <ul class="collapse">
-  <li><a href="#a-note-on-visualizing-expression-changes" id="toc-a-note-on-visualizing-expression-changes" class="nav-link" data-scroll-target="#a-note-on-visualizing-expression-changes"><span class="header-section-number">7.6.1</span> A note on visualizing expression changes</a></li>
+  <li><a href="#a-note-on-visualizing-expression-changes" id="toc-a-note-on-visualizing-expression-changes" class="nav-link" data-scroll-target="#a-note-on-visualizing-expression-changes">A note on visualizing expression changes</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -293,9 +258,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../notebooks/01-omics_data_structures.html">II. Data Structures &amp; Visualization</a></li><li class="breadcrumb-item"><a href="../notebooks/03-chip_rna_visualization.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">ChIP and RNA sequencing data plots</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">ChIP and RNA sequencing data plots</span></h1>
+<h1 class="title">ChIP and RNA sequencing data plots</h1>
 </div>
 
 
@@ -312,8 +277,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="learning-objectives" class="level2" data-number="7.1">
-<h2 data-number="7.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">7.1</span> Learning objectives</h2>
+<section id="learning-objectives" class="level2">
+<h2 class="anchored" data-anchor-id="learning-objectives">Learning objectives</h2>
 <ul>
 <li>Load and explore <code>SummarizedExperiment</code> objects for ChIP-seq and RNA-seq data.</li>
 <li>Visualize ChIP-seq signal enrichment across genomic regions using the <code>EnrichedHeatmap</code> package.</li>
@@ -324,9 +289,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Compare and reflect on the similarities and differences in visualization techniques between ChIP-seq and RNA-seq data.</li>
 </ul>
 </section>
-<section id="loading-libraries" class="level2" data-number="7.2">
-<h2 data-number="7.2" class="anchored" data-anchor-id="loading-libraries"><span class="header-section-number">7.2</span> Loading libraries</h2>
-<div id="cell-2" class="cell" data-message="false" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="1">
+<section id="loading-libraries" class="level2">
+<h2 class="anchored" data-anchor-id="loading-libraries">Loading libraries</h2>
+<div id="cell-3" class="cell" data-message="false" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">suppressWarnings</span>({</span>
@@ -341,12 +306,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 </div>
 </section>
-<section id="preparing-the-chip-seq-se-object" class="level2" data-number="7.3">
-<h2 data-number="7.3" class="anchored" data-anchor-id="preparing-the-chip-seq-se-object"><span class="header-section-number">7.3</span> Preparing the ChIP-seq SE object</h2>
-<section id="loading-the-rds-files" class="level3" data-number="7.3.1">
-<h3 data-number="7.3.1" class="anchored" data-anchor-id="loading-the-rds-files"><span class="header-section-number">7.3.1</span> Loading the RDS files</h3>
+<section id="preparing-the-chip-seq-se-object" class="level2">
+<h2 class="anchored" data-anchor-id="preparing-the-chip-seq-se-object">Preparing the ChIP-seq SE object</h2>
+<section id="loading-the-rds-files" class="level3">
+<h3 class="anchored" data-anchor-id="loading-the-rds-files">Loading the RDS files</h3>
 <p>As in the first notebook, we load the <code>SummarizedExperiment</code> for the ChIP-seq data.</p>
-<div id="cell-4" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="2">
+<div id="cell-5" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>h3k4me3 <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/h3k4me3_se.rds"</span>)</span>
@@ -356,7 +321,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 </div>
 <p>We check the structure of one of these objects.</p>
-<div id="cell-6" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="3">
+<div id="cell-7" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>h3k4me3</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -372,7 +337,7 @@ colnames: NULL
 colData names(6): bam.files totals ... group norm.factors</code></pre>
 </div>
 </div>
-<div id="cell-7" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="4">
+<div id="cell-8" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colData</span>(h3k4me3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -387,7 +352,7 @@ colData names(6): bam.files totals ... group norm.factors</code></pre>
 4 ../data/H3K4me3_15ha..  91317562       100        49      15half     1.136546</code></pre>
 </div>
 </div>
-<div id="cell-8" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="5">
+<div id="cell-9" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>rd_h3k4me3 <span class="ot">&lt;-</span> <span class="fu">rowRanges</span>(h3k4me3)</span>
@@ -465,10 +430,10 @@ colData names(6): bam.files totals ... group norm.factors</code></pre>
 </div>
 </div>
 </section>
-<section id="exploratory-data-analysis" class="level3" data-number="7.3.2">
-<h3 data-number="7.3.2" class="anchored" data-anchor-id="exploratory-data-analysis"><span class="header-section-number">7.3.2</span> Exploratory data analysis</h3>
+<section id="exploratory-data-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="exploratory-data-analysis">Exploratory data analysis</h3>
 <p>Histone methylation (especially active marks like H3K4me3 at promoters) can have very sharp, well-defined boundaries compared to the broader regions of accessibility we see in ATAC-seq or repressive marks.</p>
-<div id="cell-10" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="6">
+<div id="cell-11" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Summary statistics of H3K4me3 peak width:"</span>)</span>
@@ -483,7 +448,7 @@ colData names(6): bam.files totals ... group norm.factors</code></pre>
 </div>
 </div>
 <p>We can actually directly compare the peak width distributions and “sharpness” for all the ChIP-seq datasets using histograms.</p>
-<div id="cell-12" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="7">
+<div id="cell-13" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a named list of your 4 SE objects</span></span>
@@ -527,28 +492,28 @@ colData names(6): bam.files totals ... group norm.factors</code></pre>
 </div>
 </div>
 </section>
-<section id="interpreting-chip-seq-peak-widths" class="level3" data-number="7.3.3">
-<h3 data-number="7.3.3" class="anchored" data-anchor-id="interpreting-chip-seq-peak-widths"><span class="header-section-number">7.3.3</span> Interpreting ChIP-seq peak widths</h3>
+<section id="interpreting-chip-seq-peak-widths" class="level3">
+<h3 class="anchored" data-anchor-id="interpreting-chip-seq-peak-widths">Interpreting ChIP-seq peak widths</h3>
 <p>Histone modifications (like H3K4me3 or H3K27ac) are physically attached to the histone proteins that make up a nucleosome. A single nucleosome wraps roughly <strong>147 base pairs</strong> of DNA. Because the modification sits on the nucleosome, the absolute minimum biological “footprint” that can be captured is the size of one nucleosome (around ~150 bp), like we observe on the histograms.</p>
 <p>Moreover, during the ChIP-seq protocol, the DNA is physically sheared (via sonication or enzymatic digestion) before sequencing. We typically aim to shear the DNA into fragments of about 200 to 500 base pairs. Because the sequence reads come from the ends of these fragments, it is virtually impossible for the sequencing to resolve a peak that is narrower than the size of the fragments we physically cut the DNA into.</p>
 <p>Furthermore, the software used to detect these peaks (usually <em>MACS2</em>) has built-in parameters to filter out noise. <em>MACS2</em> models the average fragment length (which it often estimates to be ~150-250 bp) and deliberately ignores or merges signal that is smaller than that expected fragment size, because a 30 bp “peak” is almost certainly just random sequencing noise rather than a true modified nucleosome.</p>
 <p>While H3K4me3 is typically a sharp mark found at promoters (~200–1000 bp), we observe a subset of peaks extending well beyond 3,000 bp. These <strong>broad H3K4me3 domains</strong> are a well-documented biological phenomenon that typically mark highly transcribed, lineage-defining genes with large CpG islands or multiple transcription start sites.</p>
 </section>
 </section>
-<section id="question-1" class="level2" data-number="7.4">
-<h2 data-number="7.4" class="anchored" data-anchor-id="question-1"><span class="header-section-number">7.4</span> Question 1</h2>
+<section id="question-1" class="level2">
+<h2 class="anchored" data-anchor-id="question-1">Question 1</h2>
 <p><strong>Similar to ATAC-seq data, please create <code>EnrichedHeatmap</code> for all ChIP-seq datasets and observe difference in genome activity at different genomic regions.</strong></p>
-<section id="proposed-strategy" class="level3" data-number="7.4.1">
-<h3 data-number="7.4.1" class="anchored" data-anchor-id="proposed-strategy"><span class="header-section-number">7.4.1</span> Proposed strategy</h3>
+<section id="proposed-strategy" class="level3">
+<h3 class="anchored" data-anchor-id="proposed-strategy">Proposed strategy</h3>
 <p>The goal of this exercise is to visualize and compare the spatial distribution of four different histone modifications (H3K4me3, H3K4me1, H3K27ac, H3K27me3) across specific genomic regions to infer chromatin state and genome activity.</p>
 <p>To accurately compare the histone marks, we need a common set of genomic anchor regions. Since ATAC-seq peaks represent all open chromatin (both promoters and enhancers), we can use the <strong>ATAC-seq peak centers</strong> (generated in the <a href="../notebooks/02-atac_heatmaps.html">previous notebook</a>) as our universal anchor points. Alternatively, we could combine the peak ranges from all 4 ChIP-seq objects into a consensus set, but using the ATAC peaks is conceptually cleaner as it defines “all potentially active regulatory regions.” (And I have the intuition that we would finally combine all of this data at the end of the course ;-)</p>
-<section id="h3k27me3-and-the-chromatin-states" class="level4" data-number="7.4.1.1">
-<h4 data-number="7.4.1.1" class="anchored" data-anchor-id="h3k27me3-and-the-chromatin-states"><span class="header-section-number">7.4.1.1</span> H3K27me3 and the chromatin states</h4>
+<section id="h3k27me3-and-the-chromatin-states" class="level4">
+<h4 class="anchored" data-anchor-id="h3k27me3-and-the-chromatin-states">H3K27me3 and the chromatin states</h4>
 <p>Because ATAC-seq captures open chromatin, using it as our “universal anchor” creates a massive bias. It works beautifully for H3K4me3, H3K4me1, and H3K27ac because those marks actively push the chromatin open. But what about H3K27me3 (the repressive mark)? If a genomic region is heavily repressed by H3K27me3, the chromatin there is tightly closed (inactive). Because it is closed, the ATAC-seq machinery can’t get in, meaning there is no ATAC-seq peak there.</p>
 <p>If we force H3K27me3 to be plotted using ATAC-seq anchors, we will only see H3K27me3 at weird, transitioning, or “bivalent” regions that happen to be slightly open. We will completely blind ourselves to the deeply repressed, true heterochromatin regions where H3K27me3 is actually the strongest.</p>
 </section>
-<section id="expected-final-figure-layout" class="level4" data-number="7.4.1.2">
-<h4 data-number="7.4.1.2" class="anchored" data-anchor-id="expected-final-figure-layout"><span class="header-section-number">7.4.1.2</span> Expected final figure layout</h4>
+<section id="expected-final-figure-layout" class="level4">
+<h4 class="anchored" data-anchor-id="expected-final-figure-layout">Expected final figure layout</h4>
 <p>The final visualization will be a highly informative, multi-panel composite heatmap generated via the <code>EnrichedHeatmap</code> and <code>ComplexHeatmap</code> packages, as we learned throughout the previous notebook:</p>
 <ul>
 <li>Horizontal panels: 8 side-by-side heatmaps representing the continuous bigWig signal (4 histone marks × 2 developmental stages: E11.5 and E15.5)</li>
@@ -558,11 +523,11 @@ colData names(6): bam.files totals ... group norm.factors</code></pre>
 </ul>
 </section>
 </section>
-<section id="defining-anchor-regions-from-differentially-accessible-chromatin" class="level3" data-number="7.4.2">
-<h3 data-number="7.4.2" class="anchored" data-anchor-id="defining-anchor-regions-from-differentially-accessible-chromatin"><span class="header-section-number">7.4.2</span> Defining anchor regions from differentially accessible chromatin</h3>
+<section id="defining-anchor-regions-from-differentially-accessible-chromatin" class="level3">
+<h3 class="anchored" data-anchor-id="defining-anchor-regions-from-differentially-accessible-chromatin">Defining anchor regions from differentially accessible chromatin</h3>
 <p>We will rely on the ATAC-seq data processed in the previous notebook, specifically extracting the <code>rowRanges</code> from the ATAC-seq <code>SummarizedExperiment</code> and filtering for <strong>significantly differentially accessible regions</strong> (using <code>qvalue</code> and <code>logFC</code> thresholds) exclusively on chromosomes 1 and 2.</p>
 <p>Also remind that once we have isolated these significant ATAC-seq peaks, we used the <code>resize(width = 1, fix = "center")</code> function to collapse each peak down to its exact 1-bp midpoint. These midpoints will now serve as the universal anchors for our <code>EnrichedHeatmap</code> windows, ensuring that all 4 ChIP-seq datasets are visualized and compared across the exact same spatial coordinates.</p>
-<div id="cell-16" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="8">
+<div id="cell-17" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Loading the ATAC-seq dataset</span></span>
@@ -592,7 +557,7 @@ colData names(6): bam.files totals ... group norm.factors</code></pre>
 <span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(mid_peaks) <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"peak"</span>, <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(mid_peaks), <span class="at">sep =</span> <span class="st">"_"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="cell-17" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="9">
+<div id="cell-18" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="9">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mid_peaks, <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -629,12 +594,12 @@ colData names(6): bam.files totals ... group norm.factors</code></pre>
 </div>
 </div>
 </section>
-<section id="extracting-and-normalizing-continuous-chip-seq-signal" class="level3" data-number="7.4.3">
-<h3 data-number="7.4.3" class="anchored" data-anchor-id="extracting-and-normalizing-continuous-chip-seq-signal"><span class="header-section-number">7.4.3</span> Extracting and normalizing continuous ChIP-seq signal</h3>
+<section id="extracting-and-normalizing-continuous-chip-seq-signal" class="level3">
+<h3 class="anchored" data-anchor-id="extracting-and-normalizing-continuous-chip-seq-signal">Extracting and normalizing continuous ChIP-seq signal</h3>
 <p>To extract the continuous ChIP-seq signal, we first retrieve the paths for the 8 ChIP-seq <code>.bw</code> (bigWig) files from the <code>data/</code> directory. Next, we define our target extraction regions, or <code>heatmap_windows</code>, by expanding our ATAC <code>mid_peaks</code> to the desired viewing window size (for example, using <code>resize(mid_peaks, width = 2000, fix = "center")</code>, just as we did in the previous notebook).</p>
 <p>Because there is exactly one bigWig file per condition (4 histone marks × 2 developmental stages), the most elegant and “R-like” approach is to grab all 8 files at once and process them using a single <code>lapply()</code> function, rather than writing complicated nested loops. Within this single loop, we use <code>rtracklayer::import()</code> and pass our specific windows to the <code>which</code> argument. This forces R to dynamically read the continuous signal coverage only within our exact targeted regions directly from the hard drive, massively saving RAM and computation time.</p>
 <p>Once the targeted signal is read, the exact same loop immediately feeds it into <code>normalizeToMatrix()</code>, outputting a clean list of 8 normalized matrices ready for <code>EnrichedHeatmap</code>.</p>
-<div id="cell-19" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="10">
+<div id="cell-20" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="10">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get all 8 ChIP-seq bigWig files at once using the regex:</span></span>
@@ -670,7 +635,7 @@ colData names(6): bam.files totals ... group norm.factors</code></pre>
 <span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="cell-20" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="11">
+<div id="cell-21" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="11">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># View of few columns and peaks from the first matrix</span></span>
@@ -741,13 +706,13 @@ colData names(6): bam.files totals ... group norm.factors</code></pre>
 </div>
 </div>
 </section>
-<section id="constructing-and-combining-the-heatmaps" class="level3" data-number="7.4.4">
-<h3 data-number="7.4.4" class="anchored" data-anchor-id="constructing-and-combining-the-heatmaps"><span class="header-section-number">7.4.4</span> Constructing and combining the heatmaps</h3>
+<section id="constructing-and-combining-the-heatmaps" class="level3">
+<h3 class="anchored" data-anchor-id="constructing-and-combining-the-heatmaps">Constructing and combining the heatmaps</h3>
 <p>With our list of 8 normalized matrices prepared, we can now translate this numerical data into a visual map of the chromatin landscape. We will generate an individual <code>EnrichedHeatmap</code> object for each matrix. To streamline this process and ensure perfect formatting consistency, we will utilize an upgraded custom wrapper function (<code>make_EH_custom</code>). Rather than building each heatmap from scratch, this function automates several advanced features: 1. <strong>Dynamic Color Scaling:</strong> It automatically calculates a responsive color scale based on the 1st and 99th percentiles of each specific matrix (using <code>circlize::colorRamp2</code>), and perfectly aligns the legend ticks. 2. <strong>Proportional Layout Engine:</strong> By defaulting to the <code>grid</code> graphic’s flexible <code>width = unit(1, "null")</code> unit, it ensures that when we stitch multiple heatmaps together, they will dynamically stretch and divide the page space perfectly equally! Here is the perfectly tweaked bullet point to clarify that your hardcoded default precisely mirrors the native software! 3. <strong>Architectural Control:</strong> It exposes a <code>top_anno_height</code> parameter (which we safely defaulted to <code>1.5 cm</code> to precisely mirror the software’s native default behavior), giving us the ability to elegantly squeeze or expand the vertical size of the top summary meta-profile plots on the fly without complex math.</p>
 <p><em>Note: This custom function has pre-defined x-axis labels hard-coded as <code>c("-1kb", "mid", "1kb")</code>. In the future, if the genomic window being analyzed is different from the current 2000 bp window centered on the ATAC-seq peaks, be sure to make the appropriate changes to the axis_name argument.</em></p>
 <p>To highlight how these marks behave differently across distinct regulatory elements, we will pass our ATAC peak annotations to the <code>split_rows</code> argument (separating, “Promoters” from “Exon”, “Intron” and “Intergenic” regions).</p>
 <p>Finally, leveraging the power of the <code>ComplexHeatmap</code> ecosystem, we can seamlessly concatenate all 8 resulting heatmaps side-by-side using the simple <code>+</code> operator. Just as we did before, we will also append a <code>rowAnnotation</code> block to the side of the figure—visually tagging the rows with their associated metadata—to create a highly informative, unified composite figure.</p>
-<div id="cell-22" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="12">
+<div id="cell-23" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="12">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Upgraded version of the original custom function</span></span>
@@ -786,7 +751,7 @@ colData names(6): bam.files totals ... group norm.factors</code></pre>
 </details>
 </div>
 <p>Let’s now create the indicudal heatmaps objects, using colors similar to what is shown on the course logo.</p>
-<div id="cell-24" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="13">
+<div id="cell-25" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="13">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(chip_matrices)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -800,7 +765,7 @@ colData names(6): bam.files totals ... group norm.factors</code></pre>
 <ol class="list-inline"><li>'H3K27ac_11half'</li><li>'H3K27ac_15half'</li><li>'H3K27me3_11half'</li><li>'H3K27me3_15half'</li><li>'H3K4me1_11half'</li><li>'H3K4me1_15half'</li><li>'H3K4me3_11half'</li><li>'H3K4me3_15half'</li></ol>
 </div>
 </div>
-<div id="cell-25" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="14">
+<div id="cell-26" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="14">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Heatmaps for the H3K4me1 data</span></span>
@@ -821,7 +786,7 @@ colData names(6): bam.files totals ... group norm.factors</code></pre>
 <span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">heatmap_cols =</span> <span class="fu">c</span>(<span class="st">'white'</span>, <span class="st">'darkblue'</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="cell-26" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="15">
+<div id="cell-27" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="15">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Heatmaps for the H3K4me3 data</span></span>
@@ -838,7 +803,7 @@ colData names(6): bam.files totals ... group norm.factors</code></pre>
 <span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">heatmap_cols =</span> <span class="fu">c</span>(<span class="st">'white'</span>, <span class="st">'darkgreen'</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="cell-27" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="16">
+<div id="cell-28" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="16">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Heatmaps for the H3K27me3 data</span></span>
@@ -855,7 +820,7 @@ colData names(6): bam.files totals ... group norm.factors</code></pre>
 <span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">heatmap_cols =</span> <span class="fu">c</span>(<span class="st">'white'</span>, <span class="st">'darkorchid'</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="cell-28" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="17">
+<div id="cell-29" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="17">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Heatmaps for the H3K27ac data</span></span>
@@ -872,7 +837,7 @@ colData names(6): bam.files totals ... group norm.factors</code></pre>
 <span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">heatmap_cols =</span> <span class="fu">c</span>(<span class="st">'white'</span>, <span class="st">'darkred'</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="cell-29" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="18">
+<div id="cell-30" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="18">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Retrieve the genomic annotations (e.g., "Promoter", "Intron", "Intergenic") </span></span>
@@ -896,7 +861,7 @@ colData names(6): bam.files totals ... group norm.factors</code></pre>
 </div>
 <p>In the <code>ComplexHeatmap</code> ecosystem, when we combine heatmaps using <code>+</code>, they are merged together into a single master object called a HeatmapList. Because the rows are strictly locked together across all 8 heatmaps, we don’t need to split them individually.</p>
 <p>By passing <code>split = split_anno</code> directly into the <code>draw()</code> function, we are applying the split globally to the entire composite figure at the very end. We don’t have to pass <code>split_rows</code> 8 separate times in our <code>make_EH_custom</code> function, which guarantees that every single heatmap is forced to split in the exact same way simultaneously. Moreover, R only has to calculate the splitting logic once for the master figure, rather than recalculating it 8 times!</p>
-<div id="cell-31" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="19">
+<div id="cell-32" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="19">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">repr.plot.width =</span> <span class="dv">20</span>, <span class="at">repr.plot.height =</span> <span class="dv">10</span>)</span>
@@ -921,22 +886,22 @@ colData names(6): bam.files totals ... group norm.factors</code></pre>
 </div>
 <p><em>Note: Because we allowed each histone mark to dynamically scale its colors based on its own signal strength (i.e., the color scale is dynamically calculated based on the 1st and 99th percentiles of each individual matrix), we must have separate legends. This means the actual numeric scale is different for every single heatmap. Moreover, <code>merge_legend</code> only combines legends that share the exact same title. Therefore, the <code>merge_legend</code> argument has no effect here.</em></p>
 </section>
-<section id="analyzing-histone-mark-distributions-across-genomic-features" class="level3" data-number="7.4.5">
-<h3 data-number="7.4.5" class="anchored" data-anchor-id="analyzing-histone-mark-distributions-across-genomic-features"><span class="header-section-number">7.4.5</span> Analyzing histone mark distributions across genomic features</h3>
+<section id="analyzing-histone-mark-distributions-across-genomic-features" class="level3">
+<h3 class="anchored" data-anchor-id="analyzing-histone-mark-distributions-across-genomic-features">Analyzing histone mark distributions across genomic features</h3>
 <p>In the composite heatmap, the <strong>H3K4me3</strong> signal is entirely restricted to the violet (<em>Promoter</em>) block and absent everywhere else. As the canonical <strong>“Active Promoter”</strong> mark, H3K4me3 is dynamically placed directly around the Transcription Start Site (TSS) by specific enzymes (like MLL/COMPASS complexes) that associate with the transcription machinery. Seeing this signal cleanly restricted to the promoter block confirms the high quality of the data and strictly adheres to expected biological principles.</p>
 <p>Unlike H3K4me3, <strong>H3K27ac</strong> marks <strong>both</strong> active promoters and active enhancers, which perfectly explains its strong presence across the promoter, intergenic, and intronic blocks. Interestingly, a temporal shift is visible: H3K27ac signal is higher in distal regions (intergenic/introns) at E11.5, but becomes relatively stronger at promoters by E15.5. This represents a classic developmental signature. At E11.5, cells are still highly plastic and maintain massive networks of active distal enhancers. As they mature to E15.5, many of these broad enhancer networks shut down, while specific terminal genes become aggressively transcribed.</p>
 <p>A striking feature of the visualization is the distinct lack of signal (<em>white space</em>) directly in the middle of the promoters for <strong>H3K4me1</strong> and, to a lesser extent, <strong>H3K27me3</strong>. Because these heatmaps are centered precisely on <em>ATAC-seq peaks</em>, the exact middle (<code>mid</code>) represents open chromatin where nucleosomes have been physically displaced to allow transcription factors to bind. Since histone marks require a histone protein to attach to, the signal completely drops to zero in this physical “hole,” resulting in a characteristic <strong>bimodal (twin-peak) signal</strong> on the flanking nucleosomes. Furthermore, because H3K4me1 is traditionally an enhancer mark, the central nucleosomes at active promoters get heavily decorated with H3K4me3 instead, physically displacing H3K4me1 to the outer edges and explaining the wide central “dip.”</p>
 <p>Overall, the visualization successfully captures the known epigenetic landscape: H3K4me3 strictly identifies active promoters, H3K27ac identifies both promoters and enhancers while highlighting developmental transitions, and the fine spatial resolution accurately maps nucleosome depletion directly at the ATAC-seq peak centers.</p>
 </section>
 </section>
-<section id="analysis-of-the-rna-seq-data" class="level2" data-number="7.5">
-<h2 data-number="7.5" class="anchored" data-anchor-id="analysis-of-the-rna-seq-data"><span class="header-section-number">7.5</span> Analysis of the RNA-seq data</h2>
+<section id="analysis-of-the-rna-seq-data" class="level2">
+<h2 class="anchored" data-anchor-id="analysis-of-the-rna-seq-data">Analysis of the RNA-seq data</h2>
 <p>Having deeply explored the spatial distribution of chromatin accessibility (ATAC-seq; previous notebook) and histone modifications (ChIP-seq) across regulatory elements, we now shift our focus to the functional output of these epigenetic changes: <strong>gene expression</strong>.</p>
 <p>Unlike ChIP-seq, where we used <code>EnrichedHeatmap</code> to visualize the continuous spatial footprint of modifications across 2kb genomic windows, RNA-seq data is fundamentally different. Here, we are working with discrete transcription levels quantified as <strong>normalized read counts per gene</strong>. Therefore, the heatmaps we generate in this section will be standard expression heatmaps (where rows represent individual genes, columns represent experimental conditions, and color intensity reflects the expression level). This will allow us to identify clusters of co-regulated genes and track how expression profiles shift between E11.5 and E15.5.</p>
-<section id="loading-the-rna-seq-se-object" class="level3" data-number="7.5.1">
-<h3 data-number="7.5.1" class="anchored" data-anchor-id="loading-the-rna-seq-se-object"><span class="header-section-number">7.5.1</span> Loading the RNA-seq SE object</h3>
+<section id="loading-the-rna-seq-se-object" class="level3">
+<h3 class="anchored" data-anchor-id="loading-the-rna-seq-se-object">Loading the RNA-seq SE object</h3>
 <p>To begin, we will load the <code>SummarizedExperiment</code> object containing our processed RNA-seq count matrices and associated metadata.</p>
-<div id="cell-36" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="20">
+<div id="cell-37" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="20">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>rna <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/rna_se.rds"</span>)</span>
@@ -958,18 +923,18 @@ colData names(2): sample group</code></pre>
 </div>
 <p>In a typical RNA-seq experiment, finding 1,000 to 4,000 significant Differentially Expressed Genes (DEGs) is a very normal, healthy result👍</p>
 </section>
-<section id="heatmap-of-log-normalized-counts" class="level3" data-number="7.5.2">
-<h3 data-number="7.5.2" class="anchored" data-anchor-id="heatmap-of-log-normalized-counts"><span class="header-section-number">7.5.2</span> Heatmap of Log-normalized counts</h3>
+<section id="heatmap-of-log-normalized-counts" class="level3">
+<h3 class="anchored" data-anchor-id="heatmap-of-log-normalized-counts">Heatmap of Log-normalized counts</h3>
 <p>To visualize the global gene expression profile, we will switch from <code>EnrichedHeatmap</code> to the <a href="https://jokergoo.github.io/ComplexHeatmap/reference/Heatmap.html"><code>Heatmap()</code> function from the <code>ComplexHeatmap</code> package</a> (different from the <code>heatmap()</code> function from base R).</p>
 <p>Instead of plotting raw read counts, which are heavily skewed by total sequencing depth and extreme outliers, we extract the <code>logCPM</code> (<em>log2 Counts Per Million</em>) matrix directly from the <code>SummarizedExperiment</code> object. The <code>logCPM</code> transformation normalizes the data for library size and compresses the massive dynamic range of RNA expression into a scale that is much better suited for visual clustering.</p>
-<div id="cell-39" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="21">
+<div id="cell-40" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="21">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Back to standard Jupyter Notebook plotting options</span></span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">repr.plot.width =</span> <span class="dv">7</span>, <span class="at">repr.plot.height =</span> <span class="dv">7</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="cell-40" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="22">
+<div id="cell-41" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="22">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Heatmap</span>(</span>
@@ -988,12 +953,12 @@ colData names(2): sample group</code></pre>
 </div>
 </div>
 </section>
-<section id="changing-visualization-to-relative-expression" class="level3" data-number="7.5.3">
-<h3 data-number="7.5.3" class="anchored" data-anchor-id="changing-visualization-to-relative-expression"><span class="header-section-number">7.5.3</span> Changing visualization to relative expression</h3>
+<section id="changing-visualization-to-relative-expression" class="level3">
+<h3 class="anchored" data-anchor-id="changing-visualization-to-relative-expression">Changing visualization to relative expression</h3>
 <p>Plotting absolute <code>logCPM</code> is useful for seeing overall expression levels, but it can make it difficult to quickly spot dynamic <em>changes</em> between the developmental stages. A gene that is constantly highly expressed will visually overwhelm a lowly expressed gene that dramatically doubles in transcription.</p>
 <p>To make the developmental shifts immediately obvious, we can transform our absolute expression matrix into a <strong>relative expression matrix</strong>. Because our data is already on a <code>log2</code> scale, we can easily <em>approximate</em> the log-fold change simply by subtracting the baseline expression (the mean of the E11.5 samples) from every sample in the matrix.</p>
 <p>By centering the data on E11.5, the E11.5 columns will become effectively zero (our baseline). The E15.5 columns will then reflect the relative change: positive values will indicate genes that are <strong>up-regulated</strong> as development proceeds, while negative values will indicate genes that are <strong>down-regulated</strong>.</p>
-<div id="cell-42" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="23">
+<div id="cell-43" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="23">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract the data and immediately cast to a true numeric matrix</span></span>
@@ -1008,7 +973,7 @@ colData names(2): sample group</code></pre>
 <span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>counts_fc <span class="ot">&lt;-</span> log_cpm <span class="sc">-</span> <span class="fu">rowMeans</span>(log_cpm[, idx_11half])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="cell-43" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="24">
+<div id="cell-44" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="24">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Heatmap</span>(</span>
@@ -1028,12 +993,12 @@ colData names(2): sample group</code></pre>
 </div>
 <p><em>Note: while we are manually calculating these relative fold-changes across the matrix columns to generate a centered heatmap here, we will extract and analyze the rigorously calculated statistical <code>logFC</code> from the differential analysis table later in the notebook.</em></p>
 </section>
-<section id="adding-column-annotations" class="level3" data-number="7.5.4">
-<h3 data-number="7.5.4" class="anchored" data-anchor-id="adding-column-annotations"><span class="header-section-number">7.5.4</span> Adding column annotations</h3>
+<section id="adding-column-annotations" class="level3">
+<h3 class="anchored" data-anchor-id="adding-column-annotations">Adding column annotations</h3>
 <p>Now that our heatmap matrix is structured correctly, we can improve the aesthetics by adding a color-coded annotation bar to the top of our columns. This visually identifies which samples belong to E11.5 and E15.5 at a single glance, without the reader needing to squint at the text labels.</p>
 <p>To achieve this, we extract the sample metadata directly from the <code>rna</code> object using <code>colData()</code>. In addition, we take advantage of the <code>scales</code> package: <a href="https://www.rdocumentation.org/packages/scales/versions/0.4.1/topics/pretty_breaks">its <code>pretty_breaks</code> function</a> dynamically looks at the minimum and maximum values of our matrix to calculate exactly 3 “pretty” (round) numbers for our legend ticks. Finally, we adjust the width and height slightly to make the heatmap look more professional.</p>
 <p><em>Tip: The <code>drop = FALSE</code> argument prevents a single-column <code>data.frame</code> from collapsing into a nameless vector. This ensures <code>HeatmapAnnotation</code> receives a true dataframe (always check the documentation…) and can automatically pull the correct label name (like “Group” or “Stage”).</em></p>
-<div id="cell-46" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="25">
+<div id="cell-47" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="25">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colData</span>(rna)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1048,7 +1013,7 @@ RNA_15half_1.tsv.gz RNA_15half_1.tsv.gz   15half
 RNA_15half_2.tsv.gz RNA_15half_2.tsv.gz   15half</code></pre>
 </div>
 </div>
-<div id="cell-47" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="26">
+<div id="cell-48" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="26">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">100</span>)  <span class="co"># Forces R to always pick the exact same "random" colors</span></span>
@@ -1081,12 +1046,12 @@ RNA_15half_2.tsv.gz RNA_15half_2.tsv.gz   15half</code></pre>
 </div>
 </section>
 </section>
-<section id="question-2" class="level2" data-number="7.6">
-<h2 data-number="7.6" class="anchored" data-anchor-id="question-2"><span class="header-section-number">7.6</span> Question 2</h2>
+<section id="question-2" class="level2">
+<h2 class="anchored" data-anchor-id="question-2">Question 2</h2>
 <p><strong>Similar to <code>EnrichedHeatmap</code>, we can also split RNA-seq data based on logFC. Can you try to do this?</strong></p>
 <p>Just as we split our spatial ChIP-seq heatmaps by genomic regions (Promoter vs Intergenic), we can split our RNA-seq expression heatmap by gene behavior. The most logical way to do this is to physically separate the genes based on their statistical fold-change (<code>logFC</code>).</p>
 <p>We will extract the pre-calculated statistical <code>logFC</code> from the <code>rowData(rna)</code> metadata. Because <code>logFC</code> is a continuous number, we must convert it into distinct, discrete groups (e.g., “Up-regulated” and “Down-regulated”) so the software knows how to draw the split. We then simply pass this new grouping vector directly into the <code>row_split</code> argument of our <code>Heatmap()</code> function.</p>
-<div id="cell-49" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="27">
+<div id="cell-50" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="27">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract the statistical logFC for all genes</span></span>
@@ -1101,7 +1066,7 @@ RNA_15half_2.tsv.gz RNA_15half_2.tsv.gz   15half</code></pre>
 -6.94492 -0.60775  0.05993  0.31056  0.98024  8.98301 </code></pre>
 </div>
 </div>
-<div id="cell-50" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="28">
+<div id="cell-51" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="28">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Categorize the genes (here we split strictly at 0), but we can </span></span>
@@ -1110,7 +1075,7 @@ RNA_15half_2.tsv.gz RNA_15half_2.tsv.gz   15half</code></pre>
 </details>
 </div>
 <p>We can rename the factor levels in the <code>rna</code> metadata to the corresponding biological names before we draw the heatmap.</p>
-<div id="cell-52" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="29">
+<div id="cell-53" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="29">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colData</span>(rna)<span class="sc">$</span>group <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(</span>
@@ -1118,7 +1083,7 @@ RNA_15half_2.tsv.gz RNA_15half_2.tsv.gz   15half</code></pre>
 </details>
 </div>
 <p>By default, heatmaps are rendered automatically upon creation. To gain precise control over the layout of our various legends, we first save the heatmap to an object and then explicitly render it using the <code>draw()</code> function. During this construction phase, we also apply a critical aesthetic trick: by passing <code>show_annotation_name = FALSE</code> deep inside the <code>HeatmapAnnotation()</code> function, we force the engine to hide the redundant column grouping label. Without this specific override, <code>ComplexHeatmap</code> would forcefully print the word “group” on the far right edge of the plot, creating an ugly, illegible text collision overlapping directly on top of our heatmap colors.</p>
-<div id="cell-54" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="30">
+<div id="cell-55" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="30">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">100</span>)</span>
@@ -1148,8 +1113,8 @@ RNA_15half_2.tsv.gz RNA_15half_2.tsv.gz   15half</code></pre>
 </div>
 </div>
 </div>
-<section id="a-note-on-visualizing-expression-changes" class="level3" data-number="7.6.1">
-<h3 data-number="7.6.1" class="anchored" data-anchor-id="a-note-on-visualizing-expression-changes"><span class="header-section-number">7.6.1</span> A note on visualizing expression changes</h3>
+<section id="a-note-on-visualizing-expression-changes" class="level3">
+<h3 class="anchored" data-anchor-id="a-note-on-visualizing-expression-changes">A note on visualizing expression changes</h3>
 <p>By manually centering the matrix, we preserve all 4 individual columns (samples). This allows us to visually verify replicate consistency, observe the underlying biological noise, and see exactly how each sample behaves within its group. In contrast, the true <code>logFC</code> is a single, aggregated statistical value per gene. Plotting it directly would result in a 1-column heatmap that completely hides sample-level variability.</p>
 <p>There are many valid ways to visualize RNA-seq data, and we will cover other powerful methods for displaying these statistical results later in the course. For a deeper dive into standard RNA-seq workflows, differential expression statistics, and visualizations, you can refer to my previous <a href="https://github.com/sbwiecko/RNAseq_UPenn">RNA-seq course on GitHub</a>.</p>
 
@@ -1231,7 +1196,7 @@ RNA_15half_2.tsv.gz RNA_15half_2.tsv.gz   15half</code></pre>
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/sbwiecko\.github\.io\/biology-informed-multiomics-training\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -1558,18 +1523,6 @@ RNA_15half_2.tsv.gz RNA_15half_2.tsv.gz   15half</code></pre>
     }
   });
   </script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
-      <a href="../notebooks/02-atac_heatmaps.html" class="pagination-link" aria-label="Enriched Heatmaps and identification of regions with different activities">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Enriched Heatmaps and identification of regions with different activities</span></span>
-      </a>          
-  </div>
-  <div class="nav-page nav-page-next">
-      <a href="../notebooks/04-genomic_overlap_matrices.html" class="pagination-link" aria-label="Overlapping all the datasets">
-        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Overlapping all the datasets</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
-  </div>
-</nav>
 </div> <!-- /content -->
 
 

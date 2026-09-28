@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>6&nbsp; Enriched Heatmaps and identification of regions with different activities – Biology-Informed Multi-Omics Integration</title>
+<title>Enriched Heatmaps and identification of regions with different activities – Biology-Informed Multi-Omics Integration</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -71,8 +71,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../notebooks/03-chip_rna_visualization.html" rel="next">
-<link href="../notebooks/01-omics_data_structures.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -82,7 +80,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-5630e6732664d48c7cde3b526013eeb9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-93c2f64124fc842a968b101e89420266.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -117,7 +115,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="nav-sidebar floating quarto-light">
+<body class="nav-sidebar docked quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -126,7 +124,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../notebooks/01-omics_data_structures.html">II. Data Structures &amp; Visualization</a></li><li class="breadcrumb-item"><a href="../notebooks/02-atac_heatmaps.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Enriched Heatmaps and identification of regions with different activities</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../notebooks/02-atac_heatmaps.html">Enriched Heatmaps and identification of regions with different activities</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -138,7 +136,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Biology-Informed Multi-Omics Integration</a> 
@@ -154,102 +152,69 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">index.html</span></span></a>
+ <span class="menu-text">Biology-Informed Multi-Omics Integration</span></a>
   </div>
 </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">I. Theoretical Reference &amp; Notes</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../notes/epigenetic_analysis_reference_guide.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Epigenetic Analysis Reference Guide</span></span></a>
+ <span class="menu-text">Epigenetic Analysis Reference Guide</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../notes/normalization_models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Normalization models</span></span></a>
+ <span class="menu-text">Normalization models</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../notes/enrichment_analysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Functional Enrichment Analysis: Multi-Omics Integration</span></span></a>
+ <span class="menu-text">Functional Enrichment Analysis: Multi-Omics Integration</span></a>
   </div>
 </li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">II. Data Structures &amp; Visualization</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../notebooks/01-omics_data_structures.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Datasets, <code>SummarizedExperiment</code>, and <code>GRanges</code></span></span></a>
+ <span class="menu-text">Datasets, <code>SummarizedExperiment</code>, and <code>GRanges</code></span></a>
   </div>
 </li>
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../notebooks/02-atac_heatmaps.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Enriched Heatmaps and identification of regions with different activities</span></span></a>
+ <span class="menu-text">Enriched Heatmaps and identification of regions with different activities</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../notebooks/03-chip_rna_visualization.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">ChIP and RNA sequencing data plots</span></span></a>
+ <span class="menu-text">ChIP and RNA sequencing data plots</span></a>
   </div>
 </li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
- <span class="menu-text">III. Multi-Omics Integration</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../notebooks/04-genomic_overlap_matrices.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Overlapping all the datasets</span></span></a>
+ <span class="menu-text">Overlapping all the datasets</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../notebooks/05-atac_rna_integration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Integrating ATAC and RNA sequencing data</span></span></a>
+ <span class="menu-text">Integrating ATAC and RNA sequencing data</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../notebooks/06-multiomics_integration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Integrating ATAC, ChIP, and RNA sequencing data</span></span></a>
+ <span class="menu-text">Integrating ATAC, ChIP, and RNA sequencing data</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../notebooks/07-functional_enrichment.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Functional enrichment of genomic regions</span></span></a>
+ <span class="menu-text">Functional enrichment of genomic regions</span></a>
   </div>
 </li>
-      </ul>
-  </li>
     </ul>
     </div>
 </nav>
@@ -257,57 +222,57 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
+    <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">6.1</span> Learning objectives</a></li>
-  <li><a href="#loading-libraries" id="toc-loading-libraries" class="nav-link" data-scroll-target="#loading-libraries"><span class="header-section-number">6.2</span> Loading libraries</a></li>
-  <li><a href="#preparing-the-atac-summarizedexperiment" id="toc-preparing-the-atac-summarizedexperiment" class="nav-link" data-scroll-target="#preparing-the-atac-summarizedexperiment"><span class="header-section-number">6.3</span> Preparing the ATAC <code>SummarizedExperiment</code></a>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning objectives</a></li>
+  <li><a href="#loading-libraries" id="toc-loading-libraries" class="nav-link" data-scroll-target="#loading-libraries">Loading libraries</a></li>
+  <li><a href="#preparing-the-atac-summarizedexperiment" id="toc-preparing-the-atac-summarizedexperiment" class="nav-link" data-scroll-target="#preparing-the-atac-summarizedexperiment">Preparing the ATAC <code>SummarizedExperiment</code></a>
   <ul class="collapse">
-  <li><a href="#atac-peaks-information" id="toc-atac-peaks-information" class="nav-link" data-scroll-target="#atac-peaks-information"><span class="header-section-number">6.3.1</span> ATAC peaks information</a></li>
-  <li><a href="#statistical-results" id="toc-statistical-results" class="nav-link" data-scroll-target="#statistical-results"><span class="header-section-number">6.3.2</span> Statistical results</a></li>
-  <li><a href="#from-bam-files-to-differential-peaks" id="toc-from-bam-files-to-differential-peaks" class="nav-link" data-scroll-target="#from-bam-files-to-differential-peaks"><span class="header-section-number">6.3.3</span> From BAM files to differential peaks</a></li>
-  <li><a href="#filtering-the-dataset" id="toc-filtering-the-dataset" class="nav-link" data-scroll-target="#filtering-the-dataset"><span class="header-section-number">6.3.4</span> Filtering the dataset</a></li>
-  <li><a href="#atac-seq-peak-widths" id="toc-atac-seq-peak-widths" class="nav-link" data-scroll-target="#atac-seq-peak-widths"><span class="header-section-number">6.3.5</span> ATAC-seq peak widths</a></li>
-  <li><a href="#binning-signal-across-a-2-kb-window" id="toc-binning-signal-across-a-2-kb-window" class="nav-link" data-scroll-target="#binning-signal-across-a-2-kb-window"><span class="header-section-number">6.3.6</span> Binning signal across a 2 kb window</a></li>
-  <li><a href="#finding-peak-centers-with-resize" id="toc-finding-peak-centers-with-resize" class="nav-link" data-scroll-target="#finding-peak-centers-with-resize"><span class="header-section-number">6.3.7</span> Finding peak centers with <code>resize()</code></a></li>
+  <li><a href="#atac-peaks-information" id="toc-atac-peaks-information" class="nav-link" data-scroll-target="#atac-peaks-information">ATAC peaks information</a></li>
+  <li><a href="#statistical-results" id="toc-statistical-results" class="nav-link" data-scroll-target="#statistical-results">Statistical results</a></li>
+  <li><a href="#from-bam-files-to-differential-peaks" id="toc-from-bam-files-to-differential-peaks" class="nav-link" data-scroll-target="#from-bam-files-to-differential-peaks">From BAM files to differential peaks</a></li>
+  <li><a href="#filtering-the-dataset" id="toc-filtering-the-dataset" class="nav-link" data-scroll-target="#filtering-the-dataset">Filtering the dataset</a></li>
+  <li><a href="#atac-seq-peak-widths" id="toc-atac-seq-peak-widths" class="nav-link" data-scroll-target="#atac-seq-peak-widths">ATAC-seq peak widths</a></li>
+  <li><a href="#binning-signal-across-a-2-kb-window" id="toc-binning-signal-across-a-2-kb-window" class="nav-link" data-scroll-target="#binning-signal-across-a-2-kb-window">Binning signal across a 2 kb window</a></li>
+  <li><a href="#finding-peak-centers-with-resize" id="toc-finding-peak-centers-with-resize" class="nav-link" data-scroll-target="#finding-peak-centers-with-resize">Finding peak centers with <code>resize()</code></a></li>
   </ul></li>
-  <li><a href="#preparing-the-continuous-bigwig-data" id="toc-preparing-the-continuous-bigwig-data" class="nav-link" data-scroll-target="#preparing-the-continuous-bigwig-data"><span class="header-section-number">6.4</span> Preparing the continuous bigWig data</a>
+  <li><a href="#preparing-the-continuous-bigwig-data" id="toc-preparing-the-continuous-bigwig-data" class="nav-link" data-scroll-target="#preparing-the-continuous-bigwig-data">Preparing the continuous bigWig data</a>
   <ul class="collapse">
-  <li><a href="#loading-data-from-bigwig" id="toc-loading-data-from-bigwig" class="nav-link" data-scroll-target="#loading-data-from-bigwig"><span class="header-section-number">6.4.1</span> Loading data from bigWig</a></li>
-  <li><a href="#normalization" id="toc-normalization" class="nav-link" data-scroll-target="#normalization"><span class="header-section-number">6.4.2</span> Normalization</a></li>
+  <li><a href="#loading-data-from-bigwig" id="toc-loading-data-from-bigwig" class="nav-link" data-scroll-target="#loading-data-from-bigwig">Loading data from bigWig</a></li>
+  <li><a href="#normalization" id="toc-normalization" class="nav-link" data-scroll-target="#normalization">Normalization</a></li>
   </ul></li>
-  <li><a href="#building-the-enrichedheatmap" id="toc-building-the-enrichedheatmap" class="nav-link" data-scroll-target="#building-the-enrichedheatmap"><span class="header-section-number">6.5</span> Building the EnrichedHeatmap</a>
+  <li><a href="#building-the-enrichedheatmap" id="toc-building-the-enrichedheatmap" class="nav-link" data-scroll-target="#building-the-enrichedheatmap">Building the EnrichedHeatmap</a>
   <ul class="collapse">
-  <li><a href="#basic-enrichedheatmap-visualization" id="toc-basic-enrichedheatmap-visualization" class="nav-link" data-scroll-target="#basic-enrichedheatmap-visualization"><span class="header-section-number">6.5.1</span> Basic EnrichedHeatmap visualization</a></li>
-  <li><a href="#changing-color-and-size" id="toc-changing-color-and-size" class="nav-link" data-scroll-target="#changing-color-and-size"><span class="header-section-number">6.5.2</span> Changing color and size</a></li>
-  <li><a href="#color-based-on-quantile" id="toc-color-based-on-quantile" class="nav-link" data-scroll-target="#color-based-on-quantile"><span class="header-section-number">6.5.3</span> Color based on quantile</a></li>
-  <li><a href="#customizing-heatmap-aesthetics-for-publication" id="toc-customizing-heatmap-aesthetics-for-publication" class="nav-link" data-scroll-target="#customizing-heatmap-aesthetics-for-publication"><span class="header-section-number">6.5.4</span> Customizing heatmap aesthetics for publication</a></li>
+  <li><a href="#basic-enrichedheatmap-visualization" id="toc-basic-enrichedheatmap-visualization" class="nav-link" data-scroll-target="#basic-enrichedheatmap-visualization">Basic EnrichedHeatmap visualization</a></li>
+  <li><a href="#changing-color-and-size" id="toc-changing-color-and-size" class="nav-link" data-scroll-target="#changing-color-and-size">Changing color and size</a></li>
+  <li><a href="#color-based-on-quantile" id="toc-color-based-on-quantile" class="nav-link" data-scroll-target="#color-based-on-quantile">Color based on quantile</a></li>
+  <li><a href="#customizing-heatmap-aesthetics-for-publication" id="toc-customizing-heatmap-aesthetics-for-publication" class="nav-link" data-scroll-target="#customizing-heatmap-aesthetics-for-publication">Customizing heatmap aesthetics for publication</a></li>
   </ul></li>
-  <li><a href="#splitting-and-clustering" id="toc-splitting-and-clustering" class="nav-link" data-scroll-target="#splitting-and-clustering"><span class="header-section-number">6.6</span> Splitting and clustering</a>
+  <li><a href="#splitting-and-clustering" id="toc-splitting-and-clustering" class="nav-link" data-scroll-target="#splitting-and-clustering">Splitting and clustering</a>
   <ul class="collapse">
-  <li><a href="#stratifying-the-heatmap-by-direction-of-change" id="toc-stratifying-the-heatmap-by-direction-of-change" class="nav-link" data-scroll-target="#stratifying-the-heatmap-by-direction-of-change"><span class="header-section-number">6.6.1</span> Stratifying the heatmap by direction of change</a></li>
-  <li><a href="#setting-categorical-levels-with-factor" id="toc-setting-categorical-levels-with-factor" class="nav-link" data-scroll-target="#setting-categorical-levels-with-factor"><span class="header-section-number">6.6.2</span> Setting categorical levels with factor()</a></li>
+  <li><a href="#stratifying-the-heatmap-by-direction-of-change" id="toc-stratifying-the-heatmap-by-direction-of-change" class="nav-link" data-scroll-target="#stratifying-the-heatmap-by-direction-of-change">Stratifying the heatmap by direction of change</a></li>
+  <li><a href="#setting-categorical-levels-with-factor" id="toc-setting-categorical-levels-with-factor" class="nav-link" data-scroll-target="#setting-categorical-levels-with-factor">Setting categorical levels with factor()</a></li>
   </ul></li>
-  <li><a href="#functional-programming" id="toc-functional-programming" class="nav-link" data-scroll-target="#functional-programming"><span class="header-section-number">6.7</span> Functional programming</a>
+  <li><a href="#functional-programming" id="toc-functional-programming" class="nav-link" data-scroll-target="#functional-programming">Functional programming</a>
   <ul class="collapse">
-  <li><a href="#creating-a-reusable-heatmap-function" id="toc-creating-a-reusable-heatmap-function" class="nav-link" data-scroll-target="#creating-a-reusable-heatmap-function"><span class="header-section-number">6.7.1</span> Creating a reusable heatmap function</a></li>
-  <li><a href="#making-enrichedheatmaps-for-both-atac-samples" id="toc-making-enrichedheatmaps-for-both-atac-samples" class="nav-link" data-scroll-target="#making-enrichedheatmaps-for-both-atac-samples"><span class="header-section-number">6.7.2</span> Making EnrichedHeatmaps for both ATAC samples</a></li>
-  <li><a href="#resetting-the-canvas-for-larger-plots" id="toc-resetting-the-canvas-for-larger-plots" class="nav-link" data-scroll-target="#resetting-the-canvas-for-larger-plots"><span class="header-section-number">6.7.3</span> Resetting the canvas for larger plots</a></li>
+  <li><a href="#creating-a-reusable-heatmap-function" id="toc-creating-a-reusable-heatmap-function" class="nav-link" data-scroll-target="#creating-a-reusable-heatmap-function">Creating a reusable heatmap function</a></li>
+  <li><a href="#making-enrichedheatmaps-for-both-atac-samples" id="toc-making-enrichedheatmaps-for-both-atac-samples" class="nav-link" data-scroll-target="#making-enrichedheatmaps-for-both-atac-samples">Making EnrichedHeatmaps for both ATAC samples</a></li>
+  <li><a href="#resetting-the-canvas-for-larger-plots" id="toc-resetting-the-canvas-for-larger-plots" class="nav-link" data-scroll-target="#resetting-the-canvas-for-larger-plots">Resetting the canvas for larger plots</a></li>
   </ul></li>
-  <li><a href="#combining-multiple-heatmaps" id="toc-combining-multiple-heatmaps" class="nav-link" data-scroll-target="#combining-multiple-heatmaps"><span class="header-section-number">6.8</span> Combining multiple heatmaps</a>
+  <li><a href="#combining-multiple-heatmaps" id="toc-combining-multiple-heatmaps" class="nav-link" data-scroll-target="#combining-multiple-heatmaps">Combining multiple heatmaps</a>
   <ul class="collapse">
-  <li><a href="#generating-the-unified-heatmaps-and-annotations" id="toc-generating-the-unified-heatmaps-and-annotations" class="nav-link" data-scroll-target="#generating-the-unified-heatmaps-and-annotations"><span class="header-section-number">6.8.1</span> Generating the unified heatmaps and annotations</a></li>
-  <li><a href="#named-vectors-vs.-simple-vectors-for-colors" id="toc-named-vectors-vs.-simple-vectors-for-colors" class="nav-link" data-scroll-target="#named-vectors-vs.-simple-vectors-for-colors"><span class="header-section-number">6.8.2</span> Named vectors vs.&nbsp;simple vectors for colors</a></li>
+  <li><a href="#generating-the-unified-heatmaps-and-annotations" id="toc-generating-the-unified-heatmaps-and-annotations" class="nav-link" data-scroll-target="#generating-the-unified-heatmaps-and-annotations">Generating the unified heatmaps and annotations</a></li>
+  <li><a href="#named-vectors-vs.-simple-vectors-for-colors" id="toc-named-vectors-vs.-simple-vectors-for-colors" class="nav-link" data-scroll-target="#named-vectors-vs.-simple-vectors-for-colors">Named vectors vs.&nbsp;simple vectors for colors</a></li>
   </ul></li>
-  <li><a href="#question-1" id="toc-question-1" class="nav-link" data-scroll-target="#question-1"><span class="header-section-number">6.9</span> Question 1</a></li>
-  <li><a href="#refining-the-custom-heatmap-function" id="toc-refining-the-custom-heatmap-function" class="nav-link" data-scroll-target="#refining-the-custom-heatmap-function"><span class="header-section-number">6.10</span> Refining the custom heatmap function</a></li>
-  <li><a href="#question-2" id="toc-question-2" class="nav-link" data-scroll-target="#question-2"><span class="header-section-number">6.11</span> Question 2</a></li>
-  <li><a href="#question-3" id="toc-question-3" class="nav-link" data-scroll-target="#question-3"><span class="header-section-number">6.12</span> Question 3</a>
+  <li><a href="#question-1" id="toc-question-1" class="nav-link" data-scroll-target="#question-1">Question 1</a></li>
+  <li><a href="#refining-the-custom-heatmap-function" id="toc-refining-the-custom-heatmap-function" class="nav-link" data-scroll-target="#refining-the-custom-heatmap-function">Refining the custom heatmap function</a></li>
+  <li><a href="#question-2" id="toc-question-2" class="nav-link" data-scroll-target="#question-2">Question 2</a></li>
+  <li><a href="#question-3" id="toc-question-3" class="nav-link" data-scroll-target="#question-3">Question 3</a>
   <ul class="collapse">
-  <li><a href="#the-mini-heatmap-method" id="toc-the-mini-heatmap-method" class="nav-link" data-scroll-target="#the-mini-heatmap-method"><span class="header-section-number">6.12.1</span> The “Mini-Heatmap” method</a></li>
-  <li><a href="#the-rowannotation-method" id="toc-the-rowannotation-method" class="nav-link" data-scroll-target="#the-rowannotation-method"><span class="header-section-number">6.12.2</span> The <code>rowAnnotation</code> method</a></li>
-  <li><a href="#the-power-of-native-annotations" id="toc-the-power-of-native-annotations" class="nav-link" data-scroll-target="#the-power-of-native-annotations"><span class="header-section-number">6.12.3</span> The power of native annotations</a></li>
+  <li><a href="#the-mini-heatmap-method" id="toc-the-mini-heatmap-method" class="nav-link" data-scroll-target="#the-mini-heatmap-method">The “Mini-Heatmap” method</a></li>
+  <li><a href="#the-rowannotation-method" id="toc-the-rowannotation-method" class="nav-link" data-scroll-target="#the-rowannotation-method">The <code>rowAnnotation</code> method</a></li>
+  <li><a href="#the-power-of-native-annotations" id="toc-the-power-of-native-annotations" class="nav-link" data-scroll-target="#the-power-of-native-annotations">The power of native annotations</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -315,9 +280,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../notebooks/01-omics_data_structures.html">II. Data Structures &amp; Visualization</a></li><li class="breadcrumb-item"><a href="../notebooks/02-atac_heatmaps.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Enriched Heatmaps and identification of regions with different activities</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Enriched Heatmaps and identification of regions with different activities</span></h1>
+<h1 class="title">Enriched Heatmaps and identification of regions with different activities</h1>
 </div>
 
 
@@ -334,8 +299,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="learning-objectives" class="level2" data-number="6.1">
-<h2 data-number="6.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">6.1</span> Learning objectives</h2>
+<section id="learning-objectives" class="level2">
+<h2 class="anchored" data-anchor-id="learning-objectives">Learning objectives</h2>
 <ul>
 <li>Distinguish between when to use <code>Heatmap()</code> and <code>HeatmapAnnotation()</code></li>
 <li>Generate row split annotations for enriched heatmaps</li>
@@ -343,10 +308,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Avoid common data handling errors in heatmap plotting</li>
 </ul>
 </section>
-<section id="loading-libraries" class="level2" data-number="6.2">
-<h2 data-number="6.2" class="anchored" data-anchor-id="loading-libraries"><span class="header-section-number">6.2</span> Loading libraries</h2>
+<section id="loading-libraries" class="level2">
+<h2 class="anchored" data-anchor-id="loading-libraries">Loading libraries</h2>
 <p>In this exercise, we shall use methods from the <code>gUtils</code> library. It provides a set of utility functions for use with GenomicRanges. We need to install it properly in the current environment <a href="https://github.com/mskilab-org/gUtils">following the author’s instructions</a>.</p>
-<div id="cell-2" class="cell" data-message="false" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="1">
+<div id="cell-3" class="cell" data-message="false" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">suppressWarnings</span>({</span>
@@ -361,19 +326,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 </div>
 </section>
-<section id="preparing-the-atac-summarizedexperiment" class="level2" data-number="6.3">
-<h2 data-number="6.3" class="anchored" data-anchor-id="preparing-the-atac-summarizedexperiment"><span class="header-section-number">6.3</span> Preparing the ATAC <code>SummarizedExperiment</code></h2>
+<section id="preparing-the-atac-summarizedexperiment" class="level2">
+<h2 class="anchored" data-anchor-id="preparing-the-atac-summarizedexperiment">Preparing the ATAC <code>SummarizedExperiment</code></h2>
 <p>Here we load the <code>SummarizedExperiment</code> for the ATAC-seq data</p>
-<div id="cell-4" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="2">
+<div id="cell-5" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>atac <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/atac_se.rds"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<section id="atac-peaks-information" class="level3" data-number="6.3.1">
-<h3 data-number="6.3.1" class="anchored" data-anchor-id="atac-peaks-information"><span class="header-section-number">6.3.1</span> ATAC peaks information</h3>
+<section id="atac-peaks-information" class="level3">
+<h3 class="anchored" data-anchor-id="atac-peaks-information">ATAC peaks information</h3>
 <p>Each peak region represent the activity in a genomic region. These peaks are annotated for various features, including their genomic annotations and the results for differential accessibility analysis is also added there.</p>
-<div id="cell-6" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="3">
+<div id="cell-7" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>rd_atac <span class="ot">&lt;-</span> <span class="fu">rowRanges</span>(atac)</span>
@@ -458,16 +423,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>Peak Calling:</strong> We use statistical algorithms (like <em>MACS2</em>) to distinguish true biological pile-ups from random background noise, artifacts and duplicates. The algorithm defines the precise boundaries of these pile-ups, creating discrete peak regions (the shaded boxes on the example snapshot of chromatin accessibility) with specific coordinates (e.g., <code>chr1</code>, <code>start: 100</code>, <code>end: 400</code>).</li>
 </ul>
 </section>
-<section id="statistical-results" class="level3" data-number="6.3.2">
-<h3 data-number="6.3.2" class="anchored" data-anchor-id="statistical-results"><span class="header-section-number">6.3.2</span> Statistical results</h3>
+<section id="statistical-results" class="level3">
+<h3 class="anchored" data-anchor-id="statistical-results">Statistical results</h3>
 <p>Now that we have genomic coordinates for our peaks, we can extract the specific information:</p>
 <ul>
 <li>Genomic annotation: we compare our peak coordinates against a known database of genes. This tells us which gene is nearby (e.g., <code>Gene1</code>) and how far the peak is from the Transcription Start Site (<code>distanceTSS</code>).</li>
 <li>Differential accessibility: to compare conditions, we count exactly how many sequencing reads fall within a specific peak region for each experimental group (e.g., <code>Group1</code> vs <code>Group2</code>). Statistical software (like <em>DESeq2</em>) then calculates the <strong>fold-change (FC)</strong> between these counts to determine if a region <em>significantly</em> opened or closed in response to a treatment.</li>
 </ul>
 </section>
-<section id="from-bam-files-to-differential-peaks" class="level3" data-number="6.3.3">
-<h3 data-number="6.3.3" class="anchored" data-anchor-id="from-bam-files-to-differential-peaks"><span class="header-section-number">6.3.3</span> From BAM files to differential peaks</h3>
+<section id="from-bam-files-to-differential-peaks" class="level3">
+<h3 class="anchored" data-anchor-id="from-bam-files-to-differential-peaks">From BAM files to differential peaks</h3>
 <p>Here is the step-by-step bioinformatics pipeline used to generate those exact values from the raw data:</p>
 <ol type="1">
 <li>Creating a cnsensus peak set: to compare the samples, bioinformatics tools merge all the individual peak files across all replicates and conditions into a single “master list” of non-overlapping genomic windows. This ensures we are comparing the exact same spatial coordinates across the board.</li>
@@ -481,10 +446,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Constructing the <code>rowRanges</code>: finally, the data is assembled for visualization tools like <code>EnrichedHeatmap</code>, which relies on the Bioconductor ecosystem. The genomic coordinates (<code>chr</code>, <code>start</code>, <code>end</code>) form the core of the <code>rowRanges</code> object, and the statistical results (like the <code>logFC</code> and p-values) are tacked on as metadata columns. This creates a unified object where the visualization tool instantly knows both <em>where</em> the region is located and <em>how significantly</em> its accessibility changed.</li>
 </ol>
 </section>
-<section id="filtering-the-dataset" class="level3" data-number="6.3.4">
-<h3 data-number="6.3.4" class="anchored" data-anchor-id="filtering-the-dataset"><span class="header-section-number">6.3.4</span> Filtering the dataset</h3>
+<section id="filtering-the-dataset" class="level3">
+<h3 class="anchored" data-anchor-id="filtering-the-dataset">Filtering the dataset</h3>
 <p>Based on standard bioinformatics practices, we want to filter for peaks that have a significant statistical change (<em>qvalue</em>) and a meaningful magnitude of change (<em>logFC</em>).</p>
-<div id="cell-10" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="4">
+<div id="cell-11" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># qvalue is the FDR adjusted P value</span></span>
@@ -497,7 +462,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 </div>
 <p>Using the absolute value (<code>abs()</code>) is crucial here. It ensures we are keeping peaks that <em>gained</em> accessibility (logFC ≥ 0.5) AND peaks that <em>lost</em> accessibility (logFC ≤ -0.5). If we didn’t use <code>abs()</code>, we would accidentally throw away all the regions that closed down!</p>
-<div id="cell-12" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="5">
+<div id="cell-13" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>rd_atac_filtered</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -574,10 +539,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="atac-seq-peak-widths" class="level3" data-number="6.3.5">
-<h3 data-number="6.3.5" class="anchored" data-anchor-id="atac-seq-peak-widths"><span class="header-section-number">6.3.5</span> ATAC-seq peak widths</h3>
+<section id="atac-seq-peak-widths" class="level3">
+<h3 class="anchored" data-anchor-id="atac-seq-peak-widths">ATAC-seq peak widths</h3>
 <p>Most of the peaks are around 1000 bp wide. We can check the distribution with a histogram.</p>
-<div id="cell-14" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="6">
+<div id="cell-15" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># median(lengths(rd_atac_filtered))  # `lengths` (plural) is an alias for `width`</span></span>
@@ -612,10 +577,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>The rows in the <code>SummarizedExperiment</code> represent actual biological features—specifically, regions where the chromatin was physically open (peaks). Indeed, an open chromatin region (like a promoter or enhancer) is naturally a few hundred base pairs wide. However, to compare E11.5 and E15.5, we need to merge the peaks from all samples together to create a unified “master list” (a consensus peak set). When we merge overlapping peaks from multiple different samples, the resulting master regions naturally stretch out, averaging around ~1,000 bp to ensure they cover the entire open zone for all samples.</p>
 </section>
-<section id="binning-signal-across-a-2-kb-window" class="level3" data-number="6.3.6">
-<h3 data-number="6.3.6" class="anchored" data-anchor-id="binning-signal-across-a-2-kb-window"><span class="header-section-number">6.3.6</span> Binning signal across a 2 kb window</h3>
+<section id="binning-signal-across-a-2-kb-window" class="level3">
+<h3 class="anchored" data-anchor-id="binning-signal-across-a-2-kb-window">Binning signal across a 2 kb window</h3>
 <p>For plotting the data, we can hence consider 1000 bp around the <strong>peak-mid</strong> that we find using <code>gr.mid()</code>, which returns the 1-bp center of each peak. It directly overwrites the data inside the <code>ranges</code> column.</p>
-<div id="cell-17" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="7">
+<div id="cell-18" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Finding mid of all peaks</span></span>
@@ -655,10 +620,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="finding-peak-centers-with-resize" class="level3" data-number="6.3.7">
-<h3 data-number="6.3.7" class="anchored" data-anchor-id="finding-peak-centers-with-resize"><span class="header-section-number">6.3.7</span> Finding peak centers with <code>resize()</code></h3>
+<section id="finding-peak-centers-with-resize" class="level3">
+<h3 class="anchored" data-anchor-id="finding-peak-centers-with-resize">Finding peak centers with <code>resize()</code></h3>
 <p>There actually is a native way to do this in standard <code>GenomicRanges</code>, but it doesn’t have a dedicated <em>midpoint</em> name. Instead, Bioconductor relies on its highly versatile <code>resize()</code> function.</p>
-<div id="cell-19" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="8">
+<div id="cell-20" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Finding mid of all peaks</span></span>
@@ -701,7 +666,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>As we saw in the previous notebook, a <code>GRanges</code> object is not a standard data frame. It strictly separates its data into two distinct parts: <strong>Core Geometry</strong> and <strong>Metadata</strong> . Because <code>GRanges</code> is an object-oriented structure (S4), we have to use specific “accessor” functions to extract the core geometry.</p>
-<div id="cell-21" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="9">
+<div id="cell-22" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="9">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Returns an IRanges object with start, end, and width</span></span>
@@ -727,14 +692,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><em>Note: Because <code>GRanges</code> is an S4 object, its core architecture is rigidly locked. we physically cannot add a custom geometry column (like midpeak) next to start and end. The rules of the object state that a <code>GRanges</code> row can only represent exactly one genomic interval at a time.</em></p>
 </section>
 </section>
-<section id="preparing-the-continuous-bigwig-data" class="level2" data-number="6.4">
-<h2 data-number="6.4" class="anchored" data-anchor-id="preparing-the-continuous-bigwig-data"><span class="header-section-number">6.4</span> Preparing the continuous bigWig data</h2>
-<section id="loading-data-from-bigwig" class="level3" data-number="6.4.1">
-<h3 data-number="6.4.1" class="anchored" data-anchor-id="loading-data-from-bigwig"><span class="header-section-number">6.4.1</span> Loading data from bigWig</h3>
+<section id="preparing-the-continuous-bigwig-data" class="level2">
+<h2 class="anchored" data-anchor-id="preparing-the-continuous-bigwig-data">Preparing the continuous bigWig data</h2>
+<section id="loading-data-from-bigwig" class="level3">
+<h3 class="anchored" data-anchor-id="loading-data-from-bigwig">Loading data from bigWig</h3>
 <p>The SE aggregates the data into one single number per peak. All spatial information is destroyed. It cannot tell us if those 500 reads were tightly piled up exactly in the middle, or spread out evenly across the region.</p>
 <p>A bigWig file contains the continuous, base-pair-by-base-pair signal coverage across the entire genome. To draw an <code>EnrichedHeatmap</code>, we don’t want just one flat color for the whole peak. We want to see the actual biological shape of the chromatin accessibility (e.g., a sharp spike at the center, tapering off 1000 bp away).</p>
 <p>bigWig files are compressed, indexed, binary format used for efficiently displaying continuous data, like genomic signal data, in genome browsers. Here, we read in ATAC-seq bigWig files, <strong>filters</strong> the data to specific chromosomes, normalizes signal intensity around genomic regions of interest (peak centers), and saves the resulting matrices for downstream visualization.</p>
-<div id="cell-24" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="10">
+<div id="cell-25" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="10">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Find all files in the "data" folder that contain "ATAC" in their name.</span></span>
@@ -760,7 +725,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 </div>
 <p>Here, we load the entire <code>.bw</code> file into memory using <code>rtracklayer::import(x)</code> and then filter it down to <em>chr1</em> and <em>chr2</em>. However, real-world whole-genome bigWig files can be massive and will crash a standard computer’s RAM. To do this efficiently, we can pass a <code>Ranges</code> object to the <code>which=</code> argument of the <code>import()</code> function, for example, <code>import(x, which = my_regions)</code>. This forces R to dynamically extract only the data for those specific coordinates directly from the hard drive, saving huge amounts of memory and time.</p>
-<div id="cell-26" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="11">
+<div id="cell-27" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="11">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>atac_bw <span class="ot">&lt;-</span> <span class="fu">lapply</span>(atac_files, <span class="cf">function</span>(x){</span>
@@ -781,7 +746,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 </div>
 <p>Since the only reason we are loading this data is to draw a heatmap spanning 1000 bp up/downstream of our <code>mid_peaks</code>, we don’t even need the rest of <em>chr1</em> and <em>chr2</em>. We can use our <code>mid_peaks</code> object to fetch only the exact 2000 bp windows we need, reducing the memory footprint from millions of rows per sample down to just a tiny fraction of that.</p>
-<div id="cell-28" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="12">
+<div id="cell-29" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="12">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the actual 2000 bp windows we need for the heatmap</span></span>
@@ -797,7 +762,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 </div>
 <p>When imported into R, each individual bigWig file is represented as a <code>GRanges</code> object. Because we loaded multiple files at once, our <code>atac_bw</code> variable is a list of <code>GRanges</code> objects.</p>
-<div id="cell-30" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="13">
+<div id="cell-31" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="13">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>atac_bw</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -840,7 +805,7 @@ GRanges object with 72127 ranges and 1 metadata column:
   seqinfo: 66 sequences from an unspecified genome</code></pre>
 </div>
 </div>
-<div id="cell-31" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="14">
+<div id="cell-32" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="14">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(</span>
@@ -856,15 +821,15 @@ GRanges object with 72127 ranges and 1 metadata column:
 <p>To compress the file, the genome is artificially chopped into an invisible grid of 50 bp windows, likely using a tool like deepTools <code>bamCoverage</code> with a command like <code>--binSize 50</code>. The software calculates the average signal for that 50 bp window and saves it as a single chunk.</p>
 <p>Note that there are some exceptions. bigWig uses a compression trick called “run-length encoding.” If two consecutive 50 bp bins happen to have the exact same signal score, the bigWig file merges them into a single 100 bp row. And if a bin is completely empty (zero reads), it is completely deleted from the file to save space, which can cause the surrounding bins to look chopped or offset.</p>
 </section>
-<section id="normalization" class="level3" data-number="6.4.2">
-<h3 data-number="6.4.2" class="anchored" data-anchor-id="normalization"><span class="header-section-number">6.4.2</span> Normalization</h3>
+<section id="normalization" class="level3">
+<h3 class="anchored" data-anchor-id="normalization">Normalization</h3>
 <p>Next, we calculate the normalized signals into the area of interest.</p>
 <p>In <code>EnrichedHeatmap</code>, the genomic region is chopped up into tiny windows (bins). The algorithm needs to calculate a single “average” signal for each bin. Because bigWig files are highly compressed, they completely omit regions that have zero reads.</p>
 <p>For example, if a 20 bp bin has a signal of 10 covering 5 base pairs, and the bigWig file is “missing” data for the other 15 base pairs, w0 correctly assumes the missing data is zero. The <code>mean_mode = "w0"</code> calculates the weighted average as: (10 × 5bp) + (0 × 15bp) / 20bp = 2.5.</p>
 <p>If we used a different mode, the algorithm might ignore the missing data and claim the average signal is 10, artificially inflating the signal!</p>
 <p>And because the 99th percentile of our ATAC peak widths is approximately 2000 bp, we extend our analysis window by 1 kb upstream and 1 kb downstream (<code>extend = 1000</code>) from the peak center. This 2 kb total window ensures that the complete biological signal for 99% of our regions is fully captured in the heatmap without clipping the edges.</p>
 <p><em>Please check <code>?normalizeToMatrix</code> or <a href="https://www.rdocumentation.org/packages/EnrichedHeatmap/versions/1.2.2/topics/normalizeToMatrix">the official documentation</a> for details of this function.</em></p>
-<div id="cell-34" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="15">
+<div id="cell-35" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="15">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>mat_AS <span class="ot">&lt;-</span> <span class="fu">lapply</span>(atac_bw, <span class="at">FUN =</span> <span class="cf">function</span>(x) {</span>
@@ -888,7 +853,7 @@ Warning message:
 </div>
 </div>
 <p>We imported two bigWig files, “ATAC_11half.bw” (E11.5) and “ATAC_15half.bw” (E15.5), therefore the list returned by <code>lapply()</code> will have exactly two matrix elements.</p>
-<div id="cell-36" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="16">
+<div id="cell-37" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="16">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(mat_AS)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -932,7 +897,7 @@ Warning message:
 <li>The Columns: Every column represents one of the 20 bp bins from our 2000 bp extended window (so there will be ~100 columns; 50 upstream and 50 downstream).</li>
 <li>The Cells (Values): The actual numbers inside the matrix are the <code>w0</code> weighted average signal scores for that specific peak at that specific 20 bp window.</li>
 </ul>
-<div id="cell-38" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="17">
+<div id="cell-39" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="17">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(</span>
@@ -1103,12 +1068,12 @@ Warning message:
 <p>We can’t plot the entire genome in one heatmap. So, the <code>normalizeToMatrix()</code> function acts like a cookie-cutter. It goes into the bigWig file, cuts out the 2000 bp region around every single ATAC peak, and aligns them all perfectly by their center point. Then, it chops those regions into 20-bp bins to create a clean <strong>mathematical grid</strong>.</p>
 </section>
 </section>
-<section id="building-the-enrichedheatmap" class="level2" data-number="6.5">
-<h2 data-number="6.5" class="anchored" data-anchor-id="building-the-enrichedheatmap"><span class="header-section-number">6.5</span> Building the EnrichedHeatmap</h2>
-<section id="basic-enrichedheatmap-visualization" class="level3" data-number="6.5.1">
-<h3 data-number="6.5.1" class="anchored" data-anchor-id="basic-enrichedheatmap-visualization"><span class="header-section-number">6.5.1</span> Basic EnrichedHeatmap visualization</h3>
+<section id="building-the-enrichedheatmap" class="level2">
+<h2 class="anchored" data-anchor-id="building-the-enrichedheatmap">Building the EnrichedHeatmap</h2>
+<section id="basic-enrichedheatmap-visualization" class="level3">
+<h3 class="anchored" data-anchor-id="basic-enrichedheatmap-visualization">Basic EnrichedHeatmap visualization</h3>
 <p><a href="https://rdrr.io/bioc/EnrichedHeatmap/man/EnrichedHeatmap.html">Enriched heatmap</a> is a special type of heatmap which visualizes the <em>enrichment of genomic signals</em> over specific target regions.</p>
-<div id="cell-41" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="18">
+<div id="cell-42" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="18">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>(</span>
@@ -1142,11 +1107,11 @@ Use `suppressMessages()` to turn off this message.
 </div>
 </div>
 </section>
-<section id="changing-color-and-size" class="level3" data-number="6.5.2">
-<h3 data-number="6.5.2" class="anchored" data-anchor-id="changing-color-and-size"><span class="header-section-number">6.5.2</span> Changing color and size</h3>
+<section id="changing-color-and-size" class="level3">
+<h3 class="anchored" data-anchor-id="changing-color-and-size">Changing color and size</h3>
 <p>Notice the warning message above about the 1st and 99th percentiles? Most normal ATAC peaks might have a “coverage score” of around 20 to 100 reads. However, the genome contains a few “extreme” regions (often repeats, artifacts, or super-enhancers) that pull in thousands of reads.</p>
 <p>By default, <code>EnrichedHeatmap</code> assigns the darkest red color to the absolute highest number in our entire matrix.</p>
-<div id="cell-43" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="19">
+<div id="cell-44" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="19">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">EnrichedHeatmap</span>(</span>
@@ -1167,11 +1132,11 @@ Use `suppressMessages()` to turn off this message.
 </div>
 </div>
 </section>
-<section id="color-based-on-quantile" class="level3" data-number="6.5.3">
-<h3 data-number="6.5.3" class="anchored" data-anchor-id="color-based-on-quantile"><span class="header-section-number">6.5.3</span> Color based on quantile</h3>
+<section id="color-based-on-quantile" class="level3">
+<h3 class="anchored" data-anchor-id="color-based-on-quantile">Color based on quantile</h3>
 <p>Because that maximum number is so ridiculously high, the color scale is stretched too far. All of our normal, biologically real peaks (the 20-100 values) get squashed into the bottom 1% of the color scale, making the entire plot look washed out and white.</p>
 <p>We can fix it by <strong>capping</strong> the color scale at the 99th percentile. Instead of letting a few extreme peaks with 5,000 reads wash out the color scale, we cap the darkest red at 100 reads. Any region with more than 100 reads is just colored dark red, revealing the contrast in our normal peaks.</p>
-<div id="cell-45" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="20">
+<div id="cell-46" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="20">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Taking data between 1 and 99 percentile</span></span>
@@ -1201,8 +1166,8 @@ Use `suppressMessages()` to turn off this message.
 <li>Chromatin accessibility is rarely a perfect, symmetrical bell curve. If a peak is at a promoter, the transcription machinery (like RNA Polymerase) and the +1 nucleosome push the open DNA into an asymmetrical shape. But if a Transcription Factor (TF) is bound to the DNA, the ATAC-seq enzyme (Tn5) cannot cut exactly where the protein is sitting. It has to cut on the sides of it. If the TF is bound slightly off-center, we will see a heavy red signal shifted to one side.</li>
 </ol>
 </section>
-<section id="customizing-heatmap-aesthetics-for-publication" class="level3" data-number="6.5.4">
-<h3 data-number="6.5.4" class="anchored" data-anchor-id="customizing-heatmap-aesthetics-for-publication"><span class="header-section-number">6.5.4</span> Customizing heatmap aesthetics for publication</h3>
+<section id="customizing-heatmap-aesthetics-for-publication" class="level3">
+<h3 class="anchored" data-anchor-id="customizing-heatmap-aesthetics-for-publication">Customizing heatmap aesthetics for publication</h3>
 <p>Now that we have fixed our color scale, we can upgrade the rest of the plot from a default visual into a publication-ready figure. In the code block below, we are applying several aesthetic tweaks to make the data much easier to read:</p>
 <ul>
 <li>Cleaning up the legend (<code>heatmap_legend_param</code>): instead of letting R guess the legend ticks, we mathematically calculate the 1st percentile, the 99th percentile, and the exact midpoint. We then force the legend to display only these three clean, rounded numbers.</li>
@@ -1211,14 +1176,14 @@ Use `suppressMessages()` to turn off this message.
 <li>General polishing: we lock in the exact height and width of the heatmap, adjust font sizes so they aren’t visually overwhelming, and add a subtle background color to our column title.</li>
 </ul>
 <p><em>Note that when creating complex figures like heatmaps in a Jupyter Notebook, we might notice that the output sometimes looks squashed, the text overlaps, or the legends get cut off at the edges. This happens because Jupyter has a default, invisible <em>“canvas”</em> size (usually 7×7 inches) that it uses to draw all plots. Because ComplexHeatmap is an advanced package designed for publication, it tries to draw elements using strict physical dimensions (e.g., forcing a column to be exactly 3 mm wide). If the total size of our heatmap doesn’t match Jupyter’s default 7x7 canvas, the final image gets distorted to make it fit. To fix this, we can explicitly tell the notebook’s plotting engine to change the size of the “paper” it is drawing on to perfectly frame our heatmap.</em></p>
-<div id="cell-48" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="21">
+<div id="cell-49" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="21">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Change Jupyter's global canvas size (measured in inches)</span></span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">repr.plot.width =</span> <span class="fl">3.5</span>, <span class="at">repr.plot.height =</span> <span class="fl">4.5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="cell-49" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="22">
+<div id="cell-50" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="22">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We first change the color legend to display only 3 values</span></span>
@@ -1273,13 +1238,13 @@ Use `suppressMessages()` to turn off this message.
 </div>
 </section>
 </section>
-<section id="splitting-and-clustering" class="level2" data-number="6.6">
-<h2 data-number="6.6" class="anchored" data-anchor-id="splitting-and-clustering"><span class="header-section-number">6.6</span> Splitting and clustering</h2>
-<section id="stratifying-the-heatmap-by-direction-of-change" class="level3" data-number="6.6.1">
-<h3 data-number="6.6.1" class="anchored" data-anchor-id="stratifying-the-heatmap-by-direction-of-change"><span class="header-section-number">6.6.1</span> Stratifying the heatmap by direction of change</h3>
+<section id="splitting-and-clustering" class="level2">
+<h2 class="anchored" data-anchor-id="splitting-and-clustering">Splitting and clustering</h2>
+<section id="stratifying-the-heatmap-by-direction-of-change" class="level3">
+<h3 class="anchored" data-anchor-id="stratifying-the-heatmap-by-direction-of-change">Stratifying the heatmap by direction of change</h3>
 <p>Right now, all of our ATAC peaks are bundled together. While we can clearly see a general peak of accessibility at the center, this single block hides the dynamic changes occurring between our experimental conditions.</p>
 <p>To get a better understanding of the biology, we will use our <code>logFC</code> values to split the heatmap into two distinct clusters: regions that <em>gained accessibility</em> and regions that <em>lost accessibility</em>. This allows us to visually confirm our statistical results and track how different parts of the genome behave.</p>
-<div id="cell-51" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="23">
+<div id="cell-52" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="23">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>split_change <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(</span>
@@ -1296,7 +1261,7 @@ Use `suppressMessages()` to turn off this message.
  - attr(*, "names")= chr [1:1933] "peak_1" "peak_2" "peak_3" "peak_4" ...</code></pre>
 </div>
 </div>
-<div id="cell-52" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="24">
+<div id="cell-53" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="24">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define cluster colors</span></span>
@@ -1352,20 +1317,20 @@ Use `suppressMessages()` to turn off this message.
 </div>
 </div>
 </section>
-<section id="setting-categorical-levels-with-factor" class="level3" data-number="6.6.2">
-<h3 data-number="6.6.2" class="anchored" data-anchor-id="setting-categorical-levels-with-factor"><span class="header-section-number">6.6.2</span> Setting categorical levels with factor()</h3>
+<section id="setting-categorical-levels-with-factor" class="level3">
+<h3 class="anchored" data-anchor-id="setting-categorical-levels-with-factor">Setting categorical levels with factor()</h3>
 <p><code>ComplexHeatmap</code> is very smart, but if the data order doesn’t match our color order, the package can sometimes get confused when building the row annotations and legends.</p>
 <p>By default, if we give R raw text, it will almost always sort it alphabetically. Because “Decreased” starts with D and “Increased” starts with I, R’s default behavior is to put “Decreased accessibility” at the very top of the heatmap and legend.</p>
 <p>The <code>factor()</code> function takes raw text and converts it into a strict <strong>categorical</strong> variable. If we simply passed the raw text, R would automatically do this conversion for us under the hood, but it would blindly sort the categories alphabetically (putting ‘Decreased’ before ‘Increased’)</p>
 <p>By manually setting <code>levels = names(cluster_colors)</code>, we prevent R from guessing the layout. We are telling R that the strict, <em>permanent order</em> of these categories is exactly the order we defined in our color list. We explicitly used factor() to override the alphabet and force ‘Increased’ to the top of our heatmap.</p>
 </section>
 </section>
-<section id="functional-programming" class="level2" data-number="6.7">
-<h2 data-number="6.7" class="anchored" data-anchor-id="functional-programming"><span class="header-section-number">6.7</span> Functional programming</h2>
-<section id="creating-a-reusable-heatmap-function" class="level3" data-number="6.7.1">
-<h3 data-number="6.7.1" class="anchored" data-anchor-id="creating-a-reusable-heatmap-function"><span class="header-section-number">6.7.1</span> Creating a reusable heatmap function</h3>
+<section id="functional-programming" class="level2">
+<h2 class="anchored" data-anchor-id="functional-programming">Functional programming</h2>
+<section id="creating-a-reusable-heatmap-function" class="level3">
+<h3 class="anchored" data-anchor-id="creating-a-reusable-heatmap-function">Creating a reusable heatmap function</h3>
 <p>Because we have multiple samples to analyze, copying and pasting that massive block of plotting code is inefficient. Instead, it is best practice to wrap our code into a custom <code>function</code> so we can easily generate matching heatmaps for any dataset.</p>
-<div id="cell-55" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="25">
+<div id="cell-56" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="25">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>make_EH <span class="ot">&lt;-</span> <span class="cf">function</span>(</span>
@@ -1423,10 +1388,10 @@ Use `suppressMessages()` to turn off this message.
 </details>
 </div>
 </section>
-<section id="making-enrichedheatmaps-for-both-atac-samples" class="level3" data-number="6.7.2">
-<h3 data-number="6.7.2" class="anchored" data-anchor-id="making-enrichedheatmaps-for-both-atac-samples"><span class="header-section-number">6.7.2</span> Making EnrichedHeatmaps for both ATAC samples</h3>
+<section id="making-enrichedheatmaps-for-both-atac-samples" class="level3">
+<h3 class="anchored" data-anchor-id="making-enrichedheatmaps-for-both-atac-samples">Making EnrichedHeatmaps for both ATAC samples</h3>
 <p>Importantly, this allows us to generate independent <code>EnrichedHeatmap</code> objects for each sample. Once we have those individual objects, we can easily concatenate them and use the <code>draw()</code> function to plot them beautifully side-by-side.</p>
-<div id="cell-57" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="26">
+<div id="cell-58" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="26">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>eh_11h <span class="ot">&lt;-</span> <span class="fu">make_EH</span>(</span>
@@ -1442,18 +1407,18 @@ Use `suppressMessages()` to turn off this message.
 </details>
 </div>
 </section>
-<section id="resetting-the-canvas-for-larger-plots" class="level3" data-number="6.7.3">
-<h3 data-number="6.7.3" class="anchored" data-anchor-id="resetting-the-canvas-for-larger-plots"><span class="header-section-number">6.7.3</span> Resetting the canvas for larger plots</h3>
+<section id="resetting-the-canvas-for-larger-plots" class="level3">
+<h3 class="anchored" data-anchor-id="resetting-the-canvas-for-larger-plots">Resetting the canvas for larger plots</h3>
 <p>Remember the <code>options()</code> command we used earlier to shrink our Jupyter canvas? Because that was a global setting, our notebook is currently stuck drawing on a tiny 3.5 x 4.5 inch piece of “paper”.</p>
 <p>Now that we are combining multiple heatmaps and annotations into one large, unified figure, that tiny canvas is far too small. Before we generate this larger figure, we must reset the canvas back to its default.</p>
-<div id="cell-59" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="27">
+<div id="cell-60" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="27">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Reset Jupyter plot dimensions to the standard defaults (7x7 inches)</span></span>
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">repr.plot.width =</span> <span class="dv">7</span>, <span class="at">repr.plot.height =</span> <span class="dv">7</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="cell-60" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="28">
+<div id="cell-61" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="28">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">draw</span>(eh_11h <span class="sc">+</span> eh_15h)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1469,14 +1434,14 @@ Use `suppressMessages()` to turn off this message.
 <p>By default, <code>ComplexHeatmap</code> appoints the first heatmap in the list as the “Main Heatmap”. Because <code>eh_11h</code> is the Main Heatmap here, it calculates the row order based on its signal intensity, and <code>eh_15h</code> is automatically forced to obey that exact order.</p>
 </section>
 </section>
-<section id="combining-multiple-heatmaps" class="level2" data-number="6.8">
-<h2 data-number="6.8" class="anchored" data-anchor-id="combining-multiple-heatmaps"><span class="header-section-number">6.8</span> Combining multiple heatmaps</h2>
-<section id="generating-the-unified-heatmaps-and-annotations" class="level3" data-number="6.8.1">
-<h3 data-number="6.8.1" class="anchored" data-anchor-id="generating-the-unified-heatmaps-and-annotations"><span class="header-section-number">6.8.1</span> Generating the unified heatmaps and annotations</h3>
+<section id="combining-multiple-heatmaps" class="level2">
+<h2 class="anchored" data-anchor-id="combining-multiple-heatmaps">Combining multiple heatmaps</h2>
+<section id="generating-the-unified-heatmaps-and-annotations" class="level3">
+<h3 class="anchored" data-anchor-id="generating-the-unified-heatmaps-and-annotations">Generating the unified heatmaps and annotations</h3>
 <p>First, we will use our new <code>make_EH()</code> function to generate the heatmaps for both our E11.5 and E15.5 samples. Notice that we are intentionally leaving out the <code>split_rows</code> argument (letting it default to <code>NULL</code>). By removing this split, the heatmaps will initially generate as simple, continuous blocks rather than breaking into separate clusters.</p>
 <p>Next, we want to <em>label</em> which peaks belong to which cluster. To make this visually intuitive, we will build a tiny, 3-millimeter wide <em>“mini-heatmap”</em> to act as a colored side-bar, making sure to reuse our exact <code>cluster_colors</code> palette to maintain visual consistency.</p>
 <p>Finally, we can glue our samples and this new color bar together into a single figure. But how do we get our biological clusters back? Instead of trying to split each heatmap individually (which can cause frustrating alignment errors), we use a function of the <code>ComplexHeatmap</code> package: the <code>draw()</code> function. By passing our <code>split_change</code> groups directly into <code>draw()</code>, it acts as a global master controller, seamlessly splitting the entire combined figure in one shot.</p>
-<div id="cell-63" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="29">
+<div id="cell-64" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="29">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>eh_11h <span class="ot">&lt;-</span> <span class="fu">make_EH</span>(</span>
@@ -1513,15 +1478,15 @@ set. It is more suggested to do as `ht = draw(ht); row_order(ht)`."</code></pre>
 </div>
 </div>
 </section>
-<section id="named-vectors-vs.-simple-vectors-for-colors" class="level3" data-number="6.8.2">
-<h3 data-number="6.8.2" class="anchored" data-anchor-id="named-vectors-vs.-simple-vectors-for-colors"><span class="header-section-number">6.8.2</span> Named vectors vs.&nbsp;simple vectors for colors</h3>
+<section id="named-vectors-vs.-simple-vectors-for-colors" class="level3">
+<h3 class="anchored" data-anchor-id="named-vectors-vs.-simple-vectors-for-colors">Named vectors vs.&nbsp;simple vectors for colors</h3>
 <p>Because our side-bar annotation represents <strong>discrete values</strong> (a peak is strictly either “Increased” or “Decreased”), we must be careful about how we assign colors. Rather than passing a simple list of colors like <code>c("red", "blue")</code>, we pass our <code>cluster_colors</code> variable, which is a <strong>named vector</strong> (a dictionary).</p>
 <p>According to the <a href="https://jokergoo.github.io/ComplexHeatmap-reference/book/a-single-heatmap.html#colors">official ComplexHeatmap documentation</a>:</p>
 <blockquote class="blockquote">
 <p><em>“If the matrix contains discrete values (either numeric or character), colors should be specified as a named vector to make it possible for the mapping from discrete values to colors. If there is no name for the color vector, the order of colors corresponds to the order of <code>unique(mat)</code>.”</em></p>
 </blockquote>
 <p>By using our named vector, we mathematically lock the exact text keys to their specific colors, ensuring that “Increased” is always red and “Decreased” is always blue.</p>
-<div id="cell-65" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="30">
+<div id="cell-66" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="30">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">draw</span>(</span>
@@ -1540,11 +1505,11 @@ set. It is more suggested to do as `ht = draw(ht); row_order(ht)`."</code></pre>
 <p><em>Note that we can also just pass <code>cluster_rows = FALSE</code> into <code>anno_hm</code> and remove <code>row_order = row_order_eh</code>, and then use <code>draw(anno_hm + eh_11h + eh_15h, main_heatmap = "E11.5")</code>, or use <code>rowAnnotation()</code> instead (discussed at the end of the notebook) to achieve the exact same result.</em></p>
 </section>
 </section>
-<section id="question-1" class="level2" data-number="6.9">
-<h2 data-number="6.9" class="anchored" data-anchor-id="question-1"><span class="header-section-number">6.9</span> Question 1</h2>
+<section id="question-1" class="level2">
+<h2 class="anchored" data-anchor-id="question-1">Question 1</h2>
 <p><strong>Can you make split the Enriched Heatmap based on the annotations?</strong></p>
 <p><strong><em>Hint:</em></strong> <code>mid_peaks$ATAC_anno</code> contain annotations for the regions.</p>
-<div id="cell-68" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="31">
+<div id="cell-69" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="31">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>mid_peaks</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1620,7 +1585,7 @@ set. It is more suggested to do as `ht = draw(ht); row_order(ht)`."</code></pre>
   seqinfo: 21 sequences from an unspecified genome; no seqlengths</code></pre>
 </div>
 </div>
-<div id="cell-69" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="32">
+<div id="cell-70" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="32">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mid_peaks<span class="sc">$</span>ATAC_anno, <span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1634,7 +1599,7 @@ set. It is more suggested to do as `ht = draw(ht); row_order(ht)`."</code></pre>
 <ol class="list-inline"><li>'Promoter'</li><li>'Intron'</li><li>'Promoter'</li><li>'Intergenic'</li><li>'Promoter'</li><li>'Intergenic'</li><li>'Promoter'</li><li>'Promoter'</li><li>'Promoter'</li><li>'Intergenic'</li></ol>
 </div>
 </div>
-<div id="cell-70" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="33">
+<div id="cell-71" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="33">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract the genomic annotations (e.g., "Promoter", "Intron", "Intergenic") </span></span>
@@ -1658,7 +1623,7 @@ set. It is more suggested to do as `ht = draw(ht); row_order(ht)`."</code></pre>
 </div>
 <p>Instead of building a new dataframe from scratch, we may simply extract the <code>GRanges</code> object’s metadata table (<code>mcols</code>) as a standard dataframe and slice out the exact column we want. Because we are slicing the existing table, R automatically brings the peak IDs along as our row names.</p>
 <p><em>Note: <code>mcols()</code> returns a <strong><code>DataFrame</code></strong> (with a capital D and F), which is a highly complex, specialized object built by Bioconductor to hold biological data types (like raw DNA sequences) that a normal table cannot hold. However, visualization packages expect R’s standard, universally accepted <strong><code>data.frame</code></strong>. Therefore, we must use <code>as.data.frame()</code> here to safely convert our heavy genomic object into a lightweight table that the heatmap can easily understand.</em></p>
-<div id="cell-72" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="34">
+<div id="cell-73" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="34">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract the metadata as a dataframe, and slice the specific column </span></span>
@@ -1711,7 +1676,7 @@ set. It is more suggested to do as `ht = draw(ht); row_order(ht)`."</code></pre>
 </div>
 </div>
 <p>However, in base R, when we pull a column out of a data frame or a <code>GRanges</code> object (<code>split_anno_df$ATAC_anno</code>), R stubbornly strips off the row names and just hands us a flat, nameless vector. To build a “Series” in base R, we have to manually map the index back onto the vector…</p>
-<div id="cell-74" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="35">
+<div id="cell-75" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="35">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(split_anno_df<span class="sc">$</span>ATAC_anno)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1725,7 +1690,7 @@ set. It is more suggested to do as `ht = draw(ht); row_order(ht)`."</code></pre>
 <ol class="list-inline"><li>'Promoter'</li><li>'Intron'</li><li>'Promoter'</li><li>'Intergenic'</li><li>'Promoter'</li><li>'Intergenic'</li></ol>
 </div>
 </div>
-<div id="cell-75" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="36">
+<div id="cell-76" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="36">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Dynamically generate a distinct color palette for all the distinct categories</span></span>
@@ -1746,7 +1711,7 @@ set. It is more suggested to do as `ht = draw(ht); row_order(ht)`."</code></pre>
 <span id="cb51-16"><a href="#cb51-16" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="cell-76" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="37">
+<div id="cell-77" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="37">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">draw</span>(anno_an <span class="sc">+</span> eh_11h <span class="sc">+</span> eh_15h, <span class="at">split =</span> split_anno, <span class="at">main_heatmap =</span> <span class="st">"E11.5"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1760,14 +1725,14 @@ set. It is more suggested to do as `ht = draw(ht); row_order(ht)`."</code></pre>
 </div>
 </div>
 </section>
-<section id="refining-the-custom-heatmap-function" class="level2" data-number="6.10">
-<h2 data-number="6.10" class="anchored" data-anchor-id="refining-the-custom-heatmap-function"><span class="header-section-number">6.10</span> Refining the custom heatmap function</h2>
+<section id="refining-the-custom-heatmap-function" class="level2">
+<h2 class="anchored" data-anchor-id="refining-the-custom-heatmap-function">Refining the custom heatmap function</h2>
 <p>If we look closely at the summary profile at the top of our previous heatmaps, it only displayed two lines (Red and Blue), which perfectly represented the aggregate signal for our “Increased” and “Decreased” clusters.</p>
 <p>However, by splitting our heatmap by Direction and/or Genomic Region, we create multiple distinct sub-clusters. Consequently, the top <code>anno_enriched()</code> profile will now attempt to calculate and display overlapping lines for every specific sub-cluster combination.</p>
 <p>Because our <code>make_EH()</code> function explicitly passes <code>gp = gpar(col = cluster_colors)</code> to the top annotation, <code>EnrichedHeatmap</code> will be forced to <strong>recycle colors</strong>, trying to draw many lines using only our two predefined colors. To fix this, we will update our custom function to make the <code>line_colors</code> argument <strong>optional</strong> (defaulting to <code>NULL</code>). This gives us the flexibility to dynamically pass a <em>custom colormap</em> that perfectly matches the exact number of clusters we are analyzing.</p>
 <p>Additionally, we must address a frustrating quirk in how the package handles text labels. When we pass our <code>split_anno_df</code> to the global <code>draw()</code> function, it automatically generates text labels for every single cluster combination. It then forcefully hands these text labels down to our Main Heatmap (<code>eh_11h</code>) and tells it to print them.</p>
 <p>Putting <code>row_title = NULL</code> inside <code>draw()</code> only hides the <em>global</em> title for the entire figure; it does nothing to hide these individual slice titles. To truly remove this text clutter and let our color bars do the talking, we must tell the heatmap object itself to reject them. We will do this by adding <code>row_title = NULL</code> directly into our <code>make_EH()</code> function, and then we will quickly regenerate our heatmaps.</p>
-<div id="cell-78" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="38">
+<div id="cell-79" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="38">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Upgraded version of the original custom function</span></span>
@@ -1827,7 +1792,7 @@ set. It is more suggested to do as `ht = draw(ht); row_order(ht)`."</code></pre>
 <span id="cb53-55"><a href="#cb53-55" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="cell-79" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="39">
+<div id="cell-80" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="39">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create two new ComplexHeatmap objects with the updated custom function</span></span>
@@ -1843,7 +1808,7 @@ set. It is more suggested to do as `ht = draw(ht); row_order(ht)`."</code></pre>
 <span id="cb54-11"><a href="#cb54-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_fill =</span> <span class="st">"#e6fff2"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="cell-80" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="40">
+<div id="cell-81" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="40">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">draw</span>(anno_an <span class="sc">+</span> eh_11h2 <span class="sc">+</span> eh_15h2, <span class="at">split =</span> split_anno, <span class="at">main_heatmap =</span> <span class="st">"E11.5"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1857,11 +1822,11 @@ set. It is more suggested to do as `ht = draw(ht); row_order(ht)`."</code></pre>
 </div>
 </div>
 </section>
-<section id="question-2" class="level2" data-number="6.11">
-<h2 data-number="6.11" class="anchored" data-anchor-id="question-2"><span class="header-section-number">6.11</span> Question 2</h2>
+<section id="question-2" class="level2">
+<h2 class="anchored" data-anchor-id="question-2">Question 2</h2>
 <p><strong>Can you make split the Enriched Heatmap based on the annotations and change in direction?</strong></p>
 <p><strong><em>Hint:</em></strong> <code>mid_peaks$ATAC_anno</code> contain annotations for the regions. <code>mid_peaks$ATAC_logFC</code> contain sign of change.</p>
-<div id="cell-82" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="41">
+<div id="cell-83" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="41">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>split_anno_dir <span class="ot">&lt;-</span> <span class="fu">paste</span>(</span>
@@ -1886,7 +1851,7 @@ set. It is more suggested to do as `ht = draw(ht); row_order(ht)`."</code></pre>
 </style><dl class="dl-inline"><dt>peak_1</dt><dd>'Promoter Inc'</dd><dt>peak_2</dt><dd>'Intron Inc'</dd><dt>peak_3</dt><dd>'Promoter Dec'</dd><dt>peak_4</dt><dd>'Intergenic Dec'</dd><dt>peak_5</dt><dd>'Promoter Inc'</dd><dt>peak_6</dt><dd>'Intergenic Dec'</dd></dl>
 </div>
 </div>
-<div id="cell-83" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="42">
+<div id="cell-84" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="42">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>cols_an <span class="ot">&lt;-</span> RColorBrewer<span class="sc">::</span><span class="fu">brewer.pal</span>(</span>
@@ -1925,7 +1890,7 @@ colors, e.g. by adding one more color or removing a color.
 </code></pre>
 </div>
 </div>
-<div id="cell-84" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="43">
+<div id="cell-85" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="43">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">draw</span>(anno_an_dir <span class="sc">+</span> eh_11h3 <span class="sc">+</span> eh_15h3, <span class="at">split =</span> split_anno_dir)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1939,13 +1904,13 @@ colors, e.g. by adding one more color or removing a color.
 </div>
 </div>
 </section>
-<section id="question-3" class="level2" data-number="6.12">
-<h2 data-number="6.12" class="anchored" data-anchor-id="question-3"><span class="header-section-number">6.12</span> Question 3</h2>
+<section id="question-3" class="level2">
+<h2 class="anchored" data-anchor-id="question-3">Question 3</h2>
 <p><strong>Can you make split the Enriched Heatmap based on the annotations and change in direction with separate color bars for annotation and direction of change?</strong></p>
-<section id="the-mini-heatmap-method" class="level3" data-number="6.12.1">
-<h3 data-number="6.12.1" class="anchored" data-anchor-id="the-mini-heatmap-method"><span class="header-section-number">6.12.1</span> The “Mini-Heatmap” method</h3>
+<section id="the-mini-heatmap-method" class="level3">
+<h3 class="anchored" data-anchor-id="the-mini-heatmap-method">The “Mini-Heatmap” method</h3>
 <p>To make this two-level split work while keeping our top profile lines colored strictly by Direction, we must generate brand new ATAC heatmap objects using the updated version of our custom function. Creating new objects allows us to pass the correct color dictionary and ensure no messy auto-generated slice text appears on the plot. Furthermore, we must explicitly set the <code>main_heatmap</code> argument inside our <code>draw()</code> function to prevent the mini-heatmaps from hijacking the layout and causing a sorting “tug-of-war.”</p>
-<div id="cell-86" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="44">
+<div id="cell-87" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="44">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine our two existing variables into a single data frame</span></span>
@@ -2006,7 +1971,7 @@ colors, e.g. by adding one more color or removing a color.
 </table>
 </div>
 </div>
-<div id="cell-87" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="45">
+<div id="cell-88" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="45">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>annot_colors <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
@@ -2026,7 +1991,7 @@ colors, e.g. by adding one more color or removing a color.
 </style><dl class="dl-inline"><dt>Inc</dt><dd>'red'</dd><dt>Dec</dt><dd>'blue'</dd><dt>Promoter</dt><dd>'#E41A1C'</dd><dt>Intron</dt><dd>'#377EB8'</dd><dt>Intergenic</dt><dd>'#4DAF4A'</dd><dt>Exon</dt><dd>'#984EA3'</dd><dt>UTR</dt><dd>'#FF7F00'</dd></dl>
 </div>
 </div>
-<div id="cell-88" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="46">
+<div id="cell-89" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="46">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define cluster colors</span></span>
@@ -2066,7 +2031,7 @@ Warning message:
 will be converted into a character matrix."</code></pre>
 </div>
 </div>
-<div id="cell-89" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="47">
+<div id="cell-90" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="47">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>ht <span class="ot">&lt;-</span> <span class="fu">draw</span>(</span>
@@ -2086,7 +2051,7 @@ will be converted into a character matrix."</code></pre>
 </div>
 <p>If we look closely at the E11.5 heatmap (left), the highest signal is clearly in the “Dec” (Blue) clusters. But the top profile draws those highest peaks in Red! Conversely, E15.5 has intense signal in the “Inc” (Red) clusters, but its top profile draws the highest peaks in Blue. It doesn’t correspond to the profiles observed in the previous plots.</p>
 <p>Remember <code>cluster_colors_short</code> only contains two names (“Inc” and “Dec”). But because our final <code>draw()</code> function is going to split the heatmap by two variables (using the dataframe), the top profile is going to ask the dictionary for the color of the squashed string: <code>"Inc, Promoter"</code>. Because <code>"Inc, Promoter"</code> is not inside <code>cluster_colors_short</code>, the heatmap blindly recycles the red and blue colors, scrambling the lines.</p>
-<div id="cell-91" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="48">
+<div id="cell-92" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="48">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract the exact slice names</span></span>
@@ -2099,12 +2064,12 @@ will be converted into a character matrix."</code></pre>
 </div>
 </div>
 </section>
-<section id="the-rowannotation-method" class="level3" data-number="6.12.2">
-<h3 data-number="6.12.2" class="anchored" data-anchor-id="the-rowannotation-method"><span class="header-section-number">6.12.2</span> The <code>rowAnnotation</code> method</h3>
+<section id="the-rowannotation-method" class="level3">
+<h3 class="anchored" data-anchor-id="the-rowannotation-method">The <code>rowAnnotation</code> method</h3>
 <p>Instead of forcing tiny heatmaps to act as labels, <code>ComplexHeatmap</code> provides a dedicated <a href="https://www.rdocumentation.org/packages/ComplexHeatmap/versions/1.10.2/topics/rowAnnotation"><code>rowAnnotation()</code> function</a>. This is the cleanest, most professional way to annotate complex plots.</p>
 <p>By passing our metadata as a <code>data.frame</code> along with a list of color dictionaries, the package handles the mapping for multiple variables simultaneously. Best of all, because it is structurally recognized as an “annotation” rather than a heatmap, it never fights for the Main Heatmap role. This keeps our code clean and guarantees our biological sorting remains perfectly intact.</p>
 <p><em>Note: the visual order of the color bars is dictated entirely by the order of the columns inside the dataframe.</em></p>
-<div id="cell-93" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="49">
+<div id="cell-94" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="49">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Similarly using previously created vectors</span></span>
@@ -2165,7 +2130,7 @@ will be converted into a character matrix."</code></pre>
 </table>
 </div>
 </div>
-<div id="cell-94" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="50">
+<div id="cell-95" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="50">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Let ComplexHeatmap handle the mapping</span></span>
@@ -2181,7 +2146,7 @@ will be converted into a character matrix."</code></pre>
 </div>
 <p>We now pass the <code>draw()</code> function the <code>split_anno_change_df</code> dataframe with two columns. <code>ComplexHeatmap</code> goes row by row and groups the peaks by <em>every unique combination</em> of those two variables (e.g., all peaks that are both “Increased” AND “Promoter” get grouped together). It therefore preserves our biological sorting (factors), perfectly syncs with the Color Bars, and calculates the aggregate signal for the top <code>anno_enriched()</code> lines much more accurately.</p>
 <p>However, because this multi-variable split generates new combined cluster names (like <code>"Inc, Promoter"</code>), our original 2-color dictionary is no longer sufficient. To prevent the top profile from blindly recycling colors, we still need to build a custom color dictionary that explicitly maps our red and blue colors to these exact combination strings!</p>
-<div id="cell-96" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="51">
+<div id="cell-97" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="51">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate the exact slice names that ComplexHeatmap will create</span></span>
@@ -2210,7 +2175,7 @@ will be converted into a character matrix."</code></pre>
 <span id="cb69-24"><a href="#cb69-24" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="cell-97" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="52">
+<div id="cell-98" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="52">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">draw</span>(</span>
@@ -2226,8 +2191,8 @@ will be converted into a character matrix."</code></pre>
 </div>
 </div>
 </section>
-<section id="the-power-of-native-annotations" class="level3" data-number="6.12.3">
-<h3 data-number="6.12.3" class="anchored" data-anchor-id="the-power-of-native-annotations"><span class="header-section-number">6.12.3</span> The power of native annotations</h3>
+<section id="the-power-of-native-annotations" class="level3">
+<h3 class="anchored" data-anchor-id="the-power-of-native-annotations">The power of native annotations</h3>
 <p>In our earlier attempts to add a color bar for the direction of change, we used what we can call the “Mini-Heatmap” hack. We created an entirely separate heatmap and forcefully squashed it into a tiny column by hardcoding <code>width = unit(3, "mm")</code> inside our code. Because we were forcing exact dimensions, we also had to tightly micromanage the global Jupyter canvas size just to make everything fit.</p>
 <p>However, as we just saw, utilizing <code>ComplexHeatmap</code>’s native <code>rowAnnotation()</code> function changes everything. <code>rowAnnotation()</code> is specifically designed for this exact purpose. It natively understands how to size itself, how to align with the main heatmap rows, and how to format its own legends without us having to write hacky dimensional constraints.</p>
 <p>What does this mean for our code moving forward? It means we can go back to our custom <code>make_EH()</code> function and remove the hardcoded width and height definitions entirely. By letting <code>rowAnnotation()</code> handle the side-bars, and letting <code>ComplexHeatmap</code>’s layout engine dynamically calculate the sizes of the main plotting areas, our code becomes significantly more flexible. Instead of rigid, hardcoded plots, we now have a highly adaptable pipeline that will automatically scale and look beautiful, whether we are plotting a tiny subset of 100 peaks or a massive multi-omics integration of 50,000 regions.</p>
@@ -2310,7 +2275,7 @@ will be converted into a character matrix."</code></pre>
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/sbwiecko\.github\.io\/biology-informed-multiomics-training\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -2637,18 +2602,6 @@ will be converted into a character matrix."</code></pre>
     }
   });
   </script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
-      <a href="../notebooks/01-omics_data_structures.html" class="pagination-link" aria-label="Datasets, `SummarizedExperiment`, and `GRanges`">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Datasets, <code>SummarizedExperiment</code>, and <code>GRanges</code></span></span>
-      </a>          
-  </div>
-  <div class="nav-page nav-page-next">
-      <a href="../notebooks/03-chip_rna_visualization.html" class="pagination-link" aria-label="ChIP and RNA sequencing data plots">
-        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">ChIP and RNA sequencing data plots</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
-  </div>
-</nav>
 </div> <!-- /content -->
 
 

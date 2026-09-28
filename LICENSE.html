@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Sébastien Wieckowski">
-<meta name="dcterms.date" content="2026-09-28">
 
-<title>Biology-Informed Multi-Omics Integration</title>
+<title>license – Biology-Informed Multi-Omics Integration</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -27,41 +25,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -123,7 +86,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Biology-Informed Multi-Omics Integration</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
+      Biology-Informed Multi-Omics Integration
+      </li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -150,7 +115,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Biology-Informed Multi-Omics Integration</span></a>
   </div>
 </li>
@@ -219,186 +184,162 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#biology-informed-multi-omics-a-wet-lab-scientists-study-fork" id="toc-biology-informed-multi-omics-a-wet-lab-scientists-study-fork" class="nav-link active" data-scroll-target="#biology-informed-multi-omics-a-wet-lab-scientists-study-fork">Biology-Informed Multi-Omics: A Wet-Lab Scientist’s Study Fork</a>
-  <ul class="collapse">
-  <li><a href="#what-you-will-find-in-this-fork" id="toc-what-you-will-find-in-this-fork" class="nav-link" data-scroll-target="#what-you-will-find-in-this-fork">What You Will Find in This Fork</a>
-  <ul class="collapse">
-  <li><a href="#key-code-optimizations-in-this-fork" id="toc-key-code-optimizations-in-this-fork" class="nav-link" data-scroll-target="#key-code-optimizations-in-this-fork">Key Code Optimizations in this Fork</a></li>
-  </ul></li>
-  <li><a href="#analytical-workflow-covered" id="toc-analytical-workflow-covered" class="nav-link" data-scroll-target="#analytical-workflow-covered">Analytical Workflow Covered</a></li>
-  <li><a href="#prerequisites-scope" id="toc-prerequisites-scope" class="nav-link" data-scroll-target="#prerequisites-scope">Prerequisites &amp; Scope</a>
-  <ul class="collapse">
-  <li><a href="#looking-to-build-foundational-skills-or-explore-more-topics" id="toc-looking-to-build-foundational-skills-or-explore-more-topics" class="nav-link" data-scroll-target="#looking-to-build-foundational-skills-or-explore-more-topics">Looking to build foundational skills or explore more topics?</a></li>
-  </ul></li>
-  <li><a href="#setup-running-the-notebooks" id="toc-setup-running-the-notebooks" class="nav-link" data-scroll-target="#setup-running-the-notebooks">Setup &amp; Running the Notebooks</a>
-  <ul class="collapse">
-  <li><a href="#clone-the-repository" id="toc-clone-the-repository" class="nav-link" data-scroll-target="#clone-the-repository">1. Clone the repository</a></li>
-  <li><a href="#restore-the-r-environment" id="toc-restore-the-r-environment" class="nav-link" data-scroll-target="#restore-the-r-environment">2. Restore the R environment</a></li>
-  <li><a href="#running-in-vs-code" id="toc-running-in-vs-code" class="nav-link" data-scroll-target="#running-in-vs-code">3. Running in VS Code</a></li>
-  </ul></li>
-  <li><a href="#connect-discuss" id="toc-connect-discuss" class="nav-link" data-scroll-target="#connect-discuss">Connect &amp; Discuss</a></li>
-  <li><a href="#credits-upstream-authors" id="toc-credits-upstream-authors" class="nav-link" data-scroll-target="#credits-upstream-authors">Credits &amp; Upstream Authors</a></li>
-  </ul></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Biology-Informed Multi-Omics Integration</h1>
-<p class="subtitle lead">A working fork of the SIB Training by a wet-lab scientist</p>
-</div>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
 
 
-<div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Sébastien Wieckowski </p>
-          </div>
-  </div>
-    
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">September 28, 2026</p>
-    </div>
-  </div>
-  
-    
-  </div>
-  
+<p>Attribution 4.0 International</p>
+<p>=======================================================================</p>
+<p>Creative Commons Corporation (“Creative Commons”) is not a law firm and does not provide legal services or legal advice. Distribution of Creative Commons public licenses does not create a lawyer-client or other relationship. Creative Commons makes its licenses and related information available on an “as-is” basis. Creative Commons gives no warranties regarding its licenses, any material licensed under their terms and conditions, or any related information. Creative Commons disclaims all liability for damages resulting from their use to the fullest extent possible.</p>
+<p>Using Creative Commons Public Licenses</p>
+<p>Creative Commons public licenses provide a standard set of terms and conditions that creators and other rights holders may use to share original works of authorship and other material subject to copyright and certain other rights specified in the public license below. The following considerations are for informational purposes only, are not exhaustive, and do not form part of our licenses.</p>
+<pre><code> Considerations for licensors: Our public licenses are
+ intended for use by those authorized to give the public
+ permission to use material in ways otherwise restricted by
+ copyright and certain other rights. Our licenses are
+ irrevocable. Licensors should read and understand the terms
+ and conditions of the license they choose before applying it.
+ Licensors should also secure all rights necessary before
+ applying our licenses so that the public can reuse the
+ material as expected. Licensors should clearly mark any
+ material not subject to the license. This includes other CC-
+ licensed material, or material used under an exception or
+ limitation to copyright. More considerations for licensors:
+wiki.creativecommons.org/Considerations_for_licensors
 
-
-</header>
-
-
-<p><a href="https://creativecommons.org/licenses/by-sa/4.0/"><img src="https://img.shields.io/badge/License-CC_BY--SA_4.0-lightgrey.svg" class="img-fluid" alt="License: CC BY-SA 4.0"></a> <a href="https://github.com/sib-swiss/biology-informed-multiomics-training"><img src="https://img.shields.io/badge/Forked%20from-sib--swiss-blue.png" class="img-fluid" alt="Forked from sib-swiss"></a></p>
-<section id="biology-informed-multi-omics-a-wet-lab-scientists-study-fork" class="level1">
-<h1>Biology-Informed Multi-Omics: A Wet-Lab Scientist’s Study Fork</h1>
-<p>Welcome! This repository is an annotated, restructured study fork of the <a href="https://github.com/sib-swiss/biology-informed-multiomics-training">SIB Swiss Institute of Bioinformatics Multi-Omics Training Course</a>.</p>
-<p>I come from a <strong>wet-lab background</strong> and am investing significant effort into transitioning toward computational biology. To make the learning curve manageable and fully focus on the code and biology, <strong>I simplified the project architecture</strong>: I removed the Docker containers and Quarto website infrastructure in favor of standalone <strong>Jupyter Notebooks (<code>.ipynb</code>) and clean Markdown files</strong>.</p>
-<hr>
-<section id="what-you-will-find-in-this-fork" class="level2">
-<h2 class="anchored" data-anchor-id="what-you-will-find-in-this-fork">What You Will Find in This Fork</h2>
-<ul>
-<li><strong>Streamlined Interactive Format:</strong> Converted from the original <code>.qmd</code> files into pure Jupyter Notebooks (<code>.ipynb</code>) (via <code>quarto convert</code>, configured to use the R kernel via <code>jupyter: ir</code> in the YAML front matter) for direct, interactive execution.</li>
-<li><strong>Wet-Lab Context &amp; Concept Deconstruction:</strong> Line-by-line notes translating abstract computational steps into biological meaning.</li>
-<li><strong>Troubleshooting &amp; Technical Deep Dives:</strong> Detailed reflections and extra research on tricky parameters, Bioconductor quirks, and statistical assumptions.</li>
-<li><strong>Refactored &amp; Annotated Code:</strong> Code cells with additional comments explaining the <em>why</em> behind data transformations.</li>
-<li><strong>Beginner-Friendly Focus:</strong> Written specifically for researchers without formal bioinformatics degrees who want to understand multi-omics integration step by step.</li>
-</ul>
-<section id="key-code-optimizations-in-this-fork" class="level3">
-<h3 class="anchored" data-anchor-id="key-code-optimizations-in-this-fork">Key Code Optimizations in this Fork</h3>
-<p>Over the course of the notebooks, I adapted the original base R code to implement modern data science and tidyverse workflows. If you are learning R, you will find highly optimized, real-world solutions for:</p>
-<ul>
-<li><strong>Modern Biological Logic (<code>dplyr::case_when</code>):</strong> Transitioned classic boolean matrix subsetting into elegant, readable <code>case_when()</code> pipelines. This includes safely coercing <code>NA</code> values in <code>logFC</code> columns to <code>0</code> to build robust logical filtering for genomic categories.</li>
-<li><strong>Genomic Range Wrangling:</strong> Seamlessly manipulating <code>GRanges</code> metadata columns directly with <code>dplyr</code> (<code>mcols(gr) &lt;- as.data.frame(mcols(gr)) %&gt;% mutate(...)</code>) to keep genomic data structures perfectly aligned.</li>
-<li><strong>Efficient I/O &amp; Memory Management:</strong> Refactored how large multi-omics matrices are grouped into named lists and saved via <code>saveRDS</code>, significantly streamlining downstream loading and keeping the global environment clean.</li>
-<li><strong>Parameterizing Shared Scripts &amp; Local Wrappers:</strong> Updated shared plotting functions (<code>custom_enrichedheatmap_plotting.R</code>) to accept flexible aesthetic defaults (fonts, line widths), ensuring backward compatibility across all notebooks. Paired this with <strong>local function wrappers</strong> (e.g., <code>make_EH()</code>) in notebooks to abstract away dimensions when generating massive 14-column plots without repetitive copy-pasting.</li>
-</ul>
-<hr>
-</section>
-</section>
-<section id="analytical-workflow-covered" class="level2">
-<h2 class="anchored" data-anchor-id="analytical-workflow-covered">Analytical Workflow Covered</h2>
-<ol type="1">
-<li><strong>Multi-Layer Integration:</strong> Importing and processing ATAC-seq, RNA-seq, ChIP-seq, and WGBS datasets in R/Bioconductor.</li>
-<li><strong>Overlap Matrices:</strong> Quantifying co-occurrence across layers to detect epigenetic and transcriptional co-regulation.</li>
-<li><strong>Downstream Analysis:</strong> Functional annotation and pathway enrichment.</li>
-<li><strong>Data Visualization:</strong> Creating interpretable plots for multi-layer data.</li>
+ Considerations for the public: By using one of our public
+ licenses, a licensor grants the public permission to use the
+ licensed material under specified terms and conditions. If
+ the licensor's permission is not necessary for any reason--for
+ example, because of any applicable exception or limitation to
+ copyright--then that use is not regulated by the license. Our
+ licenses grant only permissions under copyright and certain
+ other rights that a licensor has authority to grant. Use of
+ the licensed material may still be restricted for other
+ reasons, including because others have copyright or other
+ rights in the material. A licensor may make special requests,
+ such as asking that all changes be marked or described.
+ Although not required by our licenses, you are encouraged to
+ respect those requests where reasonable. More considerations
+ for the public:
+wiki.creativecommons.org/Considerations_for_licensees</code></pre>
+<p>=======================================================================</p>
+<p>Creative Commons Attribution 4.0 International Public License</p>
+<p>By exercising the Licensed Rights (defined below), You accept and agree to be bound by the terms and conditions of this Creative Commons Attribution 4.0 International Public License (“Public License”). To the extent this Public License may be interpreted as a contract, You are granted the Licensed Rights in consideration of Your acceptance of these terms and conditions, and the Licensor grants You such rights in consideration of benefits the Licensor receives from making the Licensed Material available under these terms and conditions.</p>
+<p>Section 1 – Definitions.</p>
+<ol type="a">
+<li><p>Adapted Material means material subject to Copyright and Similar Rights that is derived from or based upon the Licensed Material and in which the Licensed Material is translated, altered, arranged, transformed, or otherwise modified in a manner requiring permission under the Copyright and Similar Rights held by the Licensor. For purposes of this Public License, where the Licensed Material is a musical work, performance, or sound recording, Adapted Material is always produced where the Licensed Material is synched in timed relation with a moving image.</p></li>
+<li><p>Adapter’s License means the license You apply to Your Copyright and Similar Rights in Your contributions to Adapted Material in accordance with the terms and conditions of this Public License.</p></li>
+<li><p>Copyright and Similar Rights means copyright and/or similar rights closely related to copyright including, without limitation, performance, broadcast, sound recording, and Sui Generis Database Rights, without regard to how the rights are labeled or categorized. For purposes of this Public License, the rights specified in Section 2(b)(1)-(2) are not Copyright and Similar Rights.</p></li>
+<li><p>Effective Technological Measures means those measures that, in the absence of proper authority, may not be circumvented under laws fulfilling obligations under Article 11 of the WIPO Copyright Treaty adopted on December 20, 1996, and/or similar international agreements.</p></li>
+<li><p>Exceptions and Limitations means fair use, fair dealing, and/or any other exception or limitation to Copyright and Similar Rights that applies to Your use of the Licensed Material.</p></li>
+<li><p>Licensed Material means the artistic or literary work, database, or other material to which the Licensor applied this Public License.</p></li>
+<li><p>Licensed Rights means the rights granted to You subject to the terms and conditions of this Public License, which are limited to all Copyright and Similar Rights that apply to Your use of the Licensed Material and that the Licensor has authority to license.</p></li>
+<li><p>Licensor means the individual(s) or entity(ies) granting rights under this Public License.</p></li>
+<li><p>Share means to provide material to the public by any means or process that requires permission under the Licensed Rights, such as reproduction, public display, public performance, distribution, dissemination, communication, or importation, and to make material available to the public including in ways that members of the public may access the material from a place and at a time individually chosen by them.</p></li>
+<li><p>Sui Generis Database Rights means rights other than copyright resulting from Directive 96/9/EC of the European Parliament and of the Council of 11 March 1996 on the legal protection of databases, as amended and/or succeeded, as well as other essentially equivalent rights anywhere in the world.</p></li>
+<li><p>You means the individual or entity exercising the Licensed Rights under this Public License. Your has a corresponding meaning.</p></li>
 </ol>
-<hr>
-</section>
-<section id="prerequisites-scope" class="level2">
-<h2 class="anchored" data-anchor-id="prerequisites-scope">Prerequisites &amp; Scope</h2>
-<blockquote class="blockquote">
-<p><strong>Important Scope Note:</strong><br>
-This repository focuses specifically on <strong>downstream multi-omics integration and cross-layer biological interpretation</strong>. It does <strong>not</strong> cover raw single-omics preprocessing (e.g., FASTQ quality control, read alignment, transcript quantification) or general Exploratory Data Analysis (EDA) and feature engineering from scratch.</p>
-</blockquote>
-<p>To get the most out of these notebooks, familiarity with the following concepts is recommended:</p>
-<ul>
-<li><strong>Basic R &amp; Bioconductor:</strong> Working with common data structures (<code>data.frame</code>, matrices) and core Bioconductor classes (<code>GRanges</code>, <code>SummarizedExperiment</code>).</li>
-<li><strong>Single-Omics Foundations:</strong> Understanding basic quantification and differential analysis concepts in RNA-seq, ChIP-seq, and ATAC-seq.</li>
-<li><strong>Exploratory Data Analysis (EDA):</strong> Experience diagnosing batch effects, sample clustering (PCA/UMAP), and data normalization before multi-layer joining.</li>
-</ul>
-<section id="looking-to-build-foundational-skills-or-explore-more-topics" class="level3">
-<h3 class="anchored" data-anchor-id="looking-to-build-foundational-skills-or-explore-more-topics">Looking to build foundational skills or explore more topics?</h3>
-<ul>
-<li><strong>Statistical Foundations &amp; Coding with Python:</strong> For those wanting to master coding from the ground up using biostatistics as the vehicle, check out my book <a href="https://global.oup.com/academic/product/intuitive-biostatistics-with-python-9780197845035?lang=en&amp;cc=fr"><em>Intuitive Biostatistics with Python</em> (Oxford University Press)</a>. It uses Python’s simulation and visualization capabilities to demystify confusing core concepts (null hypotheses, bootstrapping, non-parametrics) through hands-on coding and publication-ready graphs.</li>
-<li><strong>End-to-End RNA-seq &amp; Preprocessing:</strong> Check out my repository <a href="https://github.com/sbwiecko/RNAseq_UPenn">sbwiecko/RNAseq_UPenn</a>, rewritten alongside the excellent <a href="https://diytranscriptomics.com/">UPenn DIY Transcriptomics course</a> for a ground-up journey through raw data, quality control, alignment, and differential expression.</li>
-<li><strong>SIB Training Catalog:</strong> Explore the full lineup of world-class courses designed by the exceptional SIB Training Team: <a href="https://www.sib.swiss/training/learning-paths">SIB Swiss Institute of Bioinformatics Courses &amp; Training</a></li>
-<li><strong>Bioconductor Workflows:</strong> <a href="https://bioconductor.org/packages/release/workflows/vignettes/RnaSeqGeneEdgeRQL/inst/doc/edgeRQL.html">RNA-seq analysis is easy as 1-2-3 with limma, Glimma and edgeR</a></li>
-<li><strong>EDA &amp; Statistical Exploration:</strong> <a href="https://www.huber.embl.de/msmb/">Modern Statistics for Modern Biology</a> by Susan Holmes and Wolfgang Huber</li>
-<li><strong>Free Bioinformatics Resources:</strong> Discover a curated collection of free bioinformatics training materials and resources at <a href="https://glittr.org/">GLITTR</a></li>
-</ul>
-<hr>
-</section>
-</section>
-<section id="setup-running-the-notebooks" class="level2">
-<h2 class="anchored" data-anchor-id="setup-running-the-notebooks">Setup &amp; Running the Notebooks</h2>
-<p><strong>Prerequisite:</strong> You must have <strong>R</strong> installed on your system.</p>
-<p>No Docker or Quarto setup is required. The project relies on <code>renv</code> to manage dependencies. Since these are standard Jupyter Notebooks (<code>.ipynb</code>) with an R kernel, you can run them locally using <strong>VS Code</strong>.</p>
-<section id="clone-the-repository" class="level3">
-<h3 class="anchored" data-anchor-id="clone-the-repository">1. Clone the repository</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/sbwiecko/biology-informed-multiomics-training.git</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> biology-informed-multiomics-training</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="restore-the-r-environment" class="level3">
-<h3 class="anchored" data-anchor-id="restore-the-r-environment">2. Restore the R environment</h3>
-<p>Open R in your terminal, console, or IDE to restore dependencies via <code>renv</code>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"renv"</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">restore</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="running-in-vs-code" class="level3">
-<h3 class="anchored" data-anchor-id="running-in-vs-code">3. Running in VS Code</h3>
+<p>Section 2 – Scope.</p>
+<ol type="a">
+<li><p>License grant.</p>
 <ol type="1">
-<li><p><strong>Configure VS Code Working Directory (Crucial):</strong> To guarantee that Jupyter always activates <code>.Rprofile</code> and locates your <code>renv</code> library, force VS Code to run kernels from the project root.</p>
-<ul>
-<li>Open Settings (<code>Ctrl + ,</code> or <code>Cmd + ,</code>).</li>
-<li>Search for: <code>Jupyter Notebook File Root</code>.</li>
-<li>Set the value to: <code>${workspaceFolder}</code>.</li>
-</ul></li>
-<li><p><strong>Register the Project Kernel:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">install</span>(<span class="st">"IRkernel"</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>IRkernel<span class="sc">::</span><span class="fu">installspec</span>(<span class="at">name =</span> <span class="st">"ir_multiomics"</span>, <span class="at">displayname =</span> <span class="st">"R (multiomics-renv)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
-<li><p>Open any <code>.ipynb</code> notebook.</p></li>
-<li><p>Click <strong>Select Kernel</strong> in the top-right -&gt; <strong>Jupyter Kernel…</strong> -&gt; <strong>R (multiomics-renv)</strong>.</p></li>
+<li><p>Subject to the terms and conditions of this Public License, the Licensor hereby grants You a worldwide, royalty-free, non-sublicensable, non-exclusive, irrevocable license to exercise the Licensed Rights in the Licensed Material to:</p>
+<ol type="a">
+<li><p>reproduce and Share the Licensed Material, in whole or in part; and</p></li>
+<li><p>produce, reproduce, and Share Adapted Material.</p></li>
+</ol></li>
+<li><p>Exceptions and Limitations. For the avoidance of doubt, where Exceptions and Limitations apply to Your use, this Public License does not apply, and You do not need to comply with its terms and conditions.</p></li>
+<li><p>Term. The term of this Public License is specified in Section 6(a).</p></li>
+<li><p>Media and formats; technical modifications allowed. The Licensor authorizes You to exercise the Licensed Rights in all media and formats whether now known or hereafter created, and to make technical modifications necessary to do so. The Licensor waives and/or agrees not to assert any right or authority to forbid You from making technical modifications necessary to exercise the Licensed Rights, including technical modifications necessary to circumvent Effective Technological Measures. For purposes of this Public License, simply making modifications authorized by this Section 2(a)</p>
+<ol start="4" type="1">
+<li>never produces Adapted Material.</li>
+</ol></li>
+<li><p>Downstream recipients.</p>
+<ol type="a">
+<li><p>Offer from the Licensor – Licensed Material. Every recipient of the Licensed Material automatically receives an offer from the Licensor to exercise the Licensed Rights under the terms and conditions of this Public License.</p></li>
+<li><p>No downstream restrictions. You may not offer or impose any additional or different terms or conditions on, or apply any Effective Technological Measures to, the Licensed Material if doing so restricts exercise of the Licensed Rights by any recipient of the Licensed Material.</p></li>
+</ol></li>
+<li><p>No endorsement. Nothing in this Public License constitutes or may be construed as permission to assert or imply that You are, or that Your use of the Licensed Material is, connected with, or sponsored, endorsed, or granted official status by, the Licensor or others designated to receive attribution as provided in Section 3(a)(1)(A)(i).</p></li>
+</ol></li>
+<li><p>Other rights.</p>
+<ol type="1">
+<li><p>Moral rights, such as the right of integrity, are not licensed under this Public License, nor are publicity, privacy, and/or other similar personality rights; however, to the extent possible, the Licensor waives and/or agrees not to assert any such rights held by the Licensor to the limited extent necessary to allow You to exercise the Licensed Rights, but not otherwise.</p></li>
+<li><p>Patent and trademark rights are not licensed under this Public License.</p></li>
+<li><p>To the extent possible, the Licensor waives any right to collect royalties from You for the exercise of the Licensed Rights, whether directly or through a collecting society under any voluntary or waivable statutory or compulsory licensing scheme. In all other cases the Licensor expressly reserves any right to collect such royalties.</p></li>
+</ol></li>
 </ol>
-<blockquote class="blockquote">
-<p><strong>Optional check:</strong> You can always run <code>.libPaths()</code> in a notebook’s first cell to verify that packages are loading from the project’s local <code>./renv/library</code>.</p>
-</blockquote>
-<hr>
-</section>
-</section>
-<section id="connect-discuss" class="level2">
-<h2 class="anchored" data-anchor-id="connect-discuss">Connect &amp; Discuss</h2>
-<p>If you are also bridging the gap between wet-lab biology and bioinformatics, feel free to explore the notebooks, open an issue, or ask a question. Feedback, corrections, and discussions are always welcome!</p>
-<hr>
-</section>
-<section id="credits-upstream-authors" class="level2">
-<h2 class="anchored" data-anchor-id="credits-upstream-authors">Credits &amp; Upstream Authors</h2>
-<p>This repository is built upon the open course materials designed by the <strong>SIB Swiss Institute of Bioinformatics</strong>:</p>
-<ul>
-<li><strong>Original Course Site:</strong> <a href="https://sib-swiss.github.io/biology-informed-multiomics-training/">https://sib-swiss.github.io/biology-informed-multiomics-training/</a></li>
-<li><strong>Original Repository:</strong> <a href="https://www.google.com/url?sa=E&amp;source=gmail&amp;q=https://github.com/sib-swiss/biology-informed-multiomics-training">sib-swiss/biology-informed-multiomics-training</a></li>
-<li><strong>Authors:</strong> Deepak Tanwar, Geert van Geest, Patricia Palagi</li>
-<li><strong>Helper:</strong> Joana Carlevaro-Fita</li>
-<li><strong>Original DOI:</strong> <a href="https://doi.org/10.5281/zenodo.5703106">10.5281/zenodo.5703106</a></li>
-</ul>
+<p>Section 3 – License Conditions.</p>
+<p>Your exercise of the Licensed Rights is expressly made subject to the following conditions.</p>
+<ol type="a">
+<li><p>Attribution.</p>
+<ol type="1">
+<li><p>If You Share the Licensed Material (including in modified form), You must:</p>
+<ol type="a">
+<li><p>retain the following if it is supplied by the Licensor with the Licensed Material:</p>
+<ol type="i">
+<li><p>identification of the creator(s) of the Licensed Material and any others designated to receive attribution, in any reasonable manner requested by the Licensor (including by pseudonym if designated);</p></li>
+<li><p>a copyright notice;</p></li>
+<li><p>a notice that refers to this Public License;</p></li>
+<li><p>a notice that refers to the disclaimer of warranties;</p></li>
+<li><p>a URI or hyperlink to the Licensed Material to the extent reasonably practicable;</p></li>
+</ol></li>
+<li><p>indicate if You modified the Licensed Material and retain an indication of any previous modifications; and</p></li>
+<li><p>indicate the Licensed Material is licensed under this Public License, and include the text of, or the URI or hyperlink to, this Public License.</p></li>
+</ol></li>
+<li><p>You may satisfy the conditions in Section 3(a)(1) in any reasonable manner based on the medium, means, and context in which You Share the Licensed Material. For example, it may be reasonable to satisfy the conditions by providing a URI or hyperlink to a resource that includes the required information.</p></li>
+<li><p>If requested by the Licensor, You must remove any of the information required by Section 3(a)(1)(A) to the extent reasonably practicable.</p></li>
+<li><p>If You Share Adapted Material You produce, the Adapter’s License You apply must not prevent recipients of the Adapted Material from complying with this Public License.</p></li>
+</ol></li>
+</ol>
+<p>Section 4 – Sui Generis Database Rights.</p>
+<p>Where the Licensed Rights include Sui Generis Database Rights that apply to Your use of the Licensed Material:</p>
+<ol type="a">
+<li><p>for the avoidance of doubt, Section 2(a)(1) grants You the right to extract, reuse, reproduce, and Share all or a substantial portion of the contents of the database;</p></li>
+<li><p>if You include all or a substantial portion of the database contents in a database in which You have Sui Generis Database Rights, then the database in which You have Sui Generis Database Rights (but not its individual contents) is Adapted Material; and</p></li>
+<li><p>You must comply with the conditions in Section 3(a) if You Share all or a substantial portion of the contents of the database.</p></li>
+</ol>
+<p>For the avoidance of doubt, this Section 4 supplements and does not replace Your obligations under this Public License where the Licensed Rights include other Copyright and Similar Rights.</p>
+<p>Section 5 – Disclaimer of Warranties and Limitation of Liability.</p>
+<ol type="a">
+<li><p>UNLESS OTHERWISE SEPARATELY UNDERTAKEN BY THE LICENSOR, TO THE EXTENT POSSIBLE, THE LICENSOR OFFERS THE LICENSED MATERIAL AS-IS AND AS-AVAILABLE, AND MAKES NO REPRESENTATIONS OR WARRANTIES OF ANY KIND CONCERNING THE LICENSED MATERIAL, WHETHER EXPRESS, IMPLIED, STATUTORY, OR OTHER. THIS INCLUDES, WITHOUT LIMITATION, WARRANTIES OF TITLE, MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, NON-INFRINGEMENT, ABSENCE OF LATENT OR OTHER DEFECTS, ACCURACY, OR THE PRESENCE OR ABSENCE OF ERRORS, WHETHER OR NOT KNOWN OR DISCOVERABLE. WHERE DISCLAIMERS OF WARRANTIES ARE NOT ALLOWED IN FULL OR IN PART, THIS DISCLAIMER MAY NOT APPLY TO YOU.</p></li>
+<li><p>TO THE EXTENT POSSIBLE, IN NO EVENT WILL THE LICENSOR BE LIABLE TO YOU ON ANY LEGAL THEORY (INCLUDING, WITHOUT LIMITATION, NEGLIGENCE) OR OTHERWISE FOR ANY DIRECT, SPECIAL, INDIRECT, INCIDENTAL, CONSEQUENTIAL, PUNITIVE, EXEMPLARY, OR OTHER LOSSES, COSTS, EXPENSES, OR DAMAGES ARISING OUT OF THIS PUBLIC LICENSE OR USE OF THE LICENSED MATERIAL, EVEN IF THE LICENSOR HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH LOSSES, COSTS, EXPENSES, OR DAMAGES. WHERE A LIMITATION OF LIABILITY IS NOT ALLOWED IN FULL OR IN PART, THIS LIMITATION MAY NOT APPLY TO YOU.</p></li>
+<li><p>The disclaimer of warranties and limitation of liability provided above shall be interpreted in a manner that, to the extent possible, most closely approximates an absolute disclaimer and waiver of all liability.</p></li>
+</ol>
+<p>Section 6 – Term and Termination.</p>
+<ol type="a">
+<li><p>This Public License applies for the term of the Copyright and Similar Rights licensed here. However, if You fail to comply with this Public License, then Your rights under this Public License terminate automatically.</p></li>
+<li><p>Where Your right to use the Licensed Material has terminated under Section 6(a), it reinstates:</p>
+<ol type="1">
+<li><p>automatically as of the date the violation is cured, provided it is cured within 30 days of Your discovery of the violation; or</p></li>
+<li><p>upon express reinstatement by the Licensor.</p></li>
+</ol>
+<p>For the avoidance of doubt, this Section 6(b) does not affect any right the Licensor may have to seek remedies for Your violations of this Public License.</p></li>
+<li><p>For the avoidance of doubt, the Licensor may also offer the Licensed Material under separate terms or conditions or stop distributing the Licensed Material at any time; however, doing so will not terminate this Public License.</p></li>
+<li><p>Sections 1, 5, 6, 7, and 8 survive termination of this Public License.</p></li>
+</ol>
+<p>Section 7 – Other Terms and Conditions.</p>
+<ol type="a">
+<li><p>The Licensor shall not be bound by any additional or different terms or conditions communicated by You unless expressly agreed.</p></li>
+<li><p>Any arrangements, understandings, or agreements regarding the Licensed Material not stated herein are separate from and independent of the terms and conditions of this Public License.</p></li>
+</ol>
+<p>Section 8 – Interpretation.</p>
+<ol type="a">
+<li><p>For the avoidance of doubt, this Public License does not, and shall not be interpreted to, reduce, limit, restrict, or impose conditions on any use of the Licensed Material that could lawfully be made without permission under this Public License.</p></li>
+<li><p>To the extent possible, if any provision of this Public License is deemed unenforceable, it shall be automatically reformed to the minimum extent necessary to make it enforceable. If the provision cannot be reformed, it shall be severed from this Public License without affecting the enforceability of the remaining terms and conditions.</p></li>
+<li><p>No term or condition of this Public License will be waived and no failure to comply consented to unless expressly agreed to by the Licensor.</p></li>
+<li><p>Nothing in this Public License constitutes or may be interpreted as a limitation upon, or waiver of, any privileges and immunities that apply to the Licensor or You, including from the legal processes of any jurisdiction or authority.</p></li>
+</ol>
+<p>=======================================================================</p>
+<p>Creative Commons is not a party to its public licenses. Notwithstanding, Creative Commons may elect to apply one of its public licenses to material it publishes and in those instances will be considered the “Licensor.” The text of the Creative Commons public licenses is dedicated to the public domain under the CC0 Public Domain Dedication. Except for the limited purpose of indicating that material is shared under a Creative Commons public license or as otherwise permitted by the Creative Commons policies published at creativecommons.org/policies, Creative Commons does not authorize the use of the trademark “Creative Commons” or any other trademark or logo of Creative Commons without its prior written consent including, without limitation, in connection with any unauthorized modifications to any of its public licenses or any other arrangements, understandings, or agreements concerning use of licensed material. For the avoidance of doubt, this paragraph does not form part of the public licenses.</p>
+<p>Creative Commons may be contacted at creativecommons.org.</p>
 
 
-</section>
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

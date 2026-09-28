@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>8&nbsp; Overlapping all the datasets – Biology-Informed Multi-Omics Integration</title>
+<title>Overlapping all the datasets – Biology-Informed Multi-Omics Integration</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -71,8 +71,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../notebooks/05-atac_rna_integration.html" rel="next">
-<link href="../notebooks/03-chip_rna_visualization.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -82,7 +80,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-5630e6732664d48c7cde3b526013eeb9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-93c2f64124fc842a968b101e89420266.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -117,7 +115,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="nav-sidebar floating quarto-light">
+<body class="nav-sidebar docked quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -126,7 +124,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../notebooks/04-genomic_overlap_matrices.html">III. Multi-Omics Integration</a></li><li class="breadcrumb-item"><a href="../notebooks/04-genomic_overlap_matrices.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Overlapping all the datasets</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../notebooks/04-genomic_overlap_matrices.html">Overlapping all the datasets</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -138,7 +136,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Biology-Informed Multi-Omics Integration</a> 
@@ -154,102 +152,69 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">index.html</span></span></a>
+ <span class="menu-text">Biology-Informed Multi-Omics Integration</span></a>
   </div>
 </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">I. Theoretical Reference &amp; Notes</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../notes/epigenetic_analysis_reference_guide.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Epigenetic Analysis Reference Guide</span></span></a>
+ <span class="menu-text">Epigenetic Analysis Reference Guide</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../notes/normalization_models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Normalization models</span></span></a>
+ <span class="menu-text">Normalization models</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../notes/enrichment_analysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Functional Enrichment Analysis: Multi-Omics Integration</span></span></a>
+ <span class="menu-text">Functional Enrichment Analysis: Multi-Omics Integration</span></a>
   </div>
 </li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">II. Data Structures &amp; Visualization</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../notebooks/01-omics_data_structures.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Datasets, <code>SummarizedExperiment</code>, and <code>GRanges</code></span></span></a>
+ <span class="menu-text">Datasets, <code>SummarizedExperiment</code>, and <code>GRanges</code></span></a>
   </div>
 </li>
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../notebooks/02-atac_heatmaps.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Enriched Heatmaps and identification of regions with different activities</span></span></a>
+ <span class="menu-text">Enriched Heatmaps and identification of regions with different activities</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../notebooks/03-chip_rna_visualization.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">ChIP and RNA sequencing data plots</span></span></a>
+ <span class="menu-text">ChIP and RNA sequencing data plots</span></a>
   </div>
 </li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
- <span class="menu-text">III. Multi-Omics Integration</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../notebooks/04-genomic_overlap_matrices.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Overlapping all the datasets</span></span></a>
+ <span class="menu-text">Overlapping all the datasets</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../notebooks/05-atac_rna_integration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Integrating ATAC and RNA sequencing data</span></span></a>
+ <span class="menu-text">Integrating ATAC and RNA sequencing data</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../notebooks/06-multiomics_integration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Integrating ATAC, ChIP, and RNA sequencing data</span></span></a>
+ <span class="menu-text">Integrating ATAC, ChIP, and RNA sequencing data</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../notebooks/07-functional_enrichment.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Functional enrichment of genomic regions</span></span></a>
+ <span class="menu-text">Functional enrichment of genomic regions</span></a>
   </div>
 </li>
-      </ul>
-  </li>
     </ul>
     </div>
 </nav>
@@ -257,33 +222,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
+    <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">8.1</span> Learning objectives</a></li>
-  <li><a href="#initial-setup-and-data-loading" id="toc-initial-setup-and-data-loading" class="nav-link" data-scroll-target="#initial-setup-and-data-loading"><span class="header-section-number">8.2</span> Initial setup and data loading</a>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning objectives</a></li>
+  <li><a href="#initial-setup-and-data-loading" id="toc-initial-setup-and-data-loading" class="nav-link" data-scroll-target="#initial-setup-and-data-loading">Initial setup and data loading</a>
   <ul class="collapse">
-  <li><a href="#loading-required-libraries" id="toc-loading-required-libraries" class="nav-link" data-scroll-target="#loading-required-libraries"><span class="header-section-number">8.2.1</span> Loading required libraries</a></li>
-  <li><a href="#loading-the-summarizedexperiment-objects" id="toc-loading-the-summarizedexperiment-objects" class="nav-link" data-scroll-target="#loading-the-summarizedexperiment-objects"><span class="header-section-number">8.2.2</span> Loading the SummarizedExperiment objects</a></li>
-  <li><a href="#defining-a-custom-function-for-multi-omics-integration" id="toc-defining-a-custom-function-for-multi-omics-integration" class="nav-link" data-scroll-target="#defining-a-custom-function-for-multi-omics-integration"><span class="header-section-number">8.2.3</span> Defining a custom function for multi-omics integration</a></li>
+  <li><a href="#loading-required-libraries" id="toc-loading-required-libraries" class="nav-link" data-scroll-target="#loading-required-libraries">Loading required libraries</a></li>
+  <li><a href="#loading-the-summarizedexperiment-objects" id="toc-loading-the-summarizedexperiment-objects" class="nav-link" data-scroll-target="#loading-the-summarizedexperiment-objects">Loading the SummarizedExperiment objects</a></li>
+  <li><a href="#defining-a-custom-function-for-multi-omics-integration" id="toc-defining-a-custom-function-for-multi-omics-integration" class="nav-link" data-scroll-target="#defining-a-custom-function-for-multi-omics-integration">Defining a custom function for multi-omics integration</a></li>
   </ul></li>
-  <li><a href="#constructing-the-multi-omics-overlap-matrix" id="toc-constructing-the-multi-omics-overlap-matrix" class="nav-link" data-scroll-target="#constructing-the-multi-omics-overlap-matrix"><span class="header-section-number">8.3</span> Constructing the multi-omics Overlap Matrix</a>
+  <li><a href="#constructing-the-multi-omics-overlap-matrix" id="toc-constructing-the-multi-omics-overlap-matrix" class="nav-link" data-scroll-target="#constructing-the-multi-omics-overlap-matrix">Constructing the multi-omics Overlap Matrix</a>
   <ul class="collapse">
-  <li><a href="#processing-and-merging-datasets" id="toc-processing-and-merging-datasets" class="nav-link" data-scroll-target="#processing-and-merging-datasets"><span class="header-section-number">8.3.1</span> Processing and merging datasets</a></li>
-  <li><a href="#finalizing-and-saving-the-integrated-object" id="toc-finalizing-and-saving-the-integrated-object" class="nav-link" data-scroll-target="#finalizing-and-saving-the-integrated-object"><span class="header-section-number">8.3.2</span> Finalizing and saving the integrated object</a></li>
-  <li><a href="#inspecting-the-integrated-object" id="toc-inspecting-the-integrated-object" class="nav-link" data-scroll-target="#inspecting-the-integrated-object"><span class="header-section-number">8.3.3</span> Inspecting the integrated object</a></li>
-  <li><a href="#processing-atac-and-chip-seq-continuous-signals" id="toc-processing-atac-and-chip-seq-continuous-signals" class="nav-link" data-scroll-target="#processing-atac-and-chip-seq-continuous-signals"><span class="header-section-number">8.3.4</span> Processing ATAC and ChIP-seq continuous signals</a></li>
-  <li><a href="#verifying-our-datasets-peak-widths" id="toc-verifying-our-datasets-peak-widths" class="nav-link" data-scroll-target="#verifying-our-datasets-peak-widths"><span class="header-section-number">8.3.5</span> Verifying our dataset’s peak widths</a></li>
-  <li><a href="#unifying-the-coordinate-system-centering-on-atac" id="toc-unifying-the-coordinate-system-centering-on-atac" class="nav-link" data-scroll-target="#unifying-the-coordinate-system-centering-on-atac"><span class="header-section-number">8.3.6</span> Unifying the coordinate system (centering on ATAC)</a></li>
-  <li><a href="#extracting-and-normalizing-bigwig-signals" id="toc-extracting-and-normalizing-bigwig-signals" class="nav-link" data-scroll-target="#extracting-and-normalizing-bigwig-signals"><span class="header-section-number">8.3.7</span> Extracting and normalizing bigWig signals</a></li>
+  <li><a href="#processing-and-merging-datasets" id="toc-processing-and-merging-datasets" class="nav-link" data-scroll-target="#processing-and-merging-datasets">Processing and merging datasets</a></li>
+  <li><a href="#finalizing-and-saving-the-integrated-object" id="toc-finalizing-and-saving-the-integrated-object" class="nav-link" data-scroll-target="#finalizing-and-saving-the-integrated-object">Finalizing and saving the integrated object</a></li>
+  <li><a href="#inspecting-the-integrated-object" id="toc-inspecting-the-integrated-object" class="nav-link" data-scroll-target="#inspecting-the-integrated-object">Inspecting the integrated object</a></li>
+  <li><a href="#processing-atac-and-chip-seq-continuous-signals" id="toc-processing-atac-and-chip-seq-continuous-signals" class="nav-link" data-scroll-target="#processing-atac-and-chip-seq-continuous-signals">Processing ATAC and ChIP-seq continuous signals</a></li>
+  <li><a href="#verifying-our-datasets-peak-widths" id="toc-verifying-our-datasets-peak-widths" class="nav-link" data-scroll-target="#verifying-our-datasets-peak-widths">Verifying our dataset’s peak widths</a></li>
+  <li><a href="#unifying-the-coordinate-system-centering-on-atac" id="toc-unifying-the-coordinate-system-centering-on-atac" class="nav-link" data-scroll-target="#unifying-the-coordinate-system-centering-on-atac">Unifying the coordinate system (centering on ATAC)</a></li>
+  <li><a href="#extracting-and-normalizing-bigwig-signals" id="toc-extracting-and-normalizing-bigwig-signals" class="nav-link" data-scroll-target="#extracting-and-normalizing-bigwig-signals">Extracting and normalizing bigWig signals</a></li>
   </ul></li>
-  <li><a href="#processing-rna-seq-discrete-signals" id="toc-processing-rna-seq-discrete-signals" class="nav-link" data-scroll-target="#processing-rna-seq-discrete-signals"><span class="header-section-number">8.4</span> Processing RNA-seq discrete signals</a></li>
-  <li><a href="#processing-wgbs-dna-methylation-signals" id="toc-processing-wgbs-dna-methylation-signals" class="nav-link" data-scroll-target="#processing-wgbs-dna-methylation-signals"><span class="header-section-number">8.5</span> Processing WGBS (DNA Methylation) signals</a>
+  <li><a href="#processing-rna-seq-discrete-signals" id="toc-processing-rna-seq-discrete-signals" class="nav-link" data-scroll-target="#processing-rna-seq-discrete-signals">Processing RNA-seq discrete signals</a></li>
+  <li><a href="#processing-wgbs-dna-methylation-signals" id="toc-processing-wgbs-dna-methylation-signals" class="nav-link" data-scroll-target="#processing-wgbs-dna-methylation-signals">Processing WGBS (DNA Methylation) signals</a>
   <ul class="collapse">
-  <li><a href="#reading-the-wgbs-coverage-files" id="toc-reading-the-wgbs-coverage-files" class="nav-link" data-scroll-target="#reading-the-wgbs-coverage-files"><span class="header-section-number">8.5.1</span> Reading the WGBS coverage files</a></li>
-  <li><a href="#handling-high-resolution-wgbs-data" id="toc-handling-high-resolution-wgbs-data" class="nav-link" data-scroll-target="#handling-high-resolution-wgbs-data"><span class="header-section-number">8.5.2</span> Handling high-resolution WGBS data</a></li>
-  <li><a href="#question-1" id="toc-question-1" class="nav-link" data-scroll-target="#question-1"><span class="header-section-number">8.5.3</span> Question 1</a></li>
-  <li><a href="#biological-interpretation-of-dna-methylation" id="toc-biological-interpretation-of-dna-methylation" class="nav-link" data-scroll-target="#biological-interpretation-of-dna-methylation"><span class="header-section-number">8.5.4</span> Biological interpretation of DNA methylation</a></li>
+  <li><a href="#reading-the-wgbs-coverage-files" id="toc-reading-the-wgbs-coverage-files" class="nav-link" data-scroll-target="#reading-the-wgbs-coverage-files">Reading the WGBS coverage files</a></li>
+  <li><a href="#handling-high-resolution-wgbs-data" id="toc-handling-high-resolution-wgbs-data" class="nav-link" data-scroll-target="#handling-high-resolution-wgbs-data">Handling high-resolution WGBS data</a></li>
+  <li><a href="#question-1" id="toc-question-1" class="nav-link" data-scroll-target="#question-1">Question 1</a></li>
+  <li><a href="#biological-interpretation-of-dna-methylation" id="toc-biological-interpretation-of-dna-methylation" class="nav-link" data-scroll-target="#biological-interpretation-of-dna-methylation">Biological interpretation of DNA methylation</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -291,9 +256,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../notebooks/04-genomic_overlap_matrices.html">III. Multi-Omics Integration</a></li><li class="breadcrumb-item"><a href="../notebooks/04-genomic_overlap_matrices.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Overlapping all the datasets</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Overlapping all the datasets</span></h1>
+<h1 class="title">Overlapping all the datasets</h1>
 </div>
 
 
@@ -311,8 +276,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>The core challenge of multi-omics integration is linking datasets that operate on completely different coordinate systems. For example, we might want to link the statistical fold-change of a gene (from RNA-seq) to the physical location of an open chromatin enhancer (from ATAC-seq).</p>
-<section id="learning-objectives" class="level2" data-number="8.1">
-<h2 data-number="8.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">8.1</span> Learning objectives</h2>
+<section id="learning-objectives" class="level2">
+<h2 class="anchored" data-anchor-id="learning-objectives">Learning objectives</h2>
 <ul>
 <li>Load and explore genomic data using Bioconductor classes such as <code>GRangesList</code> and <code>RangedSummarizedExperiment</code>.</li>
 <li>Subset and filter genomic features based on annotation or genomic coordinates.</li>
@@ -320,12 +285,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Integrate multi-assay data (e.g., chromatin marks and gene expression) using shared genomic coordinates.</li>
 </ul>
 </section>
-<section id="initial-setup-and-data-loading" class="level2" data-number="8.2">
-<h2 data-number="8.2" class="anchored" data-anchor-id="initial-setup-and-data-loading"><span class="header-section-number">8.2</span> Initial setup and data loading</h2>
+<section id="initial-setup-and-data-loading" class="level2">
+<h2 class="anchored" data-anchor-id="initial-setup-and-data-loading">Initial setup and data loading</h2>
 <p>Before we begin calculating the genomic overlaps, we need to set up our environment by loading the necessary R packages, importing our processed data, and defining a custom helper function.</p>
-<section id="loading-required-libraries" class="level3" data-number="8.2.1">
-<h3 data-number="8.2.1" class="anchored" data-anchor-id="loading-required-libraries"><span class="header-section-number">8.2.1</span> Loading required libraries</h3>
-<div id="cell-3" class="cell" data-message="false" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="1">
+<section id="loading-required-libraries" class="level3">
+<h3 class="anchored" data-anchor-id="loading-required-libraries">Loading required libraries</h3>
+<div id="cell-4" class="cell" data-message="false" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">suppressWarnings</span>({</span>
@@ -352,9 +317,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 </div>
 </section>
-<section id="loading-the-summarizedexperiment-objects" class="level3" data-number="8.2.2">
-<h3 data-number="8.2.2" class="anchored" data-anchor-id="loading-the-summarizedexperiment-objects"><span class="header-section-number">8.2.2</span> Loading the SummarizedExperiment objects</h3>
-<div id="cell-5" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="2">
+<section id="loading-the-summarizedexperiment-objects" class="level3">
+<h3 class="anchored" data-anchor-id="loading-the-summarizedexperiment-objects">Loading the SummarizedExperiment objects</h3>
+<div id="cell-6" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>atac <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/atac_se.rds"</span>)</span>
@@ -366,14 +331,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 </div>
 </section>
-<section id="defining-a-custom-function-for-multi-omics-integration" class="level3" data-number="8.2.3">
-<h3 data-number="8.2.3" class="anchored" data-anchor-id="defining-a-custom-function-for-multi-omics-integration"><span class="header-section-number">8.2.3</span> Defining a custom function for multi-omics integration</h3>
+<section id="defining-a-custom-function-for-multi-omics-integration" class="level3">
+<h3 class="anchored" data-anchor-id="defining-a-custom-function-for-multi-omics-integration">Defining a custom function for multi-omics integration</h3>
 <p>Unfortunately, standard Bioconductor packages do not have a simple, built-in “left-join” function for genomic coordinates. To solve this, we define a custom helper function called <code>metaGR()</code>.</p>
 <p>This function takes a primary, target set of genomic regions (<code>gr1</code>) and looks for any physical overlaps with a secondary set of regions (<code>gr2</code>). Wherever a physical overlap occurs, it extracts the statistical metadata columns (like <code>logFC</code> or <code>q-value</code>) from <code>gr2</code> and seamlessly attaches them as new columns to the overlapping region in <code>gr1</code>. If a region in <code>gr1</code> doesn’t overlap with anything, it safely fills those new columns with <code>NA</code>.</p>
 <blockquote class="blockquote">
 <p><strong>Why a minimum overlap of 10?</strong> By default, the R overlap engine registers a “hit” even if two genomic features only touch by a single base pair. Because sequencing data always has a tiny bit of mapping noise at the very edges of peaks, 1-bp or 2-bp overlaps are often accidental false positives. Setting the default minimum overlap to <code>10</code> base pairs (which is roughly one full turn of the DNA double helix) ensures that the physical overlap is robust and represents a genuine biological co-localization!</p>
 </blockquote>
-<div id="cell-7" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="3">
+<div id="cell-8" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Merges metadata from gr2 onto gr1 based on genomic overlaps</span></span>
@@ -411,14 +376,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 </section>
-<section id="constructing-the-multi-omics-overlap-matrix" class="level2" data-number="8.3">
-<h2 data-number="8.3" class="anchored" data-anchor-id="constructing-the-multi-omics-overlap-matrix"><span class="header-section-number">8.3</span> Constructing the multi-omics Overlap Matrix</h2>
+<section id="constructing-the-multi-omics-overlap-matrix" class="level2">
+<h2 class="anchored" data-anchor-id="constructing-the-multi-omics-overlap-matrix">Constructing the multi-omics Overlap Matrix</h2>
 <p>We will systematically extract the genomic coordinates (<code>rowRanges</code>) from our ATAC, RNA, and ChIP-seq objects. Rather than trying to overlap the entire genome, we will apply a strict statistical filter to each dataset to isolate only the most highly significant, dynamic features (specifically requiring an <strong>absolute</strong> <code>logFC &gt;= 0.5</code> and a <code>qvalue &lt;= 0.1</code>). Furthermore, since this training course focuses strictly on Chromosomes 1 and 2, we will proactively filter our datasets by <code>seqnames</code> at this early stage to drastically reduce memory usage and computation time.</p>
 <p>To prevent confusing naming collisions when we stitch these datasets together (since they all contain columns identically named “logFC” and “qvalue”), we will prepend a unique identifier prefix (like <code>ATAC_</code> or <code>RNA_</code>) to the metadata of each object. Finally, we will use our <code>metaGR()</code> function to project all of these significant RNA and ChIP-seq features directly onto our foundational ATAC-seq peaks, creating a single, unified Overlap Matrix.</p>
-<section id="processing-and-merging-datasets" class="level3" data-number="8.3.1">
-<h3 data-number="8.3.1" class="anchored" data-anchor-id="processing-and-merging-datasets"><span class="header-section-number">8.3.1</span> Processing and merging datasets</h3>
+<section id="processing-and-merging-datasets" class="level3">
+<h3 class="anchored" data-anchor-id="processing-and-merging-datasets">Processing and merging datasets</h3>
 <p>The values selected for the filtering is a very common <strong>baseline heuristic</strong>, but it is not a hard law. A <code>qvalue &lt;= 0.1</code> means we are accepting a 10% False Discovery Rate (FDR); and <code>abs(logFC) &gt;= 0.5</code> translates to a fold-change of ~1.41×. In RNA-seq, people often use a stricter <code>logFC &gt;= 1</code> (a true doubling of expression) and <code>q &lt;= 0.05</code>. However, epigenetic marks (like ChIP-seq) are often much “noisier” and have lower dynamic ranges than RNA. Because a massive 2-fold change in a histone mark is rare, relaxing the threshold to <code>0.5</code> is standard practice to avoid throwing away real biology.</p>
-<div id="cell-10" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="4">
+<div id="cell-11" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract rowRanges and filter peaks with strong signal in chr1 and chr2</span></span>
@@ -433,7 +398,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">"ATAC"</span>, <span class="fu">colnames</span>(<span class="fu">elementMetadata</span>(rd_atac_filtered)), <span class="at">sep =</span> <span class="st">"_"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="cell-11" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="5">
+<div id="cell-12" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seqlevels</span>(rd_atac_filtered)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -448,7 +413,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p><em>Note: in Bioconductor, the chromosomes (<code>seqnames</code>) are stored internally as an R <code>factor</code>. When we subset an object in R to remove data (like removing “chr3”, “chr4”, etc.), R successfully deletes the physical data, but it <strong>never automatically drops the factor levels</strong>! The object intentionally retains a “memory” of the original chromosome list (the seqinfo metadata), even though the actual count for those chromosomes is now exactly zero. To force the <code>GRanges</code> object to forget the empty chromosomes, we just need to tell it to explicitly drop the unused levels.</em></p>
-<div id="cell-13" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="6">
+<div id="cell-14" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seqlevelsInUse</span>(rd_atac_filtered)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -462,7 +427,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ol class="list-inline"><li>'chr1'</li><li>'chr2'</li></ol>
 </div>
 </div>
-<div id="cell-14" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="7">
+<div id="cell-15" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter differentially expressed genes from chr1 and chr2</span></span>
@@ -476,7 +441,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 </div>
 <p>In a real-world scenario, the optimal <code>logFC</code> and <code>qvalue</code> thresholds are chosen based on the specific biological question, often by first visualizing the overall data distribution using a <strong>Volcano Plot</strong>. If we are designing an expensive downstream lab experiment (such as a CRISPR knockout screen), we would typically apply strict thresholds (e.g., <code>logFC &gt;= 1</code> and <code>qvalue &lt;= 0.01</code>) to isolate only the most undeniable, bulletproof targets. Conversely, a more permissive approach (such as dropping the <code>logFC</code> filter entirely and relying only on <code>qvalue &lt;= 0.05</code>) is better suited for detecting subtle, systemic shifts. For instance, a transcription factor might only boost its target genes by 20% (<code>logFC = 0.26</code>), but if it does so consistently across a massive network of genes, that subtle shift remains highly biologically significant.</p>
-<div id="cell-16" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="8">
+<div id="cell-17" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize master object: project RNA data onto ATAC peaks</span></span>
@@ -484,7 +449,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 </div>
 <p>When we run <code>metaGR()</code> for the very first time, we are officially initializing our master multi-omics object. We use the filtered ATAC-seq peaks (<code>rd_atac_filtered</code>) as our foundational genomic coordinates (<code>gr1</code>), and project the significant RNA-seq data onto them. Once this master <code>overlap</code> object is created, we simply feed it back into the function as the new <code>gr1</code> target to keep stacking the rest of the histone marks onto it.</p>
-<div id="cell-18" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="9">
+<div id="cell-19" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="9">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter differentially enriched H3K4me3 peaks in chr1 and chr2</span></span>
@@ -500,7 +465,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 </div>
 <p>Because we filtered the datasets <em>before</em> we fed them into <code>metaGR()</code>, <code>metaGR()</code> is completely blind to any genes or histone marks that failed the significance test. If an ATAC-seq peak physically overlaps with a gene, but that gene didn’t change enough to pass our filter, <code>metaGR()</code> simply injects <code>NA</code> into the ATAC peak’s metadata for that RNA or histone modification column. It means any row in our final Overlap Matrix that actually has numbers in it represents a <em>statistically significant, dynamic biological event</em>. If it’s just background noise, it’s safely masked as <code>NA</code>.</p>
-<div id="cell-20" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="10">
+<div id="cell-21" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="10">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter differentially enriched H3K4me1 peaks in chr1 and chr2</span></span>
@@ -523,7 +488,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   genome (use suppressWarnings() to suppress this warning)."</code></pre>
 </div>
 </div>
-<div id="cell-21" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="11">
+<div id="cell-22" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="11">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter differentially enriched H3K27me3 peaks in chr 1 and chr2</span></span>
@@ -538,7 +503,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>overlap <span class="ot">&lt;-</span> <span class="fu">metaGR</span>(<span class="at">gr1 =</span> overlap, <span class="at">gr2 =</span> rd_h3k27me3_filtered)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="cell-22" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="12">
+<div id="cell-23" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="12">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter differentially enriched H3K27ac peaks in chr1 and chr2</span></span>
@@ -554,10 +519,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 </div>
 </section>
-<section id="finalizing-and-saving-the-integrated-object" class="level3" data-number="8.3.2">
-<h3 data-number="8.3.2" class="anchored" data-anchor-id="finalizing-and-saving-the-integrated-object"><span class="header-section-number">8.3.2</span> Finalizing and saving the integrated object</h3>
+<section id="finalizing-and-saving-the-integrated-object" class="level3">
+<h3 class="anchored" data-anchor-id="finalizing-and-saving-the-integrated-object">Finalizing and saving the integrated object</h3>
 <p>Now that all of our multi-omics metadata is stitched together onto our foundational ATAC-seq peaks, we assign a unique ID (<code>name</code>) to every peak. This ensures we can easily track specific genomic regions during downstream analysis. Finally, we save the completed <code>GRanges</code> object to disk so it can be instantly loaded in future notebooks.</p>
-<div id="cell-24" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="13">
+<div id="cell-25" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="13">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a unique name field to the metadata and GRanges names</span></span>
@@ -570,11 +535,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 </div>
 </section>
-<section id="inspecting-the-integrated-object" class="level3" data-number="8.3.3">
-<h3 data-number="8.3.3" class="anchored" data-anchor-id="inspecting-the-integrated-object"><span class="header-section-number">8.3.3</span> Inspecting the integrated object</h3>
+<section id="inspecting-the-integrated-object" class="level3">
+<h3 class="anchored" data-anchor-id="inspecting-the-integrated-object">Inspecting the integrated object</h3>
 <p>Before we move on, let’s verify that our multi-omics integration was successful. Our <code>overlap</code> object is still fundamentally an ATAC-seq <code>GRanges</code> object (meaning its physical coordinates represent open chromatin peaks), but its metadata now contains the statistical results from every other dataset we processed.</p>
 <p><em>Note: Keep in mind that <code>overlap</code> is now a pure <code>GRanges</code> object, not a <code>SummarizedExperiment</code> (SE) container. Because of this, SE-specific functions like <code>rowRanges()</code> and <code>colData()</code> will no longer work. Instead, we must use standard <code>GRanges</code> functions to interact with the object, such as <code>length()</code> (to count the peaks), <code>mcols()</code> (to access the metadata), and <code>genome()</code>.</em></p>
-<div id="cell-26" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="14">
+<div id="cell-27" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="14">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Verify all the multi-omics metadata columns are present</span></span>
@@ -620,7 +585,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 [109] "name"                  </code></pre>
 </div>
 </div>
-<div id="cell-27" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="15">
+<div id="cell-28" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="15">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Chromosomes included in the overlap matrix</span></span>
@@ -631,8 +596,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="processing-atac-and-chip-seq-continuous-signals" class="level3" data-number="8.3.4">
-<h3 data-number="8.3.4" class="anchored" data-anchor-id="processing-atac-and-chip-seq-continuous-signals"><span class="header-section-number">8.3.4</span> Processing ATAC and ChIP-seq continuous signals</h3>
+<section id="processing-atac-and-chip-seq-continuous-signals" class="level3">
+<h3 class="anchored" data-anchor-id="processing-atac-and-chip-seq-continuous-signals">Processing ATAC and ChIP-seq continuous signals</h3>
 <p>To visualize the continuous signal of our epigenetic marks (using <code>.bw</code> files), we first need to decide how wide of a genomic window we want to look at. Because different histone modifications have entirely different biological footprints (some are sharp, some are massive and sprawling), the <a href="https://www.encodeproject.org/chip-seq/transcription_factor/">ENCODE Project Consortium</a> and the current literature provide standard recommendations:</p>
 <table class="caption-top table">
 <colgroup>
@@ -676,11 +641,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tbody>
 </table>
 </section>
-<section id="verifying-our-datasets-peak-widths" class="level3" data-number="8.3.5">
-<h3 data-number="8.3.5" class="anchored" data-anchor-id="verifying-our-datasets-peak-widths"><span class="header-section-number">8.3.5</span> Verifying our dataset’s peak widths</h3>
+<section id="verifying-our-datasets-peak-widths" class="level3">
+<h3 class="anchored" data-anchor-id="verifying-our-datasets-peak-widths">Verifying our dataset’s peak widths</h3>
 <p>Let’s now check the actual physical widths of the significant peaks we just filtered. Remind that we already did some preliminary visual exploration of this in the <a href="../notebooks/03-chip_rna_visualization.html">previous notebook</a>, where we plotted width histograms for all four histone marks.</p>
 <p>Here, we will leverage R’s built-in <code>summary()</code> function to efficiently calculate the complete statistical profile of our peak widths (Min, 1st Quartile, Median, Mean, 3rd Quartile, and Max) in a single, clean table. This allows us to quantitatively verify that our data follows the expected biological behavior (e.g., proving that our H3K27me3 peaks are physically much broader than our sharp ATAC peaks).</p>
-<div id="cell-30" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="16">
+<div id="cell-31" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="16">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Bundle the filtered objects into a named list (same as before)</span></span>
@@ -729,12 +694,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 </blockquote>
 </section>
-<section id="unifying-the-coordinate-system-centering-on-atac" class="level3" data-number="8.3.6">
-<h3 data-number="8.3.6" class="anchored" data-anchor-id="unifying-the-coordinate-system-centering-on-atac"><span class="header-section-number">8.3.6</span> Unifying the coordinate system (centering on ATAC)</h3>
+<section id="unifying-the-coordinate-system-centering-on-atac" class="level3">
+<h3 class="anchored" data-anchor-id="unifying-the-coordinate-system-centering-on-atac">Unifying the coordinate system (centering on ATAC)</h3>
 <p>As seen in the summary table, our peaks have highly variable widths. Plotting them using their native sizes would result in misaligned heatmaps. To create a unified coordinate system, we will use the exact center (<code>mid</code>) of the ATAC-seq peaks as a universal anchor point, since open chromatin serves as the regulatory hub for these regions.</p>
 <p>Next, we must determine a standardized window size for our analysis. While a few outlier peaks stretch for many kilobases, the core biological signal is much tighter. The median widths for most marks sit between 500bp and 950bp, and over 75% of our peaks (the 3rd Quartile) are smaller than 1.6kb.</p>
 <p>It is important to remember a key structural detail about how we built our <code>overlap</code> object: because we used ATAC-seq as our foundational <code>gr1</code> target during the <code>metaGR()</code> joining process, the physical coordinates of the <code>overlap</code> object <strong>are</strong> the exact ATAC-seq peaks.</p>
-<div id="cell-33" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="17">
+<div id="cell-34" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="17">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Returns ONLY the pure physical coordinates</span></span>
@@ -760,7 +725,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>We can thus simply apply the <code>resize()</code> function directly to our master <code>overlap</code> object, and it will instantly collapse every peak in our table down to the exact center point of the open chromatin. Moreover, each unique peak is already perfectly identified in its own row.</p>
-<div id="cell-35" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="18">
+<div id="cell-36" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="18">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract midpoints of peaks to create windows for visualization</span></span>
@@ -769,14 +734,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 </div>
 <p>Because the vast majority of our dynamic biological signal fits within a 2,000 base-pair footprint, we will define our universal extraction regions (<code>heatmap_windows</code>) as a <strong>±1kb window</strong> anchored directly on the ATAC-seq <code>mid_peaks</code>. This standardizes our coordinate system and captures the relevant signal of every mark while minimizing empty background noise.</p>
-<div id="cell-37" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="19">
+<div id="cell-38" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="19">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the actual 2000 bp windows we need for the import step</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>heatmap_windows <span class="ot">&lt;-</span> <span class="fu">resize</span>(mid_peaks, <span class="at">width =</span> <span class="dv">2000</span>, <span class="at">fix =</span> <span class="st">"center"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="cell-38" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="20">
+<div id="cell-39" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="20">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">seqlevelsInUse</span>(heatmap_windows))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -786,11 +751,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="extracting-and-normalizing-bigwig-signals" class="level3" data-number="8.3.7">
-<h3 data-number="8.3.7" class="anchored" data-anchor-id="extracting-and-normalizing-bigwig-signals"><span class="header-section-number">8.3.7</span> Extracting and normalizing bigWig signals</h3>
+<section id="extracting-and-normalizing-bigwig-signals" class="level3">
+<h3 class="anchored" data-anchor-id="extracting-and-normalizing-bigwig-signals">Extracting and normalizing bigWig signals</h3>
 <p>As we saw in the previous notebooks, to process the <a href="../notebooks/02-atac_heatmaps.html">ATAC</a> and <a href="../notebooks/03-chip_rna_visualization.html">ChIP-seq</a> <code>.bw</code> files efficiently, we use a clean <code>lapply()</code> loop for each dataset package. Within these loops, we use <code>rtracklayer::import()</code> and pass our specific 2kb windows to the <code>which</code> argument. This forces R to dynamically read the continuous signal coverage <strong>only</strong> within our exact targeted regions directly from the hard drive, saving RAM and computation time.</p>
 <p>Once the targeted signal is read, the exact same loop immediately feeds it into <code>normalizeToMatrix()</code>, outputting clean lists of normalized matrices that we save as <code>.rds</code> files for downstream visualization.</p>
-<div id="cell-40" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="21">
+<div id="cell-41" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="21">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># -- Process ATAC ---</span></span>
@@ -816,7 +781,7 @@ Warning message:
 "Width of `target` are all 1, `include_target` is set to `FALSE`."</code></pre>
 </div>
 </div>
-<div id="cell-41" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="22">
+<div id="cell-42" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="22">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># -- Process ChIP ---</span></span>
@@ -839,7 +804,7 @@ Warning message:
 </details>
 </div>
 <p>Because we grouped all 8 matrices into a single named list (<code>chip_matrices</code>), the most efficient practice is to save the entire list as a single <code>.rds</code> file. However, to ensure perfect compatibility with the downstream code of the original course (which expects individual matrix files), we can also use a quick loop to dynamically save them as separate files based on their names.</p>
-<div id="cell-43" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="23">
+<div id="cell-44" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="23">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Best Practice: Save the entire master list as a single object</span></span>
@@ -861,11 +826,11 @@ Warning message:
 </div>
 </section>
 </section>
-<section id="processing-rna-seq-discrete-signals" class="level2" data-number="8.4">
-<h2 data-number="8.4" class="anchored" data-anchor-id="processing-rna-seq-discrete-signals"><span class="header-section-number">8.4</span> Processing RNA-seq discrete signals</h2>
+<section id="processing-rna-seq-discrete-signals" class="level2">
+<h2 class="anchored" data-anchor-id="processing-rna-seq-discrete-signals">Processing RNA-seq discrete signals</h2>
 <p>Remind that the RNA-seq data behaves a bit differently than the ATAC/ChIP bigWig files because RNA-seq data is discrete (counts mapped to a gene) rather than continuous genomic coverage. Because of this, we don’t use <code>normalizeToMatrix()</code>. Instead, we just grab the relative fold-changes, just like we did in <a href="../notebooks/03-chip_rna_visualization.html">Notebook 03</a>, and use a standard <code>merge()</code> to map those gene scores directly onto our ATAC peak names.</p>
 <p>As a reminder, rather than plotting raw expression counts, we calculate the relative fold-change by taking the <code>logCPM</code> matrix and subtracting the baseline mean of our E11.5 control samples. We will apply that exact same math here to generate those centered expression scores. Then, using a standard <code>merge()</code>, we will map those gene scores directly onto our corresponding ATAC peak names to complete our RNA-seq matrix.</p>
-<div id="cell-45" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="24">
+<div id="cell-46" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="24">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># -- Process RNA ---</span></span>
@@ -905,7 +870,7 @@ Warning message:
 <span id="cb30-35"><a href="#cb30-35" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(mat_RNA, <span class="at">file =</span> <span class="st">"output/mat_rna.rds"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="cell-46" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="25">
+<div id="cell-47" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="25">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the first 5 rows of the RNA matrix</span></span>
@@ -925,12 +890,12 @@ peak_5           NA           NA           NA           NA</code></pre>
 </blockquote>
 <p>Because we mapped the RNA data onto our ATAC peaks using <code>metaGR()</code>, and our ATAC peaks were already restricted to <code>chr1</code> and <code>chr2</code>.</p>
 </section>
-<section id="processing-wgbs-dna-methylation-signals" class="level2" data-number="8.5">
-<h2 data-number="8.5" class="anchored" data-anchor-id="processing-wgbs-dna-methylation-signals"><span class="header-section-number">8.5</span> Processing WGBS (DNA Methylation) signals</h2>
-<section id="reading-the-wgbs-coverage-files" class="level3" data-number="8.5.1">
-<h3 data-number="8.5.1" class="anchored" data-anchor-id="reading-the-wgbs-coverage-files"><span class="header-section-number">8.5.1</span> Reading the WGBS coverage files</h3>
+<section id="processing-wgbs-dna-methylation-signals" class="level2">
+<h2 class="anchored" data-anchor-id="processing-wgbs-dna-methylation-signals">Processing WGBS (DNA Methylation) signals</h2>
+<section id="reading-the-wgbs-coverage-files" class="level3">
+<h3 class="anchored" data-anchor-id="reading-the-wgbs-coverage-files">Reading the WGBS coverage files</h3>
 <p>Whole Genome Bisulfite Sequencing (WGBS) measures DNA methylation at CpG dinucleotides. Unlike our ATAC-seq and ChIP-seq data (which is stored in binary <code>.bw</code> files), WGBS data is provided as compressed text <code>.bed.gz</code> files. These files contain explicit columns for read coverage (<code>cov</code>), Methylated counts (<code>Me</code>), Unmethylated counts (<code>Un</code>), and the final methylation ratio (<code>meth</code>).</p>
-<div id="cell-49" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="26">
+<div id="cell-50" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="26">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">dir</span>(<span class="st">"data/"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -947,7 +912,7 @@ peak_5           NA           NA           NA           NA</code></pre>
 </div>
 </div>
 <p>Because these are text files, we will use the lightning-fast <code>data.table::fread()</code> function to read them into R, convert them into <code>GRanges</code> objects, and then feed them into <code>normalizeToMatrix()</code>.</p>
-<div id="cell-51" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="27">
+<div id="cell-52" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="27">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Bisulfite seq coverage files after methylation call</span></span>
@@ -974,8 +939,8 @@ peak_5           NA           NA           NA           NA</code></pre>
 </details>
 </div>
 </section>
-<section id="handling-high-resolution-wgbs-data" class="level3" data-number="8.5.2">
-<h3 data-number="8.5.2" class="anchored" data-anchor-id="handling-high-resolution-wgbs-data"><span class="header-section-number">8.5.2</span> Handling high-resolution WGBS data</h3>
+<section id="handling-high-resolution-wgbs-data" class="level3">
+<h3 class="anchored" data-anchor-id="handling-high-resolution-wgbs-data">Handling high-resolution WGBS data</h3>
 <p>We didn’t use <code>metaGR()</code> to pull the WGBS methylation data into our master <code>overlap</code> table alongside the ATAC, ChIP, and RNA-seq data because of the specific <strong>genomic resolution</strong>.</p>
 <ul>
 <li><strong>ATAC, ChIP, and RNA</strong> are all “Region-level” data. When an ATAC peak (~1kb) overlaps a gene or a ChIP peak, it is generally a simple 1-to-1 relationship, which <code>metaGR()</code> handles perfectly.</li>
@@ -985,7 +950,7 @@ peak_5           NA           NA           NA           NA</code></pre>
 <p>Instead of forcing single-bp statistics into our master table, we handle WGBS data entirely during the <strong>Continuous Signal</strong> extraction phase.</p>
 <p>By passing our WGBS <code>GRanges</code> objects directly into <code>normalizeToMatrix()</code>, the software properly reads all 50 CpGs inside the 2kb window and smoothly averages them across the ATAC peak, allowing us to visualize the true methylation burden correctly.</p>
 <p>Because we are measuring a methylation <em>percentage</em> instead of standard read pileups, we must change two critical arguments in <code>normalizeToMatrix()</code>: * <code>value_column = "meth"</code>: We explicitly extract the methylation ratio rather than the read coverage depth. * <code>mean_mode = "absolute"</code>: By default, the software calculates a weighted mean (<code>"w0"</code>), which weights the signal based on how physically wide the overlapping genomic regions are (e.g., broad ChIP-seq peaks). Because our WGBS data operates at the single-nucleotide level (where every CpG is exactly 1 base pair wide), weighting by width is unnecessary. We override this to <code>"absolute"</code> to tell the function to simply take the straight, arithmetic mean of the methylation scores inside each window bin. * <code>background = N</code>: In ChIP-seq, if there are no reads, the signal is <code>0</code>. But in WGBS, if there are no reads covering a CpG, we simply don’t know the methylation status! Therefore, the background <em>must</em> be <code>NA</code> (unknown). If we left it as 0, we would mathematically trick R into thinking those unsequenced regions were completely unmethylated!</p>
-<div id="cell-53" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="28">
+<div id="cell-54" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="28">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Normalized matrices</span></span>
@@ -1017,7 +982,7 @@ overlapped to it. Please use `failed_rows(mat)` to get the index of the
 failed row and consider to remove it."</code></pre>
 </div>
 </div>
-<div id="cell-54" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="29">
+<div id="cell-55" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="29">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Print a few rows and columns from the first WGBS matrix</span></span>
@@ -1033,13 +998,13 @@ peak_5 0.2162887 0.2130513 0.2100990 0.2082533 0.2083358 0.2095957</code></pre>
 </div>
 </div>
 </section>
-<section id="question-1" class="level3" data-number="8.5.3">
-<h3 data-number="8.5.3" class="anchored" data-anchor-id="question-1"><span class="header-section-number">8.5.3</span> Question 1</h3>
+<section id="question-1" class="level3">
+<h3 class="anchored" data-anchor-id="question-1">Question 1</h3>
 <p><strong>Make an <code>EnrichedHeatmap</code></strong> of methylation data.</p>
 <p>To create our composite <code>EnrichedHeatmap</code> for the methylation data, we can take full advantage of the highly modular code architecture we developed in earlier notebooks.</p>
 <p>First, we need to upgrade our custom plotting function (<code>make_EH_custom</code>). Because our WGBS matrices contain <code>NA</code> values (to represent unsequenced background), our original color-scaling math would instantly crash. We simply need to update the <code>quantile()</code> math inside our custom function to include <code>na.rm = TRUE</code>, allowing it to safely ignore missing data.</p>
 <p>Furthermore, we need to upgrade the function’s color-mapping capabilities. The <code>colorRamp2</code> function strictly requires the exact same number of numerical anchor points as there are colors in the provided palette. To make our custom function truly universal, i.e., it can dynamically handle a 2-color gradient, a 3-color diverging map (like blue-white-red), or even a massive 11-color continuous palette, we will use the <code>seq()</code> function. This automatically generates a perfectly spaced mathematical sequence of anchor points from <code>vmin</code> to <code>vmax</code> that matches the exact length of any color palette we pass to it.</p>
-<div id="cell-56" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="30">
+<div id="cell-57" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="30">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>make_EH_custom_na <span class="ot">&lt;-</span> <span class="cf">function</span>(</span>
@@ -1081,7 +1046,7 @@ peak_5 0.2162887 0.2130513 0.2100990 0.2082533 0.2083358 0.2095957</code></pre>
 <p>Notice that inside our <code>make_EH_custom_na</code> function, the x-axis labels are strictly hardcoded as <code>axis_name = c("-1kb", "mid", "1kb")</code>. This works perfectly for our current analysis because we explicitly chose a 2kb total window earlier.</p>
 <p>However, if we decide to experiment and change our <code>extend</code> window size in the future (e.g., expanding to ±5kb for broad marks), these visual labels will be mathematically incorrect! For now, we will leave it as-is, but we will look at ways to make these labels dynamic and fully “upgrade” this function later in the course.</p>
 <p>Next, we will extract the <code>ATAC_anno</code> metadata directly from our master <code>overlap</code> object to dynamically build the left-side color bar (which splits our peaks into “Promoter”, “Intron”, and intergenic groups).</p>
-<div id="cell-58" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="31">
+<div id="cell-59" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="31">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>split_anno <span class="ot">&lt;-</span> <span class="fu">mcols</span>(overlap)<span class="sc">$</span>ATAC_anno</span>
@@ -1098,7 +1063,7 @@ peak_5 0.2162887 0.2130513 0.2100990 0.2082533 0.2083358 0.2095957</code></pre>
 </details>
 </div>
 <p>Finally, we will pass our two WGBS normalized matrices (E11.5 and E15.5) through our upgraded custom function, link them together with the annotation bar (<code>+</code>), and globally split the rows using the <code>draw()</code> function.</p>
-<div id="cell-60" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="32">
+<div id="cell-61" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="32">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>eh_wgbs_11h <span class="ot">&lt;-</span> <span class="fu">make_EH_custom_na</span>(</span>
@@ -1124,8 +1089,8 @@ peak_5 0.2162887 0.2130513 0.2100990 0.2082533 0.2083358 0.2095957</code></pre>
 </div>
 </div>
 </section>
-<section id="biological-interpretation-of-dna-methylation" class="level3" data-number="8.5.4">
-<h3 data-number="8.5.4" class="anchored" data-anchor-id="biological-interpretation-of-dna-methylation"><span class="header-section-number">8.5.4</span> Biological interpretation of DNA methylation</h3>
+<section id="biological-interpretation-of-dna-methylation" class="level3">
+<h3 class="anchored" data-anchor-id="biological-interpretation-of-dna-methylation">Biological interpretation of DNA methylation</h3>
 <p>Looking at our generated heatmaps, we can draw several immediate observational conclusions:</p>
 <ol type="1">
 <li><strong>No glaring global differences:</strong> By naked eye, the global methylation profiles (Blue = 0% unmethylated, Red = 50% methylated) between E11.5 and E15.5 look virtually identical. There is no massive, genome-wide shift in methylation at these open chromatin regions between the two developmental stages.</li>
@@ -1212,7 +1177,7 @@ peak_5 0.2162887 0.2130513 0.2100990 0.2082533 0.2083358 0.2095957</code></pre>
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/sbwiecko\.github\.io\/biology-informed-multiomics-training\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -1539,18 +1504,6 @@ peak_5 0.2162887 0.2130513 0.2100990 0.2082533 0.2083358 0.2095957</code></pre>
     }
   });
   </script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
-      <a href="../notebooks/03-chip_rna_visualization.html" class="pagination-link" aria-label="ChIP and RNA sequencing data plots">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">ChIP and RNA sequencing data plots</span></span>
-      </a>          
-  </div>
-  <div class="nav-page nav-page-next">
-      <a href="../notebooks/05-atac_rna_integration.html" class="pagination-link" aria-label="Integrating ATAC and RNA sequencing data">
-        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Integrating ATAC and RNA sequencing data</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
-  </div>
-</nav>
 </div> <!-- /content -->
 
 
