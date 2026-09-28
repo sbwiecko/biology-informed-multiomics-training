@@ -1,67 +1,46 @@
-# Enrichment analysis
+# Functional Enrichment Analysis: Multi-Omics Integration
 
-## Material
+This document summarizes the core concepts of functional enrichment analysis for multi-omics data, bridging the theoretical foundations from the lecture slides with the practical implementation in the accompanying R/Jupyter notebook.
 
-* [MSigDB](http://www.gsea-msigdb.org/gsea/msigdb/index.jsp)
-* clusterProfiler [vignette](https://bioconductor.org/packages/release/bioc/vignettes/clusterProfiler/inst/doc/clusterProfiler.html)
-* [Revigo](https://revigo.irb.hr/)
-* [Signaling Pathway Impact Analysis (SPIA)](https://bioconductor.org/packages/release/bioc/html/SPIA.html)
-* Original [paper](https://www.pnas.org/content/102/43/15545) on GSEA
-* [STRING](https://string-db.org/) for protein-protein interactions
-* [GO figure!](https://gitlab.com/evogenlab/GO-Figure) for plotting GO terms and the associated [paper](https://www.frontiersin.org/articles/10.3389/fbinf.2021.638255/full)
+## Overview of Enrichment Analysis
 
-## Exercises
+The primary goal of functional enrichment analysis is to extract biologically meaningful insights from long lists of genes. Instead of analyzing genes in isolation, these methods evaluate sets of genes to identify overactive or suppressed biological pathways.
 
-Load the following packages:
+The three primary methodologies include:
 
-If the FindMarkers or FindAllMarkers functions were used, we obtained a table listing only the significant genes, but we don't have any information of fold change for the non-significant genes. Therefore, we can use the over-representation analysis which is a threshold-based method. Using our list of significant genes, we can test if any gene set is over-represented among significant genes or not using a test similar to a Fisher test to compare differences in proportions.
+* **Over-Representation Analysis (ORA):** Evaluates the fraction of genes in a specific pathway found among a set of differentially expressed (DE) genes.
+  * It relies on a strict significance threshold (e.g., FDR ≤ 0.05) to select the input list.
+  * Significance is commonly calculated using Fisher's exact test, hypergeometric, chi-square, or binomial distributions.
+  * **Limitations:** It requires arbitrary cutoffs, treats all genes in the list equally regardless of expression fold-change, and assumes that all genes and pathways act independently.
+* **Functional Class Scoring (FCS / GSEA):** Evaluates whether weaker but coordinated changes in sets of related genes have significant effects.
+  * Instead of a cutoff, it ranks all genes (often by $\log_2(\text{FC}) \times \text{t-value}$) and calculates a running enrichment score using statistics like the Kolmogorov-Smirnov test.
+  * **Limitations:** Like ORA, it still assumes that genes and pathways are independent of one another.
+* **Pathway Topology (PT):** Incorporates structural biological context to assess pathway impact.
+  * It factors in the specific number of reactions, the biological position of the gene, and the type of reaction taking place.
 
-The clusterProfiler package provides functions for over-representation analysis of Gene Ontology gene sets (among other functions, including functions for actual GSEA) or KEGG gene sets.
+## Database Challenges & Semantic Similarity
 
-Genes can be labeled using different types of labels, eg symbol, Ensembl ID, Entrez ID. To list the allowed label types use:
+Enrichment relies heavily on curated databases like Gene Ontology (GO), KEGG, and Reactome.
 
-## About OrgDb
+* **The Resolution Problem:** The GO database (split into Biological Process, Molecular Function, and Cellular Component) contains highly similar or overlapping terms, such as "cell cycle" and "mitosis".
+* **Semantic Similarity:** To reduce redundancy, analysis often measures the semantic similarity of GO terms based on "exclusively inherited" shared information. This filters out broad, unrelated common ancestors to group terms by their true unique functions.
 
-For other organisms, you can find available OrgDbs at [bioconductor](http://bioconductor.org/packages/release/BiocViews.html#___OrgDb)
+Here is the expanded section, integrating the details of how GREAT calculates domains, maps peaks, and runs its statistical tests:
 
-Let's select a set of genes that are downregulated in the tumor cells compared to normal:
+## Cis-Regulatory Regions & GREAT
 
-We can do a Gene Ontology term over-representation analysis based on this set of genes. Make sure you check out the help of this function to understand its arguments:
+Standard enrichment tools fail when analyzing non-coding regions or distal regulatory elements.
 
-The results are stored in the @result slot:
+* **GREAT (Genomic Regions Enrichment of Annotations Tool):** Designed to accurately link cis-regulatory regions (like enhancers or ATAC-seq peaks) to the specific biological pathways they control. It solves the distal regulation problem in three distinct steps:
+  * **Defining Domains (Coordinate Math):** GREAT calculates a "regulatory domain" for every known gene by starting at the Transcription Start Site (TSS). It first assigns a **Basal Domain** (typically 5kb upstream to 1kb downstream). It then calculates a **Distal Extension**, expanding outward along the chromosome in both directions until it hits the nearest neighboring gene's basal domain (capped at a strict maximum of 1,000 kb).
+  * **Mapping Peaks (Interval Intersection):** It compares the genomic coordinates of the input regions against this newly built catalog of regulatory domains. Any physical overlap assigns that distal DNA to the corresponding gene.
+  * **Linking to Pathways (Binomial Test):** To evaluate pathway significance, GREAT measures the total genomic footprint (in base pairs) of all regulatory domains belonging to a specific pathway. It then runs a binomial over-representation test to determine if the peaks landed inside that pathway's footprint significantly more often than would happen by random chance.
+* It accounts for long-range interactions identified by chromatin conformation (Hi-C) or epigenetic markers (H3K27ac).
+* **rGREAT Integration:** The `rGREAT` R/Bioconductor package allows this functional enrichment to be executed directly on genomic regions.
 
----
+## Connection to the Practical Exercise
 
-### The columns GeneRatio and BgRatio
+The accompanying Jupyter notebook perfectly mirrors this methodology by applying `rGREAT` to multi-omics overlap data.
 
-The columns GeneRatio and BgRatio that are in the enrichResult object represent the numbers that are used as input for the Fisher's exact test.
-
-The two numbers (M/N) in the GeneRatio column are:
-
-- M: Number of genes of interest (in our case tum_down_genes) that are in the GO set
-- N: Number of genes of interest with any GO annoation.
-
-The two numbers (k/n) in the BgRatio column are:
-
-- k: Number of genes in the universe that are in the GO set
-- n: Number of genes in the universe with any GO annoation
-
-A low p-value resulting from the Fisher's exact means that M/N is signficantly greater than k/n.
-
----
-
-Some GO terms seem redundant because they contain many of the same genes, which is a characteristic of Gene Ontology gene sets. We can simplify this list by removing redundant gene sets:
-
-We can quite easily generate a plot called an enrichment map with the enrichplot package:
-
-Instead of testing for Gene Ontology terms, we can also test for other gene set collections. For example the Hallmark collection from [MSigDB](http://www.gsea-msigdb.org/gsea/msigdb/index.jsp):
-
-### Clear environment
-
-Clear your environment:
-
-```r
-rm(list = ls())
-gc()
-.rs.restartR()
-```
+* It isolates a specific genomic cluster ("Active Promoters") from an ATAC/RNA overlap matrix.
+* It visualizes the region-gene associations and uses the `simplifyEnrichment` package to calculate semantic similarity, clustering redundant GO terms into functional groups like "ion transport" and "calcium signaling".
