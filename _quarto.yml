@@ -6,26 +6,27 @@ website:
   # subtitle: "A working fork of the SIB Training from a wet-lab scientist"
   # author: "Sébastien Wieckowski"
   # date: today
+  repo-url: https://github.com/sbwiecko/biology-informed-multiomics-training
+  repo-actions: [edit, source, issue]
   sidebar:
     style: "docked"
     search: true
     contents:
       - index.qmd
       - notes/epigenetic_analysis_reference_guide.md
-      - notes/normalization_models.md
-      - notes/enrichment_analysis.md
       - notebooks/01-omics_data_structures.ipynb
+      - notes/normalization_models.md
       - notebooks/02-atac_heatmaps.ipynb
       - notebooks/03-chip_rna_visualization.ipynb
       - notebooks/04-genomic_overlap_matrices.ipynb
       - notebooks/05-atac_rna_integration.ipynb
       - notebooks/06-multiomics_integration.ipynb
+      - notes/enrichment_analysis.md
       - notebooks/07-functional_enrichment.ipynb
 
 format:
   html:
-    theme: cosmo
+    theme: yeti
     toc: true
-    toc-depth: 3
     code-fold: show
     code-copy: true

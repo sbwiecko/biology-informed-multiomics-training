@@ -1,11 +1,15 @@
 [![License: CC BY-SA 4.0](https://img.shields.io/badge/License-CC_BY--SA_4.0-lightgrey.svg)](https://creativecommons.org/licenses/by-sa/4.0/)
 [![Forked from sib-swiss](https://img.shields.io/badge/Forked%20from-sib--swiss-blue)](https://github.com/sib-swiss/biology-informed-multiomics-training)
+[![Course Website](https://img.shields.io/badge/Read_the_Course-Online-success?logo=quarto)](https://sbwiecko.github.io/biology-informed-multiomics-training/)
 
 # Biology-Informed Multi-Omics: A Wet-Lab Scientist's Study Fork
 
+> **💡 Read the completed course online:**  
+> If you just want to read through the analysis and biological interpretations, you can browse the [compiled course website here](https://sbwiecko.github.io/biology-informed-multiomics-training/).
+
 Welcome! This repository is an annotated, restructured study fork of the [SIB Swiss Institute of Bioinformatics Multi-Omics Training Course](https://github.com/sib-swiss/biology-informed-multiomics-training).
 
-I come from a **wet-lab background** and am investing significant effort into transitioning toward computational biology. To make the learning curve manageable and fully focus on the code and biology, **I simplified the project architecture**: I removed the Docker containers and Quarto website infrastructure in favor of standalone **Jupyter Notebooks (`.ipynb`) and clean Markdown files**.
+I come from a **wet-lab background** and am investing significant effort into transitioning toward computational biology. To make the learning curve manageable and fully focus on the code and biology, **I simplified the project architecture**. I removed the heavy Docker containers in favor of standalone **Jupyter Notebooks (`.ipynb`)** so you can easily clone the repo and practice the code yourself. I also added a clean **Quarto website** to make reading the finished notebooks and theory much easier!
 
 ---
 
