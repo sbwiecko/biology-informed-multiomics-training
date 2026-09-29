@@ -80,7 +80,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-93c2f64124fc842a968b101e89420266.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-a364407746d9004c8be0c73a9e30f2fd.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -163,20 +163,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../notebooks/01-omics_data_structures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Datasets, SummarizedExperiment, and GRanges</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../notes/normalization_models.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Normalization models</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../notes/enrichment_analysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Functional Enrichment Analysis: Multi-Omics Integration</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../notebooks/01-omics_data_structures.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Datasets, <code>SummarizedExperiment</code>, and <code>GRanges</code></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -207,6 +201,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="../notebooks/06-multiomics_integration.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Integrating ATAC, ChIP, and RNA sequencing data</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/enrichment_analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Functional Enrichment Analysis: Multi-Omics Integration</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -275,7 +275,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#the-power-of-native-annotations" id="toc-the-power-of-native-annotations" class="nav-link" data-scroll-target="#the-power-of-native-annotations">The power of native annotations</a></li>
   </ul></li>
   </ul>
-</nav>
+<div class="toc-actions"><ul><li><a href="https://github.dev/sbwiecko/biology-informed-multiomics-training/blob/main/notebooks/02-atac_heatmaps.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/sbwiecko/biology-informed-multiomics-training/blob/main/notebooks/02-atac_heatmaps.ipynb" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/sbwiecko/biology-informed-multiomics-training/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -416,7 +416,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   seqinfo: 21 sequences from an unspecified genome; no seqlengths</code></pre>
 </div>
 </div>
-<p>Once we have the short sequencing reads in an ATAC-seq experiment, bioinformatics algorithms take over to recreate the biological landscape of the genomic accessibity.</p>
+<p>Once we have the short sequencing reads in an ATAC-seq experiment, bioinformatics algorithms take over to recreate the biological landscape of the genomic accessibity:</p>
 <ul>
 <li><strong>Alignment:</strong> We take every read and match it to a reference genome to find exactly where it originated.</li>
 <li><strong>Generating Coverage:</strong> When thousands of reads map to the exact same open genomic location, they form a “pile-up.” This is the black, mountainous signal we see in the example snapshot of chromatin accessibility.</li>
@@ -1824,7 +1824,7 @@ set. It is more suggested to do as `ht = draw(ht); row_order(ht)`."</code></pre>
 </section>
 <section id="question-2" class="level2">
 <h2 class="anchored" data-anchor-id="question-2">Question 2</h2>
-<p><strong>Can you make split the Enriched Heatmap based on the annotations and change in direction?</strong></p>
+<p>Can you make split the Enriched Heatmap based on the annotations and change in direction?</p>
 <p><strong><em>Hint:</em></strong> <code>mid_peaks$ATAC_anno</code> contain annotations for the regions. <code>mid_peaks$ATAC_logFC</code> contain sign of change.</p>
 <div id="cell-83" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="41">
 <details open="" class="code-fold">
@@ -2607,4 +2607,4 @@ will be converted into a character matrix."</code></pre>
 
 
 
-</body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.dev/sbwiecko/biology-informed-multiomics-training/blob/main/notebooks/02-atac_heatmaps.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/sbwiecko/biology-informed-multiomics-training/blob/main/notebooks/02-atac_heatmaps.ipynb" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/sbwiecko/biology-informed-multiomics-training/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>

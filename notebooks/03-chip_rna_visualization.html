@@ -80,7 +80,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-93c2f64124fc842a968b101e89420266.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-a364407746d9004c8be0c73a9e30f2fd.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -163,20 +163,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../notebooks/01-omics_data_structures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Datasets, SummarizedExperiment, and GRanges</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../notes/normalization_models.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Normalization models</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../notes/enrichment_analysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Functional Enrichment Analysis: Multi-Omics Integration</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../notebooks/01-omics_data_structures.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Datasets, <code>SummarizedExperiment</code>, and <code>GRanges</code></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -207,6 +201,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="../notebooks/06-multiomics_integration.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Integrating ATAC, ChIP, and RNA sequencing data</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/enrichment_analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Functional Enrichment Analysis: Multi-Omics Integration</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -253,7 +253,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#a-note-on-visualizing-expression-changes" id="toc-a-note-on-visualizing-expression-changes" class="nav-link" data-scroll-target="#a-note-on-visualizing-expression-changes">A note on visualizing expression changes</a></li>
   </ul></li>
   </ul>
-</nav>
+<div class="toc-actions"><ul><li><a href="https://github.dev/sbwiecko/biology-informed-multiomics-training/blob/main/notebooks/03-chip_rna_visualization.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/sbwiecko/biology-informed-multiomics-training/blob/main/notebooks/03-chip_rna_visualization.ipynb" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/sbwiecko/biology-informed-multiomics-training/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -708,7 +708,12 @@ colData names(6): bam.files totals ... group norm.factors</code></pre>
 </section>
 <section id="constructing-and-combining-the-heatmaps" class="level3">
 <h3 class="anchored" data-anchor-id="constructing-and-combining-the-heatmaps">Constructing and combining the heatmaps</h3>
-<p>With our list of 8 normalized matrices prepared, we can now translate this numerical data into a visual map of the chromatin landscape. We will generate an individual <code>EnrichedHeatmap</code> object for each matrix. To streamline this process and ensure perfect formatting consistency, we will utilize an upgraded custom wrapper function (<code>make_EH_custom</code>). Rather than building each heatmap from scratch, this function automates several advanced features: 1. <strong>Dynamic Color Scaling:</strong> It automatically calculates a responsive color scale based on the 1st and 99th percentiles of each specific matrix (using <code>circlize::colorRamp2</code>), and perfectly aligns the legend ticks. 2. <strong>Proportional Layout Engine:</strong> By defaulting to the <code>grid</code> graphic’s flexible <code>width = unit(1, "null")</code> unit, it ensures that when we stitch multiple heatmaps together, they will dynamically stretch and divide the page space perfectly equally! Here is the perfectly tweaked bullet point to clarify that your hardcoded default precisely mirrors the native software! 3. <strong>Architectural Control:</strong> It exposes a <code>top_anno_height</code> parameter (which we safely defaulted to <code>1.5 cm</code> to precisely mirror the software’s native default behavior), giving us the ability to elegantly squeeze or expand the vertical size of the top summary meta-profile plots on the fly without complex math.</p>
+<p>With our list of 8 normalized matrices prepared, we can now translate this numerical data into a visual map of the chromatin landscape. We will generate an individual <code>EnrichedHeatmap</code> object for each matrix. To streamline this process and ensure perfect formatting consistency, we will utilize an upgraded custom wrapper function (<code>make_EH_custom</code>). Rather than building each heatmap from scratch, this function automates several advanced features:</p>
+<ol type="1">
+<li><strong>Dynamic Color Scaling:</strong> It automatically calculates a responsive color scale based on the 1st and 99th percentiles of each specific matrix (using <code>circlize::colorRamp2</code>), and perfectly aligns the legend ticks.</li>
+<li><strong>Proportional Layout Engine:</strong> By defaulting to the <code>grid</code> graphic’s flexible <code>width = unit(1, "null")</code> unit, it ensures that when we stitch multiple heatmaps together, they will dynamically stretch and divide the page space perfectly equally! Here is the perfectly tweaked bullet point to clarify that your hardcoded default precisely mirrors the native software!</li>
+<li><strong>Architectural Control:</strong> It exposes a <code>top_anno_height</code> parameter (which we safely defaulted to <code>1.5 cm</code> to precisely mirror the software’s native default behavior), giving us the ability to elegantly squeeze or expand the vertical size of the top summary meta-profile plots on the fly without complex math.</li>
+</ol>
 <p><em>Note: This custom function has pre-defined x-axis labels hard-coded as <code>c("-1kb", "mid", "1kb")</code>. In the future, if the genomic window being analyzed is different from the current 2000 bp window centered on the ATAC-seq peaks, be sure to make the appropriate changes to the axis_name argument.</em></p>
 <p>To highlight how these marks behave differently across distinct regulatory elements, we will pass our ATAC peak annotations to the <code>split_rows</code> argument (separating, “Promoters” from “Exon”, “Intron” and “Intergenic” regions).</p>
 <p>Finally, leveraging the power of the <code>ComplexHeatmap</code> ecosystem, we can seamlessly concatenate all 8 resulting heatmaps side-by-side using the simple <code>+</code> operator. Just as we did before, we will also append a <code>rowAnnotation</code> block to the side of the figure—visually tagging the rows with their associated metadata—to create a highly informative, unified composite figure.</p>
@@ -1528,4 +1533,4 @@ RNA_15half_2.tsv.gz RNA_15half_2.tsv.gz   15half</code></pre>
 
 
 
-</body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.dev/sbwiecko/biology-informed-multiomics-training/blob/main/notebooks/03-chip_rna_visualization.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/sbwiecko/biology-informed-multiomics-training/blob/main/notebooks/03-chip_rna_visualization.ipynb" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/sbwiecko/biology-informed-multiomics-training/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>

@@ -80,7 +80,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-93c2f64124fc842a968b101e89420266.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-a364407746d9004c8be0c73a9e30f2fd.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -160,20 +160,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../notebooks/01-omics_data_structures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Datasets, SummarizedExperiment, and GRanges</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../notes/normalization_models.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Normalization models</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../notes/enrichment_analysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Functional Enrichment Analysis: Multi-Omics Integration</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../notebooks/01-omics_data_structures.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Datasets, <code>SummarizedExperiment</code>, and <code>GRanges</code></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -204,6 +198,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="../notebooks/06-multiomics_integration.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Integrating ATAC, ChIP, and RNA sequencing data</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/enrichment_analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Functional Enrichment Analysis: Multi-Omics Integration</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -242,7 +242,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#decoding-the-multi-omics-landscape" id="toc-decoding-the-multi-omics-landscape" class="nav-link" data-scroll-target="#decoding-the-multi-omics-landscape">Decoding the Multi-Omics landscape</a></li>
   </ul></li>
   </ul>
-</nav>
+<div class="toc-actions"><ul><li><a href="https://github.dev/sbwiecko/biology-informed-multiomics-training/blob/main/notebooks/05-atac_rna_integration.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/sbwiecko/biology-informed-multiomics-training/blob/main/notebooks/05-atac_rna_integration.ipynb" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/sbwiecko/biology-informed-multiomics-training/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -352,7 +352,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="initial-setup-and-data-loading" class="level2">
 <h2 class="anchored" data-anchor-id="initial-setup-and-data-loading">Initial setup and data loading</h2>
 <p>Before integrating the data, we need to load our required R packages and import the processed <code>SummarizedExperiment</code> objects and normalized matrices that we generated in previous notebooks. Because all the heavy preprocessing and signal extraction is already complete, we no longer need to load intensive data-wrangling packages, and can focus entirely on visualization and integration.</p>
-<div id="cell-4" class="cell" data-message="false" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="1">
+<div id="cell-5" class="cell" data-message="false" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">suppressWarnings</span>({</span>
@@ -373,7 +373,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>Master <code>overlap</code> annotation object:</strong> Generated by mapping physical overlaps between our highly significant ATAC-seq peak regions and RNA-seq gene annotations (using our custom <code>metaGR()</code> function), seamlessly joining their statistical metadata together into a single <code>GRanges</code> object.</li>
 <li><strong>Normalized signal matrices:</strong> Created using <code>normalizeToMatrix()</code> to extract continuous signal coverage from bigWig files across fixed genomic windows (e.g., +/- 1 kb around peak centers), formatted as mathematical grids for immediate heatmap visualization.</li>
 </ul>
-<div id="cell-6" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="2">
+<div id="cell-7" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>overlap <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"output/overlap_data.rds"</span>)</span>
@@ -394,7 +394,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>Incongruent:</strong> Accessibility decreases while expression increases (often driven by complex distal interactions or alternate promoters).</li>
 <li><strong>Inc.&nbsp;Acc. / Dec.&nbsp;Acc.:</strong> Accessibility changes, but there is no corresponding RNA-seq gene data (e.g., distant intergenic regulatory regions).</li>
 </ul>
-<div id="cell-8" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="3">
+<div id="cell-9" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use case_when to dynamically calculate the biological state in one elegant sweep</span></span>
@@ -416,7 +416,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(<span class="at">object =</span> overlap, <span class="at">file =</span> <span class="st">"output/overlap_regulatory_status.rds"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="cell-9" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="4">
+<div id="cell-10" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>overlap</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -843,7 +843,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   seqinfo: 21 sequences from an unspecified genome; no seqlengths</code></pre>
 </div>
 </div>
-<div id="cell-10" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="5">
+<div id="cell-11" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(overlap<span class="sc">$</span>Regulatory_State[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -866,7 +866,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="recycling-our-custom-plotting-function">Recycling our custom plotting function</h3>
 <p>To ensure our color scaling and formatting remains mathematically consistent across our entire course, we need to reuse the heatmap plotting function we perfected in previous notebooks (<code>custom_enrichedheatmap_plotting</code>).</p>
 <p>Rather than redundantly copy-pasting this large block of code across every notebook, we have saved it into a dedicated, external R script. We can instantly load this tool into our environment using a single <code>source()</code> command.</p>
-<div id="cell-13" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="6">
+<div id="cell-14" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load our custom multi-omics plotting tool from the external script</span></span>
@@ -881,7 +881,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="atac-seq-signal-heatmaps" class="level3">
 <h3 class="anchored" data-anchor-id="atac-seq-signal-heatmaps">ATAC-seq signal heatmaps</h3>
 <p>We want to stratify the E11.5 and E15.5 ATAC-seq data using our newly calculated <code>Regulatory_State</code> categories. For that, we define an annotation vector (<code>split_anno</code>) to physically split the rows of the heatmap into functional clusters, and generate a narrow, adjacent color strip (<code>anno_hm</code>) to visually label each of these distinct biological states (Active, Silenced, Repressed, etc.), just as we did previously using genomic annotation.</p>
-<div id="cell-16" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="7">
+<div id="cell-17" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>split_state <span class="ot">&lt;-</span> overlap<span class="sc">$</span>Regulatory_State</span>
@@ -895,7 +895,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Just as we did in the previous notebooks when we labeled our peaks by their physical location (Promoter vs.&nbsp;Intron) or genomic annotations (Exon, Intron, etc.), we will dynamically assign a distinct color from the <code>Set1</code> palette to each of our newly defined biological categories (Active, Silenced, Repressed, etc.).</p>
-<div id="cell-18" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="8">
+<div id="cell-19" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Dynamically grab enough colors from Set1 for our distinct biological states</span></span>
@@ -908,7 +908,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <blockquote class="blockquote">
 <p>Notice that we wrap our unique categories in <code>na.omit()</code>. Because our <code>case_when()</code> logic earlier included a fallback <code>NA</code> for any peaks that didn’t perfectly match our mathematical criteria, the <code>unique()</code> function would accidentally count <code>NA</code> as a distinct biological category and try to assign a color to it! <code>na.omit()</code> safely purges any missing values from the list before we build our color palette.</p>
 </blockquote>
-<div id="cell-20" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="9">
+<div id="cell-21" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="9">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>eh_state_anno <span class="ot">&lt;-</span> <span class="fu">rowAnnotation</span>(</span>
@@ -921,7 +921,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>When assembling complex multi-omics figures, the <code>ComplexHeatmap</code> layout engine can force row annotation legends (like our <code>Regulatory State</code> colors) to strictly follow the continuous heatmaps on the right side of the plot. If we want to physically separate them and move our categorical metadata to the bottom while keeping the continuous heatmaps on the right, we have to bypass the automatic layout engine.</p>
 <p>To achieve this structural layout, we first disable the automatic legend generation inside our <code>eh_state_anno</code> object (by passing <code>show_legend = FALSE</code>). We then use the advanced <code>Legend()</code> function to manually reconstruct it as a standalone object (<code>lgd_state</code>), formatting it to print horizontally. We can thus inject this custom legend directly into our <code>draw()</code> function via the <code>annotation_legend_list</code> argument, giving us absolute architectural control over where it is ultimately placed.</p>
-<div id="cell-22" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="10">
+<div id="cell-23" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="10">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>eh_atac_11h <span class="ot">&lt;-</span> <span class="fu">custom_enrichedheatmap_plotting</span>(</span>
@@ -971,7 +971,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="rna-seq-expression-heatmap" class="level3">
 <h3 class="anchored" data-anchor-id="rna-seq-expression-heatmap">RNA-seq expression heatmap</h3>
 <p>Our RNA-seq data consists of discrete, normalized expression values (one mathematical value per gene, per sample). Therefore, just as we did in <a href="../notebooks/03-chip_rna_visualization.html">Notebook 3</a>, we will map this data onto a standard <code>ComplexHeatmap</code> block rather than an <code>EnrichedHeatmap</code>. To keep our analysis biologically consistent, we will continue to stratify these rows using the exact same <code>split_state</code> categories we just applied to the ATAC-seq data, allowing us to observe how gene expression behaves within each of our defined regulatory states.</p>
-<div id="cell-25" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="11">
+<div id="cell-26" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="11">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">colnames</span>(mat_RNA))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -980,7 +980,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>[1] "RNA_11half_1" "RNA_11half_2" "RNA_15half_1" "RNA_15half_2"</code></pre>
 </div>
 </div>
-<div id="cell-26" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="12">
+<div id="cell-27" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="12">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">100</span>)</span>
@@ -1024,16 +1024,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="rna-seq-expression-patterns">RNA-seq expression patterns</h3>
 <p>Looking specifically at the RNA-seq heatmap block, we can cleanly visualize the distinct transcriptional fates of our genes during development:</p>
 <ol type="1">
-<li><p><strong>The Upregulated Genes (Red):</strong> The <code>Active</code> and <code>Incongruent</code> clusters display a striking shift from a pale E11.5 baseline to a deep red E15.5 state. This visually confirms that the genes linked to these regulatory regions are strongly upregulated and actively turning on as embryonic development progresses.</p></li>
-<li><p><strong>The Downregulated Genes (Blue):</strong> Conversely, the <code>Silenced</code> and <code>Repressed</code> clusters transition from the E11.5 baseline into a deep blue state in E15.5. This vividly demonstrates transcriptional shutdown, confirming that these specific genes are being deactivated in the later embryonic stage.</p></li>
-<li><p><strong>The Transcriptional “Grey Zones”:</strong> Notice that the massive <code>Dec. Acc.</code> and <code>Inc. Acc.</code> blocks are completely grey (<code>NA</code>). This perfectly visualizes our mathematical filtering: these specific categories represent dynamic regions that lack any significant corresponding gene expression data. They remain transcriptionally silent or statistically insignificant in our RNA analysis.</p></li>
+<li><strong>The Upregulated Genes (Red):</strong> The <code>Active</code> and <code>Incongruent</code> clusters display a striking shift from a pale E11.5 baseline to a deep red E15.5 state. This visually confirms that the genes linked to these regulatory regions are strongly upregulated and actively turning on as embryonic development progresses.</li>
+<li><strong>The Downregulated Genes (Blue):</strong> Conversely, the <code>Silenced</code> and <code>Repressed</code> clusters transition from the E11.5 baseline into a deep blue state in E15.5. This vividly demonstrates transcriptional shutdown, confirming that these specific genes are being deactivated in the later embryonic stage.</li>
+<li><strong>The Transcriptional “Grey Zones”:</strong> Notice that the massive <code>Dec. Acc.</code> and <code>Inc. Acc.</code> blocks are completely grey (<code>NA</code>). This perfectly visualizes our mathematical filtering: these specific categories represent dynamic regions that lack any significant corresponding gene expression data. They remain transcriptionally silent or statistically insignificant in our RNA analysis.</li>
 </ol>
 </section>
 <section id="constructing-the-composite-multi-omics-heatmap" class="level3">
 <h3 class="anchored" data-anchor-id="constructing-the-composite-multi-omics-heatmap">Constructing the composite multi-omics heatmap</h3>
 <p>Using the <code>+</code> operator provided by <code>ComplexHeatmap</code>, we can now concatenate our colored biological annotation bar, the continuous ATAC-seq accessibility heatmaps, and the discrete RNA-seq expression heatmap into a single, highly informative composite figure.</p>
 <p>By passing our <code>split_state</code> categories directly into the global <code>draw()</code> engine (which <strong>overrides</strong> individual settings), the entire composite visualization is perfectly stratified, allowing us to seamlessly validate the functional relationship between chromatin state and gene expression in a single glance.</p>
-<div id="cell-30" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="13">
+<div id="cell-31" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="13">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>composite_ht <span class="ot">&lt;-</span> eh_state_anno <span class="sc">+</span> eh_atac_11h <span class="sc">+</span> eh_atac_15h <span class="sc">+</span> rna_hm</span>
@@ -1057,11 +1057,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="reordering-biological-categories" class="level3">
 <h3 class="anchored" data-anchor-id="reordering-biological-categories">Reordering biological categories</h3>
-<p><strong>Exercise:</strong> Can you change the order of the heatmap regions to follow this exact biological hierarchy? 1. Active 2. Repressed 3. Silent 4. Incongruent 5. Dec.&nbsp;Acc. 6. Inc.&nbsp;Acc.</p>
+<p><strong>Exercise:</strong> Can you change the order of the heatmap regions to follow this exact biological hierarchy?</p>
+<ol type="1">
+<li>Active</li>
+<li>Repressed</li>
+<li>Silent</li>
+<li>Incongruent</li>
+<li>Dec.&nbsp;Acc.</li>
+<li>Inc.&nbsp;Acc.</li>
+</ol>
 <p><em><strong>Hint:</strong></em> The <code>split</code> argument in the <code>draw()</code> function automatically orders the heatmap splits based on the factor levels of the provided grouping variable (<code>split_anno</code>).</p>
 <p>To reorder the layout, we convert our <code>split_state</code> text vector into a formal R <code>factor</code>, explicitly defining the <code>levels</code> in our exact desired biological hierarchy.</p>
 <p>Because <code>ComplexHeatmap</code> is highly optimized, its layout engine will automatically detect these new factor levels and physically reorder the rows to match. The best part of this object-oriented design is that we <strong>do not</strong> need to recompute any of the heavy ATAC or RNA heatmaps! We simply re-instantiate the lightweight <code>eh_state_anno</code> color bar so it learns the new order, stitch it right back onto our existing heatmap objects, and effortlessly render the plot.</p>
-<div id="cell-32" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="14">
+<div id="cell-33" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="14">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">unique</span>(split_state))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1071,7 +1079,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 [6] "Repressed"  </code></pre>
 </div>
 </div>
-<div id="cell-33" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="15">
+<div id="cell-34" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="15">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert to a strict factor with the desired hierarchical order</span></span>
@@ -1095,7 +1103,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="global-vsualization-settings" class="level3">
 <h3 class="anchored" data-anchor-id="global-vsualization-settings">Global vsualization settings</h3>
 <p>Instead of manually tweaking the borders, title padding, and legend spacing for every single heatmap we create, <code>ComplexHeatmap</code> provides a powerful global options engine called <code>ht_opt</code>. By configuring these aesthetic rules just once per R session, they will automatically apply to every subsequent plot, guaranteeing a polished, publication-ready look with minimal code.</p>
-<div id="cell-35" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="16">
+<div id="cell-36" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="16">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Shrinks the empty space between the main heatmap and its title (e.g., "ATAC-E11.5")</span></span>
@@ -1117,7 +1125,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>ht_opt<span class="sc">$</span>heatmap_border <span class="ot">&lt;-</span> <span class="cn">TRUE</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="cell-36" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="17">
+<div id="cell-37" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="17">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">draw</span>(composite_ht_2, <span class="at">split =</span> split_state_reordered, <span class="at">heatmap_legend_side =</span> <span class="st">"bottom"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1136,7 +1144,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>By perfectly aligning continuous chromatin accessibility (ATAC-seq) with discrete transcriptional output (RNA-seq), this composite heatmap reveals the stunning complexity of epigenetic regulation during embryonic development. We can visually validate several profound biological paradigms in a single glance:</p>
 <section id="the-classic-paradigms-active-silenced" class="level4">
 <h4 class="anchored" data-anchor-id="the-classic-paradigms-active-silenced">The Classic Paradigms (Active &amp; Silenced)</h4>
-<p>The <strong>Active</strong> (Red) and <strong>Silenced</strong> (Yellow) clusters clearly demonstrate the classic “central dogma” of epigenetics: - <strong>Active:</strong> We see the ATAC signal physically widening and intensifying in E15.5, allowing the transcription machinery to dock. This structurally drives the massive surge in gene expression visually confirmed in the red RNA-seq block. - <strong>Silenced:</strong> Conversely, we see the chromatin physically condensing and shutting down (loss of ATAC signal in E15.5), which directly results in the severe deactivation of the corresponding genes (blue RNA-seq block).</p>
+<p>The <strong>Active</strong> (Red) and <strong>Silenced</strong> (Yellow) clusters clearly demonstrate the classic “central dogma” of epigenetics:</p>
+<ul>
+<li><strong>Active:</strong> We see the ATAC signal physically widening and intensifying in E15.5, allowing the transcription machinery to dock. This structurally drives the massive surge in gene expression visually confirmed in the red RNA-seq block.</li>
+<li><strong>Silenced:</strong> Conversely, we see the chromatin physically condensing and shutting down (loss of ATAC signal in E15.5), which directly results in the severe deactivation of the corresponding genes (blue RNA-seq block).</li>
+</ul>
 </section>
 <section id="the-repressive-elements-repressed" class="level4">
 <h4 class="anchored" data-anchor-id="the-repressive-elements-repressed">The Repressive Elements (Repressed)</h4>
@@ -1561,4 +1573,4 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-</body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.dev/sbwiecko/biology-informed-multiomics-training/blob/main/notebooks/05-atac_rna_integration.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/sbwiecko/biology-informed-multiomics-training/blob/main/notebooks/05-atac_rna_integration.ipynb" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/sbwiecko/biology-informed-multiomics-training/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>

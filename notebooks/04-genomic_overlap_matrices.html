@@ -80,7 +80,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-93c2f64124fc842a968b101e89420266.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-a364407746d9004c8be0c73a9e30f2fd.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -163,20 +163,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../notebooks/01-omics_data_structures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Datasets, SummarizedExperiment, and GRanges</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../notes/normalization_models.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Normalization models</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../notes/enrichment_analysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Functional Enrichment Analysis: Multi-Omics Integration</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../notebooks/01-omics_data_structures.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Datasets, <code>SummarizedExperiment</code>, and <code>GRanges</code></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -207,6 +201,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="../notebooks/06-multiomics_integration.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Integrating ATAC, ChIP, and RNA sequencing data</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/enrichment_analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Functional Enrichment Analysis: Multi-Omics Integration</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -251,7 +251,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#biological-interpretation-of-dna-methylation" id="toc-biological-interpretation-of-dna-methylation" class="nav-link" data-scroll-target="#biological-interpretation-of-dna-methylation">Biological interpretation of DNA methylation</a></li>
   </ul></li>
   </ul>
-</nav>
+<div class="toc-actions"><ul><li><a href="https://github.dev/sbwiecko/biology-informed-multiomics-training/blob/main/notebooks/04-genomic_overlap_matrices.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/sbwiecko/biology-informed-multiomics-training/blob/main/notebooks/04-genomic_overlap_matrices.ipynb" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/sbwiecko/biology-informed-multiomics-training/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -336,7 +336,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Unfortunately, standard Bioconductor packages do not have a simple, built-in “left-join” function for genomic coordinates. To solve this, we define a custom helper function called <code>metaGR()</code>.</p>
 <p>This function takes a primary, target set of genomic regions (<code>gr1</code>) and looks for any physical overlaps with a secondary set of regions (<code>gr2</code>). Wherever a physical overlap occurs, it extracts the statistical metadata columns (like <code>logFC</code> or <code>q-value</code>) from <code>gr2</code> and seamlessly attaches them as new columns to the overlapping region in <code>gr1</code>. If a region in <code>gr1</code> doesn’t overlap with anything, it safely fills those new columns with <code>NA</code>.</p>
 <blockquote class="blockquote">
-<p><strong>Why a minimum overlap of 10?</strong> By default, the R overlap engine registers a “hit” even if two genomic features only touch by a single base pair. Because sequencing data always has a tiny bit of mapping noise at the very edges of peaks, 1-bp or 2-bp overlaps are often accidental false positives. Setting the default minimum overlap to <code>10</code> base pairs (which is roughly one full turn of the DNA double helix) ensures that the physical overlap is robust and represents a genuine biological co-localization!</p>
+<p>By default, the R overlap engine registers a “hit” even if two genomic features only touch by a single base pair. Because sequencing data always has a tiny bit of mapping noise at the very edges of peaks, 1-bp or 2-bp overlaps are often accidental false positives. Setting the default minimum overlap to <code>10</code> base pairs (which is roughly one full turn of the DNA double helix) ensures that the physical overlap is robust and represents a genuine biological co-localization!</p>
 </blockquote>
 <div id="cell-8" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="3">
 <details open="" class="code-fold">
@@ -538,7 +538,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="inspecting-the-integrated-object" class="level3">
 <h3 class="anchored" data-anchor-id="inspecting-the-integrated-object">Inspecting the integrated object</h3>
 <p>Before we move on, let’s verify that our multi-omics integration was successful. Our <code>overlap</code> object is still fundamentally an ATAC-seq <code>GRanges</code> object (meaning its physical coordinates represent open chromatin peaks), but its metadata now contains the statistical results from every other dataset we processed.</p>
-<p><em>Note: Keep in mind that <code>overlap</code> is now a pure <code>GRanges</code> object, not a <code>SummarizedExperiment</code> (SE) container. Because of this, SE-specific functions like <code>rowRanges()</code> and <code>colData()</code> will no longer work. Instead, we must use standard <code>GRanges</code> functions to interact with the object, such as <code>length()</code> (to count the peaks), <code>mcols()</code> (to access the metadata), and <code>genome()</code>.</em></p>
+<p><em>Keep in mind that <code>overlap</code> is now a pure <code>GRanges</code> object, not a <code>SummarizedExperiment</code> (SE) container. Because of this, SE-specific functions like <code>rowRanges()</code> and <code>colData()</code> will no longer work. Instead, we must use standard <code>GRanges</code> functions to interact with the object, such as <code>length()</code> (to count the peaks), <code>mcols()</code> (to access the metadata), and <code>genome()</code>.</em></p>
 <div id="cell-27" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="14">
 <details open="" class="code-fold">
 <summary>Code</summary>
@@ -949,7 +949,12 @@ peak_5           NA           NA           NA           NA</code></pre>
 <p>A single 1kb ATAC-seq peak might contain <strong>50 different CpG sites</strong>. If we used <code>metaGR()</code> to join them, the spatial join engine would blindly grab the methylation data of the very <em>first</em> CpG it touched and throw the other 49 away! This would result in completely inaccurate methylation profiling for that regulatory region.</p>
 <p>Instead of forcing single-bp statistics into our master table, we handle WGBS data entirely during the <strong>Continuous Signal</strong> extraction phase.</p>
 <p>By passing our WGBS <code>GRanges</code> objects directly into <code>normalizeToMatrix()</code>, the software properly reads all 50 CpGs inside the 2kb window and smoothly averages them across the ATAC peak, allowing us to visualize the true methylation burden correctly.</p>
-<p>Because we are measuring a methylation <em>percentage</em> instead of standard read pileups, we must change two critical arguments in <code>normalizeToMatrix()</code>: * <code>value_column = "meth"</code>: We explicitly extract the methylation ratio rather than the read coverage depth. * <code>mean_mode = "absolute"</code>: By default, the software calculates a weighted mean (<code>"w0"</code>), which weights the signal based on how physically wide the overlapping genomic regions are (e.g., broad ChIP-seq peaks). Because our WGBS data operates at the single-nucleotide level (where every CpG is exactly 1 base pair wide), weighting by width is unnecessary. We override this to <code>"absolute"</code> to tell the function to simply take the straight, arithmetic mean of the methylation scores inside each window bin. * <code>background = N</code>: In ChIP-seq, if there are no reads, the signal is <code>0</code>. But in WGBS, if there are no reads covering a CpG, we simply don’t know the methylation status! Therefore, the background <em>must</em> be <code>NA</code> (unknown). If we left it as 0, we would mathematically trick R into thinking those unsequenced regions were completely unmethylated!</p>
+<p>Because we are measuring a methylation <em>percentage</em> instead of standard read pileups, we must change two critical arguments in <code>normalizeToMatrix()</code>:</p>
+<ul>
+<li><code>value_column = "meth"</code>: We explicitly extract the methylation ratio rather than the read coverage depth.</li>
+<li><code>mean_mode = "absolute"</code>: By default, the software calculates a weighted mean (<code>"w0"</code>), which weights the signal based on how physically wide the overlapping genomic regions are (e.g., broad ChIP-seq peaks). Because our WGBS data operates at the single-nucleotide level (where every CpG is exactly 1 base pair wide), weighting by width is unnecessary. We override this to <code>"absolute"</code> to tell the function to simply take the straight, arithmetic mean of the methylation scores inside each window bin.</li>
+<li><code>background = N</code>: In ChIP-seq, if there are no reads, the signal is <code>0</code>. But in WGBS, if there are no reads covering a CpG, we simply don’t know the methylation status! Therefore, the background <em>must</em> be <code>NA</code> (unknown). If we left it as 0, we would mathematically trick R into thinking those unsequenced regions were completely unmethylated!</li>
+</ul>
 <div id="cell-54" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;r&quot;}}" data-execution_count="28">
 <details open="" class="code-fold">
 <summary>Code</summary>
@@ -1509,4 +1514,4 @@ peak_5 0.2162887 0.2130513 0.2100990 0.2082533 0.2083358 0.2095957</code></pre>
 
 
 
-</body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.dev/sbwiecko/biology-informed-multiomics-training/blob/main/notebooks/04-genomic_overlap_matrices.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/sbwiecko/biology-informed-multiomics-training/blob/main/notebooks/04-genomic_overlap_matrices.ipynb" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/sbwiecko/biology-informed-multiomics-training/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Sébastien Wieckowski">
-<meta name="dcterms.date" content="2026-09-28">
+<meta name="dcterms.date" content="2026-09-29">
 
 <title>Biology-Informed Multi-Omics Integration</title>
 <style>
@@ -82,7 +82,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-93c2f64124fc842a968b101e89420266.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-a364407746d9004c8be0c73a9e30f2fd.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -162,20 +162,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./notebooks/01-omics_data_structures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Datasets, SummarizedExperiment, and GRanges</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./notes/normalization_models.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Normalization models</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./notes/enrichment_analysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Functional Enrichment Analysis: Multi-Omics Integration</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./notebooks/01-omics_data_structures.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Datasets, <code>SummarizedExperiment</code>, and <code>GRanges</code></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -206,6 +200,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="./notebooks/06-multiomics_integration.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Integrating ATAC, ChIP, and RNA sequencing data</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./notes/enrichment_analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Functional Enrichment Analysis: Multi-Omics Integration</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -245,7 +245,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#credits-upstream-authors" id="toc-credits-upstream-authors" class="nav-link" data-scroll-target="#credits-upstream-authors">Credits &amp; Upstream Authors</a></li>
   </ul></li>
   </ul>
-</nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/sbwiecko/biology-informed-multiomics-training/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/sbwiecko/biology-informed-multiomics-training/blob/main/index.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/sbwiecko/biology-informed-multiomics-training/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -270,7 +270,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">September 28, 2026</p>
+      <p class="date">September 29, 2026</p>
     </div>
   </div>
   
@@ -282,11 +282,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p><a href="https://creativecommons.org/licenses/by-sa/4.0/"><img src="https://img.shields.io/badge/License-CC_BY--SA_4.0-lightgrey.svg" class="img-fluid" alt="License: CC BY-SA 4.0"></a> <a href="https://github.com/sib-swiss/biology-informed-multiomics-training"><img src="https://img.shields.io/badge/Forked%20from-sib--swiss-blue.png" class="img-fluid" alt="Forked from sib-swiss"></a></p>
+<p><a href="https://creativecommons.org/licenses/by-sa/4.0/"><img src="https://img.shields.io/badge/License-CC_BY--SA_4.0-lightgrey.svg" class="img-fluid" alt="License: CC BY-SA 4.0"></a> <a href="https://github.com/sib-swiss/biology-informed-multiomics-training"><img src="https://img.shields.io/badge/Forked%20from-sib--swiss-blue.png" class="img-fluid" alt="Forked from sib-swiss"></a> <a href="https://sbwiecko.github.io/biology-informed-multiomics-training/"><img src="https://img.shields.io/badge/Read_the_Course-Online-success?logo=quarto.png" class="img-fluid" alt="Course Website"></a></p>
 <section id="biology-informed-multi-omics-a-wet-lab-scientists-study-fork" class="level1">
 <h1>Biology-Informed Multi-Omics: A Wet-Lab Scientist’s Study Fork</h1>
+<blockquote class="blockquote">
+<p><strong>💡 Read the completed course online:</strong><br>
+If you just want to read through the analysis and biological interpretations, you can browse the <a href="https://sbwiecko.github.io/biology-informed-multiomics-training/">compiled course website here</a>.</p>
+</blockquote>
 <p>Welcome! This repository is an annotated, restructured study fork of the <a href="https://github.com/sib-swiss/biology-informed-multiomics-training">SIB Swiss Institute of Bioinformatics Multi-Omics Training Course</a>.</p>
-<p>I come from a <strong>wet-lab background</strong> and am investing significant effort into transitioning toward computational biology. To make the learning curve manageable and fully focus on the code and biology, <strong>I simplified the project architecture</strong>: I removed the Docker containers and Quarto website infrastructure in favor of standalone <strong>Jupyter Notebooks (<code>.ipynb</code>) and clean Markdown files</strong>.</p>
+<p>I come from a <strong>wet-lab background</strong> and am investing significant effort into transitioning toward computational biology. To make the learning curve manageable and fully focus on the code and biology, <strong>I simplified the project architecture</strong>. I removed the heavy Docker containers in favor of standalone <strong>Jupyter Notebooks (<code>.ipynb</code>)</strong> so you can easily clone the repo and practice the code yourself. I also added a clean <strong>Quarto website</strong> to make reading the finished notebooks and theory much easier!</p>
 <hr>
 <section id="what-you-will-find-in-this-fork" class="level2">
 <h2 class="anchored" data-anchor-id="what-you-will-find-in-this-fork">What You Will Find in This Fork</h2>
@@ -806,4 +810,4 @@ This repository focuses specifically on <strong>downstream multi-omics integrati
 
 
 
-</body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/sbwiecko/biology-informed-multiomics-training/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/sbwiecko/biology-informed-multiomics-training/blob/main/index.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/sbwiecko/biology-informed-multiomics-training/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
