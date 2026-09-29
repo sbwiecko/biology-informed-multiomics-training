@@ -7,7 +7,7 @@ website:
   # author: "Sébastien Wieckowski"
   # date: today
   repo-url: https://github.com/sbwiecko/biology-informed-multiomics-training
-  repo-actions: [edit, source, issue]
+  repo-actions: [source]
   sidebar:
     style: "docked"
     search: true
